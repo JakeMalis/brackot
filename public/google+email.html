@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>All-Star eSports Login</title>
+    <link rel="icon" type="image/png" href="https://cdn.discordapp.com/attachments/703419145752150090/718584157390766150/Logo_STARcolor_background.png"/>
+
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase.js"></script>
+
+
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyBSjggPyShfi3JJGmfuf2p_BFLMeEeVTLY",
+            authDomain: "all-star-esports.firebaseapp.com",
+            databaseURL: "https://all-star-esports.firebaseio.com",
+            projectId: "all-star-esports",
+            storageBucket: "all-star-esports.appspot.com",
+            messagingSenderId: "894423381350",
+            appId: "1:894423381350:web:3fe3b4195ae678bd6704a7"
+        };
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script src="script.js"></script>
+</head>
+<body>
+    <h4>Login</h4>
+    <p><input placeholder="Enter Email Address" id="email"></p>
+    <p><input type="password" placeholder="Enter Password" id="password"></p>
+    <button type="button" id="sign-in" onclick="passwordSignIn()">Sign In</button>
+    <button type="button" id="register" onclick="passwordSignUp()">Register</button>
+    <button type="button" id="passwordReset" onclick="passwordReset()">Reset Password</button>
+
+    <!-- This is the debugger which outputs all user info to ensure login is sucessful.
+    <div>
+        Firebase sign-in status: <span id="quickstart-sign-in-status">Unknown</span>
+        <div>Firebase auth <code>currentUser</code> object value:</div>
+        <pre><code id="quickstart-account-details">null</code></pre>
+    </div>
+    -->
+</body>
+</html>
