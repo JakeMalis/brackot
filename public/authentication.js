@@ -8,7 +8,7 @@ function validateEmail(email) {
 function passwordSignIn() {
     if (firebase.auth().currentUser) {
         firebase.auth().signOut();
-        document.getElementById('sign-in').textContent = 'Sign In';
+        document.getElementById('loginBtn').textContent = 'Sign In';
     }
     else {
         var email = document.getElementById('email').value;
@@ -33,6 +33,7 @@ function passwordSignIn() {
         }
     }
 }
+/*
 function passwordReset() {
     var email = document.getElementById('email').value;
     firebase.auth().sendPasswordResetEmail(email).then(
@@ -49,6 +50,7 @@ function passwordReset() {
         }
     });
 }
+*/
 function initApp() {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
@@ -59,7 +61,7 @@ function initApp() {
             var isAnonymous = user.isAnonymous;
             var uid = user.uid;
             var providerData = user.providerData;
-            document.getElementById('sign-in').textContent = 'Sign out';
+            document.getElementById('loginBtn').textContent = 'Sign out';
             document.getElementById('quickstart-sign-in-status').textContent = 'Signed in';
             document.getElementById('quickstart-account-details').textContent = JSON.stringify(user, null, '  ');
         } else {
@@ -67,9 +69,7 @@ function initApp() {
             document.getElementById('quickstart-account-details').textContent = 'null';
         }
     });
-    document.getElementById('sign-in').addEventListener('click', passwordSignIn, false);
-    document.getElementById('register').addEventListener('click', passwordSignUp, false);
-    document.getElementById('password-reset').addEventListener('click', passwordReset, false);
+    document.getElementById('loginBtn').addEventListener('click', passwordSignIn, false);
 }
 window.onload = function() {
     initApp();

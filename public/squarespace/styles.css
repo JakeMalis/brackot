@@ -1,0 +1,172 @@
+* {
+  font-family: purista-web, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  background-color: #f6faff;
+}
+
+body {
+  overflow: hidden;
+  background: #f6faff;
+  section.Main-content{
+    margin: 0px;
+    padding: 0px;
+    background: #f6faff;
+  }
+}
+
+#resetBtn{
+  float: center;
+  margin-top: 4vh;
+  margin-bottom: 10px;
+  background: -webkit-linear-gradient(360deg, #0084ff, #00c6ff);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 550;
+  width: 150px;
+  height: 44px;
+  color: white;
+  border: transparent;
+  border-radius: 8px;
+  @media only screen and (min-width: 900px){
+    margin-right: 228px;
+  }
+}
+
+#forgotPasswordImage{
+  float: right;
+  display: none;
+  width: 50vw;
+  height: 100vh;
+  object-fit: cover;
+  @media only screen and (min-width: 900px){
+    display: inline;
+  }
+}
+
+input {
+  margin: 0px;
+  padding: 14px;
+  min-width: 250px;
+  width: 250px;
+  font-size: 17px;
+  border: 1px solid #dddddd;
+  background-color: #fff;
+  border-radius: 7px;
+  @media only screen and (min-width: 900px){
+    width: 350px;
+  }
+}
+
+@media only screen and (min-width: 900px){
+  .overlay{
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 50vw;
+  opacity: 0;
+  background-color: #00c6ff;
+  }
+}
+
+#registerBtn{
+  display: inline;
+  float: center;
+  margin-top: 4vh;
+  margin-bottom: 10px;
+  background: -webkit-linear-gradient(360deg, #0084ff, #00c6ff);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 550;
+  width: 150px;
+  height: 44px;
+  color: white;
+  border: transparent;
+  border-radius: 8px;
+  @media only screen and (min-width: 900px){
+    margin-right: 60px;
+  }
+}
+
+h1{
+  color: #262626;
+  text-align: center;
+  font-size: 30px;
+  letter-spacing: 1.6px;
+  margin-bottom: 4vh;
+  text-transform: uppercase;
+  @media only screen and (min-width: 900px){
+    padding-right: 50px;
+  }
+}
+
+#loginBtn{
+  float: center;
+  margin-top: 4vh;
+  margin-bottom: 10px;
+  background: -webkit-linear-gradient(360deg, #0084ff, #00c6ff);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 550;
+  width: 150px;
+  height: 44px;
+  color: white;
+  border: transparent;
+  border-radius: 8px;
+  @media only screen and (min-width: 900px){
+    margin-right: 15px;
+  }
+  }
+
+input.invalid {
+  background-color: #ffdddd;
+}
+
+.Footer{
+  display: none;
+}
+.Header{
+  display: none;
+}
+
+#logo{
+  display: inline;
+  width: 200px;
+  max-height: 100px;
+  object-fit: cover;
+  margin-top: 4vh;
+  margin-right: 225px;
+  @media only screen and (min-width: 900px){
+    display: inline;
+    width: 200px;
+    max-height: 100px;
+    object-fit: cover;
+    margin-top: 4vh;
+    margin-right: 225px;
+  }
+}
+
+#loginImage{
+  float: right;
+  width: 50vw;
+  height: 100vh;
+  object-fit: cover;
+  @media only screen and (min-width: 900px){
+    display: inline;
+  }
+}
+
+#loginForm {
+  background: #f6faff;
+  width: 100vw;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 10vh;
+  padding: 0px;
+  @media only screen and (min-width: 900px){
+    margin-top: 17vh;
+    float: left;
+    width: 50vw;
+  }
+}
