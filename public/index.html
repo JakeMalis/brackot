@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>All-Star eSports Login</title>
     <link rel="icon" type="image/png" href="https://cdn.discordapp.com/attachments/703419145752150090/718584157390766150/Logo_STARcolor_background.png"/>
+    <script src="authentication.js"></script>
 
     <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase.js"></script>
-
 
     <script>
         var firebaseConfig = {
@@ -22,16 +22,13 @@
         };
         firebase.initializeApp(firebaseConfig);
     </script>
-
-    <script src="script.js"></script>
 </head>
 <body>
     <h4>Login</h4>
     <p><input placeholder="Enter Email Address" id="email"></p>
     <p><input type="password" placeholder="Enter Password" id="password"></p>
     <button type="button" id="sign-in" onclick="passwordSignIn()">Sign In</button>
-    <button type="button" id="register" onclick="passwordSignUp()">Register</button>
-    <button type="button" id="passwordReset" onclick="passwordReset()">Reset Password</button>
+    <button type="button" id="password-reset" onclick="passwordReset()">Reset Password</button>
 
     <!-- This is the debugger which outputs all user info to ensure login is sucessful.
     <div>
