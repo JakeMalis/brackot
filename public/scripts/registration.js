@@ -59,7 +59,7 @@ function register() {
                 .catch(function(error) {
                     console.error("Error writing document: ", error);
                 });
-        }, 5000);
+        }, 350);
     }
     else if (validateEmail(document.getElementById('email').value) === false) {
         alert('Email address is not valid');
