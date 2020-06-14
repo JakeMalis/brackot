@@ -1,5 +1,5 @@
 * {
-    font-family: purista-web, sans-serif;
+    font-family: 'purista-web', sans-serif;
     font-weight: 400;
     font-style: normal;
     background-color: #f6faff;
@@ -8,11 +8,12 @@
 body {
     overflow: hidden;
     background: #f6faff;
-section.Main-content{
-    margin: 0px;
-    padding: 0px;
-    background: #f6faff;
-}
+
+    section.Main-content{
+      margin: 0px;
+      padding: 0px;
+      background: #f6faff;
+    }
 }
 
 #resetBtn{
@@ -28,9 +29,6 @@ section.Main-content{
     color: white;
     border: transparent;
     border-radius: 8px;
-@media only screen and (min-width: 900px){
-    margin-right: 228px;
-}
 }
 
 #forgotPasswordImage{
@@ -47,28 +45,34 @@ section.Main-content{
 input {
     margin: 0px;
     padding: 14px;
-    min-width: 250px;
     width: 250px;
     font-size: 17px;
     border: 1px solid #dddddd;
-    background-color: #fff;
+    background-color: #ffffff;
     border-radius: 7px;
-@media only screen and (min-width: 900px){
-    width: 350px;
-}
 }
 
-@media only screen and (min-width: 900px){
-    .overlay{
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 100vh;
-        width: 50vw;
-        opacity: 0;
-        background-color: #00c6ff;
-    }
+h1{
+    color: #262626;
+    text-align: center;
+    font-size: 30px;
+    letter-spacing: 1.6px;
+    margin-bottom: 4vh;
+    text-transform: uppercase;
 }
+
+input.invalid {
+    background-color: #ffdddd;
+}
+
+.Footer{
+    display: none;
+}
+.Header{
+    display: none;
+}
+
+/* THE BELOW IS FOR THE LOGIN PAGE */
 
 #registerBtn{
     display: inline;
@@ -84,21 +88,6 @@ input {
     color: white;
     border: transparent;
     border-radius: 8px;
-@media only screen and (min-width: 900px){
-    margin-right: 60px;
-}
-}
-
-h1{
-    color: #262626;
-    text-align: center;
-    font-size: 30px;
-    letter-spacing: 1.6px;
-    margin-bottom: 4vh;
-    text-transform: uppercase;
-@media only screen and (min-width: 900px){
-    padding-right: 50px;
-}
 }
 
 #loginBtn{
@@ -114,20 +103,6 @@ h1{
     color: white;
     border: transparent;
     border-radius: 8px;
-@media only screen and (min-width: 900px){
-    margin-right: 15px;
-}
-}
-
-input.invalid {
-    background-color: #ffdddd;
-}
-
-.Footer{
-    display: none;
-}
-.Header{
-    display: none;
 }
 
 #logo{
@@ -137,24 +112,14 @@ input.invalid {
     object-fit: cover;
     margin-top: 4vh;
     margin-right: 225px;
-@media only screen and (min-width: 900px){
-    display: inline;
-    width: 200px;
-    max-height: 100px;
-    object-fit: cover;
-    margin-top: 4vh;
-    margin-right: 225px;
-}
 }
 
 #loginImage{
+    display: none;
     float: right;
     width: 50vw;
     height: 100vh;
     object-fit: cover;
-@media only screen and (min-width: 900px){
-    display: inline;
-}
 }
 
 #loginForm {
@@ -164,9 +129,49 @@ input.invalid {
     margin-right: 0px;
     margin-top: 10vh;
     padding: 0px;
-@media only screen and (min-width: 900px){
-    margin-top: 17vh;
-    float: left;
-    width: 50vw;
 }
+
+#firebaseLoginDev{
+  display: none;
+}
+
+/* END LOGIN PAGE */
+
+@media only screen and (min-width: 900px){
+
+  #loginImage{
+    display: inline;
+  }
+
+  #loginBtn{
+    margin-right: 10px;
+  }
+
+  #registerBtn{
+    margin-right: 65px;
+  }
+
+  #logInText{
+    margin-left: -50px;
+  }
+
+  #email{
+    width: 350px;
+    margin-left: -30px;
+  }
+
+  #password{
+    width: 350px;
+    margin-left: -30px;
+  }
+
+  #forgot-password-block{
+    margin-left: -200px;
+    margin-top: -17px;
+  }
+
+  #resetBtn{
+    margin-right: 228px;
+  }
+
 }
