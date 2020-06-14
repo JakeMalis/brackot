@@ -137,6 +137,55 @@ input.invalid {
 
 /* END LOGIN PAGE */
 
+
+
+
+
+/* REGISTRATION PAGE BEGINS HERE */
+
+.gameImages{
+  margin: 20px;
+  height: auto;
+  width: 200px;
+  cursor: pointer;
+}
+
+.gameCheckbox{
+  width: 0px;
+  visibility: hidden;
+  box-shadow: 0px 2px 8px 0px rgba(0,0,0,1);
+}
+
+.gameCheckbox:hover{
+
+}
+
+.gameCheckbox:checked{
+
+}
+
+#gamesTab{
+  margin-left:auto;
+  margin-right: auto;
+}
+
+#submitRegistrationButton{
+  display: inline;
+  margin-top: 0vh;
+  margin-bottom: 0px;
+  background: -webkit-linear-gradient(360deg, #0084ff, #00c6ff);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 550;
+  width: 150px;
+  height: 44px;
+  color: white;
+  border: transparent;
+  border-radius: 8px;
+}
+
+/* END REGISTRATION PAGE */
+
 @media only screen and (min-width: 900px){
 
   #loginImage{
