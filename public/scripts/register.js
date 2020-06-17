@@ -15,16 +15,13 @@ function hide(x){
 
 function next(){
   jordanspeepeenumber++;
-
   if (jordanspeepeenumber > 3){
     hide(nextButton);
     show(submitRegistrationButton);
   }
-
   if (jordanspeepeenumber < 0){
     jordanspeepeenumber = 0;
   }
-
   if (jordanspeepeenumber == 0){
     show(nameTab);
     hide(emailTab);
@@ -32,7 +29,6 @@ function next(){
     hide(locationTab);
     hide(gamesTab);
   }
-
   if (jordanspeepeenumber == 1){
     hide(nameTab);
     show(emailTab);
@@ -40,7 +36,6 @@ function next(){
     hide(locationTab);
     hide(gamesTab);
   }
-
   if (jordanspeepeenumber == 2){
     hide(nameTab);
     hide(emailTab);
@@ -48,7 +43,6 @@ function next(){
     hide(locationTab);
     hide(gamesTab);
   }
-
   if (jordanspeepeenumber == 3){
     hide(nameTab);
     hide(emailTab);
@@ -56,7 +50,6 @@ function next(){
     show(locationTab);
     hide(gamesTab);
   }
-
   if (jordanspeepeenumber == 4){
     hide(nameTab);
     hide(emailTab);
