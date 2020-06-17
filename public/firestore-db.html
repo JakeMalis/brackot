@@ -28,31 +28,36 @@
             firebase.initializeApp(firebaseConfig);
             var db = firebase.firestore();
         </script>
+        <script>
+            function showTab(x){
+              
+            }
+        </script>
 </head>
     <body>
         <h1 id="title">Registration</h1>
-        <div class="tab">
+        <div id="nameTab"  class="tab">
           <p>
             <input placeholder="First Name" id="first-name">
             <input placeholder="Last Name" id="last-name">
           </p>
         </div>
 
-        <div class="tab">
+        <div id="emailTab" class="tab">
           <p>
             <input placeholder="Email" id="email">
             <input type="password" placeholder="Password" id="password">
           </p>
         </div>
 
-        <div class="tab">
+        <div id="roleTab"  class="tab">
           <input type="radio" id="player" name="role" value="player">
           <label for="player">Player</label>
           <input type="radio" id="coach" name="role" value="coach">
           <label for="coach">Coach</label>
         </div>
 
-        <div class="tab">
+        <div id="locationTab" class="tab">
           <p>
               <select id="state" name="state">
                 <option value="">Select State</option>
