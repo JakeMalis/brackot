@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>All-Star eSports Login</title>
-    <link rel="icon" type="image/png" href="https://cdn.discordapp.com/attachments/703419145752150090/718584157390766150/Logo_STARcolor_background.png"/>
-    <script src="authentication.js"></script>
+    <link rel="stylesheet" href="https://use.typekit.net/bea1phk.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <script src="scripts/authentication.js"></script>
+    <script src="scripts/load-image.js"></script>
 
     <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase.js"></script>
@@ -24,18 +26,31 @@
     </script>
 </head>
 <body>
-    <h4>Login</h4>
-    <p><input placeholder="Enter Email Address" id="email"></p>
-    <p><input type="password" placeholder="Enter Password" id="password"></p>
-    <button type="button" id="sign-in" onclick="passwordSignIn()">Sign In</button>
-    <button type="button" id="password-reset" onclick="passwordReset()">Reset Password</button>
+    <center>
+        <img id="logo" href="https://allstaresports.com" src="https://allstaresports.com/s/text_logo">
+        <form id="loginForm" action="">
+            <div class="tab">
+                <h1 id="logInText">Log in and <span style="background: -webkit-linear-gradient(0deg, #0084ff, #00c6ff);-webkit-background-clip: text; -webkit-text-fill-color: transparent;">game on</span></h1>
+                <p><input placeholder="Email Address..." id="email" oninput="this.className = ''"></p>
+                <p><input placeholder="Password..." id="password" type="password" oninput="this.className = ''"></p>
+                <div id="forgot-password-block">
+                    <a href="forgot_password.html"><p>Forgot your password?</p></a>
+                </div>
+            </div>
 
-    <!-- This is the debugger which outputs all user info to ensure login is sucessful.
-    <div>
-        Firebase sign-in status: <span id="quickstart-sign-in-status">Unknown</span>
-        <div>Firebase auth <code>currentUser</code> object value:</div>
-        <pre><code id="quickstart-account-details">null</code></pre>
-    </div>
-    -->
+            <div style="overflow:auto;">
+                <div style="float:center;">
+                    <button type="button" id="loginBtn" onclick="passwordSignIn()">Login</button>
+                    <button type="button" id="registerBtn" onclick="location.href='register.html';">Sign Up</button>
+                </div>
+            </div>
+        </form>
+
+        <div id="firebaseLoginDev">
+            Firebase sign-in status: <span id="quickstart-sign-in-status">Unknown</span>
+            <div>Firebase auth <code>currentUser</code> object value:</div>
+            <pre><code id="quickstart-account-details">null</code></pre>
+        </div>
+    </center>
 </body>
 </html>

@@ -23,9 +23,6 @@ function register() {
         var role = "coach";
     }
 
-    //Change HTML Title
-    //document.getElementById('title').innerHTML = fortnite + " " + overwatch;
-
     if (validateEmail(document.getElementById('email').value) === true) {
         firebase.auth().createUserWithEmailAndPassword(document.getElementById('email').value, document.getElementById('password').value).catch(
             function(error) {

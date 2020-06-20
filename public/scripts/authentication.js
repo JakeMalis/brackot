@@ -6,51 +6,27 @@ function validateEmail(email) {
     return (false)
 }
 function passwordSignIn() {
-    if (firebase.auth().currentUser) {
-        firebase.auth().signOut();
-        document.getElementById('loginBtn').textContent = 'Sign In';
-    }
-    else {
-        var email = document.getElementById('email').value;
-        var password = document.getElementById('password').value;
-        if (validateEmail(email) === true) {
-            firebase.auth().signInWithEmailAndPassword(email, password).catch(
-                function (error) {
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    if (errorCode == 'auth/wrong-password') {
-                        alert('Incorrect password')
-                    } else {
-                        alert(errorMessage);
-                    }
-                });
-            firebase.auth().currentUser.sendEmailVerification().then(
-                function () {
-                    alert('Verification Email Sent');
-                });
-        } else if (validateEmail(email) === false) {
-            alert('Email address is not valid');
-        }
-    }
+      var email = document.getElementById('email').value;
+      var password = document.getElementById('password').value;
+      if (validateEmail(email) === true) {
+          firebase.auth().signInWithEmailAndPassword(email, password).catch(
+              function (error) {
+                  var errorCode = error.code;
+                  var errorMessage = error.message;
+                  if (errorCode == 'auth/wrong-password') {
+                      alert('Incorrect password')
+                  } else {
+                      alert(errorMessage);
+                  }
+              });
+          firebase.auth().currentUser.sendEmailVerification().then(
+              function () {
+                  alert('Verification Email Sent');
+              });
+      } else if (validateEmail(email) === false) {
+          alert('Email address is not valid');
+      }
 }
-/*
-function passwordReset() {
-    var email = document.getElementById('email').value;
-    firebase.auth().sendPasswordResetEmail(email).then(
-        function() {
-            alert('Password Reset Email Sent');
-        }
-    ).catch(function(error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        if (errorCode == 'auth/invalid-email') {
-            alert(errorMessage);
-        } else if (errorCode == 'auth/user-not-found') {
-            alert(errorMessage);
-        }
-    });
-}
-*/
 function initApp() {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
@@ -64,6 +40,7 @@ function initApp() {
             document.getElementById('loginBtn').textContent = 'Sign out';
             document.getElementById('quickstart-sign-in-status').textContent = 'Signed in';
             document.getElementById('quickstart-account-details').textContent = JSON.stringify(user, null, '  ');
+            window.location = "logout.html";
         } else {
             document.getElementById('quickstart-sign-in-status').textContent = 'Signed out';
             document.getElementById('quickstart-account-details').textContent = 'null';
