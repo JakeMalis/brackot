@@ -30,30 +30,46 @@
         </script>
 </head>
     <body>
-        <h1 id="title">Registration</h1>
+      <div style="top: 0;" class="gradientLiner"></div>
+      <div style="bottom: 0;" class="gradientLiner"></div>
         <div id="nameTab" style="display:block;" class="tab">
-          <p>
+            <h1 class="registrationTitle">Welcome to <span style="background: -webkit-linear-gradient(0deg, #0084ff, #00c6ff);
+                                                    -webkit-background-clip: text;
+                                                    -webkit-text-fill-color: transparent;">All-Star!</span></h1>
+            <p class="registrationText">First things first, we're going to need a little more information from you in order to get your account set up.</p>
+          <div class="inputRow">
             <input placeholder="First Name" id="first-name">
             <input placeholder="Last Name" id="last-name">
-          </p>
+          </div>
+          <button type="button" class="nextButton" onClick="next();">Continue</button>
         </div>
 
         <div id="emailTab" style="display:none;" class="tab">
-          <p>
+          <h1 class="registrationTitle">Let's be safe here.</h1>
+          <p class="registrationText">Please input an email and password for your account, and make sure to remember them - you'll need them to log back in.</p>
+          <div class="inputRow">
             <input placeholder="Email" id="email">
             <input type="password" placeholder="Password" id="password">
-          </p>
+          </div>
+          <button type="button" class="nextButton" onClick="next();">Continue</button>
         </div>
 
         <div id="roleTab" style="display:none;" class="tab">
-          <input type="radio" id="player" name="role" value="player">
-          <label for="player">Player</label>
-          <input type="radio" id="coach" name="role" value="coach">
-          <label for="coach">Coach</label>
+          <h1 class="registrationTitle">WHAT'S YOUR ROLE?</h1>
+          <p class="registrationText">Help us figure out in which ways we can help you bring your eSports game to the next level.</p>
+          <div style="width: 515px !important;" class="inputRow">
+            <input type="radio" id="player" name="role" value="player">
+            <label for="player">Player</label>
+            <input type="radio" id="coach" name="role" value="coach">
+            <label for="coach">Coach</label>
+          </div>
+          <button type="button" class="nextButton" onClick="next();">Continue</button>
         </div>
 
         <div id="locationTab" style="display:none;" class="tab">
-          <p>
+          <h1 class="registrationTitle">WHERE ARE YOU FROM?</h1>
+          <p class="registrationText">We're proud to include the participation of high school teams across all 50 of the United States - including yours!</p>
+          <div class="inputRow">
               <select id="state" name="state">
                 <option value="">Select State</option>
                 <option value="AL">Alabama</option>
@@ -107,10 +123,14 @@
                 <option value="WI">Wisconsin</option>
                 <option value="WY">Wyoming</option>
               </select>
-            <input placeholder="High School" id="highschool"></p>
+            <input placeholder="High School" id="highschool">
+          </div>
+            <button type="button" class="nextButton" onClick="next();">Continue</button>
         </div>
 
         <div id="gamesTab" style="display:none;" class="tab">
+          <h1 class="registrationTitle">WHAT DO YOU PLAY?</h1>
+          <p class="registrationText">Pick your poison(s) and we'll be able to better match you with game-specific platform features.</p>
           <input class="gameCheckbox" type="checkbox" id="fortnite" name="game">
           <label class="gameLabel" for="fortnite"><img class="gameImages" src="media/game_images/fortnite.jpg"></label>
 
@@ -122,11 +142,12 @@
 
           <input class="gameCheckbox" type="checkbox" id="valorant" name="game">
           <label class="gameLabel" for="valorant"><img class="gameImages" src="media/game_images/valorant.jpg"></label>
+          <button type="button" class="nextButton" style="display:none;" id="submitRegistrationButton">Register</button>
         </div>
 
         <br/><br/>
-        <button type="button" id="nextButton" onClick="next();">Next</button>
-        <button type="button" style="display:none;" id="submitRegistrationButton">Register</button>
+        <!-- <button type="button" id="nextButton" onClick="next();">Next</button> -->
+        <!-- <button type="button" style="display:none;" id="submitRegistrationButton">Register</button> -->
         <br/><br/>
 
         <!-- This is the debugger which outputs all user info to ensure login is sucessful.
