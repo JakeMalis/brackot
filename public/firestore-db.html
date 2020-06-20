@@ -31,21 +31,30 @@
 </head>
     <body>
         <h1 id="title">Registration</h1>
-        <p><input placeholder="First Name" id="first-name">
-        <input placeholder="Last Name" id="last-name"></p>
-        <br/>
+        <div id="nameTab" style="display:block;" class="tab">
+          <p>
+            <input placeholder="First Name" id="first-name">
+            <input placeholder="Last Name" id="last-name">
+          </p>
+        </div>
 
-        <p><input placeholder="Email" id="email">
-        <input type="password" placeholder="Password" id="password"></p>
-        <br/>
+        <div id="emailTab" style="display:none;" class="tab">
+          <p>
+            <input placeholder="Email" id="email">
+            <input type="password" placeholder="Password" id="password">
+          </p>
+        </div>
 
-        <input type="radio" id="player" name="role" value="player">
-        <label for="player">Player</label>
-        <input type="radio" id="coach" name="role" value="coach">
-        <label for="coach">Coach</label>
-        <br/>
+        <div id="roleTab" style="display:none;" class="tab">
+          <input type="radio" id="player" name="role" value="player">
+          <label for="player">Player</label>
+          <input type="radio" id="coach" name="role" value="coach">
+          <label for="coach">Coach</label>
+        </div>
 
-        <p><select id="state" name="state">
+        <div id="locationTab" style="display:none;" class="tab">
+          <p>
+              <select id="state" name="state">
                 <option value="">Select State</option>
                 <option value="AL">Alabama</option>
                 <option value="AK">Alaska</option>
@@ -97,25 +106,27 @@
                 <option value="WV">West Virginia</option>
                 <option value="WI">Wisconsin</option>
                 <option value="WY">Wyoming</option>
-            </select>
-        <input placeholder="High School" id="highschool"></p>
-        <br/>
+              </select>
+            <input placeholder="High School" id="highschool"></p>
+        </div>
 
-        <input type="checkbox" id="fortnite" name="game">
-        <label for="fortnite">Fortnite</label>
+        <div id="gamesTab" style="display:none;" class="tab">
+          <input class="gameCheckbox" type="checkbox" id="fortnite" name="game">
+          <label class="gameLabel" for="fortnite"><img class="gameImages" src="Fortnite.jpg"></label>
 
-        <input type="checkbox" id="overwatch" name="game">
-        <label for="overwatch">Overwatch</label>
+          <input class="gameCheckbox" type="checkbox" id="overwatch" name="game">
+          <label class="gameLabel" for="overwatch"><img class="gameImages" src="Overwatch.png"></label>
 
-        <input type="checkbox" id="smash" name="game">
-        <label for="smash">Super Smash Bros</label>
+          <input class="gameCheckbox" type="checkbox" id="smash" name="game">
+          <label class="gameLabel" for="smash"><img class="gameImages" src="SuperSmashBrosUltimate.jpg"></label>
 
-        <input type="checkbox" id="valorant" name="game">
-        <label for="valorant">Valorant</label>
-        <br/>
+          <input class="gameCheckbox" type="checkbox" id="valorant" name="game">
+          <label class="gameLabel" for="valorant"><img class="gameImages" src="VALORANT.jpg"></label>
+        </div>
 
         <br/><br/>
-        <button type="button" id="register">Register</button>
+        <button type="button" id="nextButton" onClick="next();">Next</button>
+        <button type="button" style="display:none;" id="submitRegistrationButton">Register</button>
         <br/><br/>
 
         <!-- This is the debugger which outputs all user info to ensure login is sucessful.
@@ -125,5 +136,6 @@
             <pre><code id="quickstart-account-details">null</code></pre>
         </div>
         -->
+    <script src="scripts/register.js"></script>
     </body>
 </html>

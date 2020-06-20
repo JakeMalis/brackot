@@ -138,6 +138,82 @@ input.invalid {
 
 /* END LOGIN PAGE */
 
+
+
+
+
+/* REGISTRATION PAGE BEGINS HERE */
+
+select{
+  margin: 0px;
+  padding: 14px;
+  width: 250px;
+  font-size: 17px;
+  border: 1px solid #dddddd;
+  border-radius: 7px;
+  background-color: #ffffff;
+}
+
+.gameImages{
+  height: auto;
+  width: 200px;
+  cursor: pointer;
+}
+
+.gameCheckbox{
+  position: absolute;
+  visibility: hidden;
+  width: 45px;
+  height: 45px;
+  z-index: 10;
+}
+
+.gameCheckbox:checked{
+  visibility: visible;
+  transition-duration: 0.2s;
+  box-shadow: 3px 3px 10px 0px rgba(0,0,0,0.4);
+}
+
+input[type="checkbox"] + label{
+  filter: opacity(100%);
+  transition-duration: 0.2s;
+  margin: 20px;
+}
+
+input[type="checkbox"]:hover + label{
+  filter: opacity(70%);
+  transition-duration: 0.2s;
+  transform: scale(0.97);
+}
+
+input[type="checkbox"]:checked + label{
+  transform: scale(1.06);
+  transition-duration: 0.2s;
+  box-shadow: 0px 0px 13px 0px rgba(0,0,0,0.23);
+}
+
+#gamesTab{
+  margin-left:auto;
+  margin-right: auto;
+}
+
+#submitRegistrationButton{
+  display: inline;
+  margin-top: 0vh;
+  margin-bottom: 0px;
+  background: -webkit-linear-gradient(360deg, #0084ff, #00c6ff);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 550;
+  width: 150px;
+  height: 44px;
+  color: white;
+  border: transparent;
+  border-radius: 8px;
+}
+
+/* END REGISTRATION PAGE */
+
 @media only screen and (min-width: 900px){
 
   #loginImage{
