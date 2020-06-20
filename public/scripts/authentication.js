@@ -37,7 +37,6 @@ function initApp() {
             var isAnonymous = user.isAnonymous;
             var uid = user.uid;
             var providerData = user.providerData;
-            document.getElementById('loginBtn').textContent = 'Sign out';
             document.getElementById('quickstart-sign-in-status').textContent = 'Signed in';
             document.getElementById('quickstart-account-details').textContent = JSON.stringify(user, null, '  ');
             window.location = "logout.html";

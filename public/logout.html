@@ -3,9 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>All-Star eSports Login</title>
     <link rel="icon" type="image/png" href="https://cdn.discordapp.com/attachments/703419145752150090/718584157390766150/Logo_STARcolor_background.png"/>
-    <script src="authentication.js"></script>
 
     <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase.js"></script>
@@ -22,17 +20,13 @@
         };
         firebase.initializeApp(firebaseConfig);
     </script>
+    <script>
+    function initApp() {
+        firebase.auth().signOut();
+    }
+    window.onload = function() {
+        initApp();
+    }
+    </script>
 </head>
-<body>
-    <h4>Sign Out</h4>
-    <button type="button" id="sign-in" onclick="firebase.auth().signOut();">Sign Out</button>
-
-    <!-- This is the debugger which outputs all user info to ensure login is sucessful.
-    <div>
-        Firebase sign-in status: <span id="quickstart-sign-in-status">Unknown</span>
-        <div>Firebase auth <code>currentUser</code> object value:</div>
-        <pre><code id="quickstart-account-details">null</code></pre>
-    </div>
-    -->
-</body>
 </html>
