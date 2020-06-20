@@ -1,4 +1,4 @@
-var jordanspeepeenumber = 0;
+var tabNumber = 0;
 const nameTab = document.getElementById("nameTab");
 const emailTab = document.getElementById("emailTab");
 const roleTab = document.getElementById("roleTab");
@@ -14,43 +14,43 @@ function hide(x){
 }
 
 function next(){
-  jordanspeepeenumber++;
-  if (jordanspeepeenumber > 3){
+  tabNumber++;
+  if (tabNumber > 4){
     hide(nextButton);
     show(submitRegistrationButton);
   }
-  if (jordanspeepeenumber < 0){
-    jordanspeepeenumber = 0;
+  if (tabNumber < 0){
+    tabNumber = 0;
   }
-  if (jordanspeepeenumber == 0){
+  if (tabNumber == 0){
     show(nameTab);
     hide(emailTab);
     hide(roleTab);
     hide(locationTab);
     hide(gamesTab);
   }
-  if (jordanspeepeenumber == 1){
+  if (tabNumber == 1){
     hide(nameTab);
     show(emailTab);
     hide(roleTab);
     hide(locationTab);
     hide(gamesTab);
   }
-  if (jordanspeepeenumber == 2){
+  if (tabNumber == 2){
     hide(nameTab);
     hide(emailTab);
     show(roleTab);
     hide(locationTab);
     hide(gamesTab);
   }
-  if (jordanspeepeenumber == 3){
+  if (tabNumber == 3){
     hide(nameTab);
     hide(emailTab);
     hide(roleTab);
     show(locationTab);
     hide(gamesTab);
   }
-  if (jordanspeepeenumber == 4){
+  if (tabNumber == 4){
     hide(nameTab);
     hide(emailTab);
     hide(roleTab);
