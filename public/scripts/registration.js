@@ -56,7 +56,10 @@ function register() {
                 .catch(function(error) {
                     console.error("Error writing document: ", error);
                 });
-        }, 350);
+        }, 450);
+        setTimeout(function(){
+            window.location = "dashboard/index.html";
+        }, 750);
     }
     else if (validateEmail(document.getElementById('email').value) === false) {
         alert('Email address is not valid');
@@ -80,14 +83,8 @@ function initApp() {
             var isAnonymous = user.isAnonymous;
             var uid = user.uid;
             var providerData = user.providerData;
-            document.getElementById('quickstart-sign-in-status').textContent = 'Signed in';
-            document.getElementById('quickstart-account-details').textContent = JSON.stringify(user, null, '  ');
-        } else {
-            document.getElementById('quickstart-sign-in-status').textContent = 'Signed out';
-            document.getElementById('quickstart-account-details').textContent = 'null';
         }
     });
-    document.getElementById('register').addEventListener('click', register, false);
 }
 
 window.onload = function() {

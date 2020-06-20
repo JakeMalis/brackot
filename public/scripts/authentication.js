@@ -5,6 +5,7 @@ function validateEmail(email) {
     }
     return (false)
 }
+
 function passwordSignIn() {
       var email = document.getElementById('email').value;
       var password = document.getElementById('password').value;
@@ -23,10 +24,12 @@ function passwordSignIn() {
               function () {
                   alert('Verification Email Sent');
               });
+          window.location = "dashboard/index.html";
       } else if (validateEmail(email) === false) {
           alert('Email address is not valid');
       }
 }
+
 function initApp() {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
@@ -47,6 +50,7 @@ function initApp() {
     });
     document.getElementById('loginBtn').addEventListener('click', passwordSignIn, false);
 }
+
 window.onload = function() {
     initApp();
 }
