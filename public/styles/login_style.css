@@ -145,10 +145,10 @@ input.invalid {
 /* REGISTRATION PAGE BEGINS HERE */
 
 #registrationLogo{
-  width: 100px;
-  height: 100px;
-  top: 20px;
-  left: 20px;
+  width: 120px;
+  height: 120px;
+  top: 50px;
+  left: 40px;
   object-fit:contain;
   position: absolute;
 }
