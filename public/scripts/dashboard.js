@@ -55,7 +55,7 @@ function personalizeElements() {
 
   userDocument.get().then(function(doc) {
     boost = doc.data().boost;
-    if (boost = true) {
+    if (boost === true) {
       $('#noBoostActiveText').hide();
       $('#boostActiveText').show();
     }
