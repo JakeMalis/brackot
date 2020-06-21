@@ -49,6 +49,10 @@ function register() {
                   state: document.getElementById('state').value,
                   highschool: document.getElementById('highschool').value,
                   role: role,
+                  coins: 0,
+                  notifications: 0,
+                  matches: 0,
+                  wins: 0,
                   games: {
                       fortnite: fortnite,
                       overwatch: overwatch,
@@ -68,7 +72,7 @@ function register() {
                   email: document.getElementById('email').value,
                   state: document.getElementById('state').value,
                   highschool: document.getElementById('highschool').value,
-                  role: role
+                  role: role,
               }).then(function() {
                   console.log("Document successfully written!");
               }).catch(function(error) {
