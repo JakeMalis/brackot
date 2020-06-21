@@ -131,6 +131,10 @@ input.invalid {
     padding: 0px;
 }
 
+.loginInput{
+  margin-bottom: 10px;
+}
+
 #firebaseLoginDev{
   display: none;
 }
@@ -304,20 +308,26 @@ input[type="checkbox"]:checked + label{
   }
 
   #registerBtn{
-    margin-right: 65px;
+    margin-right: 85px;
   }
 
   #logInText{
-    margin-left: -50px;
+    margin-left: 0px;
+    margin-bottom: 40px;
   }
 
   #forgot-password-block{
-    margin-left: -200px;
-    margin-top: -17px;
+    margin-left: -240px;
+    margin-top: -10px;
   }
 
   #resetBtn{
     margin-right: 228px;
+  }
+
+  .loginInput{
+    margin-left: -3px;
+    width: 420px;
   }
 
 }
