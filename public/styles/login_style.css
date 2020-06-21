@@ -131,10 +131,6 @@ input.invalid {
   margin-bottom: 10px;
 }
 
-.forgotPasswordInput{
-
-}
-
 #firebaseLoginDev{
   display: none;
 }
