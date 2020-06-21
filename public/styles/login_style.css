@@ -131,6 +131,10 @@ input.invalid {
   margin-bottom: 10px;
 }
 
+.forgotPasswordInput{
+
+}
+
 #firebaseLoginDev{
   display: none;
 }
@@ -330,12 +334,18 @@ input[type="checkbox"]:checked + label{
   }
 
   #resetBtn{
-    margin-right: 228px;
+    margin-top: 50px;
+    margin-right: 214px;
   }
 
   .loginInput{
     margin-left: -3px;
     width: 420px;
+  }
+
+  .forgotPasswordInput{
+    margin-left: -10px;
+    width: 360px;
   }
 
 }
