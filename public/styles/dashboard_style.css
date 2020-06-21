@@ -1,0 +1,518 @@
+body{
+  overflow-x: hidden;
+  margin: 0px;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #f0f8ff !important;
+}
+
+h1{
+  font-family: 'purista-web', sans-serif;
+  color: #232323;
+}
+
+h2{
+  font-family: 'purista-web', sans-serif;
+  color: #232323;
+}
+
+h3{
+  font-family: 'purista-web', sans-serif;
+  color: #232323;
+}
+
+h4{
+  font-family: 'purista-web', sans-serif;
+  color: #232323;
+}
+
+h5{
+  font-family: 'purista-web', sans-serif;
+  color: #232323;
+}
+
+h6{
+  font-family: 'purista-web', sans-serif;
+  color: #777777 !important;
+  text-transform: uppercase;
+}
+
+p{
+  font-family: 'purista-web', sans-serif;
+  color: #232323;
+}
+
+.main-page{
+  width: calc(100vw: - 60px);
+  margin-left: 60px;
+}
+
+.gradientHeader{
+  width: 100vw;
+  z-index: -1000;
+  height: 400px;
+  background-image: linear-gradient(135deg,#0069ff,#00dbff);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.dashboardIcons{
+  float: right;
+  margin-top: 10px;
+  width: 50px;
+  height: 50px;
+}
+
+.fa-2x {
+font-size: 2em;
+}
+
+.fa-lg{
+  font-size: 1.33em;
+}
+
+.fa {
+position: relative;
+display: table-cell;
+width: 60px;
+height: 30px;
+text-align: center;
+vertical-align: middle;
+font-size:20px;
+font-weight: 200;
+margin-top: 16px;
+}
+
+
+.main-menu:hover,nav.main-menu.expanded {
+width:250px;
+overflow:visible;
+}
+
+.main-menu {
+background:#ffffff;
+box-shadow: 1px 0px 12px 0px rgba(10,10,10,0.15);
+border-right:0px solid #0084ff;
+border-image:
+    linear-gradient(
+      to bottom,
+      #0084ff,
+      #00c6ff
+    ) 1 100%;
+position:fixed;
+top:0;
+bottom:0;
+height:100%;
+left:0;
+width:60px;
+overflow:hidden;
+-webkit-transition:width .25s ease-in-out;
+transition:width .25s ease-in-out;
+-webkit-transform:translateZ(0) scale(1,1);
+z-index:1000;
+}
+
+.main-menu>ul {
+margin:7px 0;
+}
+
+.main-menu li {
+position:relative;
+display:block;
+width:250px;
+}
+
+.main-menu li>a {
+position:relative;
+display:table;
+border-collapse:collapse;
+border-spacing:0;
+color:#0084ff;
+font-family: "purista-web", sans-serif;
+font-size: 15px;
+text-decoration:none;
+-webkit-transform:translateZ(0) scale(1,1);
+-webkit-transition:all 0.1s linear;
+transition:all 0.1s linear;
+
+}
+
+.main-menu .nav-icon {
+position:relative;
+display:table-cell;
+width:60px;
+height:36px;
+text-align:center;
+vertical-align:middle;
+font-size:18px;
+}
+
+.main-menu .nav-text {
+position:relative;
+display:table-cell;
+vertical-align:middle;
+width:190px;
+font-family: 'purista-web', sans-serif;
+letter-spacing: 1px;
+}
+
+.main-menu>ul.logout {
+position:absolute;
+left:0;
+bottom:0;
+}
+
+.no-touch .scrollable.hover {
+overflow-y:hidden;
+}
+
+.no-touch .scrollable.hover:hover {
+overflow-y:auto;
+overflow:visible;
+}
+
+a:hover,a:focus {
+text-decoration:none;
+}
+
+nav {
+-webkit-user-select:none;
+-moz-user-select:none;
+-ms-user-select:none;
+-o-user-select:none;
+user-select:none;
+}
+
+nav ul,nav li {
+outline:0;
+margin:0;
+padding:0;
+}
+.main-menu li:hover>a,nav.main-menu li.active>a,.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus,.dropdown-menu>.active>a,.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus,.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,.dashboard-page nav.dashboard-menu ul li.active a {
+color:#ffffff;
+background-color:#0084ff;
+}
+.area {
+float: left;
+background: #e2e2e2;
+width: 100%;
+height: 100%;
+}
+@font-face {
+  font-family: 'purista-web', sans-serif;
+  font-weight: 300;
+}
+
+#firstGreetingMessage{
+  color: #ffffff;
+  display: normal;
+  font-size: 50px;
+  text-align: center;
+}
+
+#greetingMessage{
+  color: #ffffff;
+  display: none;
+  font-size: 50px;
+  text-align: center;
+}
+
+#boostsMessage{
+  color: #ffffff;
+  font-size: 50px;
+  text-align: center;
+}
+
+.userInfobar{
+  top: 0;
+  right: 0;
+  background-color: transparent;
+  width: auto;
+  height: 80px;
+  position: absolute;
+}
+
+.userPicInfobar{
+  position: relative;
+  float: right;
+  margin-top: 16px;
+  margin-right: 20px;
+  height: 48px;
+  width: 48px;
+}
+
+.userNameInfobar{
+  padding-top: 29px;
+  padding-right: 16px;
+  float: right;
+  position: relative;
+  color: #ffffff;
+  text-align: center;
+  width: auto;
+}
+
+.userNameInfobar:hover{
+  color: rgba(255,255,255,0.7);
+}
+
+.row{
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  margin-left: 50px !important;
+  margin-right: 50px !important;
+}
+
+.column{
+  display: flex;
+}
+
+
+.tournamentCard{
+  flex: 0 0 100%;
+  max-width: 100%;
+  height: 400px;
+  background: transparent;
+}
+
+.tournamentCardBackground{
+  margin-left: auto;
+  margin-right: auto;
+  height: 80%;
+  width: 90%;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+  background-color: #f9fcff;
+}
+
+.tournamentCardContent{
+  margin: 0px;
+}
+
+.tournamentCardText{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.tournamentCardContent > img{
+  height: 150px;
+  width: 100%;
+  object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+
+.smallCard{
+  flex: 0 0 100%;
+  max-width: 100%;
+  height: 200px;
+  background: transparent;
+}
+
+.smallCardBackground{
+  margin-left: auto;
+  margin-right: auto;
+  height: 80%;
+  width: 80%;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.05);
+  background-color: #ffffff;
+}
+
+.smallCardContent{
+  margin-top: 18px;
+  margin-bottom: 18px;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.longYCard{
+  flex: 0 0 100%;
+  max-width: 100%;
+  height: 400px;
+}
+
+.longYCardBackground{
+  margin-left: auto;
+  margin-right: auto;
+  height: 80%;
+  width: 80%;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.05);
+  background-color: #ffffff;
+}
+
+.longYCardContent{
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.wideCard{
+  flex: 0 0 100%;
+  max-width: 100%;
+  height: 800px;
+}
+
+.wideCardBackground{
+  margin-left: auto;
+  margin-right: auto;
+  height: 80%;
+  width: 80%;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.05);
+  background-color: #ffffff;
+}
+
+.wideCardContent{
+  margin-top: 42px;
+  margin-bottom: 42px;
+  margin-left: 56px;
+  margin-right: 56px;
+}
+
+#boostsContainer{
+  margin-top: 85px;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#noBoostActiveText{
+  margin-top: 30px;
+  display: normal;
+}
+
+#boostActiveText{
+  margin-top: 30px;
+  display: none;
+}
+
+#profileStatsCard{
+  display: none;
+}
+
+#profilePic{
+  float: right;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
+  transition-duration: 0.2s;
+  display: none;
+  margin-bottom: 30px;
+  margin-left: 30px;
+}
+
+#profilePic:hover{
+  opacity: 65%;
+  transition-duration: 0.2s;
+}
+
+.nameProfileInputs{
+  flex: 0 0 100%;
+  width: 100%;
+  padding: 11px;
+  font-size: 20px;
+  border-radius: 11px;
+  background-color: #f6faff;
+  border: 1px solid #dddddd;
+}
+
+.shortProfileInputs{
+  flex: 0 0 100%;
+  width: 100%;
+  padding: 11px;
+  font-size: 20px;
+  border-radius: 11px;
+  background-color: #f6faff;
+  border: 1px solid #dddddd;
+}
+
+.longProfileInputs{
+  flex: 0 0 100%;
+  width: 100%;
+  padding: 11px;
+  font-size: 20px;
+  border-radius: 11px;
+  background-color: #f6faff;
+  border: 1px solid #dddddd;
+}
+
+/* ADMIN PAGE CODE BELOW */
+
+#newTournamentSubmitButton{
+  height: 40px;
+  width: 200px;
+  font-size: 18px;
+  font-family: 'purista-web', sans-serif;
+  letter-spacing: 1.7px;
+  font-weight: 800px;
+  color: #ffffff;
+  background-image: linear-gradient(135deg,#0069ff,#00dbff);
+  border: 0px;
+  border-radius: 9px;
+  cursor: pointer;
+  transition-duration: 0.1s;
+}
+
+#newTournamentSubmitButton:hover{
+  opacity: 70%;
+  transition-duration: 0.1s;
+}
+
+/* END ADMIN PAGE CODE */
+
+
+
+
+/* THE BELOW SECTION IS MEANT FOR MOBILE DEVICES ONLY */
+@media only screen and (min-width: 700px){
+  #profilePic{
+    display: flex;
+  }
+}
+
+@media only screen and (min-width: 900px){
+  .tournamentCard{
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+  .smallCard{
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+  .longYCard{
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+  .shortProfileInputs{
+    flex: 0 0 50%;
+    width: 50%;
+  }
+  .nameProfileInputs{
+    flex: 0 0 50%;
+    width: calc(100%-210px);
+  }
+}
+
+@media only screen and (min-width: 1200px){
+  .tournamentCard{
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+  .smallCard{
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+}

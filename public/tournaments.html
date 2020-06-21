@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tournaments</title>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="icon" type="image/png" href="media/favicon.png"/>
+    <link rel="stylesheet" href="https://use.typekit.net/fyp1otf.css">
+    <script src="scripts/sidebar.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/201b9c41aa.js" crossorigin="anonymous"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase.js"></script>
+
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyBSjggPyShfi3JJGmfuf2p_BFLMeEeVTLY",
+            authDomain: "all-star-esports.firebaseapp.com",
+            databaseURL: "https://all-star-esports.firebaseio.com",
+            projectId: "all-star-esports",
+            storageBucket: "all-star-esports.appspot.com",
+            messagingSenderId: "894423381350",
+            appId: "1:894423381350:web:3fe3b4195ae678bd6704a7"
+        };
+        firebase.initializeApp(firebaseConfig);
+    </script>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="area"></div>
+    <nav class="main-menu">
+          <ul>
+              <li>
+                  <a href="home.html">
+                      <i class="fa fa-home fa-lg"></i>
+                      <span class="nav-text">
+                          Home
+                      </span>
+                  </a>
+
+              </li>
+              <li class="has-subnav">
+                  <a href="profile.html">
+                      <i class="fa fa-user-circle fa-lg"></i>
+                      <span class="nav-text">
+                          Profile
+                      </span>
+                  </a>
+
+              </li>
+              <li class="has-subnav">
+                  <a href="tournaments.html">
+                     <i class="fa fa-trophy fa-lg"></i>
+                      <span class="nav-text">
+                          Tournaments
+                      </span>
+                  </a>
+
+              </li>
+              <li class="has-subnav">
+                  <a href="boosts.html">
+                     <i class="fa fa-bolt fa-lg"></i>
+                      <span class="nav-text">
+                          Boosts
+                      </span>
+                  </a>
+
+              </li>
+          </ul>
+
+          <ul class="logout">
+              <li>
+                 <a href="logout.html" onclick="alert("YEET");">
+                       <i class="fa fa-sign-out fa-lg"></i>
+                      <span class="nav-text">
+                          Log Out
+                      </span>
+                  </a>
+              </li>
+          </ul>
+      </nav>
+    </div>
+  </div>
+
+    <!-- THIS IS WHERE THE MAIN CONTENT OF THE PAGE GOES -->
+    <div class="main-page">
+      <div class="gradientHeader"></div>
+      <div class="userInfobar">
+        <a href="profile.html">
+          <div class="userPicInfobar"><img src="media/blank_profile.png" alt="Profile Picture" width="48px" height="48px" style="object-fit: cover; border-radius: 50%;"></div>
+          <div class="userNameInfobar"><h3 style="font-size: 17px;">Mark Malis</h3></div>
+        </a>
+      </div>
+
+      <div style="margin-top: 150px;">
+        <div class="wideCard" style="min-height: 1600px;">
+          <div class="wideCardBackground">
+            <div class="wideCardContent">
+              <h3 style="margin-bottom: 30px;">Tournaments</h3>
+              <div class="row" style="margin-left: 0px !important; margin-right: 0px; !important">
+                <div class="tournamentCard">
+                  <div class="tournamentCardBackground">
+                    <div class="tournamentCardContent">
+                      <img src="media/game_wallpapers/valorantgameplay.jpg">
+                      <div class="tournamentCardText">
+                        <h6 style="color: #232323 !important; text-align: center;">Valorant Series</h6>
+                        <p>June 23rd</p>
+                        <p>221 Participants</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tournamentCard">
+                  <div class="tournamentCardBackground">
+                    <div class="tournamentCardContent">
+                      <img src="media/game_wallpapers/ssbugameplay.jpg">
+                      <div class="tournamentCardText">
+                        <h6 style="color: #232323 !important; text-align: center;">Smash Bash</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tournamentCard">
+                  <div class="tournamentCardBackground">
+                    <div class="tournamentCardContent">
+                      <img src="media/game_wallpapers/fortnitegameplay.png">
+                      <div class="tournamentCardText">
+                        <h6 style="color: #232323 !important; text-align: center;">Fortnite Clash Cup</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tournamentCard">
+                  <div class="tournamentCardBackground">
+                    <div class="tournamentCardContent">
+                      <img src="media/game_wallpapers/overwatchgameplay.jpg">
+                      <div class="tournamentCardText">
+                        <h6 style="color: #232323 !important; text-align: center;">Overwatch Duels</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+</body>
+</html>

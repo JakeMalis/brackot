@@ -1,21 +1,26 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>All-Star eSports Login</title>
+    <title>Dashboard</title>
 
     <link rel="icon" type="image/png" href="media/favicon.png"/>
-    <link rel="stylesheet" type="text/css" href="styles/style.css">
-    <script src="scripts/authentication.js"></script>
-    <script src="scripts/load-image.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/dashboard_style.css">
+    <script src="scripts/dashboard.js"></script>
 
-    <link rel="stylesheet" href="https://use.typekit.net/bea1phk.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.typekit.net/fyp1otf.css">
+    <script src="https://kit.fontawesome.com/201b9c41aa.js" crossorigin="anonymous"></script>
 
-    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-functions.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-storage.js"></script>
 
     <script>
         var firebaseConfig = {
@@ -29,27 +34,74 @@
         };
         firebase.initializeApp(firebaseConfig);
     </script>
+
+
 </head>
 <body>
-    <center>
-        <img id="logo" href="https://allstaresports.com" src="https://allstaresports.com/s/text_logo">
-        <form id="loginForm" action="">
-            <div class="tab">
-                <h1 id="logInText">Log in and <span style="background: -webkit-linear-gradient(0deg, #0084ff, #00c6ff);-webkit-background-clip: text; -webkit-text-fill-color: transparent;">game on</span></h1>
-                <p><input placeholder="Email Address..." id="email" oninput="this.className = ''"></p>
-                <p><input placeholder="Password..." id="password" type="password" oninput="this.className = ''"></p>
-                <div id="forgot-password-block">
-                    <a href="forgot_password.html"><p>Forgot your password?</p></a>
-                </div>
-            </div>
+  <div id="sidebar">
+    <script> $( "#sidebar" ).load( "ajax/sidebar.html" ); </script>
+  </div>
 
-            <div style="overflow:auto;">
-                <div style="float:center;">
-                    <button type="button" id="loginBtn" onclick="passwordSignIn()">Login</button>
-                    <button type="button" id="registerBtn" onclick="location.href='register.html';">Sign Up</button>
-                </div>
-            </div>
-        </form>
-    </center>
+  <div class="main-page">
+    <div id="topbar">
+      <script> $( "#topbar" ).load( "ajax/topbar.html" ); </script>
+    </div>
+
+    <h1 style="padding-top: 140px;" id="firstGreetingMessage">Welcome to your dashboard, User.</h1>
+    <div style="margin-top: 100px;" class="row">
+      <div class="smallCard">
+        <div class="smallCardBackground">
+          <div class="smallCardContent">
+            <img class="dashboardIcons" src="media/icons/notificationsicon.svg">
+            <h6>Notifications</h6>
+            <h2>0</h2>
+          </div>
+        </div>
+      </div>
+      <div class="smallCard">
+        <div class="smallCardBackground">
+          <div class="smallCardContent">
+            <img class="dashboardIcons" src="media/icons/matchesicon.svg">
+            <h6>Matches</h6>
+            <h2>1</h2>
+          </div>
+        </div>
+      </div>
+      <div class="smallCard">
+        <div class="smallCardBackground">
+          <div class="smallCardContent">
+            <img class="dashboardIcons" src="media/icons/starcoinsicon.svg">
+            <h6>Star Coins</h6>
+            <h2>2,500</h2>
+            <p id="noBoostActiveText" style="color: rgba(255,0,0,0.4);">No boost active<p>
+            <p id="boostActiveText"  style="color: rgba(0,200,0,0.7);">Boost active!</p>
+          </div>
+        </div>
+      </div>
+      <div class="smallCard">
+        <div class="smallCardBackground">
+          <div class="smallCardContent">
+            <img class="dashboardIcons" src="media/icons/winsicon.svg">
+            <h6>Total Wins</h6>
+            <h2>6</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="wideCard">
+        <div class="wideCardBackground">
+          <div class="wideCardContent">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
+
+
+<!-- profile - (states all known info about user, points)
+boost - (similar to battle pass, by purchasing points are 2x) (pulls up info about each boost/battle pass)
+tournaments - (show upcoming tournaments (game, date, title, amount of points for each place, and num players signed up))
+-->

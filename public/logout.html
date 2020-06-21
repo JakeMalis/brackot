@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="media/favicon.png"/>
 
-    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-functions.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-storage.js"></script>
 
     <script>
         var firebaseConfig = {
@@ -20,13 +23,16 @@
         };
         firebase.initializeApp(firebaseConfig);
     </script>
+
     <script>
-    function initApp() {
+      window.onload = function() {
         firebase.auth().signOut();
-    }
-    window.onload = function() {
-        initApp();
-    }
+        console.log('Logged out');
+        setTimeout(function(){
+          window.location = "login.html";
+        }, 500);
+      }
     </script>
+
 </head>
 </html>

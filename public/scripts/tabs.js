@@ -19,6 +19,9 @@ function next(){
     hide(nextButton);
     show(submitRegistrationButton);
   }
+  if (document.getElementById('coach').checked) {
+    tabNumber++;
+  }
   if (tabNumber < 0){
     tabNumber = 0;
   }
@@ -47,14 +50,14 @@ function next(){
     hide(nameTab);
     hide(emailTab);
     hide(roleTab);
-    show(locationTab);
-    hide(gamesTab);
+    hide(locationTab);
+    show(gamesTab);
   }
   if (tabNumber == 4){
     hide(nameTab);
     hide(emailTab);
     hide(roleTab);
-    hide(locationTab);
-    show(gamesTab);
+    show(locationTab);
+    hide(gamesTab);
   }
 }
