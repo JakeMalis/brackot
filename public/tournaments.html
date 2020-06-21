@@ -1,97 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Tournaments</title>
-    <link rel="stylesheet" type="text/css" href="styles/style.css">
-    <link rel="icon" type="image/png" href="media/favicon.png"/>
-    <link rel="stylesheet" href="https://use.typekit.net/fyp1otf.css">
-    <script src="scripts/sidebar.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/201b9c41aa.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard</title>
 
-    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase.js"></script>
+  <link rel="icon" type="image/png" href="media/favicon.png"/>
+  <link rel="stylesheet" type="text/css" href="styles/dashboard_style.css">
+  <script src="scripts/dashboard.js"></script>
 
-    <script>
-        var firebaseConfig = {
-            apiKey: "AIzaSyBSjggPyShfi3JJGmfuf2p_BFLMeEeVTLY",
-            authDomain: "all-star-esports.firebaseapp.com",
-            databaseURL: "https://all-star-esports.firebaseio.com",
-            projectId: "all-star-esports",
-            storageBucket: "all-star-esports.appspot.com",
-            messagingSenderId: "894423381350",
-            appId: "1:894423381350:web:3fe3b4195ae678bd6704a7"
-        };
-        firebase.initializeApp(firebaseConfig);
-    </script>
+  <link rel="stylesheet" href="https://use.typekit.net/fyp1otf.css">
+  <script src="https://kit.fontawesome.com/201b9c41aa.js" crossorigin="anonymous"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-functions.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-storage.js"></script>
+
+  <script>
+      var firebaseConfig = {
+          apiKey: "AIzaSyBSjggPyShfi3JJGmfuf2p_BFLMeEeVTLY",
+          authDomain: "all-star-esports.firebaseapp.com",
+          databaseURL: "https://all-star-esports.firebaseio.com",
+          projectId: "all-star-esports",
+          storageBucket: "all-star-esports.appspot.com",
+          messagingSenderId: "894423381350",
+          appId: "1:894423381350:web:3fe3b4195ae678bd6704a7"
+      };
+      firebase.initializeApp(firebaseConfig);
+  </script>
 </head>
 <body>
-  <div class="wrapper">
-    <div class="area"></div>
-    <nav class="main-menu">
-          <ul>
-              <li>
-                  <a href="home.html">
-                      <i class="fa fa-home fa-lg"></i>
-                      <span class="nav-text">
-                          Home
-                      </span>
-                  </a>
-
-              </li>
-              <li class="has-subnav">
-                  <a href="profile.html">
-                      <i class="fa fa-user-circle fa-lg"></i>
-                      <span class="nav-text">
-                          Profile
-                      </span>
-                  </a>
-
-              </li>
-              <li class="has-subnav">
-                  <a href="tournaments.html">
-                     <i class="fa fa-trophy fa-lg"></i>
-                      <span class="nav-text">
-                          Tournaments
-                      </span>
-                  </a>
-
-              </li>
-              <li class="has-subnav">
-                  <a href="boosts.html">
-                     <i class="fa fa-bolt fa-lg"></i>
-                      <span class="nav-text">
-                          Boosts
-                      </span>
-                  </a>
-
-              </li>
-          </ul>
-
-          <ul class="logout">
-              <li>
-                 <a href="logout.html" onclick="alert("YEET");">
-                       <i class="fa fa-sign-out fa-lg"></i>
-                      <span class="nav-text">
-                          Log Out
-                      </span>
-                  </a>
-              </li>
-          </ul>
-      </nav>
-    </div>
+  <div id="sidebar">
+    <script> $( "#sidebar" ).load( "ajax/sidebar.html" ); </script>
   </div>
 
-    <!-- THIS IS WHERE THE MAIN CONTENT OF THE PAGE GOES -->
-    <div class="main-page">
-      <div class="gradientHeader"></div>
-      <div class="userInfobar">
-        <a href="profile.html">
-          <div class="userPicInfobar"><img src="media/blank_profile.png" alt="Profile Picture" width="48px" height="48px" style="object-fit: cover; border-radius: 50%;"></div>
-          <div class="userNameInfobar"><h3 style="font-size: 17px;">Mark Malis</h3></div>
-        </a>
-      </div>
+  <div class="main-page">
+    <div id="topbar">
+      <script> $( "#topbar" ).load( "ajax/topbar.html" ); </script>
+    </div>
 
       <div style="margin-top: 150px;">
         <div class="wideCard" style="min-height: 1600px;">

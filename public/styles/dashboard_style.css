@@ -389,12 +389,11 @@ height: 100%;
 
 #noBoostActiveText{
   margin-top: 30px;
-  display: normal;
 }
 
 #boostActiveText{
   margin-top: 30px;
-  display: none;
+
 }
 
 #profileStatsCard{

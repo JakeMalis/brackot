@@ -53,6 +53,7 @@ function register() {
                   notifications: 0,
                   matches: 0,
                   wins: 0,
+                  boost: false,
                   games: {
                       fortnite: fortnite,
                       overwatch: overwatch,
@@ -80,7 +81,7 @@ function register() {
               });
             }
             console.log("Added documents");
-        }, 350);
+        }, 500);
         setTimeout(function(){
             window.location = "index.html";
         }, 1000);

@@ -34,8 +34,6 @@
         };
         firebase.initializeApp(firebaseConfig);
     </script>
-
-
 </head>
 <body>
   <div id="sidebar">
@@ -47,14 +45,14 @@
       <script> $( "#topbar" ).load( "ajax/topbar.html" ); </script>
     </div>
 
-    <h1 style="padding-top: 140px;" id="firstGreetingMessage">Welcome to your dashboard, User.</h1>
+    <h1 style="padding-top: 140px;" id="firstGreetingMessage">Welcome back, User.</h1>
     <div style="margin-top: 100px;" class="row">
       <div class="smallCard">
         <div class="smallCardBackground">
           <div class="smallCardContent">
             <img class="dashboardIcons" src="media/icons/notificationsicon.svg">
             <h6>Notifications</h6>
-            <h2>0</h2>
+            <h2 id="notifications">0</h2>
           </div>
         </div>
       </div>
@@ -63,7 +61,7 @@
           <div class="smallCardContent">
             <img class="dashboardIcons" src="media/icons/matchesicon.svg">
             <h6>Matches</h6>
-            <h2>1</h2>
+            <h2 id="matches">1</h2>
           </div>
         </div>
       </div>
@@ -72,9 +70,9 @@
           <div class="smallCardContent">
             <img class="dashboardIcons" src="media/icons/starcoinsicon.svg">
             <h6>Star Coins</h6>
-            <h2>2,500</h2>
-            <p id="noBoostActiveText" style="color: rgba(255,0,0,0.4);">No boost active<p>
-            <p id="boostActiveText"  style="color: rgba(0,200,0,0.7);">Boost active!</p>
+            <h2 id="coins">2,500</h2>
+            <p id="noBoostActiveText" style="color: rgba(255,0,0,0.4); display: normal;">No boost active<p>
+            <p id="boostActiveText" style="color: rgba(0,200,0,0.7); display: none;">Boost active!</p>
           </div>
         </div>
       </div>
@@ -83,7 +81,7 @@
           <div class="smallCardContent">
             <img class="dashboardIcons" src="media/icons/winsicon.svg">
             <h6>Total Wins</h6>
-            <h2>6</h2>
+            <h2 id="wins">6</h2>
           </div>
         </div>
       </div>
