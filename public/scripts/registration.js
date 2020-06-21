@@ -6,89 +6,80 @@ function validateEmail(email) {
     return (false)
 }
 
+function createUser() {
+  if (validateEmail(document.getElementById('email').value) === true) {
+    firebase.auth().createUserWithEmailAndPassword(document.getElementById('email').value, document.getElementById('password').value).catch(
+      function(error) {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          if (errorCode == 'auth/weak-password') {
+              alert('Password too weak')
+          }
+          else {
+              alert(errorMessage);
+          }
+      }
+    );
+  }
+  else if (validateEmail(document.getElementById('email').value) === false) {
+      alert('Email address is not valid');
+  }
+}
+
 function register() {
-    var fortnite = false;
-    var overwatch = false;
-    var smash = false;
-    var valorant = false;
+  var role = "player";
+  var fortnite = document.getElementById("fortnite").checked;
+  var overwatch = document.getElementById("overwatch").checked;
+  var smash = document.getElementById("smash").checked;
+  var valorant = document.getElementById("valorant").checked;
 
-    if (document.getElementById('player').checked) {
-        var role = "player";
-        var fortnite = document.getElementById("fortnite").checked;
-        var overwatch = document.getElementById("overwatch").checked;
-        var smash = document.getElementById("smash").checked;
-        var valorant = document.getElementById("valorant").checked;
-    }
-    else if (document.getElementById('coach').checked) {
-        var role = "coach";
-    }
-
-    if (validateEmail(document.getElementById('email').value) === true) {
-        firebase.auth().createUserWithEmailAndPassword(document.getElementById('email').value, document.getElementById('password').value).catch(
-            function(error) {
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                if (errorCode == 'auth/weak-password') {
-                    alert('Password too weak')
-                }
-                else {
-                    alert(errorMessage);
-                }
-            });
-        setTimeout(function(){
-            firebase.auth().currentUser.sendEmailVerification();
-            firebase.auth().currentUser.updateProfile({
-              displayName: document.getElementById('first-name').value + " " + document.getElementById('last-name').value,
-              photoURL: "https://cdn.discordapp.com/attachments/720005730765111376/723733915990360135/blank-profile-picture-973460_640.png"
-            });
-            if (document.getElementById('player').checked) {
-              db.collection("users").doc(firebase.auth().currentUser.uid).set({
-                  first: document.getElementById('first-name').value,
-                  last: document.getElementById('last-name').value,
-                  email: document.getElementById('email').value,
-                  state: document.getElementById('state').value,
-                  highschool: document.getElementById('highschool').value,
-                  role: role,
-                  coins: 0,
-                  notifications: 0,
-                  matches: 0,
-                  wins: 0,
-                  boost: false,
-                  games: {
-                      fortnite: fortnite,
-                      overwatch: overwatch,
-                      smash: smash,
-                      valorant: valorant
-                  }
-              }).then(function() {
-                  console.log("Document successfully written!");
-              }).catch(function(error) {
-                      console.error("Error writing document: ", error);
-              });
-            }
-            else if (document.getElementById('coach').checked) {
-              db.collection("users").doc(firebase.auth().currentUser.uid).set({
-                  first: document.getElementById('first-name').value,
-                  last: document.getElementById('last-name').value,
-                  email: document.getElementById('email').value,
-                  state: document.getElementById('state').value,
-                  highschool: document.getElementById('highschool').value,
-                  role: role,
-              }).then(function() {
-                  console.log("Document successfully written!");
-              }).catch(function(error) {
-                      console.error("Error writing document: ", error);
-              });
-            }
-            console.log("Added documents");
-        }, 500);
-        setTimeout(function(){
-            window.location = "index.html";
-        }, 1000);
-    }
-    else if (validateEmail(document.getElementById('email').value) === false) {
-        alert('Email address is not valid');
-    }
+  firebase.auth().currentUser.sendEmailVerification();
+  firebase.auth().currentUser.updateProfile({
+    displayName: document.getElementById('first-name').value + " " + document.getElementById('last-name').value,
+    photoURL: "https://cdn.discordapp.com/attachments/720005730765111376/723733915990360135/blank-profile-picture-973460_640.png"
+  });
+  if (role = "player") {
+    db.collection("users").doc(firebase.auth().currentUser.uid).set({
+        first: document.getElementById('first-name').value,
+        last: document.getElementById('last-name').value,
+        email: document.getElementById('email').value,
+        state: document.getElementById('state').value,
+        highschool: document.getElementById('highschool').value,
+        role: role,
+        coins: 0,
+        notifications: 0,
+        matches: 0,
+        wins: 0,
+        boost: false,
+        games: {
+            fortnite: fortnite,
+            overwatch: overwatch,
+            smash: smash,
+            valorant: valorant
+        }
+    }).then(function() {
+        console.log("Document successfully written!");
+    }).catch(function(error) {
+            console.error("Error writing document: ", error);
+    });
+  }
+  else if (role = "coach") {
+    db.collection("users").doc(firebase.auth().currentUser.uid).set({
+        first: document.getElementById('first-name').value,
+        last: document.getElementById('last-name').value,
+        email: document.getElementById('email').value,
+        state: document.getElementById('state').value,
+        highschool: document.getElementById('highschool').value,
+        role: role
+    }).then(function() {
+        console.log("Document successfully written!");
+    }).catch(function(error) {
+            console.error("Error writing document: ", error);
+    });
+  }
+  setTimeout(function(){
+      window.location = "index.html";
+  }, 1000);
 }
 
 function initApp() {
@@ -111,6 +102,7 @@ function initApp() {
       }
   });
   document.getElementById('submitRegistrationButton').addEventListener("click", register);
+  document.getElementById('userCreate').addEventListener("click", createUser);
 }
 
 window.onload = function() {
