@@ -272,8 +272,14 @@ height: 100%;
 .tournamentCard{
   flex: 0 0 100%;
   max-width: 100%;
-  height: 400px;
+  height: 430px;
   background: transparent;
+  transition-duration: 0.2s;
+}
+
+.tournamentCard:hover{
+  transform: scale(1.03);
+  transition-duration: 0.2s;
 }
 
 .tournamentCardBackground{
@@ -282,9 +288,9 @@ height: 100%;
   height: 80%;
   width: 90%;
   border-radius: 12px;
-  border: 1px solid rgba(0,0,0,0.05);
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
-  background-color: #f9fcff;
+  border: 0px;
+  box-shadow: 0px 0px 13px 0px rgba(0,0,0,0.2);
+  background-color: #ffffff;
 }
 
 .tournamentCardContent{
@@ -306,6 +312,49 @@ height: 100%;
   border-top-right-radius: 12px;
 }
 
+.tournamentCardTitle{
+  font-size: 19px;
+  letter-spacing: 1px;
+  font-weight: 700;
+  color: #232323 !important;
+  text-align: center;
+  font-family: 'purista-web', sans-serif;
+}
+
+.tournamentCardDetails{
+  list-style-type: none;
+  margin-top: 22px;
+  line-height: 24px;
+  margin-left: -30px;
+}
+
+.tournamentCardDetail{
+  font-size: 14px;
+  color: #555555 !important;
+  font-family: 'purista-web', sans-serif;
+}
+
+.tournamentCardButton{
+  font-family: 'purista-web', sans-serif;
+  background-image: linear-gradient(135deg,#0069ff,#00dbff);
+  margin-top: 13px;
+  height: 50px;
+  border: 0px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  color: #ffffff;
+  width: 100%;
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.tournamentCardButton:hover{
+  opacity: 70%;
+}
 
 .smallCard{
   flex: 0 0 100%;
