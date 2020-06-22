@@ -36,7 +36,7 @@ function register() {
   firebase.auth().currentUser.sendEmailVerification();
   firebase.auth().currentUser.updateProfile({
     displayName: document.getElementById('first-name').value + " " + document.getElementById('last-name').value,
-    photoURL: "https://cdn.discordapp.com/attachments/720005730765111376/723733915990360135/blank-profile-picture-973460_640.png"
+    photoURL: "https://cdn.discordapp.com/attachments/720005730765111376/724418307129606155/profileicon_.png"
   });
   if (role = "player") {
     db.collection("users").doc(firebase.auth().currentUser.uid).set({

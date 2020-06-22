@@ -61,7 +61,7 @@ function personalizeElements() {
     }
   });
 
-
-  document.getElementById("name").innerHTML = firebase.auth().currentUser.displayName;
+  // Shows the user's full name
+  //document.getElementById("name").innerHTML = firebase.auth().currentUser.displayName;
   document.getElementById("avatar").src = firebase.auth().currentUser.photoURL;
 }
