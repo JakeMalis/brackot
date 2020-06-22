@@ -64,16 +64,16 @@
                 <br>
                 <h6>Start Time (EST)</h6>
                 <p style="margin: 0px; padding: 0px; font-size: 14px;">*Must be in the format HH:MM AM or HH:MM PM</p>
-                <input type="text" name="newTournamentStartTime" class="longProfileInputs"></input>
+                <input type="text" name="newTournamentStartTime" class="longProfileInputs" id="time"></input>
                 <br>
                 <br>
                 <h6>Game</h6>
-                <select name="newTournamentGame" class="longProfileInputs">
+                <select name="newTournamentGame" class="longProfileInputs" id="game">
                   <option value="null">Select a Game...</option>
-                  <option value="fortnite">Fortnite</option>
-                  <option value="overwatch">Overwatch</option>
-                  <option value="smash">Super Smash Bros. Ultimate</option>
-                  <option value="valorant">Valorant</option>
+                  <option value="FORTNITE">Fortnite</option>
+                  <option value="OVERWATCH">Overwatch</option>
+                  <option value="SMASH">Super Smash Bros. Ultimate</option>
+                  <option value="VALORANT">Valorant</option>
                 </select>
                 <br>
                 <br>
@@ -90,30 +90,25 @@
                 <br>
                 <h6>1st Place Prize</h6>
                 <p style="margin: 0px; padding: 0px; font-size: 14px;">*In Star Coins</p>
-                <input type="text" name="newTournamentFirstPrize" class="longProfileInputs"></input>
+                <input type="text" name="newTournamentFirstPrize" class="longProfileInputs" id="firstEarnings"></input>
                 <br>
                 <br>
                 <h6>2nd Place Prize</h6>
                 <p style="margin: 0px; padding: 0px; font-size: 14px;">*In Star Coins</p>
-                <input type="text" name="newTournamentSecondPrize" class="longProfileInputs"></input>
+                <input type="text" name="newTournamentSecondPrize" class="longProfileInputs" id="secondEarnings"></input>
                 <br>
                 <br>
                 <h6>3rd Place Prize</h6>
                 <p style="margin: 0px; padding: 0px; font-size: 14px;">*In Star Coins</p>
-                <input type="text" name="newTournamentThirdPrize" class="longProfileInputs"></input>
+                <input type="text" name="newTournamentThirdPrize" class="longProfileInputs" id="thirdEarnings"></input>
                 <br>
                 <br>
-                <input id="newTournamentSubmitButton" type="submit" id="addTournament"></input>
               </form>
+              <button id="newTournamentSubmitButton">Add Tournament</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- jQuery CDN - Slim version (=without AJAX) -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 </body>
 </html>

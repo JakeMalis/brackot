@@ -20,7 +20,7 @@ function initApp() {
         window.location = "login.html";
       }
   });
-  document.getElementById('addTournament').addEventListener("click", addTournament);
+  document.getElementById('newTournamentSubmitButton').addEventListener("click", addTournament);
 }
 
 window.onload = function() {
@@ -30,12 +30,17 @@ window.onload = function() {
 }
 
 function addTournament() {
-  db.collection("tournaments").doc( + document.getElementById('dateSimple').value).set({
-      date: document.getElementById('first-name').value,
-      last: document.getElementById('last-name').value,
-      email: document.getElementById('email').value,
-      state: document.getElementById('state').value,
-      highschool: document.getElementById('highschool').value
+  var simpleEventName = document.getElementById('game').value + "-" + document.getElementById('dateSimple').value
+  firebase.firestore().collection("tournaments").doc(simpleEventName).set({
+      date: document.getElementById('dateElegant').value,
+      game: document.getElementById('game').value,
+      name: document.getElementById('tournamentName').value,
+      time: document.getElementById('time').value,
+      earnings: {
+          1: document.getElementById('firstEarnings').value,
+          2: document.getElementById('secondEarnings').value,
+          3: document.getElementById('thirdEarnings').value
+      }
   }).then(function() {
       console.log("Document successfully written!");
   }).catch(function(error) {
