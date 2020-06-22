@@ -7,7 +7,7 @@
 
   <link rel="icon" type="image/png" href="media/favicon.png"/>
   <link rel="stylesheet" type="text/css" href="styles/dashboard_style.css">
-  <script src="scripts/dashboard.js"></script>
+  <script src="scripts/tournaments.js"></script>
 
   <link rel="stylesheet" href="https://use.typekit.net/fyp1otf.css">
   <script src="https://kit.fontawesome.com/201b9c41aa.js" crossorigin="anonymous"></script>
@@ -88,14 +88,14 @@
                     <div class="tournamentCardContent">
                       <img src="media/game_wallpapers/fortnitegameplay.png">
                       <div class="tournamentCardText">
-                        <h6 class="tournamentCardTitle">Clash Cup</h6>
+                        <h6 class="tournamentCardTitle" id="fortniteEvent">Clash Cup</h6>
                         <ul class="tournamentCardDetails">
                           <li class="tournamentCardDetail">Fortnite</li>
-                          <li class="tournamentCardDetail">June 22, 2020</li>
-                          <li class="tournamentCardDetail">12 Participants</li>
+                          <li class="tournamentCardDetail" id="fortniteDate">June 22, 2020</li>
+                          <li class="tournamentCardDetail" id="fortniteParticipants">12 Participants</li>
                         </ul>
                       </div>
-                      <button class="tournamentCardButtonSigned">✓ Signed Up</button>
+                      <button class="tournamentCardButton" onclick="fortniteEnroll()" id="fortniteBtn">Sign Up</button>
                     </div>
                   </div>
                 </div>

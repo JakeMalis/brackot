@@ -7,7 +7,7 @@
 
   <link rel="icon" type="image/png" href="media/favicon.png"/>
   <link rel="stylesheet" type="text/css" href="styles/dashboard_style.css">
-  <script src="scripts/dashboard.js"></script>
+  <script src="scripts/admin.js"></script>
 
   <link rel="stylesheet" href="https://use.typekit.net/fyp1otf.css">
   <script src="https://kit.fontawesome.com/201b9c41aa.js" crossorigin="anonymous"></script>
@@ -52,16 +52,18 @@
               <h2 style="margin-bottom: 30px;">Post a New Tournament</h2>
               <form>
                 <h6>Tournament Name</h6>
-                <input type="text" name="newTournamentName" class="longProfileInputs"></input>
+                <input type="text" name="newTournamentName" class="longProfileInputs" id="tournamentName"></input>
                 <br>
                 <br>
                 <h6>Tournament Date</h6>
-                <p style="margin: 0px; padding: 0px; font-size: 14px;">*Must be in the format MM/DD/YYYY</p>
-                <input type="text" name="newTournamentDate" class="longProfileInputs"></input>
+                <p style="margin: 0px; padding: 0px; font-size: 14px;">*Must be written out Month Day(th), Year</p>
+                <input type="text" name="newTournamentDate" class="longProfileInputs" id="dateElegant"></input>
+                <p style="margin: 0px; padding: 0px; font-size: 14px;">*Must be written out M.D.Y</p>
+                <input type="text" name="newTournamentDate" class="longProfileInputs" id="dateSimple"></input>
                 <br>
                 <br>
                 <h6>Start Time (EST)</h6>
-                <p style="margin: 0px; padding: 0px; font-size: 14px;">*Must be in the format HH:MM military time</p>
+                <p style="margin: 0px; padding: 0px; font-size: 14px;">*Must be in the format HH:MM AM or HH:MM PM</p>
                 <input type="text" name="newTournamentStartTime" class="longProfileInputs"></input>
                 <br>
                 <br>
@@ -75,7 +77,7 @@
                 </select>
                 <br>
                 <br>
-                <h6>Platform</h6>
+                <h6>Platform !!!IGNORE FOR NOW!!!</h6>
                 <p style="margin: 0px; padding: 0px; font-size: 14px;">*Hold CTRL to select more than one</p>
                 <select style="min-height: 164px;" name="newTournamentPlatform" class="longProfileInputs" multiple>
                   <option value="pc">PC</option>
@@ -101,7 +103,7 @@
                 <input type="text" name="newTournamentThirdPrize" class="longProfileInputs"></input>
                 <br>
                 <br>
-                <input id="newTournamentSubmitButton" type="submit"></input>
+                <input id="newTournamentSubmitButton" type="submit" id="addTournament"></input>
               </form>
             </div>
           </div>
