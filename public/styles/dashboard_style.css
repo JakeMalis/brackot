@@ -87,7 +87,7 @@ margin-top: 16px;
 
 .main-menu:hover,nav.main-menu.expanded {
 width:250px;
-overflow:visible;
+overflow:hidden;
 }
 
 .main-menu {
