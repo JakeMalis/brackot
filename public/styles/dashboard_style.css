@@ -356,6 +356,24 @@ height: 100%;
   opacity: 70%;
 }
 
+.tournamentCardButtonSigned{
+  font-family: 'purista-web', sans-serif;
+  background: #38de7d;
+  margin-top: 13px;
+  height: 50px;
+  border: 0px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  color: #ffffff;
+  width: 100%;
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
 .smallCard{
   flex: 0 0 100%;
   max-width: 100%;
