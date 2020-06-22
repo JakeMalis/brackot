@@ -7,32 +7,32 @@ body{
 }
 
 h1{
-  font-family: 'purista-web', sans-serif;
+  font-family: 'purista-web', sans-serif !important;
   color: #232323;
 }
 
 h2{
-  font-family: 'purista-web', sans-serif;
+  font-family: 'purista-web', sans-serif !important;
   color: #232323;
 }
 
 h3{
-  font-family: 'purista-web', sans-serif;
+  font-family: 'purista-web', sans-serif !important;
   color: #232323;
 }
 
 h4{
-  font-family: 'purista-web', sans-serif;
+  font-family: 'purista-web', sans-serif !important;
   color: #232323;
 }
 
 h5{
-  font-family: 'purista-web', sans-serif;
+  font-family: 'purista-web', sans-serif !important;
   color: #232323;
 }
 
 h6{
-  font-family: 'purista-web', sans-serif;
+  font-family: 'purista-web', sans-serif !important;
   color: #777777 !important;
   text-transform: uppercase;
 }
@@ -272,6 +272,7 @@ height: 100%;
 
 .column{
   display: flex;
+  flex-direction: column;
 }
 
 
@@ -519,12 +520,19 @@ height: 100%;
 
 .longProfileInputs{
   flex: 0 0 100%;
-  width: 100%;
-  padding: 11px;
-  font-size: 20px;
+  width: 85%;
+  padding-left: 10px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  font-size: 18px;
+  font-family: 'purista-web', sans-serif;
   border-radius: 11px;
   background-color: #f6faff;
   border: 1px solid #dddddd;
+}
+
+.profileInputTitle{
+  width: 100%;
 }
 
 /* ADMIN PAGE CODE BELOW */
