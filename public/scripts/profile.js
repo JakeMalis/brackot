@@ -23,7 +23,7 @@ function initApp() {
   });
   document.getElementById('avatarUploader').addEventListener("click", uploadAvatar);
   document.getElementById('editProfileButton').addEventListener("click", editProfile);
-  document.getElementById('saveProfileButton').addEventListener("click", saveProfile);
+  document.getElementById('saveProfileButton').addEventListener("click", saveProfileChanges);
 }
 
 window.onload = function() {
@@ -96,8 +96,6 @@ function saveProfile() {
   document.getElementById("highschool").placeholder = document.getElementById("highschool").value;
   document.getElementById("highschool").value = "";
 
-  saveProfileChanges();
-
 }
 
 function saveProfileChanges() {
@@ -114,6 +112,10 @@ function saveProfileChanges() {
   }).catch(function(error) {
           console.error("Error writing document: ", error);
   });
+
+  setTimeout(function(){
+      saveProfile();
+  }, 500);
 }
 
 function uploadAvatar(avatar) {

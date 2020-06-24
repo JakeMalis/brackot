@@ -1,25 +1,30 @@
 function createUser() {
+  var errorThrown = false;
   firebase.auth().createUserWithEmailAndPassword(document.getElementById('email').value, document.getElementById('password').value).catch(
     function(error) {
         var errorCode = error.code;
         var errorMessage = error.message;
         if (errorCode == 'auth/email-already-in-use') {
+          errorThrown = true;
           alert('Email already in use');
         }
         else if (errorCode == 'auth/invalid-email') {
+          errorThrown = true;
           alert('Email address is invalid.');
         }
         else if (errorCode == 'auth/weak-password') {
+          errorThrown = true;
             alert('Password too weak');
         }
         else {
+          errorThrown = true;
             alert(errorMessage);
         }
     }
   );
   setTimeout(function(){
-      if (firebase.auth().currentUser.uid != null) { next(); }
-  }, 350);
+      if (errorThrown == false) { next(); }
+  }, 500);
 }
 
 function register() {

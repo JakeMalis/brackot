@@ -2,8 +2,9 @@ var tabNumber = 0;
 const nameTab = document.getElementById("nameTab");
 const emailTab = document.getElementById("emailTab");
 const roleTab = document.getElementById("roleTab");
-const locationTab = document.getElementById("locationTab");
 const gamesTab = document.getElementById("gamesTab");
+const locationTab = document.getElementById("locationTab");
+const profilePicTab = document.getElementById("profilePicTab");
 
 function show(x){
   x.style.display = "block";
@@ -15,7 +16,7 @@ function hide(x){
 
 function next(){
   tabNumber++;
-  if (tabNumber > 4){
+  if (tabNumber > 5){
     hide(nextButton);
     show(submitRegistrationButton);
   }
@@ -31,6 +32,7 @@ function next(){
     hide(roleTab);
     hide(locationTab);
     hide(gamesTab);
+    hide(profilePicTab);
   }
   if (tabNumber == 1){
     hide(nameTab);
@@ -38,6 +40,7 @@ function next(){
     hide(roleTab);
     hide(locationTab);
     hide(gamesTab);
+    hide(profilePicTab);
   }
   if (tabNumber == 2){
     hide(nameTab);
@@ -45,6 +48,7 @@ function next(){
     show(roleTab);
     hide(locationTab);
     hide(gamesTab);
+    hide(profilePicTab);
   }
   if (tabNumber == 3){
     hide(nameTab);
@@ -52,6 +56,7 @@ function next(){
     hide(roleTab);
     hide(locationTab);
     show(gamesTab);
+    hide(profilePicTab);
   }
   if (tabNumber == 4){
     hide(nameTab);
@@ -59,5 +64,14 @@ function next(){
     hide(roleTab);
     show(locationTab);
     hide(gamesTab);
+    hide(profilePicTab);
+  }
+  if (tabNumber == 5){
+    hide(nameTab);
+    hide(emailTab);
+    hide(roleTab);
+    hide(locationTab);
+    hide(gamesTab);
+    show(profilePicTab);
   }
 }
