@@ -303,6 +303,16 @@ input[type="checkbox"]:checked + label{
   margin-top: 15vh;
 }
 
+#profilePicTab{
+  margin-top: 15vh;
+}
+
+#addProfilePic{
+  object-fit: contain;
+  width: 200px;
+  height: auto;
+}
+
 /* END REGISTRATION PAGE */
 
 @media only screen and (min-width: 900px){
