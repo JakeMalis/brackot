@@ -7,7 +7,7 @@
 
   <link rel="icon" type="image/png" href="media/favicon.png"/>
   <link rel="stylesheet" type="text/css" href="styles/dashboard_style.css">
-  <script src="scripts/dashboard.js"></script>
+  <script src="scripts/profile.js"></script>
 
   <link rel="stylesheet" href="https://use.typekit.net/fyp1otf.css">
   <script src="https://kit.fontawesome.com/201b9c41aa.js" crossorigin="anonymous"></script>
@@ -58,21 +58,24 @@
             <div class="wideCardContent">
               <h2 style="margin-bottom: 30px;">Profile Information</h2>
               <button id="editProfileButton">EDIT</button>
-              <div style="margin: 0px !important;"" class="row">
+              <button id="saveProfileButton">SAVE</button>
+              <div style="margin: 0px !important;" class="row">
                 <div class="column" style="width: 50%;">
                   <h6 class="profileInputTitle">First Name</h6>
-                  <input placeholder="Jordan" type="text" class="longProfileInputs" disabled>
+                  <input placeholder="" type="text" class="longProfileInputs" disabled id='firstName'>
                   <h6 class="profileInputTitle">Last Name</h6>
-                  <input placeholder="Zietz" type="text" class="longProfileInputs" disabled>
+                  <input placeholder="" type="text" class="longProfileInputs" disabled id='lastName'>
                   <h6 class="profileInputTitle">Profile Picture</h6>
-                  <img id="profileProfilePic" src="https://cdn.discordapp.com/attachments/720005730765111376/724418307129606155/profileicon_.png">
+                  <img id="profileProfilePic">
+                  <input type="file" id="avatarUploader">
+
 
                 </div>
                 <div class="column" style="width: 50%;">
                   <h6 class="profileInputTitle">Email</h6>
-                  <input placeholder="zietzjordan@gmail.com" type="text" class="longProfileInputs" disabled>
+                  <input placeholder="" type="text" class="longProfileInputs" disabled id="email">
                   <h6 class="profileInputTitle">High School</h6>
-                  <input placeholder="Pine Crest School" type="text" class="longProfileInputs" disabled>
+                  <input placeholder="" type="text" class="longProfileInputs" disabled id='highschool'>
                   <h6 class="profileInputTitle">Games</h6>
                   <div class="row" style="margin: 0px !important; width: 100%;">
                     <img id="fortniteID" class="gameProfilePic" src="media/game_images/fortnite.jpg">
