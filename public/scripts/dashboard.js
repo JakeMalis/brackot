@@ -24,9 +24,7 @@ function initApp() {
 }
 
 window.onload = function() {
-  setTimeout(function(){
-      initApp();
-  }, 500);
+  initApp();
 }
 
 function personalizeElements() {

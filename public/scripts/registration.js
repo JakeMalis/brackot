@@ -1,29 +1,25 @@
-function validateEmail(email) {
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
-    {
-        return (true)
-    }
-    return (false)
-}
-
 function createUser() {
-  if (validateEmail(document.getElementById('email').value) === true) {
-    firebase.auth().createUserWithEmailAndPassword(document.getElementById('email').value, document.getElementById('password').value).catch(
-      function(error) {
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          if (errorCode == 'auth/weak-password') {
-              alert('Password too weak')
-          }
-          else {
-              alert(errorMessage);
-          }
-      }
-    );
-  }
-  else if (validateEmail(document.getElementById('email').value) === false) {
-      alert('Email address is not valid');
-  }
+  firebase.auth().createUserWithEmailAndPassword(document.getElementById('email').value, document.getElementById('password').value).catch(
+    function(error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        if (errorCode == 'auth/email-already-in-use') {
+          alert('Email already in use');
+        }
+        else if (errorCode == 'auth/invalid-email') {
+          alert('Email address is invalid.');
+        }
+        else if (errorCode == 'auth/weak-password') {
+            alert('Password too weak');
+        }
+        else {
+            alert(errorMessage);
+        }
+    }
+  );
+  setTimeout(function(){
+      if (firebase.auth().currentUser.uid != null) { next(); }
+  }, 350);
 }
 
 function register() {
