@@ -36,8 +36,7 @@ function register() {
 
   firebase.auth().currentUser.sendEmailVerification();
   firebase.auth().currentUser.updateProfile({
-    displayName: document.getElementById('first-name').value + " " + document.getElementById('last-name').value,
-    photoURL: "https://cdn.discordapp.com/attachments/720005730765111376/724418307129606155/profileicon_.png"
+    displayName: document.getElementById('first-name').value + " " + document.getElementById('last-name').value
   });
   if (role = "player") {
     db.collection("users").doc(firebase.auth().currentUser.uid).set({
@@ -83,6 +82,27 @@ function register() {
   }, 1000);
 }
 
+function uploadAvatar(avatar) {
+  var storageReference = firebase.storage().ref(firebase.auth().currentUser.uid + ".png");
+  var image = avatar.target.files[0];
+
+  storageReference.put(image).then(function(snapshot) {
+    console.log('Uploaded profile image!');
+    snapshot.ref.getDownloadURL().then(function(url){
+        firebase.auth().currentUser.updateProfile({
+            photoURL: url
+        });
+        document.getElementById("addProfilePic").src = url;
+    });
+  });
+}
+
+function skipAvatar() {
+  firebase.auth().currentUser.updateProfile({
+      photoURL: "https://cdn.discordapp.com/attachments/720005730765111376/724418307129606155/profileicon_.png"
+  });
+}
+
 function initApp() {
   firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
@@ -104,6 +124,7 @@ function initApp() {
   });
   document.getElementById('submitRegistrationButton').addEventListener("click", register);
   document.getElementById('userCreate').addEventListener("click", createUser);
+  document.getElementById('avatarUploader').addEventListener("change", uploadAvatar);
 }
 
 window.onload = function() {
