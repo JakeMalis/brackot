@@ -56,9 +56,9 @@ function personalizeElements() {
 function editProfile() {
   document.getElementById('editProfileButton').style.visibility = "hidden";
   document.getElementById('saveProfileButton').style.visibility = "visible";
-
   document.getElementById("avatar").src = firebase.auth().currentUser.photoURL;
   document.getElementById("profileProfilePic").src = firebase.auth().currentUser.photoURL;
+
 
   document.getElementById("firstName").disabled = false;
   document.getElementById("firstName").value = document.getElementById("firstName").placeholder;
@@ -102,16 +102,46 @@ function saveProfileChanges() {
   firebase.auth().currentUser.updateProfile({
     displayName: document.getElementById('firstName').value + " " + document.getElementById('lastName').value,
   });
-  firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
-      first: document.getElementById('firstName').value,
-      last: document.getElementById('lastName').value,
-      email: document.getElementById('email').value,
-      highschool: document.getElementById('highschool').value,
-  }).then(function() {
-      console.log("Document successfully written!");
-  }).catch(function(error) {
-          console.error("Error writing document: ", error);
-  });
+
+  if (document.getElementById("firstName").placeholder != document.getElementById("firstName").value) {
+    firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
+        first: document.getElementById('firstName').value
+    }).then(function() {
+        console.log("Document successfully written!");
+    }).catch(function(error) {
+            console.error("Error writing document: ", error);
+    });
+  }
+
+  if (document.getElementById("lastName").placeholder != document.getElementById("lastName").value) {
+    firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
+        last: document.getElementById('lastName').value
+    }).then(function() {
+        console.log("Document successfully written!");
+    }).catch(function(error) {
+            console.error("Error writing document: ", error);
+    });
+  }
+
+  if (document.getElementById("email").placeholder != document.getElementById("email").value) {
+    firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
+        email: document.getElementById('email').value
+    }).then(function() {
+        console.log("Document successfully written!");
+    }).catch(function(error) {
+            console.error("Error writing document: ", error);
+    });
+  }
+
+  if (document.getElementById("highschool").placeholder != document.getElementById("highschool").value) {
+    firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
+        highschool: document.getElementById('highschool').value
+    }).then(function() {
+        console.log("Document successfully written!");
+    }).catch(function(error) {
+            console.error("Error writing document: ", error);
+    });
+  }
 
   setTimeout(function(){
       saveProfile();
