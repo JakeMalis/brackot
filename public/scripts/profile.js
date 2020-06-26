@@ -1,33 +1,11 @@
-function initApp() {
+window.onload = function() {
   firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-          var displayName = user.displayName;
-          var email = user.email;
-          var emailVerified = user.emailVerified;
-          var photoURL = user.photoURL;
-          var isAnonymous = user.isAnonymous;
-          var uid = user.uid;
-          var providerData = user.providerData;
-          user.providerData.forEach(function (profile) {
-            console.log("Sign-in provider: " + profile.providerId);
-            console.log("  Provider-specific UID: " + profile.uid);
-            console.log("  Name: " + profile.displayName);
-            console.log("  Email: " + profile.email);
-            console.log("  Photo URL: " + profile.photoURL);
-          });
-          personalizeElements();
-      }
-      else {
-        window.location = "login.html";
-      }
+      if (user) { personalizeElements(); }
+      else { window.location = "login.html"; }
   });
   document.getElementById('avatarUploader').addEventListener("click", uploadAvatar);
   document.getElementById('editProfileButton').addEventListener("click", editProfile);
   document.getElementById('saveProfileButton').addEventListener("click", saveProfileChanges);
-}
-
-window.onload = function() {
-  initApp();
 }
 
 function personalizeElements() {
@@ -107,7 +85,7 @@ function saveProfileChanges() {
     firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
         first: document.getElementById('firstName').value
     }).then(function() {
-        console.log("Document successfully written!");
+        saveProfile();
     }).catch(function(error) {
             console.error("Error writing document: ", error);
     });
@@ -117,7 +95,7 @@ function saveProfileChanges() {
     firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
         last: document.getElementById('lastName').value
     }).then(function() {
-        console.log("Document successfully written!");
+        saveProfile();
     }).catch(function(error) {
             console.error("Error writing document: ", error);
     });
@@ -127,7 +105,7 @@ function saveProfileChanges() {
     firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
         email: document.getElementById('email').value
     }).then(function() {
-        console.log("Document successfully written!");
+        saveProfile();
     }).catch(function(error) {
             console.error("Error writing document: ", error);
     });
@@ -137,15 +115,11 @@ function saveProfileChanges() {
     firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
         highschool: document.getElementById('highschool').value
     }).then(function() {
-        console.log("Document successfully written!");
+        saveProfile();
     }).catch(function(error) {
             console.error("Error writing document: ", error);
     });
   }
-
-  setTimeout(function(){
-      saveProfile();
-  }, 500);
 }
 
 function uploadAvatar(avatar) {
