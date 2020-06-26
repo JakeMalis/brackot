@@ -3,7 +3,7 @@ window.onload = function() {
       if (user) { personalizeElements(); }
       else { window.location = "login.html"; }
   });
-  document.getElementById('avatarUploader').addEventListener("click", uploadAvatar);
+  document.getElementById('avatarUploader').addEventListener("change", uploadAvatar);
   document.getElementById('editProfileButton').addEventListener("click", editProfile);
   document.getElementById('saveProfileButton').addEventListener("click", saveProfileChanges);
 }
@@ -123,16 +123,19 @@ function saveProfileChanges() {
 }
 
 function uploadAvatar(avatar) {
-  var storageReference = firebase.storage().ref(firebase.auth().currentUser.uid + ".png");
+  var storageReference = firebase.storage().ref(firebase.auth().currentUser.uid);
+  var avatarReference = storageReference.child("profile.png");
   var image = avatar.target.files[0];
 
 
-  storageReference.put(image).then(function(snapshot) {
+  avatarReference.put(image).then(function(snapshot) {
     console.log('Uploaded profile image!');
     snapshot.ref.getDownloadURL().then(function(url){
         firebase.auth().currentUser.updateProfile({
             photoURL: url
         });
+        document.getElementById("profileProfilePic").src = url;
+        document.getElementById("avatar").src = url;
     });
   });
 }

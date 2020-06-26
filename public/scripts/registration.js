@@ -18,7 +18,6 @@ function createUser() {
 }
 
 function register() {
-  if (firebase.auth().currentUser.photoURL = "null") { firebase.auth().currentUser.updateProfile({ photoURL: "media/avatar.png" }); }
   firebase.auth().currentUser.sendEmailVerification();
   firebase.auth().currentUser.updateProfile({
     displayName: document.getElementById('first-name').value + " " + document.getElementById('last-name').value
@@ -65,10 +64,11 @@ function register() {
 }
 
 function uploadAvatar(avatar) {
-  var storageReference = firebase.storage().ref(firebase.auth().currentUser.uid + ".png");
+  var storageReference = firebase.storage().ref(firebase.auth().currentUser.uid);
+  var avatarReference = storageReference.child("profile.png");
   var image = avatar.target.files[0];
 
-  storageReference.put(image).then(function(snapshot) {
+  avatarReference.put(image).then(function(snapshot) {
     console.log('Uploaded profile image!');
     snapshot.ref.getDownloadURL().then(function(url){
         firebase.auth().currentUser.updateProfile({
@@ -77,6 +77,7 @@ function uploadAvatar(avatar) {
         document.getElementById("addProfilePic").src = url;
     });
   });
+  if (firebase.auth().currentUser.photoURL = "null") { firebase.auth().currentUser.updateProfile({ photoURL: "media/avatar.png" }); }
 }
 
 window.onload = function() {
