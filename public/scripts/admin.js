@@ -7,7 +7,7 @@ window.onload = function() {
 }
 
 function addTournament() {
-  var simpleEventName = document.getElementById('game').value + "-" + document.getElementById('dateSimple').value
+  var simpleEventName = document.getElementById('dateSimple').value + "-" + document.getElementById('game').value
   firebase.firestore().collection("tournaments").doc(simpleEventName).set({
       date: document.getElementById('dateElegant').value,
       game: document.getElementById('game').value,

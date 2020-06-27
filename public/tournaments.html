@@ -16,9 +16,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-
   <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-firestore.js"></script>
@@ -54,6 +51,7 @@
             <div class="wideCardContent">
               <h3 style="margin-bottom: 30px;">Tournaments</h3>
               <div class="row" style="margin-left: 0px !important; margin-right: 0px; !important">
+
                 <div class="tournamentCard">
                   <div class="tournamentCardBackground">
                     <div class="tournamentCardContent">
@@ -70,70 +68,27 @@
                     </div>
                   </div>
                 </div>
+
                 <div class="tournamentCard">
                   <div class="tournamentCardBackground">
                     <div class="tournamentCardContent">
-                      <img src="media/game_wallpapers/ssbugameplay.jpg">
+                      <img id="tournamentWallpaper1">
                       <div class="tournamentCardText">
-                        <h6 class="tournamentCardTitle">Smash Bash</h6>
+                        <h6 class="tournamentCardTitle" id="tournamentTitle1">Valorant Series</h6>
                         <ul class="tournamentCardDetails">
-                          <li class="tournamentCardDetail">Super Smash Bros. Ultimate</li>
-                          <li class="tournamentCardDetail">June 21, 2020</li>
-                          <li class="tournamentCardDetail">0 Participants</li>
-                        </ul>
-                      </div>
-                      <button class="tournamentCardButtonSigned" disabled>✓ Signed Up</button>
-                    </div>
-                  </div>
-                </div>
-                <div class="tournamentCard">
-                  <div class="tournamentCardBackground">
-                    <div class="tournamentCardContent">
-                      <img src="media/game_wallpapers/fortnitegameplay.png">
-                      <div class="tournamentCardText">
-                        <h6 class="tournamentCardTitle" id="fortniteEvent">Clash Cup</h6>
-                        <ul class="tournamentCardDetails">
-                          <li class="tournamentCardDetail">Fortnite</li>
-                          <li class="tournamentCardDetail" id="fortniteDate">June 22, 2020</li>
-                          <li class="tournamentCardDetail" id="fortniteParticipants">12 Participants</li>
-                        </ul>
-                      </div>
-                      <button class="tournamentCardButton" onclick="fortniteEnroll()" id="fortniteBtn">Sign Up</button>
-                    </div>
-                  </div>
-                </div>
-                <div class="tournamentCard">
-                  <div class="tournamentCardBackground">
-                    <div class="tournamentCardContent">
-                      <img src="media/game_wallpapers/overwatchgameplay.jpg">
-                      <div class="tournamentCardText">
-                        <h6 class="tournamentCardTitle">Overwatch Duels</h6>
-                        <ul class="tournamentCardDetails">
-                          <li class="tournamentCardDetail">Overwatch</li>
-                          <li class="tournamentCardDetail">June 24, 2020</li>
-                          <li class="tournamentCardDetail">168 Participants</li>
+                          <li class="tournamentCardDetail" id="tournamentGame1">VALORANT</li>
+                          <li class="tournamentCardDetail" id="tournamentDate1">June 20, 2020</li>
+                          <li class="tournamentCardDetail" id="tournamentParticipants1">221 Participants</li>
                         </ul>
                       </div>
                       <button class="tournamentCardButton">Sign Up</button>
                     </div>
                   </div>
                 </div>
-                <div class="tournamentCard">
-                  <div class="tournamentCardBackground">
-                    <div class="tournamentCardContent">
-                      <img src="media/game_wallpapers/overwatchgameplay.jpg">
-                      <div class="tournamentCardText">
-                        <h6 class="tournamentCardTitle">Overwatch Duels</h6>
-                        <ul class="tournamentCardDetails">
-                          <li class="tournamentCardDetail">Overwatch</li>
-                          <li class="tournamentCardDetail">June 24, 2020</li>
-                          <li class="tournamentCardDetail">168 Participants</li>
-                        </ul>
-                      </div>
-                      <button class="tournamentCardButton">Sign Up</button>
-                    </div>
-                  </div>
-                </div>
+
+
+
+
               </div>
             </div>
           </div>

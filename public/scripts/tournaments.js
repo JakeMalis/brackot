@@ -17,5 +17,11 @@ function fortniteEnroll() {
 
 
 function personalizeElements() {
+  firebase.firestore().collection("tournaments").get().then(function(querySnapshot) {
+    querySnapshot.forEach(function(doc) {
+        console.log(doc.id, " => ", doc.data());
+    });
+});
+
   document.getElementById("avatar").src = firebase.auth().currentUser.photoURL;
 }
