@@ -130,7 +130,8 @@ function updateEmail() {
         email: document.getElementById('email').value
     }).then(function() {
         saveProfile();
-        $('#modal').modal('hide')
+        $('#modal').modal('hide');
+        firebase.auth().currentUser.sendEmailVerification();
     }).catch(function(error) {
             console.error("Error writing document: ", error);
     });
