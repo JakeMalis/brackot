@@ -8,9 +8,30 @@
   background: -webkit-linear-gradient(360deg, #0084ff, #00c6ff);
 }
 
+#lolsave{
+  background: -webkit-linear-gradient(360deg, #0084ff, #00c6ff);
+  color: white;
+}
+
+.loginInput{
+  margin-left: -3px;
+  width: 420px;
+}
+
+input {
+    margin-top: 0px;
+    padding: 14px;
+    width: 50%;
+    font-size: 17px;
+    border: 1px solid #dddddd;
+    background-color: #ffffff;
+    border-radius: 7px;
+}
+
 #notamodalLabel{
   text-transform: capitalize;
   font-family: 'purista-web', sans-serif;
   font-weight: 400;
-  color: #00c6ff
+  color: #00c6ff;
+  text-align: center;
 }

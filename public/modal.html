@@ -6,26 +6,27 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <title>IHateNiggers</title>
+    <link rel="stylesheet" href="https://use.typekit.net/bea1phk.css">
+    <title>Modal</title>
 </head>
 
 <body>
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#notamodal">Click this if you hate jews</button>
-  <div class="modal fade" id="notamodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#notamodal">Click this if you hate jake</button>
+  <div class="modal fade" id="notamodal" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header" data-keyboard="false" data-backdrop="static">
           <h1 class="modal-title" id="notamodalLabel">CONFIRM PASSWORD</h1>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
         </div>
         <div class="modal-body">
-          ...
+          <div class="row">
+            <center>
+              <input class="pwInput" placeholder="Password..." id="password" type="password">
+            </center>
+          </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-primary" id="lolsave">CONFIRM</button>
         </div>
       </div>
     </div>
