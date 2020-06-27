@@ -9,6 +9,8 @@
   <link rel="stylesheet" type="text/css" href="styles/dashboard_style.css">
   <script src="scripts/profile.js"></script>
 
+  <link rel="stylesheet" type="text/css" href="styles/modal.css">
+
   <link rel="stylesheet" href="https://use.typekit.net/fyp1otf.css">
   <script src="https://kit.fontawesome.com/201b9c41aa.js" crossorigin="anonymous"></script>
 
@@ -66,8 +68,10 @@
                   <h6 class="profileInputTitle">Last Name</h6>
                   <input placeholder="" type="text" class="longProfileInputs" disabled id='lastName'>
                   <h6 class="profileInputTitle">Profile Picture</h6>
-                  <img id="profileProfilePic">
-                  <input type="file" id="avatarUploader" accept="image/jpg, image/jpeg, image/png, image/img, image/gif">
+                  <label for="avatarUploader">
+                    <img id="profileProfilePic">
+                    <input type="file" name="avatarUploader" id="avatarUploader" style="display:none" accept="image/jpg, image/jpeg, image/png, image/img, image/gif">
+                  </label>
 
 
                 </div>
@@ -88,6 +92,28 @@
             </div>
           </div>
         </div>
+
+        <div class="modal fade" id="modal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header" data-keyboard="false" data-backdrop="static">
+                <h1 class="modal-title" id="modalTitle">CONFIRM PASSWORD</h1>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <center>
+                    <input class="pwInput" placeholder="Password..." id="passwordConfirmation" type="password">
+                  </center>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="confirmPassword" onclick="updateEmail();">CONFIRM</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
       </div>
     </div>
 </body>

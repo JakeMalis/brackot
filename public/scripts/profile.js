@@ -23,7 +23,7 @@ function personalizeElements() {
   });
 
   userDocument.get().then(function(doc) {
-    document.getElementById("email").placeholder = doc.data().email;
+    document.getElementById("email").placeholder = firebase.auth().currentUser.email;
   });
 
   userDocument.get().then(function(doc) {
@@ -102,13 +102,7 @@ function saveProfileChanges() {
   }
 
   if (document.getElementById("email").placeholder != document.getElementById("email").value) {
-    firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
-        email: document.getElementById('email').value
-    }).then(function() {
-        saveProfile();
-    }).catch(function(error) {
-            console.error("Error writing document: ", error);
-    });
+    $('#modal').modal();
   }
 
   if (document.getElementById("highschool").placeholder != document.getElementById("highschool").value) {
@@ -120,6 +114,27 @@ function saveProfileChanges() {
             console.error("Error writing document: ", error);
     });
   }
+}
+
+function updateEmail() {
+  const confirmedPassword = document.getElementById("passwordConfirmation").value;
+  const user = firebase.auth().currentUser;
+
+  const credential = firebase.auth.EmailAuthProvider.credential(
+      user.email,
+      confirmedPassword
+  );
+  user.reauthenticateWithCredential(credential).then(function() {
+    user.updateEmail(document.getElementById('email').value);
+    firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
+        email: document.getElementById('email').value
+    }).then(function() {
+        saveProfile();
+        $('#modal').modal('hide')
+    }).catch(function(error) {
+            console.error("Error writing document: ", error);
+    });
+  });
 }
 
 function uploadAvatar(avatar) {

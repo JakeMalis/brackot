@@ -4,11 +4,8 @@
     font-style: normal;
 }
 
-.modal {
-  background: -webkit-linear-gradient(360deg, #0084ff, #00c6ff);
-}
 
-#lolsave{
+#confirmPassword{
   background: -webkit-linear-gradient(360deg, #0084ff, #00c6ff);
   color: white;
 }
@@ -28,7 +25,7 @@ input {
     border-radius: 7px;
 }
 
-#notamodalLabel{
+#modalTitle{
   text-transform: capitalize;
   font-family: 'purista-web', sans-serif;
   font-weight: 400;
