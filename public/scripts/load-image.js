@@ -1,4 +1,4 @@
-var imlocation = "https://allstaresports.com/s/";
+var imlocation = "media/load-image/";
 var currentdate = 0;
 var image_number = 0;
 function ImageArray (n) {
@@ -8,9 +8,9 @@ function ImageArray (n) {
     }
 }
 image = new ImageArray(3)
-image[0] = 'login1'
-image[1] = 'login2'
-image[2] = 'login3'
+image[0] = '1.jpg'
+image[1] = '2.jpg'
+image[2] = '3.jpg'
 var rand = 60/image.length
 function randomimage() {
     currentdate = new Date()
