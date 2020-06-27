@@ -10,6 +10,8 @@ body {
     background-color: #f6faff;
     margin: 0px;
     padding: 0px;
+    width: 100%;
+    height: 100%;
 }
 
 input {
@@ -75,6 +77,12 @@ input.invalid {
     width: 50vw;
     height: 100vh;
     object-fit: cover;
+}
+
+.forgotPasswordInput{
+    margin-top: 30px;
+    width: 60%;
+    margin-bottom: -20px;
 }
 /* END FORGOT PASSWORD PAGE CODE */
 
@@ -435,6 +443,12 @@ input[type="checkbox"]:checked + label{
     width: 420px;
   }
   /* END LOGIN PAGE CODE */
+
+  /*FORGOT PASSWORD CODE */
+  .forgotPasswordInput{
+    width: 360px;
+  }
+  /* END FORGOT PASSWORD CODE */
 }
 
 @media only screen and (min-width: 900px){
@@ -451,6 +465,8 @@ input[type="checkbox"]:checked + label{
   .forgotPasswordInput{
     margin-left: -10px;
     width: 360px;
+    margin-top: 0px;
+    margin-bottom: 0px;
   }
   /*END FORGOT PASSWORD CODE */
 
@@ -471,6 +487,11 @@ input[type="checkbox"]:checked + label{
   #logInText{
     margin-left: 0px;
     margin-bottom: 40px;
+  }
+
+  #return-login-block{
+    margin-left: -60px;
+    margin-top: -20px;
   }
 
   #forgot-password-block{
