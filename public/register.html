@@ -157,8 +157,10 @@
           <h1 class="registrationTitle">Add some flair.</h1>
           <p class="registrationText">Upload an image or gif below to help make your account feel unique, and to help others find you on the platform.</p>
           <div id="profilePicRow" class="inputRow">
-            <img id="addProfilePic" src="media/addpic.png">
-            <input type="file" id="avatarUploader">
+            <label for="avatarUploader">
+              <img id="addProfilePic" src="media/addpic.png">
+              <input type="file" name="avatarUploader" id="avatarUploader" style="display:none">
+            </label>
           </div>
           <button type="button" class="nextButton" id="submitRegistrationButton">Register</button>
         </div>

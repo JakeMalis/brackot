@@ -1,0 +1,16 @@
+* {
+    font-family: 'purista-web', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.modal {
+  background: -webkit-linear-gradient(360deg, #0084ff, #00c6ff);
+}
+
+#notamodalLabel{
+  text-transform: capitalize;
+  font-family: 'purista-web', sans-serif;
+  font-weight: 400;
+  color: #00c6ff
+}
