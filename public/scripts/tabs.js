@@ -20,6 +20,10 @@ function next(){
     hide(nextButton);
     show(submitRegistrationButton);
   }
+  if ((document.getElementById('first-name').value == "") || (document.getElementById('last-name').value == "")) {
+    tabNumber--;
+    alert("First or last name is empty")
+  }
   if (document.getElementById('coach').checked) {
     tabNumber++;
   }
