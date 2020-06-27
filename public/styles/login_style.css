@@ -144,6 +144,7 @@ input.invalid {
 
 .loginInput{
   margin-bottom: 10px;
+  width: 60%;
 }
 
 /*Shows raw firebase code*/
@@ -428,6 +429,12 @@ input[type="checkbox"]:checked + label{
     width: 250px;
   }
   /* END REGISTRATION PAGE CODE */
+
+  /*LOGIN PAGE CODE */
+  .loginInput{
+    width: 420px;
+  }
+  /* END LOGIN PAGE CODE */
 }
 
 @media only screen and (min-width: 900px){
