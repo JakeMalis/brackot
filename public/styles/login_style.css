@@ -12,40 +12,24 @@ body {
     padding: 0px;
 }
 
-#resetBtn{
-    float: center;
-    margin-top: 4vh;
-    margin-bottom: 10px;
-    background: -webkit-linear-gradient(360deg, #0084ff, #00c6ff);
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-weight: 550;
-    width: 150px;
-    height: 44px;
-    color: white;
-    border: transparent;
-    border-radius: 8px;
-}
-
-#forgotPasswordImage{
-    float: right;
-    display: none;
-    width: 50vw;
-    height: 100vh;
-    object-fit: cover;
-@media only screen and (min-width: 900px){
-    display: inline;
-}
-}
-
 input {
     margin-top: 0px;
     padding: 14px;
-    width: 250px;
+    width: 100%;
     font-size: 17px;
     border: 1px solid #dddddd;
     background-color: #ffffff;
     border-radius: 7px;
+}
+
+select{
+  margin: 0px;
+  padding: 14px;
+  width: 100%;
+  font-size: 17px;
+  border: 1px solid #dddddd;
+  border-radius: 7px;
+  background-color: #ffffff;
 }
 
 h1{
@@ -68,8 +52,38 @@ input.invalid {
     display: none;
 }
 
+/* FORGOT PASSWORD PAGE CODE BELOW */
+
+#resetBtn{
+    float: center;
+    margin-top: 4vh;
+    margin-bottom: 10px;
+    background: -webkit-linear-gradient(360deg, #0084ff, #00c6ff);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 550;
+    width: 150px;
+    height: 44px;
+    color: white;
+    border: transparent;
+    border-radius: 8px;
+}
+
+#forgotPasswordImage{
+    float: right;
+    display: none;
+    width: 50vw;
+    height: 100vh;
+    object-fit: cover;
+}
+/* END FORGOT PASSWORD PAGE CODE */
+
+
+
 /* THE BELOW IS FOR THE LOGIN PAGE */
 
+
+/* BUTTONS */
 #registerBtn{
     display: inline;
     float: center;
@@ -100,6 +114,7 @@ input.invalid {
     border: transparent;
     border-radius: 8px;
 }
+/* END BUTTONS */
 
 #logo{
     display: inline;
@@ -131,20 +146,19 @@ input.invalid {
   margin-bottom: 10px;
 }
 
+/*Shows raw firebase code*/
 #firebaseLoginDev{
-  display: none;
+  display: none; /* Display normal to show */
 }
-/* Display normal to show */
 
 /* END LOGIN PAGE */
-
-
 
 
 
 /* REGISTRATION PAGE BEGINS HERE */
 
 #registrationLogo{
+  display: none;
   width: 120px;
   height: 120px;
   top: 50px;
@@ -154,12 +168,15 @@ input.invalid {
 }
 
 .gradientLiner{
+  display: none;
   height: 20px;
   width: 100vw;
   background: -webkit-linear-gradient(360deg, #0084ff, #00c6ff);
   position: absolute;
 }
 
+
+/* PLAYER OR COACH INPUT BUTTONS */
 input[type="radio"]{
   visibility: hidden;
   height: 0px;
@@ -167,10 +184,12 @@ input[type="radio"]{
 }
 
 input[type="radio"] + label{
+  display: block;
   padding-top: 20px;
   font-size: 40px;
   text-align: center;
-  width: 250px;
+  margin-left: 5%;
+  width: 90%;
   height: 100px;
   background: white;
   color: #232323;
@@ -186,17 +205,10 @@ input[type="radio"]:checked + label{
   background: -webkit-linear-gradient(360deg, #0084ff, #00c6ff);
   color: white;
 }
+/* END PLAYER OR COACH INPUT BUTTONS */
 
-select{
-  margin: 0px;
-  padding: 14px;
-  width: 250px;
-  font-size: 17px;
-  border: 1px solid #dddddd;
-  border-radius: 7px;
-  background-color: #ffffff;
-}
 
+/*GAME SELECT*/
 .gameImages{
   height: auto;
   width: 150px;
@@ -235,21 +247,28 @@ input[type="checkbox"]:checked + label{
   box-shadow: 0px 0px 13px 0px rgba(0,0,0,0.23);
 }
 
+#gameRow{
+  margin-left: auto;
+  margin-right: auto;
+  width: 345px;
+}
+/*END GAME SELECT*/
+
 .registrationTitle{
-  font-size: 60px;
+  font-size: 7vw;
   font-weight: 500;
   margin-bottom: 10px;
 }
 
 .registrationText{
-  font-size: 19px;
+  font-size: 18px;
   letter-spacing: 1.7px;
   color: #454545;
   text-align: center;
-  margin-bottom: 6vh;
+  margin-bottom: 3vh;
   margin-left: auto;
   margin-right: auto;
-  width: 680px;
+  width: 75%;
 }
 
 .nextButton{
@@ -263,7 +282,7 @@ input[type="checkbox"]:checked + label{
   text-transform: uppercase;
   letter-spacing: 3px;
   font-weight: 600;
-  width: 350px;
+  width: 70vw;
   height: 44px;
   color: white;
   border: transparent;
@@ -280,7 +299,7 @@ input[type="checkbox"]:checked + label{
 .inputRow{
   margin-left: auto;
   margin-right: auto;
-  width: 505px;
+  width: 75vw;
 }
 
 #nameTab{
@@ -288,11 +307,11 @@ input[type="checkbox"]:checked + label{
 }
 
 #emailTab{
-  margin-top: 25vh;
+  margin-top: 22vh;
 }
 
 #roleTab{
-  margin-top: 20vh;
+  margin-top: 15vh;
 }
 
 #locationTab{
@@ -300,7 +319,7 @@ input[type="checkbox"]:checked + label{
 }
 
 #gamesTab{
-  margin-top: 15vh;
+  margin-top: 6vh;
 }
 
 #profilePicTab{
@@ -313,10 +332,123 @@ input[type="checkbox"]:checked + label{
   height: auto;
 }
 
+#profilePicRow{
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+}
 /* END REGISTRATION PAGE */
 
-@media only screen and (min-width: 900px){
 
+
+@media only screen and (min-width: 690px){
+  input{
+    width: 250px;
+  }
+
+  /* REGISTRATION PAGE CODE */
+  .inputRow{
+    width: 505px;
+  }
+
+  .gradientLiner{
+    display: block;
+  }
+
+  #registrationLogo{
+    display: block;
+  }
+
+  .registrationTitle{
+    font-size: 60px;
+  }
+
+  .registrationText{
+    font-size: 19px;
+    margin-bottom: 6vh;
+    width: 680px;
+  }
+
+  .nextButton{
+    width: 350px;
+  }
+
+  #nameTab{
+    margin-top: 25vh;
+  }
+
+  #emailTab{
+    margin-top: 25vh;
+  }
+
+  #roleTab{
+    margin-top: 20vh;
+  }
+
+  #locationTab{
+    margin-top: 25vh;
+  }
+
+  #gamesTab{
+    margin-top: 15vh;
+  }
+
+  #profilePicTab{
+    margin-top: 15vh;
+  }
+
+  input[type="radio"] + label{
+    margin-left: 0px;
+    margin-bottom: 0px;
+    width: 100%;
+    display: block;
+  }
+
+  #roleRow{
+    margin-left: auto;
+    margin-right: auto;
+    width: 700px;
+  }
+
+  #spacing{
+    margin-left: auto;
+    margin-right: auto;
+    width: 55%;
+  }
+
+  #roleText{
+    margin-bottom: 20px;
+  }
+
+  #gameRow{
+    width: 695px;
+  }
+
+  select{
+    width: 250px;
+  }
+  /* END REGISTRATION PAGE CODE */
+}
+
+@media only screen and (min-width: 900px){
+  /* FORGOT PASSWORD CODE */
+  #forgotPasswordImage{
+    display: inline;
+  }
+
+  #resetBtn{
+    margin-top: 50px;
+    margin-right: 214px;
+  }
+
+  .forgotPasswordInput{
+    margin-left: -10px;
+    width: 360px;
+  }
+  /*END FORGOT PASSWORD CODE */
+
+
+  /* LOGIN PAGE CODE */
   #loginImage{
     display: inline;
   }
@@ -338,20 +470,10 @@ input[type="checkbox"]:checked + label{
     margin-left: -240px;
     margin-top: -10px;
   }
-
-  #resetBtn{
-    margin-top: 50px;
-    margin-right: 214px;
-  }
+  /* END LOGIN PAGE CODE */
 
   .loginInput{
     margin-left: -3px;
     width: 420px;
   }
-
-  .forgotPasswordInput{
-    margin-left: -10px;
-    width: 360px;
-  }
-
 }
