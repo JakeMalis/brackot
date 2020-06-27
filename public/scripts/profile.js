@@ -140,7 +140,7 @@ function updateEmail() {
 
 function uploadAvatar(avatar) {
   var storageReference = firebase.storage().ref(firebase.auth().currentUser.uid);
-  var avatarReference = storageReference.child("profile.png");
+  var avatarReference = storageReference.child("profile");
   var image = avatar.target.files[0];
 
 
