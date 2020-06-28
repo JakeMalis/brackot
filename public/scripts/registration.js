@@ -61,12 +61,15 @@ function register() {
             console.error("Error writing document: ", error);
     });
   }
+  if (firebase.auth().currentUser.photoURL == "") { firebase.auth().currentUser.updateProfile({ photoURL: "media/avatar.png" }); };
 }
 
 function uploadAvatar(avatar) {
   var storageReference = firebase.storage().ref(firebase.auth().currentUser.uid);
   var avatarReference = storageReference.child("profile");
   var image = avatar.target.files[0];
+  document.getElementById("submitRegistrationButton").disabled = true;
+  document.getElementById("submitRegistrationButton").value = "Uploading Avatar...";
 
   avatarReference.put(image).then(function(snapshot) {
     console.log('Uploaded profile image!');
@@ -75,9 +78,9 @@ function uploadAvatar(avatar) {
             photoURL: url
         });
         document.getElementById("addProfilePic").src = url;
+        document.getElementById("submitRegistrationButton").disabled = false;
     });
   });
-  if (firebase.auth().currentUser.photoURL = "null") { firebase.auth().currentUser.updateProfile({ photoURL: "media/avatar.png" }); }
 }
 
 window.onload = function() {
