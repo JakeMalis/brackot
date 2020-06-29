@@ -306,6 +306,7 @@ height: 100%;
   height: 430px;
   background: transparent;
   transition-duration: 0.2s;
+  visibility: hidden;
 }
 
 .tournamentCard:hover{
