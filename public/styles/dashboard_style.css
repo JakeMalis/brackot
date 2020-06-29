@@ -250,6 +250,7 @@ height: 100%;
 }
 
 .boostsRow{
+  display: table;
   width: 100%;
   margin: 0px;
   padding: 0px;
@@ -263,8 +264,11 @@ height: 100%;
 }
 
 .boostsGraphic{
+  margin-left: 5%;
   float: right;
-  width: 30%;
+  width: 35%;
+  height: 35%;
+  margin-top: -2vw;
 }
 
 .clear{
@@ -272,6 +276,8 @@ height: 100%;
 }
 
 .boostsList{
+  padding-left: 20px;
+  float: left;
   max-width: 60%;
   list-style-type: circle;
 }
@@ -282,6 +288,14 @@ height: 100%;
 
 .boostsTitle{
   padding-bottom: 15px;
+}
+
+.boostsPrice{
+text-align: center;
+}
+
+.priceDetail{
+  font-size: 18px;
 }
 /* END BOOSTS PAGE CODE */
 
@@ -480,11 +494,10 @@ height: 100%;
   flex: 0 0 100%;
   max-width: 100%;
   height: auto;
-  transition-duration: 0.2s;
 }
 
-.longYCard:hover{
-  transform: scale(1.01);
+.longYCardBackground:hover{
+  transform: scale(1.02);
   transition-duration: 0.2s;
   cursor: pointer;
 }
@@ -492,12 +505,13 @@ height: 100%;
 .longYCardBackground{
   margin-left: auto;
   margin-right: auto;
-  height: auto;
+  height: 100%;
   width: 80%;
   border-radius: 12px;
   border: 1px solid rgba(0,0,0,0.05);
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.05);
   background-color: #ffffff;
+  transition-duration: 0.2s;
 }
 
 .longYCardContent{
