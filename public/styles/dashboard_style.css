@@ -57,6 +57,30 @@ p{
   left: 0;
 }
 
+.gradientButton{
+  display: block;
+  font-size: 18px;
+  background: -webkit-linear-gradient(360deg, #0084ff, #00c6ff);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 600;
+  padding-left: 40px;
+  padding-right: 40px;
+  width: auto;
+  height: 44px;
+  color: white;
+  border: transparent;
+  border-radius: 8px;
+  transition-duration: 0.2s;
+}
+
+.gradientButton:hover{
+  opacity: 70%;
+  transition-duration: 0.2s;
+  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+  transform: translateY(-1px);
+}
+
 .dashboardIcons{
   float: right;
   margin-top: 10px;
@@ -439,13 +463,13 @@ height: 100%;
 .wideCard{
   flex: 0 0 100%;
   max-width: 100%;
-  height: 800px;
+  height: auto;
 }
 
 .wideCardBackground{
   margin-left: auto;
   margin-right: auto;
-  height: 80%;
+  height: auto;
   width: 80%;
   border-radius: 12px;
   border: 1px solid rgba(0,0,0,0.05);
@@ -659,7 +683,18 @@ height: 100%;
 /* END ADMIN PAGE CODE */
 
 
-
+/* EMAIL PREFERENCES PAGE CODE */
+.preferenceCheckbox{
+  width: 40px;
+}
+.preferenceLabel{
+  margin-left: 0px;
+  cursor: pointer;
+}
+.preferenceSubtext{
+  margin-left: 45px;
+}
+/* END EMAIL PREFERENCES PAGE CODE */
 
 /* THE BELOW SECTION IS MEANT FOR MOBILE DEVICES ONLY */
 @media only screen and (min-width: 700px){
