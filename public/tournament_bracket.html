@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -6,10 +5,8 @@
   <title>Dashboard</title>
 
   <link rel="icon" type="image/png" href="media/favicon.png"/>
-  <link rel="stylesheet" type="text/css" href="styles/dashboard_style.css">
-  <script src="scripts/profile.js"></script>
-
-  <link rel="stylesheet" type="text/css" href="styles/modal.css">
+  <link rel="stylesheet" type="text/css" href="styles/bracket.css">
+  <script src="scripts/dashboard.js"></script>
 
   <link rel="stylesheet" href="https://use.typekit.net/fyp1otf.css">
   <script src="https://kit.fontawesome.com/201b9c41aa.js" crossorigin="anonymous"></script>
@@ -43,37 +40,14 @@
   </div>
 
   <div class="main-page">
-    <div class="gradientHeader"></div>
     <div id="topbar">
       <script> $( "#topbar" ).load( "ajax/topbar.html" ); </script>
     </div>
 
-      <div style="margin-top: 100px;" class="row">
-        <div class="wideCard">
-          <div class="wideCardBackground">
-            <div class="wideCardContent">
-              <h2 style="margin-bottom: 30px;">Email Preferences</h2>
-              <input class="preferenceCheckbox" type="checkbox" id="important" name="emailpreferences">
-              <label class="preferenceLabel" for="important"><h4>Important Announcements</h4></label>
-              <br>
-              <p class="preferenceSubtext">Updates from All-Star eSports regarding player status, tournament-related material, and event-related announcements.</p>
-              <input class="preferenceCheckbox" type="checkbox" id="newsletter" name="emailpreferences">
-              <label class="preferenceLabel" for="newsletter"><h4>All-Star eSports Newsletters</h4></label>
-              <br>
-              <p class="preferenceSubtext">Monthly gaming newsletters featuring playstyle suggestions, player spotlights, and other eSports related content curated by the All-Star eSports team.</p>
-              <input class="preferenceCheckbox" type="checkbox" id="thirdparty" name="emailpreferences">
-              <label class="preferenceLabel" for="thirdparty"><h4>3rd Party Offers</h4></label>
-              <br>
-              <p class="preferenceSubtext">Free products, discounts, sales, and coupon codes from All-Star eSports partnered organizations.</p>
-              <br>
-              <br>
-              <button class="gradientButton">Update</button>
-            </div>
-          </div>
-        </div>
-
-
-      </div>
-    </div>
+    <div class="teamCard"></div>
+    <div class="firstTeamCard"></div>
+    <div class="secondTeamCard"></div>
+    <div class="thirdTeamCard"></div>
+  </div>
 </body>
 </html>

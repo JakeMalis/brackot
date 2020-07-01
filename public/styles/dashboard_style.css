@@ -57,6 +57,41 @@ p{
   left: 0;
 }
 
+.gradientTextAnimated{
+  font-weight: bold;
+  background: -webkit-linear-gradient(45deg, #0073ff, #00d7ff);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  -webkit-animation: flow 3.5s ease infinite;
+  -moz-animation: flow 3.5s ease infinite;
+  -o-animation: flow 3.5s ease infinite;
+  animation: flow 3.5s ease infinite;
+}
+
+@-webkit-keyframes flow {
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+@-moz-keyframes flow {
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+@-o-keyframes flow {
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+@keyframes flow {
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+
+
 .gradientButton{
   display: block;
   font-size: 18px;

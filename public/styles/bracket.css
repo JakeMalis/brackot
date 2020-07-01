@@ -1,0 +1,80 @@
+body{
+  overflow-x: hidden;
+  margin: 0px;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #f0f8ff !important;
+}
+
+h1{
+  font-family: 'purista-web', sans-serif !important;
+  color: #232323;
+}
+
+h2{
+  font-family: 'purista-web', sans-serif !important;
+  color: #232323;
+}
+
+h3{
+  font-family: 'purista-web', sans-serif !important;
+  color: #232323;
+}
+
+h4{
+  font-family: 'purista-web', sans-serif !important;
+  color: #232323;
+}
+
+h5{
+  font-family: 'purista-web', sans-serif !important;
+  color: #232323;
+}
+
+h6{
+  font-family: 'purista-web', sans-serif !important;
+  color: #777777 !important;
+  text-transform: uppercase;
+}
+
+p{
+  font-family: 'purista-web', sans-serif;
+  color: #232323;
+}
+
+.main-page{
+  width: calc(100vw: - 60px);
+  margin-left: 60px;
+}
+
+.teamCard{
+  height: 44px;
+  border-radius: 11px;
+  width: 200px;
+  background-color: #ffffff;
+  box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.2);
+}
+
+.firstTeamCard{
+  height: 44px;
+  border-radius: 11px;
+  width: 200px;
+  background-color: #FFC000;
+  box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.2);
+}
+
+.secondTeamCard{
+  height: 44px;
+  border-radius: 11px;
+  width: 200px;
+  background-color: #C7C7C7;
+  box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.2);
+}
+
+.thirdTeamCard{
+  height: 44px;
+  border-radius: 11px;
+  width: 200px;
+  background-color: #cd7f32;
+  box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.2);
+}
