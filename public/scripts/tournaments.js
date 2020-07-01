@@ -14,50 +14,36 @@ function enroll(tournamentNumber) {
   const tournament = tournaments[tournamentNumber - 1];
   var tournamentId = (tournament.date + "-" + tournament.game);
 
-  firebase.firestore().collection("tournaments").doc(tournamentId).collection("players").doc(firebase.auth().currentUser.uid).set({
-    name: firebase.auth().currentUser.displayName
+  firebase.firestore().collection("tournaments").doc(tournamentId).update({
+    players: firebase.firestore.FieldValue.arrayUnion(firebase.auth().currentUser.uid)
   }).then(function() {
-    document.getElementById("tournamentCardButton" + tournamentNumber).classList.toggle('tournamentCardButton');
+    document.getElementById("tournamentCardButton" + tournamentNumber).classList.toggle('tournamentCardButtonSigned');
     document.getElementById("tournamentCardButton" + tournamentNumber).innerHTML = "✓ Signed Up";
+    document.getElementById("tournamentCardButton" + tournamentNumber).disabled = true;
   });
 }
 
 function loadTournaments() {
+  var tournamentNumber = 1;
   firebase.firestore().collection("tournaments").get().then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
-        console.log(doc.id, " => ", doc.data());
         tournaments.push(doc.data());
+
+        document.getElementById("tournamentCard" + tournamentNumber).style.visibility = "visible";
+        document.getElementById("tournamentWallpaper" + tournamentNumber).src = "/media/game_wallpapers/" + doc.data().game + "-" + "gameplay.jpg";
+        document.getElementById("tournamentTitle" + tournamentNumber).innerHTML = doc.data().name;
+        document.getElementById("tournamentGame" + tournamentNumber).innerHTML = doc.data().game;
+        document.getElementById("tournamentDate" + tournamentNumber).innerHTML = doc.data().elegant_date;
+        document.getElementById("tournamentParticipants" + tournamentNumber).innerHTML = doc.data().players.length + " Participants";
+
+
+        if ((doc.data().players).includes(firebase.auth().currentUser.uid)) {
+          document.getElementById("tournamentCardButton" + tournamentNumber).classList.toggle('tournamentCardButtonSigned');
+          document.getElementById("tournamentCardButton" + tournamentNumber).innerHTML = "✓ Signed Up";
+          document.getElementById("tournamentCardButton" + tournamentNumber).disabled = true;
+        }
+
+        tournamentNumber++;
     });
-  }).then(function() {
-      personalizeElements();
   });
-}
-
-function personalizeElements() {
-  for (index = 0; index < tournaments.length; index++) {
-    const tournament = tournaments[index];
-    var tournamentId = (tournament.date + "-" + tournament.game);
-    var cardNumber = index + 1;
-
-    document.getElementById("tournamentCard" + cardNumber).style.visibility = "visible";
-
-    document.getElementById("tournamentWallpaper" + cardNumber).src = "/media/game_wallpapers/" + tournament.game + "-" + "gameplay.jpg";
-    document.getElementById("tournamentTitle" + cardNumber).innerHTML = tournament.name;
-    document.getElementById("tournamentGame" + cardNumber).innerHTML = tournament.game;
-    document.getElementById("tournamentDate" + cardNumber).innerHTML = tournament.elegant_date;
-
-    var tournamentDocument = firebase.firestore().collection("tournaments").doc(tournamentId);
-
-    tournamentDocument.collection("players").get().then(function(doc) {
-      document.getElementById("tournamentParticipants" + cardNumber).innerHTML = doc.size + " Participants";
-    });
-
-    tournamentDocument.collection("players").doc(firebase.auth().currentUser.uid).get().then(function(doc) {
-      if (doc.exists) {
-        document.getElementById("tournamentCardButton" + cardNumber).classList.toggle('tournamentCardButtonSigned');
-        document.getElementById("tournamentCardButton" + cardNumber).innerHTML = "✓ Signed Up";
-        document.getElementById("tournamentCardButton" + cardNumber).disabled = true;
-      }
-    });
-  }
 }

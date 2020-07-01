@@ -14,6 +14,7 @@ function addTournament() {
       game: document.getElementById('game').value,
       name: document.getElementById('tournamentName').value,
       time: document.getElementById('time').value,
+      players: ["admin"],
       earnings: {
           1: document.getElementById('firstEarnings').value,
           2: document.getElementById('secondEarnings').value,
