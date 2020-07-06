@@ -1,4 +1,4 @@
-var imlocation = "media/load-image/";
+var imlocation = "media/login_images/";
 var currentdate = 0;
 var image_number = 0;
 function ImageArray (n) {
