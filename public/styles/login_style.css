@@ -56,21 +56,6 @@ input.invalid {
 
 /* FORGOT PASSWORD PAGE CODE BELOW */
 
-#resetBtn{
-    float: center;
-    margin-top: 4vh;
-    margin-bottom: 10px;
-    background: -webkit-linear-gradient(360deg, #0084ff, #00c6ff);
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-weight: 550;
-    width: 150px;
-    height: 44px;
-    color: white;
-    border: transparent;
-    border-radius: 8px;
-}
-
 #forgotPasswordImage{
     float: right;
     display: none;
@@ -92,35 +77,32 @@ input.invalid {
 
 
 /* BUTTONS */
-#registerBtn{
-    display: inline;
-    float: center;
-    margin-top: 4vh;
-    margin-bottom: 10px;
-    background: -webkit-linear-gradient(360deg, #0084ff, #00c6ff);
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-weight: 550;
-    width: 150px;
-    height: 44px;
-    color: white;
-    border: transparent;
-    border-radius: 8px;
+
+.loginButton{
+  float: center;
+  margin-top: 4vh;
+  margin-bottom: 10px;
+  background: -webkit-linear-gradient(360deg, #0084ff, #00c6ff);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 550;
+  width: 150px;
+  height: 44px;
+  color: white;
+  border: transparent;
+  border-radius: 8px;
+  transition-duration: 0.2s;
 }
 
-#loginBtn{
-    float: center;
-    margin-top: 4vh;
-    margin-bottom: 10px;
-    background: -webkit-linear-gradient(360deg, #0084ff, #00c6ff);
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-weight: 550;
-    width: 150px;
-    height: 44px;
-    color: white;
-    border: transparent;
-    border-radius: 8px;
+.loginButton:hover{
+  opacity: 70%;
+  transition-duration: 0.2s;
+  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+  transform: translateY(-1px);
+}
+
+#registerBtn{
+    display: inline;
 }
 /* END BUTTONS */
 
@@ -296,6 +278,14 @@ input[type="checkbox"]:checked + label{
   color: white;
   border: transparent;
   border-radius: 8px;
+  transition-duration: 0.2s;
+}
+
+.nextButton:hover{
+  opacity: 70%;
+  transition-duration: 0.2s;
+  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+  transform: translateY(-1px);
 }
 
 .tab{

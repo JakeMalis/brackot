@@ -96,11 +96,12 @@ p{
   display: block;
   font-size: 18px;
   background: -webkit-linear-gradient(360deg, #0084ff, #00c6ff);
+  font-family: 'purista-web', sans-serif;
   text-transform: uppercase;
   letter-spacing: 3px;
   font-weight: 600;
-  padding-left: 40px;
-  padding-right: 40px;
+  padding-left: 30px;
+  padding-right: 30px;
   width: auto;
   height: 44px;
   color: white;
@@ -762,26 +763,6 @@ text-align: center;
 }
 
 /* ADMIN PAGE CODE BELOW */
-
-#newTournamentSubmitButton{
-  height: 40px;
-  width: 200px;
-  font-size: 18px;
-  font-family: 'purista-web', sans-serif;
-  letter-spacing: 1.7px;
-  font-weight: 800px;
-  color: #ffffff;
-  background-image: linear-gradient(135deg,#0069ff,#00dbff);
-  border: 0px;
-  border-radius: 9px;
-  cursor: pointer;
-  transition-duration: 0.1s;
-}
-
-#newTournamentSubmitButton:hover{
-  opacity: 70%;
-  transition-duration: 0.1s;
-}
 
 /* END ADMIN PAGE CODE */
 
