@@ -47,85 +47,156 @@ p{
   margin-left: 60px;
 }
 
-.score{
-  height: 44px;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
-  padding-top: 9px;
-  text-align: center;
-  font-size: 18px;
-  width: 40px;
-  float: left;
-  background-color: rgba(0,0,0,0.09);
-}
 
-.scoreGold{
-  background-color: rgba(0,0,0,0.12);
-}
 
-.scoreSilver{
-  background-color: rgba(0,0,0,0.2);
-}
 
-.scoreBronze{
-  background-color: rgba(0,0,0,0.2);
-}
-
-.scoreWin{
-  background-color: rgba(119, 221, 119);
-}
-
-.scoreLoss{
-  background-color: rgba(237,67,55);
-}
-
-.profilePic{
-  float: left;
-  height: 44px;
-  width: 44px;
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
-  transition-duration: 0.2s;
-}
 
 .teamName{
+  margin: 0px;
   float: left;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   letter-spacing: 0.75px;
-  width: 156px;
-  height: 44px;
+  width: 130px;
+  height: 35px;
   padding-top: 10px;
-  font-size: 16px;
+  font-size: 13px;
   color: #232323;
-  padding-left: 16px;
+  padding-left: 14px;
 }
 
 .whiteText{
   color: white;
 }
 
-/* There's room in the column for a connector from column pair to another pair */
 .bracketColumn{
   float: left;
   height: auto;
-  width: 320px;
+  width: 200px;
 }
 
-.bracketPair{
-  height: auto;
-  width: auto;
-  margin-bottom: 30px;
+.divider{
+  width: 200px;
+  height: 1px;
+  background-color: rgba(15,15,20,0.2);
+}
+
+.upperHalf{
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  background-color: #ffffff;
+  height: 35px;
+  width: 200px;
+}
+
+.lowerHalf{
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  background-color: #ffffff;
+  height: 35px;
+  width: 200px;
+}
+
+.match{
+  height: 71px;
+  width: 200px;
+  border-radius: 8px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0px 3px 2px 0px rgba(0,0,0,0.15);
+  transition-duration: 0.2s;
+  background-color: #ffffff;
+}
+
+.match:hover{
+  cursor: pointer;
+  transform: scale(1.03);
+  transition-duration: 0.2s;
+}
+
+.profilePic{
+  float: left;
+  height: 35px;
+  width: 35px;
+  transition-duration: 0.2s;
+}
+
+.upperHalf > .profilePic{
+  border-top-left-radius: 8px;
+}
+
+.lowerHalf > .profilePic{
+  border-bottom-left-radius: 8px;
+}
+
+.score{
+  height: 35px;
+  padding-top: 6px;
+  text-align: center;
+  font-size: 16px;
+  width: 35px;
+  float: left;
+  margin: 0px;
+  background-color: rgba(0,0,0,0.09);
+}
+
+.upperHalf > .score{
+  border-top-right-radius: 8px;
+}
+
+.lowerHalf > .score{
+  border-bottom-right-radius: 8px;
+}
+
+.win{
+  background-color: rgba(119, 221, 119);
+}
+
+.loss{
+  background-color: rgba(237,67,55);
+}
+
+
+
+
+
+
+.extraSpace{
+  margin-top: 358px;
+}
+
+.emptyPair3{
+  height: 280px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.emptyPair4{
+  height: 569px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.emptyCard{
+  margin: 10px;
+  height: 44px;
+  border-radius: 8px;
+  width: 240px;
+  background-color: rgba(200,200,200,0.2);
+  box-shadow: 0px 2px 1px 0px rgba(0,0,0,0.25);
+  transition-duration: 0.2s;
+  margin-right: 20px;
 }
 
 .teamCard{
+  cursor: pointer;
   margin: 10px;
   height: 44px;
   border-radius: 8px;
   width: 240px;
   background-color: #FFFFFF;
-  box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.25);
+  box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.25);
   transition-duration: 0.2s;
   margin-right: 20px;
 }
@@ -136,7 +207,7 @@ p{
 }
 
 .teamCard:hover > .profilePic{
-  transform: scale(1.015);
+  transform: scale(1.014);
   transition-duration: 0.2s;
 }
 

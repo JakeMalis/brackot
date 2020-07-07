@@ -5,7 +5,7 @@
   <title>Dashboard</title>
 
   <link rel="icon" type="image/png" href="media/favicon.png"/>
-  <link rel="stylesheet" type="text/css" href="styles/bracket.css">
+  <link rel="stylesheet" type="text/css" href="styles/bracket2.css">
   <script src="scripts/dashboard.js"></script>
 
   <link rel="stylesheet" href="https://use.typekit.net/fyp1otf.css">
@@ -44,22 +44,21 @@
       <script> $( "#topbar" ).load( "ajax/topbar.html" ); </script>
     </div>
 
+
     <div class="bracketColumn">
-      <div class="bracketPair">
-        <div class="teamCard"><img class="profilePic" src="media/avatar.png"><p class="teamName">Stanford University</p><p class="score">0</p></div>
-        <div class="teamCard goldTeamCard"><img class="profilePic" src="media/avatar.png"><p class="teamName whiteText">Pine Crest</p><p class="score whiteText scoreGold">1</p></div>
+      <div class="match">
+        <div class="upperHalf"><img class="profilePic" src="media/avatar.png"><p class="teamName">Stanford University</p><p class="score whiteText loss">L</p></div></a>
+        <div class="divider"></div>
+        <div class="lowerHalf"><img class="profilePic" src="media/avatar.png"><p class="teamName">Pine Crest</p><p class="score whiteText win">W</p></div>
       </div>
-      <div class="bracketPair">
-        <div class="teamCard silverTeamCard"><img class="profilePic" src="media/avatar.png"><p class="teamName whiteText">Park Vista</p><p class="score whiteText scoreSilver">W</p></div>
-        <div class="teamCard bronzeTeamCard"><img class="profilePic" src="media/avatar.png"><p class="teamName whiteText">Spanish River</p><p class="score whiteText scoreBronze">L</p></div>
+      <div class="match">
+        <div class="upperHalf"><img class="profilePic" src="media/avatar.png"><p class="teamName">Park Vista</p><p class="score whiteText win">W</p></div>
+        <div class="divider"></div>
+        <div class="lowerHalf"><img class="profilePic" src="media/avatar.png"><p class="teamName">Spanish River</p><p class="score whiteText loss">L</p></div>
       </div>
     </div>
-    <div class="bracketColumn">
-      <div class="bracketPair">
-        <div class="teamCard"><img class="profilePic" src="media/avatar.png"><p class="teamName">Stanford University</p><p class="score whiteText scoreWin">W</p></div>
-        <div class="teamCard"><img class="profilePic" src="media/avatar.png"><p class="teamName">Stanford University</p><p class="score whiteText scoreLoss">L</p></div>
-      </div>
-    </div>
+
+
   </div>
 </body>
 </html>
