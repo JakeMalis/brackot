@@ -385,13 +385,22 @@ text-align: center;
   display: flex;
   flex-wrap: wrap;
   box-sizing: border-box;
-  margin-left: 50px !important;
-  margin-right: 50px !important;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
 .column{
   display: flex;
   flex-direction: column;
+  width: 100%;
+}
+
+.leftColumn{
+  margin: 0px;
+}
+
+.rightColumn{
+  margin: 0px;
 }
 
 
@@ -652,7 +661,7 @@ text-align: center;
 
 .longProfileInputs{
   flex: 0 0 100%;
-  width: 85%;
+  width: 100%;
   max-height: 50px;
   margin-bottom: 15px;
   padding: 11px;
@@ -669,58 +678,54 @@ text-align: center;
   width: 100%;
 }
 
-#editProfileButton{
-  display: block;
+.profileButton{
   position: relative;
   float: right;
-  margin-top: -60px;
+  display: inline-block;
+  margin-top: -120px;
+  margin-right: -40px;
   height: 40px;
-  width: 100px;
+  min-width: 70px;
+  max-width: 100px;
+  width: 40%;
   font-size: 18px;
   font-family: 'purista-web', sans-serif;
   letter-spacing: 1.7px;
   font-weight: 800px;
   color: #ffffff;
-  background-image: linear-gradient(135deg,#0069ff,#00dbff);
   border: 0px;
   border-radius: 9px;
   cursor: pointer;
   transition-duration: 0.1s;
-  visibility: visible;
 }
-#editProfileButton:hover{
-  opacity: 70%;
-  transition-duration: 0.1s;
-}
-#saveProfileButton{
-  display: block;
-  position: relative;
-  float: right;
+
+.throwaway{
   margin-top: -60px;
-  height: 40px;
   width: 100px;
-  font-size: 18px;
-  font-family: 'purista-web', sans-serif;
-  letter-spacing: 1.7px;
-  font-weight: 800px;
-  color: #ffffff;
-  background-image: linear-gradient(70deg,#36bf70,#12fe7b);
-  border: 0px;
-  border-radius: 9px;
-  cursor: pointer;
-  transition-duration: 0.1s;
-  visibility: hidden;
 }
-#saveProfileButton:hover{
+.profileButton:hover{
   opacity: 70%;
   transition-duration: 0.1s;
 }
 
+#editProfileButton{
+  background-image: linear-gradient(135deg,#0069ff,#00dbff);
+  visibility: visible;
+}
+
+#saveProfileButton{
+  background-image: linear-gradient(70deg,#36bf70,#12fe7b);
+  visibility: hidden;
+}
+
+#profilePicContainer{
+  text-align: center;
+}
+
 #profileProfilePic{
-  margin-top: 20px;
-  margin-left: 0px;
-  height: 200px;
-  width: 200px;
+  margin-top: 10px;
+  height: 120px;
+  width: 120px;
   object-fit: cover;
   transition-duration: 0.2s;
   border-radius: 50%;
@@ -731,6 +736,11 @@ text-align: center;
   opacity: 70%;
   transition-duration: 0.2s;
   cursor: pointer;
+}
+
+#profileCardTitle{
+  margin-bottom: 30px;
+  max-width: 70%;
 }
 
 .gameProfilePic{
@@ -785,13 +795,37 @@ text-align: center;
 /* END EMAIL PREFERENCES PAGE CODE */
 
 /* THE BELOW SECTION IS MEANT FOR MOBILE DEVICES ONLY */
+@media only screen and (min-width: 480px){
+  .profileButton{
+    margin-top: -60px;
+    margin-right: 0px;
+  }
+  #profileProfilePic{
+    margin-top: 20px;
+    height: 200px;
+    width: 200px;
+}
+
 @media only screen and (min-width: 700px){
   #profilePic{
     display: flex;
   }
+  .row{
+    margin-left: 50px !important;
+    margin-right: 50px !important;
+  }
 }
 
 @media only screen and (min-width: 900px){
+  .column{
+    width: 47%;
+  }
+  .leftColumn{
+    margin-right: 3%;
+  }
+  .rightColumn{
+    margin-left: 3%;
+  }
   .tournamentCard{
     flex: 0 0 50%;
     max-width: 50%;

@@ -59,24 +59,22 @@
         <div id="profileInfoCard" class="wideCard">
           <div class="wideCardBackground">
             <div class="wideCardContent">
-              <h2 style="margin-bottom: 30px;">Profile Information</h2>
-              <button id="editProfileButton">EDIT</button>
-              <button id="saveProfileButton">SAVE</button>
+              <h2 id="profileCardTitle">Profile Information</h2>
+              <button class="profileButton" id="editProfileButton">EDIT</button>
+              <button class="profileButton" id="saveProfileButton">SAVE</button>
               <div style="margin: 0px !important;" class="row">
-                <div class="column" style="width: 50%;">
+                <div class="column leftColumn">
+                  <h6 class="profileInputTitle">Profile Picture</h6>
+                  <label for="avatarUploader">
+                    <div id="profilePicContainer"><img id="profileProfilePic"></div>
+                    <input type="file" name="avatarUploader" id="avatarUploader" style="display:none" accept="image/jpg, image/jpeg, image/png, image/img, image/gif">
+                  </label>
                   <h6 class="profileInputTitle">First Name</h6>
                   <input placeholder="" type="text" class="longProfileInputs" disabled id='firstName'>
                   <h6 class="profileInputTitle">Last Name</h6>
                   <input placeholder="" type="text" class="longProfileInputs" disabled id='lastName'>
-                  <h6 class="profileInputTitle">Profile Picture</h6>
-                  <label for="avatarUploader">
-                    <img id="profileProfilePic">
-                    <input type="file" name="avatarUploader" id="avatarUploader" style="display:none" accept="image/jpg, image/jpeg, image/png, image/img, image/gif">
-                  </label>
-
-
                 </div>
-                <div class="column" style="width: 50%;">
+                <div class="column rightColumn">
                   <h6 class="profileInputTitle">Email</h6>
                   <input placeholder="" type="text" class="longProfileInputs" disabled id="email">
                   <h6 class="profileInputTitle">High School</h6>
@@ -102,13 +100,11 @@
               </div>
               <div class="modal-body">
                 <div class="row">
-                  <center>
-                    <input class="pwInput" placeholder="Password..." id="passwordConfirmation" type="password">
-                  </center>
+                  <input class="pwInput" placeholder="Password..." id="passwordConfirmation" type="password">
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="confirmPassword" onclick="updateEmail();">CONFIRM</button>
+                <button type="button" class="gradientButton" id="confirmPassword" onclick="updateEmail();">CONFIRM</button>
               </div>
             </div>
           </div>

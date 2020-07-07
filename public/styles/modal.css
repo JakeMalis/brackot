@@ -4,31 +4,37 @@
     font-style: normal;
 }
 
-
-#confirmPassword{
-  background: -webkit-linear-gradient(360deg, #0084ff, #00c6ff);
-  color: white;
-}
-
 .loginInput{
   margin-left: -3px;
   width: 420px;
 }
 
 input {
-    margin-top: 0px;
-    padding: 14px;
-    width: 50%;
-    font-size: 17px;
-    border: 1px solid #dddddd;
-    background-color: #ffffff;
-    border-radius: 7px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0px;
+  width: 70%;
+  padding: 11px;
+  font-size: 20px;
+  border-radius: 11px;
+  background-color: #f6faff;
+  border: 1px solid #dddddd;
 }
 
-#modalTitle{
+.modal-title{
   text-transform: capitalize;
   font-family: 'purista-web', sans-serif;
   font-weight: 400;
-  color: #00c6ff;
+  background: -webkit-linear-gradient(360deg, #0084ff, #00c6ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   text-align: center;
+}
+
+.modal-header{
+  border: none !important;
+}
+
+.modal-footer{
+  border: none !important;
 }
