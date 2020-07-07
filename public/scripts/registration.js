@@ -14,7 +14,19 @@ function createUser() {
         }
     }
   );
-  firebase.auth().onAuthStateChanged(function(user) { if (user) { next(); }});
+  firebase.auth().onAuthStateChanged(function(user) { if (user) {
+    next();
+    firebase.firestore().collection("mail").doc(firebase.auth().currentUser.uid + "-welcome").set({
+      to: document.getElementById('email').value,
+      template: {
+        name: 'welcome',
+        data: {
+          first: document.getElementById('first-name').value,
+          email: firebase.auth().currentUser.email
+        }
+      }
+    });
+  }});
 }
 
 function register() {
@@ -61,7 +73,6 @@ function register() {
             console.error("Error writing document: ", error);
     });
   }
-  if (firebase.auth().currentUser.photoURL == "") { firebase.auth().currentUser.updateProfile({ photoURL: "media/avatar.png" }); };
 }
 
 function uploadAvatar(avatar) {
