@@ -106,10 +106,17 @@ p{
   color: white;
 }
 
+/* There's room in the column for a connector from column pair to another pair */
 .bracketColumn{
   float: left;
   height: auto;
-  width: 255px;
+  width: 320px;
+}
+
+.bracketPair{
+  height: auto;
+  width: auto;
+  margin-bottom: 30px;
 }
 
 .teamCard{
@@ -120,6 +127,7 @@ p{
   background-color: #FFFFFF;
   box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.25);
   transition-duration: 0.2s;
+  margin-right: 20px;
 }
 
 .teamCard:hover{
