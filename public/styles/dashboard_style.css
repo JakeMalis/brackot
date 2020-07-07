@@ -360,6 +360,12 @@ text-align: center;
   transition-duration: 0.2s;
 }
 
+.unlimitedIconInfobar{
+  position: absolute;
+  right: 20px;
+  top: 52px;
+}
+
 .userNameInfobar{
   padding-top: 29px;
   padding-right: 16px;
@@ -529,6 +535,7 @@ text-align: center;
   flex: 0 0 100%;
   max-width: 100%;
   height: auto;
+  margin-bottom: 20px;
 }
 
 .longYCardBackground:hover{
