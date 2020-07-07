@@ -716,7 +716,7 @@ text-align: center;
   margin-left: 0px;
   height: 200px;
   width: 200px;
-  object-fit: contain;
+  object-fit: cover;
   transition-duration: 0.2s;
   border-radius: 50%;
   box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.08);
