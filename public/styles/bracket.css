@@ -106,6 +106,12 @@ p{
   color: white;
 }
 
+.bracketColumn{
+  float: left;
+  height: auto;
+  width: 255px;
+}
+
 .teamCard{
   margin: 10px;
   height: 44px;

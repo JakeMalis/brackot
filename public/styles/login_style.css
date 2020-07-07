@@ -326,9 +326,17 @@ input[type="checkbox"]:checked + label{
 }
 
 #addProfilePic{
-  object-fit: contain;
+  object-fit: cover;
   width: 200px;
-  height: auto;
+  height: 200px;
+  border-radius: 50%;
+}
+
+#avatarUploader{
+  object-fit: cover;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
 }
 
 #profilePicRow{
