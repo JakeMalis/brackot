@@ -1,4 +1,4 @@
-var tabNumber = 0;
+var tabNumber = 3;
 const nameTab = document.getElementById("nameTab");
 const emailTab = document.getElementById("emailTab");
 const roleTab = document.getElementById("roleTab");
