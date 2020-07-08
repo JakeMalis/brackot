@@ -93,7 +93,7 @@
         <script>
         function liveFilter() {
           var input, filter, ul, li, a, i, txtValue;
-          input = document.getElementById("myInput");
+          input = document.getElementById("team");
           filter = input.value.toUpperCase();
           ul = document.getElementById("myUL");
           li = ul.getElementsByTagName("li");
@@ -110,10 +110,23 @@
         </script>
 
         <div id="teamTab" style="display:none;" class="tab">
-          <h1 class="registrationTitle">TIME TO TEAM UP</h1>
+          <h1 class="registrationTitle">TIME TO TEAM UP.</h1>
           <p class="registrationText">Find your squad using the search bar below. Don't have a team? Enter a team name then hit 'continue' to create your own.</p>
           <div class="inputRow">
-            <input type="text" placeholder="Team" id="team" onkeyup="liveFilter()">
+            <input type="text" placeholder="Search for a Team..." id="team" onkeyup="liveFilter()">
+
+            <ul id="myUL">
+              <li><a href="#">Adele</a></li>
+              <li><a href="#">Agnes</a></li>
+
+              <li><a href="#">Billy</a></li>
+              <li><a href="#">Bob</a></li>
+
+              <li><a href="#">Calvin</a></li>
+              <li><a href="#">Christina</a></li>
+              <li><a href="#">Cindy</a></li>
+            </ul>
+
           </div>
           <button type="button" class="nextButton" onClick="next();">Continue</button>
         </div>
