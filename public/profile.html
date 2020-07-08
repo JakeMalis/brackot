@@ -62,13 +62,12 @@
               <h2 id="profileCardTitle">Profile Information</h2>
               <button class="profileButton" id="editProfileButton">EDIT</button>
               <button class="profileButton" id="saveProfileButton">SAVE</button>
+              <label style="width: 100%;" for="avatarUploader">
+                <div id="profilePicContainer"><img id="profileProfilePic"></div>
+                <input type="file" name="avatarUploader" id="avatarUploader" style="display:none" accept="image/jpg, image/jpeg, image/png, image/img, image/gif">
+              </label>
               <div style="margin: 0px !important;" class="row">
                 <div class="column leftColumn">
-                  <h6 class="profileInputTitle">Profile Picture</h6>
-                  <label for="avatarUploader">
-                    <div id="profilePicContainer"><img id="profileProfilePic"></div>
-                    <input type="file" name="avatarUploader" id="avatarUploader" style="display:none" accept="image/jpg, image/jpeg, image/png, image/img, image/gif">
-                  </label>
                   <h6 class="profileInputTitle">First Name</h6>
                   <input placeholder="" type="text" class="longProfileInputs" disabled id='firstName'>
                   <h6 class="profileInputTitle">Last Name</h6>
