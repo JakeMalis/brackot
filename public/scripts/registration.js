@@ -40,7 +40,7 @@ function register() {
         last: document.getElementById('last-name').value,
         email: document.getElementById('email').value,
         state: document.getElementById('state').value,
-        highschool: document.getElementById('highschool').value,
+        team: document.getElementById('team').value,
         role: "player",
         coins: 0,
         notifications: 0,
@@ -65,7 +65,7 @@ function register() {
         last: document.getElementById('last-name').value,
         email: document.getElementById('email').value,
         state: document.getElementById('state').value,
-        highschool: document.getElementById('highschool').value,
+        team: document.getElementById('team').value,
         role: "coach"
     }).then(function() {
         window.location = "index.html";

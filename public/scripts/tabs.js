@@ -34,7 +34,7 @@ function next(){
     show(nameTab);
     hide(emailTab);
     hide(roleTab);
-    hide(locationTab);
+    hide(teamTab);
     hide(gamesTab);
     hide(profilePicTab);
   }
@@ -42,7 +42,7 @@ function next(){
     hide(nameTab);
     show(emailTab);
     hide(roleTab);
-    hide(locationTab);
+    hide(teamTab);
     hide(gamesTab);
     hide(profilePicTab);
   }
@@ -50,32 +50,32 @@ function next(){
     hide(nameTab);
     hide(emailTab);
     show(roleTab);
-    hide(locationTab);
     hide(gamesTab);
+    hide(teamTab);
     hide(profilePicTab);
   }
   if (tabNumber == 3){
     hide(nameTab);
     hide(emailTab);
     hide(roleTab);
-    hide(locationTab);
     show(gamesTab);
+    hide(teamTab);
     hide(profilePicTab);
   }
   if (tabNumber == 4){
     hide(nameTab);
     hide(emailTab);
     hide(roleTab);
-    show(locationTab);
     hide(gamesTab);
+    show(teamTab);
     hide(profilePicTab);
   }
   if (tabNumber == 5){
     hide(nameTab);
     hide(emailTab);
     hide(roleTab);
-    hide(locationTab);
     hide(gamesTab);
+    hide(teamTab);
     show(profilePicTab);
   }
 }
