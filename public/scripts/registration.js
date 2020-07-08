@@ -98,4 +98,10 @@ window.onload = function() {
   document.getElementById('submitRegistrationButton').addEventListener("click", register);
   document.getElementById('userCreate').addEventListener("click", createUser);
   document.getElementById('avatarUploader').addEventListener("change", uploadAvatar);
+
+  if(team.value.length == 0) {
+    allTeams.style.display = "none";
+  } else {
+    allTeams.style.display = "block";
+  }
 }
