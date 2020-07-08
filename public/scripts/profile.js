@@ -77,11 +77,10 @@ function saveProfile() {
 }
 
 function saveProfileChanges() {
-  firebase.auth().currentUser.updateProfile({
-    displayName: document.getElementById('firstName').value + " " + document.getElementById('lastName').value,
-  });
-
   if (document.getElementById("firstName").placeholder != document.getElementById("firstName").value) {
+    firebase.auth().currentUser.updateProfile({
+      displayName: document.getElementById('firstName').value + " " + document.getElementById('lastName').value,
+    });
     firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
         first: document.getElementById('firstName').value
     }).then(function() {
@@ -92,6 +91,9 @@ function saveProfileChanges() {
   }
 
   if (document.getElementById("lastName").placeholder != document.getElementById("lastName").value) {
+    firebase.auth().currentUser.updateProfile({
+      displayName: document.getElementById('firstName').value + " " + document.getElementById('lastName').value,
+    });
     firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
         last: document.getElementById('lastName').value
     }).then(function() {
@@ -113,6 +115,10 @@ function saveProfileChanges() {
     }).catch(function(error) {
             console.error("Error writing document: ", error);
     });
+  }
+
+  if ((document.getElementById("firstName").placeholder == document.getElementById("firstName").value) && (document.getElementById("lastName").placeholder == document.getElementById("lastName").value) && (document.getElementById("email").placeholder == document.getElementById("email").value) && (document.getElementById("highschool").placeholder == document.getElementById("highschool").value)) {
+    saveProfile();
   }
 }
 
