@@ -3,7 +3,6 @@ window.onload = function() {
       if (user) { document.getElementById("avatar").src = firebase.auth().currentUser.photoURL; }
       else { window.location = "login.html"; }
   });
-  document.getElementById('newTournamentSubmitButton').addEventListener("click", addTournament);
 }
 
 function addTournament() {
