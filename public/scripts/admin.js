@@ -25,7 +25,8 @@ function addTournament() {
           switch: document.getElementById("switch").selected,
           mobile: document.getElementById("mobile").selected
       },
-      unlimited: document.getElementById("unlimited").checked
+      unlimited: document.getElementById("unlimited").checked,
+      type: document.getElementById('participantType').value
   }).then(function() {
       alert("Added tournament!");
   }).catch(function(error) {
