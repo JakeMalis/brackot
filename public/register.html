@@ -9,8 +9,11 @@
   <script src="scripts/registration.js"></script>
   <link rel="stylesheet" type="text/css" href="styles/login_style.css">
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
   <link rel="stylesheet" href="https://use.typekit.net/bea1phk.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
   <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-auth.js"></script>
@@ -90,20 +93,29 @@
           <button type="button" class="nextButton" onClick="next();">Continue</button>
         </div>
 
+        <script>
+          $(function(){
+            $('.teamName').on('click', function() {
+                $("#team").val($(this).text());
+                $("#allTeams").hide();
+            });
+          });
+        </script>
+
         <div id="teamTab" style="display:none;" class="tab">
           <h1 class="registrationTitle">TIME TO TEAM UP.</h1>
           <p class="registrationText">Find your squad using the search bar below. Don't have a team? Enter a team name then hit 'continue' to create your own.</p>
           <div class="inputRow">
             <input type="text" placeholder="Search for a Team..." id="team" onkeyup="liveFilter()">
             <ul id="allTeams">
-              <li><a href="#" class="teamName">Pine Crest School</a></li>
-              <li><a href="#" class="teamName">Park Vista High School</a></li>
-              <li><a href="#" class="teamName">Stanford University</a></li>
-              <li><a href="#" class="teamName">American University</a></li>
-              <li><a href="#" class="teamName">Princeton</a></li>
-              <li><a href="#" class="teamName">Bad Booty Boys</a></li>
-              <li><a href="#" onclick="alert('Jordan Kissed me On The Bus');" class="teamName">Jake Kissed Me on the Bus</a></li>
-              <li><a href="#" class="teamName">Jordan Ate me Out in McDonalds. It was McCreamy.</a></li>
+              <li><a href="javascript:console.log('Hello');" class="teamName">Pine Crest School</a></li>
+              <li><a class="teamName">Park Vista High School</a></li>
+              <li><a class="teamName">Stanford University</a></li>
+              <li><a class="teamName">American University</a></li>
+              <li><a class="teamName">Princeton</a></li>
+              <li><a class="teamName">Bad Booty Boys</a></li>
+              <li><a class="teamName" onclick="alert('Jordan Kissed me On The Bus');">Jake Kissed Me on the Bus</a></li>
+              <li><a class="teamName" onclick="selectSchool();">Jordan Ate me Out in McDonalds. It was McCreamy.</a></li>
             </ul>
           </div>
           <button type="button" class="nextButton" onClick="next();">Continue</button>

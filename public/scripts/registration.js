@@ -55,8 +55,6 @@ function register() {
         }
     }).then(function() {
         window.location = "index.html";
-    }).catch(function(error) {
-            console.error("Error writing document: ", error);
     });
   }
   else if (document.getElementById("coach").checked) {
@@ -69,8 +67,6 @@ function register() {
         role: "coach"
     }).then(function() {
         window.location = "index.html";
-    }).catch(function(error) {
-            console.error("Error writing document: ", error);
     });
   }
 }
@@ -101,7 +97,8 @@ window.onload = function() {
 
   if(team.value.length == 0) {
     allTeams.style.display = "none";
-  } else {
+  }
+  else {
     allTeams.style.display = "block";
   }
 }
