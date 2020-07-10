@@ -114,18 +114,57 @@
           <div class="inputRow">
             <input type="text" placeholder="Search for a Team..." id="team" onkeyup="liveFilter()">
             <ul id="allTeams">
-              <li><a href="javascript:console.log('Hello');" class="teamName">Pine Crest School</a></li>
+              <li><a class="teamName">Pine Crest School</a></li>
               <li><a class="teamName">Park Vista High School</a></li>
               <li><a class="teamName">Stanford University</a></li>
               <li><a class="teamName">American University</a></li>
               <li><a class="teamName">Princeton</a></li>
               <li><a class="teamName">Bad Booty Boys</a></li>
               <li><a class="teamName" onclick="alert('Jordan Kissed me On The Bus');">Jake Kissed Me on the Bus</a></li>
-              <li><a class="teamName" onclick="selectSchool();">Jordan Ate me Out in McDonalds. It was McCreamy.</a></li>
+              <li><a class="teamName">Jordan Ate me Out in McDonalds. It was McCreamy.</a></li>
             </ul>
           </div>
           <button type="button" class="nextButton" onClick="next();">Continue</button>
+
+          <div class="modal fade" id="joinTeamModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header" data-keyboard="false" data-backdrop="static">
+                  <h1 class="modal-title" id="modalTitle">CONFIRM PASSWORD</h1>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <input class="pwInput" placeholder="Password..." id="passwordConfirmation" type="password">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="gradientButton" id="confirmPassword" onclick="updateEmail();">CONFIRM</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="createTeamModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header" data-keyboard="false" data-backdrop="static">
+                  <h1 class="modal-title" id="modalTitle">CONFIRM PASSWORD</h1>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <input class="pwInput" placeholder="Password..." id="passwordConfirmation" type="password">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="gradientButton" id="confirmPassword" onclick="updateEmail();">CONFIRM</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
         </div>
+
 
         <div id="profilePicTab" style="display:none;" class="tab">
           <h1 class="registrationTitle">Add some flair.</h1>
