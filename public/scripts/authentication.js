@@ -18,6 +18,5 @@ function passwordSignIn() {
 }
 
 window.onload = function() {
-  document.getElementById('loginBtn').addEventListener("click", passwordSignIn);
   firebase.auth().onAuthStateChanged(function(user) { if (user) { window.location = "index.html"; }});
 }

@@ -15,6 +15,7 @@
 
     <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-auth.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
     <script>
         var firebaseConfig = {
@@ -27,6 +28,13 @@
             appId: "1:894423381350:web:3fe3b4195ae678bd6704a7"
         };
         firebase.initializeApp(firebaseConfig);
+
+        //Makes it so the enter key also runs the same function as pressing the actual 'Login' button
+        $(document).on("keypress", "input", function(e){
+        if(e.which == 13){
+            passwordSignIn();
+        }
+    });
     </script>
 </head>
 <body>
@@ -43,7 +51,7 @@
 
             <div style="overflow:auto;">
                 <div style="float:center;">
-                    <button type="button" class="loginButton" id="loginBtn">Login</button>
+                    <button type="button" class="loginButton" id="loginBtn" onclick="passwordSignIn();">Login</button>
                     <button type="button" class="loginButton" id="registerBtn" onclick="location.href='register.html';">Sign Up</button>
                 </div>
             </div>

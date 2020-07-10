@@ -15,6 +15,7 @@ function hide(x){
 }
 
 function next(){
+
   tabNumber++;
   if (tabNumber > 5){
     hide(nextButton);
@@ -22,8 +23,10 @@ function next(){
   }
 
   if(tabNumber == 1){
-    if (document.getElementById('first-name').value == "") {
+    if ((document.getElementById('first-name').value == "") || (document.getElementById('last-name').value == "")){
       tabNumber--;
+    }
+    if (document.getElementById('first-name').value == "") {
       var firstname = document.getElementById('first-name');
       firstname.style.backgroundColor = '#ffdddd';
       firstname.classList.add('error');
@@ -35,7 +38,6 @@ function next(){
       document.getElementById('first-name').style.backgroundColor="#ffffff";
     }
     if (document.getElementById('last-name').value == "") {
-      tabNumber--;
       var lastname = document.getElementById('last-name');
       lastname.style.backgroundColor = '#ffdddd';
       lastname.classList.add('error');
@@ -47,9 +49,12 @@ function next(){
       document.getElementById('last-name').style.backgroundColor="#ffffff";
     }
   }
+
   if(tabNumber == 2){
-    if (document.getElementById('email').value == "") {
+    if ((document.getElementById('email').value == "") || (document.getElementById('password').value == "")){
       tabNumber--;
+    }
+    if (document.getElementById('email').value == "") {
       var email = document.getElementById('email');
       email.style.backgroundColor = '#ffdddd';
       email.classList.add('error');
@@ -61,7 +66,6 @@ function next(){
       document.getElementById('email').style.backgroundColor="#ffffff";
     }
     if (document.getElementById('password').value == "") {
-      tabNumber--;
       var password = document.getElementById('password');
       password.style.backgroundColor = '#ffdddd';
       password.classList.add('error');
