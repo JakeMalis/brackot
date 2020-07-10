@@ -6,8 +6,7 @@ window.onload = function() {
 }
 
 function addTournament() {
-  var simpleEventName = document.getElementById('dateSimple').value + "-" + document.getElementById('game').value
-  firebase.firestore().collection("tournaments").doc(simpleEventName).set({
+  firebase.firestore().collection("tournaments").doc(document.getElementById('dateSimple').value + "-" + document.getElementById('game').value).set({
       date: document.getElementById('dateSimple').value,
       elegant_date: document.getElementById('dateElegant').value,
       game: document.getElementById('game').value,
@@ -19,7 +18,7 @@ function addTournament() {
           2: document.getElementById('secondEarnings').value,
           3: document.getElementById('thirdEarnings').value
       },
-      games: {
+      platform: {
           pc: document.getElementById("pc").selected,
           xbox: document.getElementById("xbox").selected,
           ps: document.getElementById("ps").selected,
