@@ -36,48 +36,20 @@ function editProfile() {
 
 }
 
-function saveProfileChanges() {
-  if (document.getElementById("firstName").placeholder != document.getElementById("firstName").value) {
-    firebase.auth().currentUser.updateProfile({
-      displayName: document.getElementById('firstName').value + " " + document.getElementById('lastName').value,
-    });
-    firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
-        first: document.getElementById('firstName').value
-    }).then(function() {
-        saveProfile();
-    }).catch(function(error) {
-            console.error("Error writing document: ", error);
-    });
-  }
+function saveProfile() {
+  document.getElementById('editPreferencesButton').style.visibility = "visible";
+  document.getElementById('savePreferencesButton').style.visibility = "hidden";
 
-  if (document.getElementById("lastName").placeholder != document.getElementById("lastName").value) {
-    firebase.auth().currentUser.updateProfile({
-      displayName: document.getElementById('firstName').value + " " + document.getElementById('lastName').value,
-    });
-    firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
-        last: document.getElementById('lastName').value
-    }).then(function() {
-        saveProfile();
-    }).catch(function(error) {
-            console.error("Error writing document: ", error);
-    });
-  }
 
-  if (document.getElementById("email").placeholder != document.getElementById("email").value) {
-    $('#modal').modal();
-  }
+  document.getElementById("announcements").disabled = true;
+  document.getElementById("newsletter").disabled = true;
+  document.getElementById("thirdparty").disabled = true;
 
-  if (document.getElementById("highschool").placeholder != document.getElementById("highschool").value) {
-    firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
-        highschool: document.getElementById('highschool').value
-    }).then(function() {
-        saveProfile();
-    }).catch(function(error) {
-            console.error("Error writing document: ", error);
-    });
-  }
-
-  if ((document.getElementById("firstName").placeholder == document.getElementById("firstName").value) && (document.getElementById("lastName").placeholder == document.getElementById("lastName").value) && (document.getElementById("email").placeholder == document.getElementById("email").value) && (document.getElementById("highschool").placeholder == document.getElementById("highschool").value)) {
-    saveProfile();
-  }
+  firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
+    email_preferences: {
+      announcements: document.getElementById("announcements").checked,
+      newsletter: document.getElementById("newsletter").checked,
+      thirdparty: document.getElementById("thirdparty").checked
+    }
+  });
 }
