@@ -71,21 +71,21 @@
                 <h6>Game</h6>
                 <select name="newTournamentGame" class="longProfileInputs" id="game">
                   <option value="null">Select a Game...</option>
-                  <option value="FORTNITE">Fortnite</option>
-                  <option value="OVERWATCH">Overwatch</option>
-                  <option value="SMASH">Super Smash Bros. Ultimate</option>
-                  <option value="VALORANT">Valorant</option>
+                  <option id="fortnite" value="FORTNITE">Fortnite</option>
+                  <option id="overwatch" value="OVERWATCH">Overwatch</option>
+                  <option id="smash" value="SMASH">Super Smash Bros. Ultimate</option>
+                  <option id="valorant" value="VALORANT">Valorant</option>
                 </select>
                 <br>
                 <br>
-                <h6>Platform !!!IGNORE FOR NOW!!!</h6>
+                <h6>Platform</h6>
                 <p style="margin: 0px; padding: 0px; font-size: 14px;">*Hold CTRL to select more than one</p>
-                <select style="min-height: 164px;" name="newTournamentPlatform" class="longProfileInputs" multiple>
-                  <option value="pc">PC</option>
-                  <option value="xbox">Xbox</option>
-                  <option value="ps">Playstation</option>
-                  <option value="switch">Switch</option>
-                  <option value="switch">Mobile</option>
+                <select style="min-height: 164px;" name="newTournamentPlatform" class="longProfileInputs" multiple id="platform">
+                  <option id="pc">PC</option>
+                  <option id="xbox">Xbox</option>
+                  <option id="ps">Playstation</option>
+                  <option id="switch">Switch</option>
+                  <option id="mobile">Mobile</option>
                 </select>
                 <br>
                 <br>
@@ -102,6 +102,11 @@
                 <h6>3rd Place Prize</h6>
                 <p style="margin: 0px; padding: 0px; font-size: 14px;">*In Star Coins</p>
                 <input type="text" name="newTournamentThirdPrize" class="longProfileInputs" id="thirdEarnings"></input>
+                <br>
+                <br>
+                <h6>All-Star Unlimited Exclusive</h6>
+                <input type="checkbox" id="unlimited" name="selection" value="true">
+                <label for="unlimited">Unlimited</label>
                 <br>
                 <br>
               </form>

@@ -18,9 +18,17 @@ function addTournament() {
           1: document.getElementById('firstEarnings').value,
           2: document.getElementById('secondEarnings').value,
           3: document.getElementById('thirdEarnings').value
-      }
+      },
+      games: {
+          pc: document.getElementById("pc").selected,
+          xbox: document.getElementById("xbox").selected,
+          ps: document.getElementById("ps").selected,
+          switch: document.getElementById("switch").selected,
+          mobile: document.getElementById("mobile").selected
+      },
+      unlimited: document.getElementById("unlimited").checked
   }).then(function() {
-      alert("Document successfully written!");
+      alert("Added tournament!");
   }).catch(function(error) {
           console.error("Error writing document: ", error);
   });
