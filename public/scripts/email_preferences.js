@@ -25,23 +25,15 @@ function personalizeElements() {
 }
 
 function editProfile() {
-  document.getElementById('editProfileButton').style.visibility = "hidden";
-  document.getElementById('saveProfileButton').style.visibility = "visible";
+  document.getElementById('editPreferencesButton').style.visibility = "hidden";
+  document.getElementById('savePreferencesButton').style.visibility = "visible";
   document.getElementById("avatar").src = firebase.auth().currentUser.photoURL;
-  document.getElementById("profileProfilePic").src = firebase.auth().currentUser.photoURL;
 
 
-  document.getElementById("firstName").disabled = false;
-  document.getElementById("firstName").value = document.getElementById("firstName").placeholder;
+  document.getElementById("announcements").disabled = false;
+  document.getElementById("newsletter").disabled = false;
+  document.getElementById("thirdparty").disabled = false;
 
-  document.getElementById("lastName").disabled = false;
-  document.getElementById("lastName").value = document.getElementById("lastName").placeholder;
-
-  document.getElementById("email").disabled = false;
-  document.getElementById("email").value = document.getElementById("email").placeholder;
-
-  document.getElementById("highschool").disabled = false;
-  document.getElementById("highschool").value = document.getElementById("highschool").placeholder;
 }
 
 function saveProfileChanges() {
