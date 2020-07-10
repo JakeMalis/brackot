@@ -4,10 +4,22 @@ function createUser() {
         var errorCode = error.code;
         var errorMessage = error.message;
         if (errorCode == 'auth/invalid-email') {
-          alert('Email address is invalid.');
+          var email = document.getElementById('email');
+          email.style.backgroundColor = '#ffdddd';
+          email.classList.add('error');
+          setTimeout(function() {
+            email.classList.remove('error');
+          }, 300);
+          error.preventDefault();
         }
         else if (errorCode == 'auth/weak-password') {
-          alert('Password too weak');
+          var password = document.getElementById('password');
+          password.style.backgroundColor = '#ffdddd';
+          password.classList.add('error');
+          setTimeout(function() {
+            email.classList.remove('error');
+          }, 300);
+          error.preventDefault();
         }
         else {
           alert(errorMessage);
@@ -39,7 +51,6 @@ function register() {
         first: document.getElementById('first-name').value,
         last: document.getElementById('last-name').value,
         email: document.getElementById('email').value,
-        state: document.getElementById('state').value,
         team: document.getElementById('team').value,
         role: "player",
         coins: 0,
@@ -47,6 +58,12 @@ function register() {
         matches: 0,
         wins: 0,
         boost: false,
+        unlimited: false,
+        email_preferences: {
+          announcements: true,
+          newsletter: true,
+          thirdparty: true
+        },
         games: {
             fortnite: document.getElementById("fortnite").checked,
             overwatch: document.getElementById("overwatch").checked,
@@ -62,9 +79,14 @@ function register() {
         first: document.getElementById('first-name').value,
         last: document.getElementById('last-name').value,
         email: document.getElementById('email').value,
-        state: document.getElementById('state').value,
         team: document.getElementById('team').value,
+        email_preferences: {
+          announcements: true,
+          newsletter: true,
+          thirdparty: true
+        },
         role: "coach"
+
     }).then(function() {
         window.location = "index.html";
     });

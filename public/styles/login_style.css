@@ -43,8 +43,15 @@ h1{
     text-transform: uppercase;
 }
 
-input.invalid {
-    background-color: #ffdddd;
+.error {
+  position: relative;
+  animation: shake .1s linear;
+  animation-iteration-count: 3;
+}
+
+@keyframes shake{
+  0% {left: -3px; }
+  100% {right: -3px;}
 }
 
 .Footer{

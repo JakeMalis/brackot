@@ -47,7 +47,7 @@
     </div>
 
       <div style="margin-top: 150px;" class="row">
-        <div class="wideCard" style="min-height: 1600px; height:auto;">
+        <div class="wideCard" style="min-height: 1600px; height:auto; margin-bottom: 40px;">
           <div class="wideCardBackground">
             <div class="wideCardContent">
               <h2 style="margin-bottom: 30px;">Post a New Tournament</h2>
@@ -80,7 +80,7 @@
                 <br>
                 <h6>Platform</h6>
                 <p style="margin: 0px; padding: 0px; font-size: 14px;">*Hold CTRL to select more than one</p>
-                <select style="min-height: 164px;" name="newTournamentPlatform" class="longProfileInputs" multiple id="platform">
+                <select style="min-height: 160px;" name="newTournamentPlatform" class="longProfileInputs" multiple id="platform">
                   <option id="pc">PC</option>
                   <option id="xbox">Xbox</option>
                   <option id="ps">Playstation</option>
@@ -107,6 +107,13 @@
                 <h6>All-Star Unlimited Exclusive</h6>
                 <input type="checkbox" id="unlimited" name="selection" value="true">
                 <label for="unlimited">Unlimited</label>
+                <br>
+                <br>
+                <h6>Is the tournament for teams to register, or for individual players?</h6>
+                <select name="newTournamentParticipantType" class="longProfileInputs" id="participantType">
+                  <option id="individual">Individual</option>
+                  <option id="team">Team</option>
+                </select>
                 <br>
                 <br>
               </form>

@@ -1,9 +1,9 @@
-var tabNumber = 3;
+var tabNumber = 0;
 const nameTab = document.getElementById("nameTab");
 const emailTab = document.getElementById("emailTab");
 const roleTab = document.getElementById("roleTab");
 const gamesTab = document.getElementById("gamesTab");
-const locationTab = document.getElementById("locationTab");
+const teamTab = document.getElementById("teamTab");
 const profilePicTab = document.getElementById("profilePicTab");
 
 function show(x){
@@ -20,10 +20,60 @@ function next(){
     hide(nextButton);
     show(submitRegistrationButton);
   }
-  if ((document.getElementById('first-name').value == "") || (document.getElementById('last-name').value == "")) {
-    tabNumber--;
-    alert("First or last name is empty")
+
+  if(tabNumber == 1){
+    if (document.getElementById('first-name').value == "") {
+      tabNumber--;
+      var firstname = document.getElementById('first-name');
+      firstname.style.backgroundColor = '#ffdddd';
+      firstname.classList.add('error');
+      setTimeout(function() {
+        email.classList.remove('error');
+      }, 300);
+    }
+    else{
+      document.getElementById('first-name').style.backgroundColor="#ffffff";
+    }
+    if (document.getElementById('last-name').value == "") {
+      tabNumber--;
+      var lastname = document.getElementById('last-name');
+      lastname.style.backgroundColor = '#ffdddd';
+      lastname.classList.add('error');
+      setTimeout(function() {
+        email.classList.remove('error');
+      }, 300);
+    }
+    else{
+      document.getElementById('last-name').style.backgroundColor="#ffffff";
+    }
   }
+  if(tabNumber == 2){
+    if (document.getElementById('email').value == "") {
+      tabNumber--;
+      var email = document.getElementById('email');
+      email.style.backgroundColor = '#ffdddd';
+      email.classList.add('error');
+      setTimeout(function() {
+        email.classList.remove('error');
+      }, 300);
+    }
+    else{
+      document.getElementById('email').style.backgroundColor="#ffffff";
+    }
+    if (document.getElementById('password').value == "") {
+      tabNumber--;
+      var password = document.getElementById('password');
+      password.style.backgroundColor = '#ffdddd';
+      password.classList.add('error');
+      setTimeout(function() {
+        password.classList.remove('error');
+      }, 300);
+    }
+    else{
+      document.getElementById('password').style.backgroundColor="#ffffff";
+    }
+  }
+
   if (document.getElementById('coach').checked) {
     tabNumber++;
   }
