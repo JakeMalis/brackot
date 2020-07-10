@@ -95,7 +95,7 @@ p{
 .gradientButton{
   display: block;
   font-size: 18px;
-  background: -webkit-linear-gradient(360deg, #0084ff, #00c6ff);
+  background-image: linear-gradient(90deg, #0084ff, #00c6ff);
   font-family: 'purista-web', sans-serif;
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -722,11 +722,14 @@ text-align: center;
 #editPreferencesButton{
   background-image: linear-gradient(135deg,#0069ff,#00dbff);
   visibility: visible;
+  transition-duration: 0s;
 }
 
 #savePreferencesButton{
   background-image: linear-gradient(70deg,#36bf70,#12fe7b);
   visibility: hidden;
+  margin-top: -44px;
+  transition-duration: 0s;
 }
 
 #profilePicContainer{
