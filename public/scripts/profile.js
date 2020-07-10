@@ -12,22 +12,26 @@ function personalizeElements() {
   document.getElementById("avatar").src = firebase.auth().currentUser.photoURL;
   document.getElementById("profileProfilePic").src = firebase.auth().currentUser.photoURL;
 
-  var userDocument = firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid);
+  firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).get().then(function(doc) {
+    if (doc.data().unlimited == true) {
+      document.getElementById("unlimitedIcon").style.visibility = "visible";
+    }
+  });
 
-  userDocument.get().then(function(doc) {
+  firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).get().then(function(doc) {
     document.getElementById("firstName").placeholder = doc.data().first;
   });
 
-  userDocument.get().then(function(doc) {
+  firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).get().then(function(doc) {
     document.getElementById("lastName").placeholder = doc.data().last;
   });
 
-  userDocument.get().then(function(doc) {
+  firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).get().then(function(doc) {
     document.getElementById("email").placeholder = firebase.auth().currentUser.email;
   });
 
-  userDocument.get().then(function(doc) {
-    document.getElementById("highschool").placeholder = doc.data().highschool;
+  firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).get().then(function(doc) {
+    document.getElementById("team").placeholder = doc.data().team;
   });
 }
 
