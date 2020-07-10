@@ -366,6 +366,7 @@ input[type="checkbox"]:checked + label{
 
 #allTeams li a:hover:not(.header) {
   background-color: #eee;
+  cursor: pointer;
 }
 
 #gamesTab{
