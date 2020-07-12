@@ -47,14 +47,50 @@ p{
   margin-left: 60px;
 }
 
-.gradientHeader{
+.headerImage{
   width: 100vw;
   z-index: -1000;
   height: 400px;
-  background-image: linear-gradient(135deg,#0069ff,#00dbff);
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.gradientHeader{
+  background-image: linear-gradient(135deg,#0069ff,#00dbff);
+}
+
+#tournamentWallpaper{
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.overwatchWallpaper{
+  background-image: url('../media/game_wallpapers/OVERWATCH-gameplay.jpg');
+}
+
+.valorantWallpaper{
+  background-image: url('../media/game_wallpapers/VALORANT-gameplay.jpg');
+}
+
+.fortniteWallpaper{
+  background-image: url('../media/game_wallpapers/FORTNITE-gameplay.jpg');
+}
+
+.smashWallpaper{
+  background-image: url('../media/game_wallpapers/SMASH-gameplay.jpg');
+}
+
+.prizingIcons{
+  width: 10%;
+  height: 10%;
+  object-fit: contain;
+}
+
+.platformIcons{
+  width: 10%;
+  height: 10%;
+  object-fit: contain;
 }
 
 .gradientTextAnimated{
