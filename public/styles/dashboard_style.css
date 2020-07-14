@@ -7,38 +7,39 @@ body{
 }
 
 h1{
-  font-family: 'purista-web', sans-serif !important;
+  font-family: 'Heebo', sans-serif !important;
+  font-weight: bold;
   color: #232323;
 }
 
 h2{
-  font-family: 'purista-web', sans-serif !important;
+  font-family: 'Heebo', sans-serif !important;
   color: #232323;
 }
 
 h3{
-  font-family: 'purista-web', sans-serif !important;
+  font-family: 'Heebo', sans-serif !important;
   color: #232323;
 }
 
 h4{
-  font-family: 'purista-web', sans-serif !important;
+  font-family: 'Heebo', sans-serif !important;
   color: #232323;
 }
 
 h5{
-  font-family: 'purista-web', sans-serif !important;
+  font-family: 'Heebo', sans-serif !important;
   color: #232323;
 }
 
 h6{
-  font-family: 'purista-web', sans-serif !important;
+  font-family: 'Heebo', sans-serif !important;
   color: #777777 !important;
   text-transform: uppercase;
 }
 
 p{
-  font-family: 'purista-web', sans-serif;
+  font-family: 'Heebo', sans-serif;
   color: #232323;
 }
 
@@ -132,7 +133,7 @@ p{
   display: block;
   font-size: 18px;
   background-image: linear-gradient(90deg, #0084ff, #00c6ff);
-  font-family: 'purista-web', sans-serif;
+  font-family: 'Heebo', sans-serif;
   text-transform: uppercase;
   letter-spacing: 3px;
   font-weight: 600;
@@ -225,7 +226,7 @@ display:table;
 border-collapse:collapse;
 border-spacing:0;
 color:#0084ff;
-font-family: "purista-web", sans-serif;
+font-family: "Heebo", sans-serif;
 font-size: 15px;
 text-decoration:none;
 -webkit-transform:translateZ(0) scale(1,1);
@@ -249,7 +250,7 @@ position:relative;
 display:table-cell;
 vertical-align:middle;
 width:190px;
-font-family: 'purista-web', sans-serif;
+font-family: 'Heebo', sans-serif;
 letter-spacing: 1px;
 }
 
@@ -296,7 +297,7 @@ width: 100%;
 height: 100%;
 }
 @font-face {
-  font-family: 'purista-web', sans-serif;
+  font-family: 'Heebo', sans-serif;
   font-weight: 300;
 }
 
@@ -491,7 +492,7 @@ text-align: center;
   font-weight: 700;
   color: #232323 !important;
   text-align: center;
-  font-family: 'purista-web', sans-serif;
+  font-family: 'Heebo', sans-serif;
 }
 
 .tournamentCardDetails{
@@ -504,11 +505,11 @@ text-align: center;
 .tournamentCardDetail{
   font-size: 14px;
   color: #555555 !important;
-  font-family: 'purista-web', sans-serif;
+  font-family: 'Heebo', sans-serif;
 }
 
 .tournamentCardButton{
-  font-family: 'purista-web', sans-serif;
+  font-family: 'Heebo', sans-serif;
   background-image: linear-gradient(135deg,#0069ff,#00dbff);
   margin-top: 13px;
   height: 50px;
@@ -530,7 +531,7 @@ text-align: center;
 }
 
 .tournamentCardButtonSigned{
-  font-family: 'purista-web', sans-serif;
+  font-family: 'Heebo', sans-serif;
   background-image: linear-gradient(70deg,#36bf70,#12fe7b);
   margin-top: 13px;
   height: 50px;
@@ -703,7 +704,7 @@ text-align: center;
   margin-bottom: 15px;
   padding: 11px;
   font-size: 16px;
-  font-family: 'purista-web', sans-serif;
+  font-family: 'Heebo', sans-serif;
   border-radius: 11px;
   background-color: #f6faff;
   border: 1px solid #dddddd;
@@ -726,7 +727,7 @@ text-align: center;
   max-width: 100px;
   width: 40%;
   font-size: 18px;
-  font-family: 'purista-web', sans-serif;
+  font-family: 'Heebo', sans-serif;
   letter-spacing: 1.7px;
   font-weight: 800px;
   color: #ffffff;
