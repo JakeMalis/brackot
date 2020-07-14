@@ -1,4 +1,4 @@
-var tabNumber = 0;
+var tabNumber = 3;
 const nameTab = document.getElementById("nameTab");
 const emailTab = document.getElementById("emailTab");
 const roleTab = document.getElementById("roleTab");
@@ -31,7 +31,7 @@ function next(){
       firstname.style.backgroundColor = '#ffdddd';
       firstname.classList.add('error');
       setTimeout(function() {
-        email.classList.remove('error');
+        firstname.classList.remove('error');
       }, 300);
     }
     else{
@@ -42,7 +42,7 @@ function next(){
       lastname.style.backgroundColor = '#ffdddd';
       lastname.classList.add('error');
       setTimeout(function() {
-        email.classList.remove('error');
+        lastname.classList.remove('error');
       }, 300);
     }
     else{
