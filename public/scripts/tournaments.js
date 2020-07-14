@@ -50,6 +50,7 @@ function sendConfirmationEmail(tournamentNumber) {
         game: game,
         name: name,
         date: date,
+        id: tournamentId,
         tournamentImage: tournamentImage,
         email: firebase.auth().currentUser.email
       }

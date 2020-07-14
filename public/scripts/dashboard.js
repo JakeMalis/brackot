@@ -11,21 +11,9 @@ function personalizeElements() {
 
   userDocument.get().then(function(doc) {
     document.getElementById("firstGreetingMessage").innerHTML = "Welcome back, " + doc.data().first + "!";
-  });
-
-  userDocument.get().then(function(doc) {
     document.getElementById("notifications").innerHTML = doc.data().notifications;
-  });
-
-  userDocument.get().then(function(doc) {
     document.getElementById("matches").innerHTML = doc.data().matches;
-  });
-
-  userDocument.get().then(function(doc) {
     document.getElementById("coins").innerHTML = doc.data().coins;
-  });
-
-  userDocument.get().then(function(doc) {
     document.getElementById("wins").innerHTML = doc.data().wins;
   });
 
