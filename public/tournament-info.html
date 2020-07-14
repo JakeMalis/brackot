@@ -47,16 +47,39 @@
     </div>
 
       <div style="margin-top: 170px;">
-        <div class="wideCard">
-          <div class="wideCardBackground">
+        <div class="wideCard tournamentInfoCard">
+          <div class="wideCardBackground tournamentInfoCardBackground">
+            <div class="quickDetailHeader">
+              <h2 id="tournamentTitle">Fortnite Clash Cup</h2>
+              <ul class="tournamentQuickDetails">
+                <li class="quickDetail"><i class="fa fa-user quickDetailIcon" aria-hidden="true"></i><p id="participantsQuick" class="quickDetailText">73 Participants</p></li>
+                <li class="quickDetail"><i class="fa fa-trophy quickDetailIcon" aria-hidden="true"></i><p id="prizingQuick" class="quickDetailText">1500 Star Coins</p></li>
+                <li class="quickDetail"><i class="fa fa-gamepad quickDetailIcon" aria-hidden="true"></i><p id="gameQuick" class="quickDetailText">Valorant</p></li>
+                <li class="quickDetail"><i class="fa fa-calendar quickDetailIcon" aria-hidden="true"></i><p id="dateAndTimeQuick" class="quickDetailText">July 30, 2020 at 3:00 PM EST</p></li>
+              </ul>
+              <ul class="quickNavbar">
+                <li id="overviewNavbar" class="quickNavbarItem quickNavbarItemSelected"><a class="quickNavbarItemLink"><p class="quickNavbarItemText">Overview</p></a></li>
+                <li id="participantsNavbar" class="quickNavbarItem"><a class="quickNavbarItemLink"><p class="quickNavbarItemText">Participants</p></a></li>
+                <li id="matchesNavbar" class="quickNavbarItem"><a class="quickNavbarItemLink"><p class="quickNavbarItemText">Matches</p></a></li>
+              </ul>
+            </div>
             <div class="wideCardContent">
-              <h2 id="tournamentTitle" style="margin-bottom: 30px;"></h2>
-
-
-
-              <div class="row" style="margin-left: 0px !important; margin-right: 0px; !important">
-
-
+              <div class="tournamentInfoRow">
+                <h6 class="tournamentInfoSubheader">Description</h6><p id="tournamentInfoDescription" class="tournamentInfoDetail font15">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+              </div>
+              <div class="tournamentInfoRow noBottomPadding">
+                <div class="tournamentInfoColumn">
+                  <h6 class="tournamentInfoSubheader">Prizes</h6>
+                  <ul class="prizingList">
+                    <li class="prizingListItem"><i class="fa fa-trophy tournamentInfoPrizingIcon goldColor" aria-hidden="true"></i><p id="tournamentInfoFirstPrizing" class="tournamentInfoDetail font18">500 Star Coins</p></li>
+                    <li class="prizingListItem"><i class="fa fa-trophy tournamentInfoPrizingIcon silverColor" aria-hidden="true"></i><p id="tournamentInfoSecondPrizing" class="tournamentInfoDetail font18">250 Star Coins</p></li>
+                    <li class="prizingListItem"><i class="fa fa-trophy tournamentInfoPrizingIcon bronzeColor" aria-hidden="true"></i><p id="tournamentInfoThirdPrizing" class="tournamentInfoDetail font18">100 Star Coins</p></li>
+                  </ul>
+                </div>
+                <div class="tournamentInfoColumn">
+                  <h6 class="tournamentInfoSubheader">Format</h6><p id="tournamentInfoFormat" class="tournamentInfoDetail font30">5v5</p>
+                </div>
+                <div class="clearFloat"></div>
               </div>
             </div>
           </div>

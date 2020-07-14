@@ -850,6 +850,159 @@ text-align: center;
 }
 /* END EMAIL PREFERENCES PAGE CODE */
 
+
+/* PRETOURNAMENT INFO PAGE CODE */
+#tournamentTitle{
+  margin-bottom: 0px;
+  padding-top: 30px;
+  padding-left: 42px;
+  letter-spacing: 0.8px;
+  font-weight: bold;
+}
+
+.quickDetailHeader{
+  background-color: #e0e5ee;
+  margin-top: -20px;
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+}
+
+.tournamentQuickDetails{
+  margin-left: -5px;
+  padding-top: 10px;
+  padding-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.quickDetail{
+  list-style: none;
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: auto;
+}
+
+.quickDetailIcon{
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 15px;
+  width: 20px;
+  padding-right: 26px;
+}
+
+.quickDetailText{
+  font-size: 15px;
+  display: inline-block;
+  letter-spacing: 0.8px;
+  margin: 0px;
+}
+
+
+.quickNavbar{
+  list-style: none;
+}
+
+.quickNavbarItem{
+  display: inline-block;
+  padding-left: 14px;
+  padding-right: 14px;
+  cursor: pointer;
+  border-bottom: 4px solid rgba(0,132,255,0);
+}
+.quickNavbarItem:hover{
+  border-bottom: 4px solid rgba(0,132,255,0.3);
+}
+
+.quickNavbarItemSelected{
+  border-bottom: 4px solid rgba(0,132,255,1);
+}
+
+.quickNavbarItemLink:hover{
+  text-decoration: none;
+}
+
+
+.tournamentInfoRow{
+  padding-bottom: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.noBottomPadding{
+  padding-bottom: 0px;
+}
+
+.tournamentInfoColumn{
+  min-width: 270px;
+  width: 30%;
+  float: left;
+  display: block;
+}
+
+.tournamentInfoSubheader{
+  font-size: 15px;
+  max-width: 150px;
+}
+
+.tournamentInfoDetail{
+}
+
+.font15{
+  font-size: 15px;
+}
+
+.font18{
+  font-size: 18px;
+}
+
+.font22{
+  font-size: 22px;
+}
+
+.font30{
+  font-size: 30px;
+}
+
+.goldColor{
+  color: #FFC000;
+}
+
+.silverColor{
+  color: #999999;
+}
+
+.bronzeColor{
+  color: #9a6532;
+}
+
+.tournamentInfoPrizingIcon{
+  font-size: 24px;
+  display: inline-block;
+  margin-top: 0px;
+}
+
+.tournamentInfoDetail{
+  display: inline-block;
+}
+
+.prizingList{
+  list-style: none;
+  padding-top: 5px;
+  margin-left: -54px;
+  width: 250px;
+}
+
+.prizingListItem{
+  padding-bottom: 7px;
+}
+
+.clearFloat{
+  clear: both;
+}
+
+/* END PRETOURNAMENT INFO PAGE CODE */
+
+
 /* THE BELOW SECTION IS MEANT FOR MOBILE DEVICES ONLY */
 @media only screen and (min-width: 480px){
   .profileButton{
