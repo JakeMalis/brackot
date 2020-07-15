@@ -25,8 +25,6 @@
 
   <script src="scripts/registration.js"></script>
 
-
-
   <script>
       var firebaseConfig = {
           apiKey: "AIzaSyBSjggPyShfi3JJGmfuf2p_BFLMeEeVTLY",
@@ -46,18 +44,15 @@
       });
   </script>
 
-
-
-  <div class="modal fade" id="joinTeamModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="joinPublicTeamModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header" data-keyboard="false" data-backdrop="static">
-          <h1 class="modal-title" id="modalTitle">ENTER <span class="gradientText">PASSWORD</span></h1>
+          <h1 class="modal-title">ARE YOU SURE YOU WANT TO JOIN?</h1>
         </div>
         <div class="modal-body">
           <div class="row">
-            <h2 class="privacyTeamName" id="joinTeamName">Pine Crest School</h2>
-            <input type="password" class="teamPasswordInput">
+            <h2 class="privacyTeamName" id="joinPublicTeamName">Pine Crest School</h2>
             <!--
             <div class="pin-wrapper">
               <input type="text" data-role="pin" maxlength="1" class="pin-input">
@@ -67,6 +62,7 @@
             </div>
             -->
             <div class="modal-footer">
+              <button type="button" class="gradientButton modalButton" onclick="joinTeam();">JOIN</button>
             </div>
           </div>
         </div>
@@ -74,6 +70,32 @@
     </div>
   </div>
 
+  <div class="modal fade" id="joinPrivateTeamModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header" data-keyboard="false" data-backdrop="static">
+          <h1 class="modal-title">ENTER <span class="gradientText">PASSWORD</span></h1>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <h2 class="privacyTeamName" id="joinPrivateTeamName">Pine Crest School</h2>
+            <input type="password" class="teamPasswordInput" id="joinTeamPassword">
+            <!--
+            <div class="pin-wrapper">
+              <input type="text" data-role="pin" maxlength="1" class="pin-input">
+              <input type="text" data-role="pin" maxlength="1" class="pin-input">
+              <input type="text" data-role="pin" maxlength="1" class="pin-input">
+              <input type="text" data-role="pin" maxlength="1" class="pin-input">
+            </div>
+            -->
+            <div class="modal-footer">
+              <button type="button" class="gradientButton modalButton" id="joinTeam" onclick="joinTeam();">JOIN</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="modal fade" id="createTeamModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -96,7 +118,7 @@
                 <p class="labelDetails">PIN needed to join</p>
               </label>
             </div>
-            <input type="password" class="teamPasswordInput">
+            <input type="password" class="teamPasswordInput" id="createTeamPassword">
             <!--
             <div class="pin-wrapper">
               <input type="text" data-role="pin" maxlength="1" class="pin-input" id="pin1">
@@ -139,7 +161,7 @@
             <input placeholder="Email" id="email">
             <input type="password" placeholder="Password" id="password">
           </div>
-          <button type="button" class="nextButton" id="userCreate">Continue</button>
+          <button type="button" class="nextButton" id="createUser" onclick="createUser();">Continue</button>
         </div>
 
         <div id="roleTab" style="display:none;" class="tab">
@@ -197,7 +219,7 @@
               <input type="file" name="avatarUploader" id="avatarUploader" style="display:none">
             </label>
           </div>
-          <button type="button" class="nextButton" id="submitRegistrationButton">Register</button>
+          <button type="button" class="nextButton" id="submitRegistrationButton" onclick="register();">Register</button>
         </div>
 
         <script src="scripts/tabs.js"></script>

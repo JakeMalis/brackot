@@ -71,61 +71,96 @@ function createUser() {
 }
 
 function openModal() {
-  var teamExists = false;
-  firebase.firestore().collection("teams").where("name", "==", document.getElementById('team').value).get().then(function(querySnapshot) {
-    querySnapshot.forEach(function(doc) {
-      if (doc.exists) {
+  if (document.getElementById('team').value !== "") {
+    var teamExists = false;
+    firebase.firestore().collection("teams").where("name", "==", document.getElementById('team').value).get().then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+        if (doc.exists) {
+          $("#allTeams").hide();
+          teamExists = true;
+          console.log(teamExists);
+          if (doc.data().privacy === "public") {
+            $('#joinPublicTeamModal').modal();
+            document.getElementById("joinPublicTeamName").innerHTML = document.getElementById('team').value
+          }
+          else if (doc.data().privacy === "private") {
+            $('#joinPrivateTeamModal').modal();
+            document.getElementById("joinPrivateTeamName").innerHTML = document.getElementById('team').value
+          }
+        }
+      });
+    }).then(function() {
+      if (!teamExists) {
         $("#allTeams").hide();
-        $('#joinTeamModal').modal();
-        teamExists = true;
+        $('#createTeamModal').modal();
+        document.getElementById("newTeamName").innerHTML = document.getElementById('team').value;
       }
     });
-  }).then(function() {
-    if (!teamExists) {
-      $("#allTeams").hide();
-      $('#createTeamModal').modal();
-      document.getElementById("newTeamName").innerHTML = document.getElementById('team').value;
-    }
-  });
+  }
+  else { alert("Please enter team name") }
 }
 
 function createTeam() {
   if (document.getElementById("public").checked) {
-    var privacy = "public";
     firebase.firestore().collection("teams").add({
         privacy: "public",
         players: [firebase.auth().currentUser.uid],
         name: document.getElementById('team').value
     }).then(function(team) {
+      $('#createTeamModal').modal("hide");
       firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
           teams: [firebase.firestore().doc('teams/' + team.id)]
       });
+      next();
     });
   }
   else {
-    var privacy = "private";
-    firebase.firestore().collection("teams").add({
-        privacy: "private",
-        pin: 3332,
-        players: [firebase.auth().currentUser.uid],
-        name: document.getElementById('team').value
-    }).then(function(team) {
-      firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
-          teams: [firebase.firestore().doc('teams/' + team.id)]
+    if (document.getElementById('createTeamPassword').value !== "") {
+      firebase.firestore().collection("teams").add({
+          privacy: "private",
+          password: document.getElementById('createTeamPassword').value,
+          players: [firebase.auth().currentUser.uid],
+          name: document.getElementById('team').value
+      }).then(function(team) {
+        $('#createTeamModal').modal("hide");
+        firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
+            teams: [firebase.firestore().doc('teams/' + team.id)]
+        });
+        next();
       });
-    });
+    }
+    else { alert("Please enter team PIN") }
   }
 }
 
 function joinTeam() {
   firebase.firestore().collection("teams").where("name", "==", document.getElementById('team').value).get().then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
+      if (doc.data().privacy === "private") {
+        if (doc.data().password === document.getElementById('joinTeamPassword').value) {
+          $('#joinPrivateTeamModal').modal("hide");
+          firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
+            teams: [firebase.firestore().doc('teams/' + doc.id)]
+          });
+          firebase.firestore().collection("teams").doc(doc.id).update({
+            players: firebase.firestore.FieldValue.arrayUnion(firebase.auth().currentUser.uid)
+          });
+          next();
+        }
+        else {
+          alert('Incorrect team password');
+        }
+      }
+      else if (doc.data().privacy === "public") {
+        $('#joinPublicTeamModal').modal("hide");
         firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
             teams: [firebase.firestore().doc('teams/' + doc.id)]
         });
         firebase.firestore().collection("teams").doc(doc.id).update({
           players: firebase.firestore.FieldValue.arrayUnion(firebase.auth().currentUser.uid)
         });
+        next();
+      }
     });
   });
 }
@@ -182,15 +217,12 @@ function loadExistingTeams() {
       $('.teamName').on('click', function() {
           $("#team").val($(this).text());
           $("#allTeams").hide();
-          $('#joinTeamModal').modal();
       });
     });
   });
 }
 
 window.onload = function() {
-  document.getElementById('submitRegistrationButton').addEventListener("click", register);
-  document.getElementById('userCreate').addEventListener("click", createUser);
   document.getElementById('avatarUploader').addEventListener("change", uploadAvatar);
 
   loadExistingTeams();
