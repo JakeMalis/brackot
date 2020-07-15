@@ -7,6 +7,7 @@
 
   <link rel="icon" type="image/png" href="media/favicon.png"/>
   <link rel="stylesheet" type="text/css" href="styles/dashboard_style.css">
+  <link rel="stylesheet" type="text/css" href="styles/selectPlayers.css">
   <script src="scripts/tournaments.js"></script>
 
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -37,24 +38,32 @@
       firebase.initializeApp(firebaseConfig);
   </script>
 
+  <script src="scripts/draganddrop.js"></script>
   <div class="modal fade" id="chooseTeamModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header" data-keyboard="false" data-backdrop="static">
-          <h1 class="modal-title" id="modalTitle">CHOOSE <span class="gradientText">PLAYERS</span></h1>
+          <h1 class="modal-title" id="modalTitle">Select <span class="gradientText">players</span></h1>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <h2 class="privacyTeamName" id="joinTeamName">Pine Crest School</h2>
-            <input type="password" class="teamPasswordInput">
-            <!--
-            <div class="pin-wrapper">
-              <input type="text" data-role="pin" maxlength="1" class="pin-input">
-              <input type="text" data-role="pin" maxlength="1" class="pin-input">
-              <input type="text" data-role="pin" maxlength="1" class="pin-input">
-              <input type="text" data-role="pin" maxlength="1" class="pin-input">
+          <div class="playerCardColumn">
+            <div class="playerCard">
+              <label class="playerLabel"><img class="playerProfilePic"><h3 class="playerName">Jordan Zietz</h3><i class="fa fa-plus-circle" aria-hidden="true"></i></label>
             </div>
-            -->
+            <div class="playerCard">
+              <label class="playerLabel"><img class="playerProfilePic"><h3 class="playerName">Jake Malis</h3><i class="fa fa-minus-circle" aria-hidden="true"></i></label>
+            </div>
+          </div>
+
+          <div class="playerCardColumn">
+            <div id="emptySlot1" class="emptySlot"></div>
+            <div id="emptySlot2" class="emptySlot"></div>
+            <div id="emptySlot3" class="emptySlot"></div>
+            <div id="emptySlot4" class="emptySlot"></div>
+            <div id="emptySlot5" class="emptySlot"></div>
+            <div id="emptySlot6" class="emptySlot"></div>
+          </div>
+
             <div class="modal-footer">
             </div>
           </div>
@@ -62,6 +71,7 @@
       </div>
     </div>
   </div>
+
 </head>
 <body>
   <div class="headerImage gradientHeader"></div>
@@ -79,6 +89,13 @@
           <div class="wideCardBackground">
             <div class="wideCardContent">
               <h2 style="margin-bottom: 30px;">Tournaments</h2>
+
+
+
+              <button type="button" data-toggle="modal" data-target="#chooseTeamModal">Launch Modal</button>
+
+
+
               <div class="row" style="margin-left: 0px !important; margin-right: 0px; !important">
 
                 <div class="tournamentCard" id="tournamentCard1">
