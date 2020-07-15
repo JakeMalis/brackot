@@ -14,9 +14,9 @@ function addTournament() {
       time: document.getElementById('time').value,
       players: ["admin"],
       earnings: {
-          1: document.getElementById('firstEarnings').value,
-          2: document.getElementById('secondEarnings').value,
-          3: document.getElementById('thirdEarnings').value
+          1: parseInt(document.getElementById('firstEarnings').value),
+          2: parseInt(document.getElementById('secondEarnings').value),
+          3: parseInt(document.getElementById('thirdEarnings').value)
       },
       platform: {
           pc: document.getElementById("pc").selected,
