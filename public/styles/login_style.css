@@ -1,12 +1,12 @@
 * {
-    font-family: 'Heebo', sans-serif;
+    font-family: 'Purista-web', sans-serif;
     font-weight: 400;
     font-style: normal;
 }
 
 body {
     overflow: hidden;
-    background-color: #f6faff !important;
+    background-color: #F6FAFF !important;
     margin: 0px;
     padding: 0px;
     width: 100vw;
@@ -136,7 +136,7 @@ h1{
 }
 
 #loginForm {
-    background: #f6faff;
+    background: #F6FAFF;
     width: 100vw;
     margin-left: 0px;
     margin-right: 0px;
@@ -406,6 +406,7 @@ input[type="checkbox"]:checked + label{
   margin-right: auto;
   width: 200px;
 }
+
 /* END REGISTRATION PAGE */
 
 
