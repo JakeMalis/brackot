@@ -90,6 +90,20 @@ function loadTournaments() {
     querySnapshot.forEach(function(doc) {
         tournaments.push(doc.data());
 
+        //This will have to change for team registration so that it says it for each registered player on a team
+        if ((doc.data().players).includes(firebase.auth().currentUser.uid)) {
+          document.getElementById("tournamentCardButton" + tournamentNumber).className = 'tournamentCardButtonSigned';
+          document.getElementById("tournamentCardButton" + tournamentNumber).innerHTML = "✓ Signed Up";
+          document.getElementById("tournamentCardButton" + tournamentNumber).disabled = true;
+        }
+
+        if ((doc.data().type) === "team") {
+          document.getElementById("tournamentCardButton" + tournamentNumber).innerHTML = "Pick Team Roster";
+          document.getElementById("tournamentCardButton" + tournamentNumber).onclick = function() {
+            $('#chooseTeamModal').modal();
+          };
+        }
+
         document.getElementById("tournamentCard" + tournamentNumber).style.visibility = "visible";
         document.getElementById("tournamentWallpaper" + tournamentNumber).src = "/media/game_wallpapers/" + doc.data().game + "-" + "gameplay.jpg";
         document.getElementById("tournamentTitle" + tournamentNumber).innerHTML = doc.data().name;
@@ -97,12 +111,6 @@ function loadTournaments() {
         document.getElementById("tournamentDate" + tournamentNumber).innerHTML = doc.data().elegant_date;
         document.getElementById("tournamentParticipants" + tournamentNumber).innerHTML = (doc.data().players.length - 1) + " Participants";
 
-
-        if ((doc.data().players).includes(firebase.auth().currentUser.uid)) {
-          document.getElementById("tournamentCardButton" + tournamentNumber).className = 'tournamentCardButtonSigned';
-          document.getElementById("tournamentCardButton" + tournamentNumber).innerHTML = "✓ Signed Up";
-          document.getElementById("tournamentCardButton" + tournamentNumber).disabled = true;
-        }
 
         tournamentNumber++;
     });
