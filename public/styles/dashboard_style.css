@@ -68,18 +68,26 @@ p{
 
 .overwatchWallpaper{
   background-image: url('../media/game_wallpapers/OVERWATCH-gameplay.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .valorantWallpaper{
   background-image: url('../media/game_wallpapers/VALORANT-gameplay.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .fortniteWallpaper{
   background-image: url('../media/game_wallpapers/FORTNITE-gameplay.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .smashWallpaper{
   background-image: url('../media/game_wallpapers/SMASH-gameplay.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .prizingIcons{
