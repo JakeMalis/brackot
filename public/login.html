@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -31,12 +30,11 @@
         };
         firebase.initializeApp(firebaseConfig);
 
-        //Makes it so the enter key also runs the same function as pressing the actual 'Login' button
         $(document).on("keypress", "input", function(e){
-        if(e.which == 13){
+          if(e.which == 13){
             passwordSignIn();
-        }
-    });
+          }
+        });
     </script>
 </head>
 <body>
