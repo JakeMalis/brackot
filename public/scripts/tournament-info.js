@@ -26,7 +26,7 @@ function loadTournamentInfo() {
     } else { $('#secondPlace').remove(); }
 
     if (doc.data().earnings[3] != 0) {
-      document.getElementById("tournamentInfoSecondPrizing").innerHTML = doc.data().earnings[3] + " Star Coins";
+      document.getElementById("tournamentInfoThirdPrizing").innerHTML = doc.data().earnings[3] + " Star Coins";
     } else { $('#thirdPlace').remove(); }
 
 

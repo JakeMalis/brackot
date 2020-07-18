@@ -90,6 +90,10 @@ function loadTournaments() {
     querySnapshot.forEach(function(doc) {
         tournaments.push(doc.data());
 
+        $('#tournamentContent' + tournamentNumber).click(function(){
+          window.location = "tournament-info?tournamentId=" + doc.id;
+        });
+
         //This will have to change for team registration so that it says it for each registered player on a team
         if ((doc.data().players).includes(firebase.auth().currentUser.uid)) {
           document.getElementById("tournamentCardButton" + tournamentNumber).className = 'tournamentCardButtonSigned';
