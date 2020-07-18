@@ -1,6 +1,5 @@
 * {
-    font-family: 'Purista-web', sans-serif;
-    font-weight: 400;
+    font-family: 'Purista-Web';
     font-style: normal;
 }
 
@@ -14,6 +13,8 @@ body {
 }
 
 input {
+    font-family: 'MuseoSans500' !important;
+    -webkit-font-smoothing: antialiased;
     margin-top: 0px;
     padding: 14px;
     width: 100%;
@@ -34,6 +35,8 @@ select{
 }
 
 h1{
+    font-family: 'Purista-Web' !important;
+    -webkit-font-smoothing: antialiased;
     color: #262626;
     text-align: center;
     font-size: 30px;
