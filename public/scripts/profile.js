@@ -1,22 +1,8 @@
-window.onload = function() {
-  firebase.auth().onAuthStateChanged(function(user) {
-      if (user) { personalizeElements(); }
-      else { window.location = "login.html"; }
-  });
+function personalizeElements() {
   document.getElementById('avatarUploader').addEventListener("change", uploadAvatar);
   document.getElementById('editProfileButton').addEventListener("click", editProfile);
   document.getElementById('saveProfileButton').addEventListener("click", saveProfileChanges);
-}
 
-function personalizeElements() {
-  document.getElementById("avatar").src = firebase.auth().currentUser.photoURL;
-  document.getElementById("profileProfilePic").src = firebase.auth().currentUser.photoURL;
-
-  firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).get().then(function(doc) {
-    if (doc.data().unlimited == true) {
-      document.getElementById("unlimitedIcon").style.visibility = "visible";
-    }
-  });
 
   firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).get().then(function(doc) {
     document.getElementById("firstName").placeholder = doc.data().first;
