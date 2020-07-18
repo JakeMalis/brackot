@@ -233,4 +233,13 @@ window.onload = function() {
   else {
     allTeams.style.display = "block";
   }
+
+
+  $('#private').on('click', function() {
+      document.getElementById('createTeamPassword').style.visibility = "visible";
+  });
+
+  $('#public').on('click', function() {
+      document.getElementById('createTeamPassword').style.visibility = "hidden";
+  });
 }
