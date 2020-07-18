@@ -7,40 +7,61 @@ body{
 }
 
 h1{
-  font-family: 'Heebo', sans-serif !important;
+  font-family: 'MuseoSans500', sans-serif !important;
   font-weight: bold;
   color: #232323;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h2{
-  font-family: 'Heebo', sans-serif !important;
+  font-family: 'MuseoSans700', sans-serif !important;
   color: #232323;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h3{
-  font-family: 'Heebo', sans-serif !important;
+  font-family: 'MuseoSans500', sans-serif !important;
   color: #232323;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h4{
-  font-family: 'Heebo', sans-serif !important;
+  font-family: 'MuseoSans500', sans-serif !important;
   color: #232323;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h5{
-  font-family: 'Heebo', sans-serif !important;
+  font-family: 'MuseoSans500', sans-serif !important;
   color: #232323;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h6{
-  font-family: 'Heebo', sans-serif !important;
-  color: #777777 !important;
+  font-family: 'MuseoSans700', sans-serif !important;
+  color: #888888 !important;
   text-transform: uppercase;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 p{
-  font-family: 'Heebo', sans-serif;
+  font-family: 'MuseoSans500', sans-serif;
   color: #232323;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .main-page{
@@ -141,7 +162,7 @@ p{
   display: block;
   font-size: 18px;
   background-image: linear-gradient(90deg, #0084ff, #00c6ff);
-  font-family: 'Heebo', sans-serif;
+  font-family: 'MuseoSans700', sans-serif;
   text-transform: uppercase;
   letter-spacing: 3px;
   font-weight: 600;
@@ -234,7 +255,7 @@ display:table;
 border-collapse:collapse;
 border-spacing:0;
 color:#0084ff;
-font-family: "Heebo", sans-serif;
+font-family: 'MuseoSans500', sans-serif;
 font-size: 15px;
 text-decoration:none;
 -webkit-transform:translateZ(0) scale(1,1);
@@ -258,7 +279,7 @@ position:relative;
 display:table-cell;
 vertical-align:middle;
 width:190px;
-font-family: 'Heebo', sans-serif;
+font-family: 'MuseoSans500', sans-serif;
 letter-spacing: 1px;
 }
 
@@ -305,8 +326,7 @@ width: 100%;
 height: 100%;
 }
 @font-face {
-  font-family: 'Heebo', sans-serif;
-  font-weight: 300;
+  font-family: 'MuseoSans500', sans-serif;
 }
 
 #firstGreetingMessage{
@@ -501,7 +521,7 @@ text-align: center;
   font-weight: 700;
   color: #232323 !important;
   text-align: center;
-  font-family: 'Heebo', sans-serif;
+  font-family: 'MuseoSans500', sans-serif;
 }
 
 .tournamentCardDetails{
@@ -514,11 +534,11 @@ text-align: center;
 .tournamentCardDetail{
   font-size: 14px;
   color: #555555 !important;
-  font-family: 'Heebo', sans-serif;
+  font-family: 'MuseoSans300', sans-serif;
 }
 
 .tournamentCardButton{
-  font-family: 'Heebo', sans-serif;
+  font-family: 'MuseoSans700', sans-serif;
   background-image: linear-gradient(135deg,#0069ff,#00dbff);
   margin-top: 13px;
   height: 50px;
@@ -540,7 +560,7 @@ text-align: center;
 }
 
 .tournamentCardButtonSigned{
-  font-family: 'Heebo', sans-serif;
+  font-family: 'MuseoSans700', sans-serif;
   background-image: linear-gradient(70deg,#36bf70,#12fe7b);
   margin-top: 13px;
   height: 50px;
@@ -709,18 +729,20 @@ text-align: center;
 .longProfileInputs{
   flex: 0 0 100%;
   width: 100%;
+  min-height: 50px;
   max-height: 50px;
   margin-bottom: 15px;
   padding: 11px;
-  font-size: 16px;
-  font-family: 'Heebo', sans-serif;
+  font-size: 18px;
+  font-family: 'MuseoSans300', sans-serif;
   border-radius: 11px;
   background-color: #f6faff;
   border: 1px solid #dddddd;
 }
 
 .profileInputTitle{
-  font-size: 14px;
+  font-size: 15px;
+  padding-left: 2px;
   margin-bottom: 3px;
   width: 100%;
 }
@@ -736,7 +758,7 @@ text-align: center;
   max-width: 100px;
   width: 40%;
   font-size: 18px;
-  font-family: 'Heebo', sans-serif;
+  font-family: 'MuseoSans700', sans-serif;
   letter-spacing: 1.7px;
   font-weight: 800px;
   color: #ffffff;

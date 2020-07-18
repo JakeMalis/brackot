@@ -7,38 +7,38 @@ body{
 }
 
 h1{
-  font-family: 'Heebo', sans-serif !important;
+  font-family: 'MuseoSans500', sans-serif;
   color: #232323;
 }
 
 h2{
-  font-family: 'Heebo', sans-serif !important;
+  font-family: 'MuseoSans500', sans-serif;
   color: #232323;
 }
 
 h3{
-  font-family: 'Heebo', sans-serif !important;
+  font-family: 'MuseoSans500', sans-serif;
   color: #232323;
 }
 
 h4{
-  font-family: 'Heebo', sans-serif !important;
+  font-family: 'MuseoSans500', sans-serif;
   color: #232323;
 }
 
 h5{
-  font-family: 'Heebo', sans-serif !important;
+  font-family: 'MuseoSans500', sans-serif;
   color: #232323;
 }
 
 h6{
-  font-family: 'Heebo', sans-serif !important;
+  font-family: 'MuseoSans500', sans-serif;
   color: #777777 !important;
   text-transform: uppercase;
 }
 
 p{
-  font-family: 'Heebo', sans-serif;
+  font-family: 'MuseoSans500', sans-serif;
   color: #232323;
 }
 
@@ -151,10 +151,12 @@ p{
 
 .win{
   background-color: rgba(119, 221, 119);
+  font-family: 'MuseoSans700', sans-serif;
 }
 
 .loss{
   background-color: rgba(237,67,55);
+  font-family: 'MuseoSans700', sans-serif;
 }
 
 
