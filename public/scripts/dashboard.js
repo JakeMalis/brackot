@@ -1,10 +1,3 @@
-window.onload = function() {
-  firebase.auth().onAuthStateChanged(function(user) {
-      if (user) { personalizeElements(); }
-      else { window.location = "login.html"; }
-  });
-}
-
 function personalizeElements() {
   var boost;
   firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).get().then(function(doc) {
@@ -20,6 +13,4 @@ function personalizeElements() {
       $('#boostActiveText').show();
     }
   });
-
-  document.getElementById("avatar").src = firebase.auth().currentUser.photoURL;
 }

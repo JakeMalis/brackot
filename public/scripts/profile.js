@@ -1,4 +1,7 @@
 function personalizeElements() {
+  document.getElementById("profileProfilePic").src = firebase.auth().currentUser.photoURL;
+
+  
   document.getElementById('avatarUploader').addEventListener("change", uploadAvatar);
   document.getElementById('editProfileButton').addEventListener("click", editProfile);
   document.getElementById('saveProfileButton').addEventListener("click", saveProfileChanges);

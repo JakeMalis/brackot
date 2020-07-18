@@ -12,7 +12,7 @@ function addTournament() {
       game: document.getElementById('game').value,
       name: document.getElementById('tournamentName').value,
       time: document.getElementById('time').value,
-      players: ["admin"],
+      players: [],
       earnings: {
           1: parseInt(document.getElementById('firstEarnings').value),
           2: parseInt(document.getElementById('secondEarnings').value),

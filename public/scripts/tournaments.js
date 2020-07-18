@@ -1,13 +1,7 @@
 const tournaments = new Array();
 
-window.onload = function() {
-  firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        document.getElementById("avatar").src = firebase.auth().currentUser.photoURL;
-        loadTournaments();
-      }
-      else { window.location = "login.html"; }
-  });
+function personalizeElements() {
+  loadTournaments();
 }
 
 function enroll(tournamentNumber) {
@@ -70,7 +64,7 @@ function refreshTournaments() {
         document.getElementById("tournamentTitle" + tournamentNumber).innerHTML = doc.data().name;
         document.getElementById("tournamentGame" + tournamentNumber).innerHTML = doc.data().game;
         document.getElementById("tournamentDate" + tournamentNumber).innerHTML = doc.data().elegant_date;
-        document.getElementById("tournamentParticipants" + tournamentNumber).innerHTML = (doc.data().players.length - 1) + " Participants";
+        document.getElementById("tournamentParticipants" + tournamentNumber).innerHTML = (doc.data().players.length) + " Participants";
 
 
         if ((doc.data().players).includes(firebase.auth().currentUser.uid)) {
@@ -113,7 +107,7 @@ function loadTournaments() {
         document.getElementById("tournamentTitle" + tournamentNumber).innerHTML = doc.data().name;
         document.getElementById("tournamentGame" + tournamentNumber).innerHTML = doc.data().game;
         document.getElementById("tournamentDate" + tournamentNumber).innerHTML = doc.data().elegant_date;
-        document.getElementById("tournamentParticipants" + tournamentNumber).innerHTML = (doc.data().players.length - 1) + " Participants";
+        document.getElementById("tournamentParticipants" + tournamentNumber).innerHTML = (doc.data().players.length) + " Participants";
 
 
         tournamentNumber++;

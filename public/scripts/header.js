@@ -7,7 +7,6 @@ window.onload = function() {
 
 function loadHeader() {
   document.getElementById("avatar").src = firebase.auth().currentUser.photoURL;
-  document.getElementById("profileProfilePic").src = firebase.auth().currentUser.photoURL;
 
   firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).get().then(function(doc) {
     if (doc.data().unlimited == true) {
