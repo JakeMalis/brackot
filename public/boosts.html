@@ -35,6 +35,13 @@
       };
       firebase.initializeApp(firebaseConfig);
   </script>
+  <script>
+    window.onload = function() {
+      $('#allStarUnlimited').click(function(){
+        alert('Purchase All-Star Unlimited');
+      });
+    }
+  </script>
 </head>
 <body>
   <div id="sidebar">
@@ -51,7 +58,7 @@
       <div style="margin-top: 100px;" class="row">
         <div class="longYCard">
           <div class="longYCardBackground">
-            <div class="longYCardContent">
+            <div class="longYCardContent" id="allStarUnlimited">
               <h2 class="boostsTitle">All-Star <span class="gradientTextAnimated">Unlimited</span></h2>
               <div class="boostsRow">
                 <img class="boostsGraphic" src="media/allstarunlimitedcheck.svg">
