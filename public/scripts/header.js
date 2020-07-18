@@ -9,7 +9,7 @@ function loadHeader() {
   document.getElementById("avatar").src = firebase.auth().currentUser.photoURL;
 
   firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).get().then(function(doc) {
-    if (doc.data().unlimited == true) {
+    if (doc.data().subscription.unlimited == true) {
       document.getElementById("unlimitedIcon").style.visibility = "visible";
     }
   });

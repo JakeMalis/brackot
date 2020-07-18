@@ -55,12 +55,16 @@ function createUser() {
         first: document.getElementById('first-name').value,
         last: document.getElementById('last-name').value,
         email: document.getElementById('email').value,
-        coins: 0,
-        notifications: 0,
-        matches: 0,
-        wins: 0,
-        boost: false,
-        unlimited: false,
+        stats: {
+          coins: 0,
+          notifications: 0,
+          matches: 0,
+          wins: 0
+        },
+        subscription: {
+          boost: false,
+          unlimited: false
+        },
         email_preferences: {
           announcements: true,
           newsletter: true,
@@ -109,7 +113,7 @@ function createTeam() {
     }).then(function(team) {
       $('#createTeamModal').modal("hide");
       firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
-          teams: [firebase.firestore().doc('teams/' + team.id)]
+          teams: [team.id]
       });
       next();
     });
@@ -124,7 +128,7 @@ function createTeam() {
       }).then(function(team) {
         $('#createTeamModal').modal("hide");
         firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
-            teams: [firebase.firestore().doc('teams/' + team.id)]
+            teams: [team.id]
         });
         next();
       });
@@ -140,7 +144,7 @@ function joinTeam() {
         if (doc.data().password === document.getElementById('joinTeamPassword').value) {
           $('#joinPrivateTeamModal').modal("hide");
           firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
-            teams: [firebase.firestore().doc('teams/' + doc.id)]
+            teams: [team.id]
           });
           firebase.firestore().collection("teams").doc(doc.id).update({
             players: firebase.firestore.FieldValue.arrayUnion(firebase.auth().currentUser.uid)
