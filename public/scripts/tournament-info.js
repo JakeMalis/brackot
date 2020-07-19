@@ -15,7 +15,7 @@ function loadTournamentInfo() {
   firebase.firestore().collection("tournaments").doc(tournamentId).get().then(function(doc) {
     document.getElementById("tournamentTitle").innerHTML = doc.data().name;
     document.getElementById("prizingQuick").innerHTML = ((doc.data().earnings[1]) + (doc.data().earnings[2]) + (doc.data().earnings[3])) + " Star Coins";
-    document.getElementById("participantsQuick").innerHTML = (doc.data().players.length - 1) + " Participants";
+    document.getElementById("participantsQuick").innerHTML = (doc.data().players.length) + " Participants";
     document.getElementById("gameQuick").innerHTML = doc.data().game;
     document.getElementById("dateAndTimeQuick").innerHTML = (doc.data().elegant_date) + " at " + (doc.data().time) + " EST";
     document.getElementById("tournamentInfoDescription").innerHTML = doc.data().description;

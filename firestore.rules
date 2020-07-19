@@ -15,5 +15,24 @@ service cloud.firestore {
     match /teams/{document=**} {
       allow read, write: if true;
     }
+    match /customers/{uid} {
+      allow read, write: if request.auth.uid == uid;
+
+      match /checkout_sessions/{id} {
+        allow read, write: if request.auth.uid == uid;
+      }
+      match /subscriptions/{id} {
+        allow read, write: if request.auth.uid == uid;
+      }
+    }
+
+    match /plans/{id} {
+      allow read: if true;
+      allow write: if false;
+
+      match /prices/{id} {
+        allow read: if true;
+        allow write: if false;
+      }
   }
 }
