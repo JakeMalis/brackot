@@ -142,13 +142,11 @@
       <div style="bottom: 0;" class="gradientLiner"></div>
       <img id="registrationLogo" src="media/starlogo.png">
         <div id="nameTab" style="display:block;" class="tab">
-            <h1 class="registrationTitle">Welcome to <span style="background: -webkit-linear-gradient(0deg, #0084ff, #00c6ff);
-                                                    -webkit-background-clip: text;
-                                                    -webkit-text-fill-color: transparent;">All-Star!</span></h1>
+            <h1 class="registrationTitle">Welcome to <span class="gradientText">All-Star!</span></h1>
             <p class="registrationText">First things first, we're going to need a little more information from you in order to get your account set up.</p>
           <div class="inputRow">
-            <input placeholder="First Name" id="first-name">
-            <input placeholder="Last Name" id="last-name">
+            <input class="registrationInputBoxes" placeholder="First Name" id="first-name">
+            <input class="registrationInputBoxes" placeholder="Last Name" id="last-name">
           </div>
           <button type="button" class="nextButton" onClick="next();">Continue</button>
         </div>
@@ -157,8 +155,8 @@
           <h1 class="registrationTitle">Let's be safe here.</h1>
           <p class="registrationText">Please input an email and password for your account, and make sure to remember them - you'll need them to log back in.</p>
           <div class="inputRow">
-            <input placeholder="Email" id="email">
-            <input type="password" placeholder="Password" id="password">
+            <input class="registrationInputBoxes" placeholder="Email" id="email">
+            <input class="registrationInputBoxes" type="password" placeholder="Password" id="password">
           </div>
           <button type="button" class="nextButton" id="createUser" onclick="createUser();">Continue</button>
         </div>
@@ -201,7 +199,7 @@
           <h1 class="registrationTitle">TIME TO TEAM UP.</h1>
           <p class="registrationText">Start typing to find your squad. Don't have a team? Enter a team name then hit 'continue' to create your own.</p>
           <div class="inputRow">
-            <input type="text" placeholder="Search for a Team..." id="team" onkeyup="liveFilter()">
+            <input class="registrationInputBoxes" type="text" placeholder="Search for a Team..." id="team" onkeyup="liveFilter()">
             <ul id="allTeams">
             </ul>
           </div>
