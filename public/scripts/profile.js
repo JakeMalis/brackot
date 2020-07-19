@@ -1,7 +1,7 @@
 function personalizeElements() {
   document.getElementById("profileProfilePic").src = firebase.auth().currentUser.photoURL;
 
-  
+
   document.getElementById('avatarUploader').addEventListener("change", uploadAvatar);
   document.getElementById('editProfileButton').addEventListener("click", editProfile);
   document.getElementById('saveProfileButton').addEventListener("click", saveProfileChanges);
@@ -9,18 +9,17 @@ function personalizeElements() {
 
   firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).get().then(function(doc) {
     document.getElementById("firstName").placeholder = doc.data().first;
-  });
-
-  firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).get().then(function(doc) {
     document.getElementById("lastName").placeholder = doc.data().last;
-  });
-
-  firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).get().then(function(doc) {
     document.getElementById("email").placeholder = firebase.auth().currentUser.email;
+    if (doc.data().teams.length === 0) { document.getElementById("team").placeholder = "None"; }
   });
 
-  firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).get().then(function(doc) {
-    document.getElementById("team").placeholder = doc.data().team;
+  firebase.firestore().collection("teams").where("players", "array-contains", firebase.auth().currentUser.uid).get().then(function(querySnapshot) {
+    querySnapshot.forEach(function(doc) {
+      document.getElementById("team").placeholder = document.getElementById("team").placeholder + doc.data().name + ", ";
+    });
+  }).then(function() {
+    document.getElementById("team").placeholder = document.getElementById("team").placeholder.slice(0, -2);
   });
 }
 
