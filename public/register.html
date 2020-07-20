@@ -24,6 +24,13 @@
 
   <script src="scripts/registration.js"></script>
 
+
+
+  <script src="scripts/textinput_animation.js"></script>
+
+
+
+
   <script>
       var firebaseConfig = {
           apiKey: "AIzaSyBSjggPyShfi3JJGmfuf2p_BFLMeEeVTLY",
@@ -138,15 +145,13 @@
 
 </head>
     <body>
-      <div style="top: 0;" class="gradientLiner"></div>
-      <div style="bottom: 0;" class="gradientLiner"></div>
       <img id="registrationLogo" src="media/starlogo.png">
         <div id="nameTab" style="display:block;" class="tab">
             <h1 class="registrationTitle">Welcome to <span class="gradientText">All-Star!</span></h1>
             <p class="registrationText">First things first, we're going to need a little more information from you in order to get your account set up.</p>
           <div class="inputRow">
-            <input class="registrationInputBoxes" placeholder="First Name" id="first-name">
-            <input class="registrationInputBoxes" placeholder="Last Name" id="last-name">
+            <input class="registrationInputBoxes roundedTopBorder10 roundedBottomBorder10" placeholder="First Name" id="first-name">
+            <input class="registrationInputBoxes roundedTopBorder10 roundedBottomBorder10" placeholder="Last Name" id="last-name">
           </div>
           <button type="button" class="nextButton" onClick="next();">Continue</button>
         </div>
@@ -155,14 +160,14 @@
           <h1 class="registrationTitle">Let's be safe here.</h1>
           <p class="registrationText">Please input an email and password for your account, and make sure to remember them - you'll need them to log back in.</p>
           <div class="inputRow">
-            <input class="registrationInputBoxes" placeholder="Email" id="email">
-            <input class="registrationInputBoxes" type="password" placeholder="Password" id="password">
+            <input class="registrationInputBoxes roundedTopBorder10 roundedBottomBorder10" placeholder="Email" id="email">
+            <input class="registrationInputBoxes roundedTopBorder10 roundedBottomBorder10" type="password" placeholder="Password" id="password">
           </div>
           <button type="button" class="nextButton" id="createUser" onclick="createUser();">Continue</button>
         </div>
 
         <div id="roleTab" style="display:none;" class="tab">
-          <h1 class="registrationTitle">WHAT'S YOUR ROLE?</h1>
+          <h1 class="registrationTitle">What's your role?</h1>
           <p id="roleText" class="registrationText">Help us figure out in which ways we can help you bring your eSports game to the next level.</p>
           <div id="roleRow" class="inputRow">
             <div id="spacing">
@@ -176,7 +181,7 @@
         </div>
 
         <div id="gamesTab" style="display:none;" class="tab">
-          <h1 class="registrationTitle">WHAT DO YOU PLAY?</h1>
+          <h1 class="registrationTitle">What do you play?</h1>
           <p class="registrationText">Pick your poison(s) and we'll be able to better match you with game-specific platform features.</p>
           <div id="gameRow" class="inputRow">
             <input class="gameCheckbox" type="checkbox" id="fortnite" name="game">
@@ -196,10 +201,10 @@
 
 
         <div id="teamTab" style="display:none;" class="tab">
-          <h1 class="registrationTitle">TIME TO TEAM UP.</h1>
+          <h1 class="registrationTitle">Time to team up.</h1>
           <p class="registrationText">Start typing to find your squad. Don't have a team? Enter a team name then hit 'continue' to create your own.</p>
           <div class="inputRow">
-            <input class="registrationInputBoxes" type="text" placeholder="Search for a Team..." id="team" onkeyup="liveFilter()">
+            <input class="registrationInputBoxes roundedTopBorder10 roundedBottomBorder10" type="text" placeholder="Search for a Team..." id="team" onkeyup="liveFilter()">
             <ul id="allTeams">
             </ul>
           </div>

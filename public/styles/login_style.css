@@ -1,3 +1,7 @@
+:root{
+  --blueGradient: linear-gradient(90deg,#0084ff,#00c6ff);
+}
+
 * {
     font-family: 'MuseoSans500';
     font-style: normal;
@@ -19,10 +23,12 @@ input {
     padding: 14px;
     width: 100%;
     font-size: 17px;
-    border: 1px solid #dddddd;
-    background-color: #ffffff;
-    border-radius: 7px;
+    border: 1px solid #EEEEEE;
+    background-color: #FFFFFF;
+    transition-duration: 0.2s;
 }
+
+
 
 select{
   font-family: 'MuseoSans500' !important;
@@ -31,7 +37,6 @@ select{
   width: 100%;
   font-size: 17px;
   border: 1px solid #dddddd;
-  border-radius: 7px;
   background-color: #ffffff;
 }
 
@@ -43,7 +48,20 @@ h1{
     font-size: 30px;
     letter-spacing: 1.6px;
     margin-bottom: 4vh;
-    text-transform: uppercase;
+}
+
+.roundedTopBorder10{
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.roundedBottomBorder10{
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.blueBottomBorder{
+  box-shadow: inset 0px -5px 0px 0px #0084ff;
 }
 
 .error {
@@ -186,14 +204,6 @@ h1{
   top: 50px;
   left: 40px;
   object-fit:contain;
-  position: absolute;
-}
-
-.gradientLiner{
-  display: none;
-  height: 20px;
-  width: 100vw;
-  background: -webkit-linear-gradient(360deg, #0084ff, #00c6ff);
   position: absolute;
 }
 
@@ -429,9 +439,9 @@ input[type="checkbox"]:checked + label{
 
   .registrationInputBoxes{
     font-size: 16px;
-    padding: 13px;
+    padding: 16px;
   }
-  
+
   .inputRow{
     width: 505px;
   }
