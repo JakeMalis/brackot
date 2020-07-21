@@ -110,11 +110,8 @@ function createTeam() {
         privacy: "public",
         players: [firebase.auth().currentUser.uid],
         name: document.getElementById('team').value
-    }).then(function(team) {
+    }).then(function() {
       $('#createTeamModal').modal("hide");
-      firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
-          teams: [team.id]
-      });
       next();
     });
   }
@@ -125,11 +122,8 @@ function createTeam() {
           password: document.getElementById('createTeamPassword').value,
           players: [firebase.auth().currentUser.uid],
           name: document.getElementById('team').value
-      }).then(function(team) {
+      }).then(function() {
         $('#createTeamModal').modal("hide");
-        firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
-            teams: [team.id]
-        });
         next();
       });
     }
@@ -143,9 +137,6 @@ function joinTeam() {
       if (doc.data().privacy === "private") {
         if (doc.data().password === document.getElementById('joinTeamPassword').value) {
           $('#joinPrivateTeamModal').modal("hide");
-          firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
-            teams: [team.id]
-          });
           firebase.firestore().collection("teams").doc(doc.id).update({
             players: firebase.firestore.FieldValue.arrayUnion(firebase.auth().currentUser.uid)
           });
