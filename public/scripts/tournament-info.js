@@ -29,18 +29,6 @@ function loadTournamentInfo() {
       document.getElementById("tournamentInfoThirdPrizing").innerHTML = doc.data().earnings[3] + " Star Coins";
     } else { $('#thirdPlace').remove(); }
 
-
-    if (doc.data().game == "FORTNITE") {
-      document.getElementById("tournamentInfoDescription").className = "headerImage fortniteWallpaper";
-    }
-    else if (doc.data().game == "OVERWATCH") {
-      document.getElementById("tournamentInfoDescription").className = "headerImage overwatchWallpaper";
-    }
-    else if (doc.data().game == "SMASH") {
-      document.getElementById("tournamentInfoDescription").className = "headerImage smashWallpaper";
-    }
-    else if (doc.data().game == "VALORANT") {
-      document.getElementById("tournamentInfoDescription").className = "headerImage valorantWallpaper";
-    }
+    document.getElementById("tournamentInfoDescription").className = "headerImage " + doc.data().game.toLowerCase() + "Wallpaper";
   });
 }
