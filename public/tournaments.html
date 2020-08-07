@@ -9,11 +9,13 @@
   <link rel="stylesheet" type="text/css" href="styles/dashboard_style.css">
   <link rel="stylesheet" type="text/css" href="styles/selectPlayers.css">
   <link rel="stylesheet" type="text/css" href="styles/fonts.css">
-  <script src="scripts/tournaments.js"></script>
-  <script src="scripts/header.js"></script>
 
   <link rel="stylesheet" href="https://use.typekit.net/fyp1otf.css">
   <script src="https://kit.fontawesome.com/201b9c41aa.js" crossorigin="anonymous"></script>
+
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -24,6 +26,9 @@
   <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-functions.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-storage.js"></script>
+
+  <script type="text/babel" src="scripts/tournaments.js"></script>
+  <script src="scripts/header.js"></script>
 
   <script>
       var firebaseConfig = {
@@ -88,46 +93,35 @@
           <div class="wideCardBackground">
             <div class="wideCardContent">
               <h2 style="margin-bottom: 30px;">Tournaments</h2>
-
-
-              <div class="row" style="margin-left: 0px !important; margin-right: 0px; !important">
-
-                <div class="tournamentCard" id="tournamentCard1">
-                  <div class="tournamentCardBackground">
-                    <div class="tournamentCardContent" id="tournamentContent1">
-                      <img id="tournamentWallpaper1">
-                      <div class="tournamentCardText">
-                        <h6 class="tournamentCardTitle" id="tournamentTitle1"></h6>
-                        <ul class="tournamentCardDetails">
-                          <li class="tournamentCardDetail" id="tournamentGame1"></li>
-                          <li class="tournamentCardDetail" id="tournamentDate1"></li>
-                          <li class="tournamentCardDetail" id="tournamentParticipants1"></li>
-                        </ul>
-                      </div>
-                    </div>
-                    <button class="tournamentCardButton" id="tournamentCardButton1" onclick="enroll(1)">Sign Up</button>
-                  </div>
-                </div>
-
-                <div class="tournamentCard" id="tournamentCard2">
-                  <div class="tournamentCardBackground">
-                    <div class="tournamentCardContent" id="tournamentContent2">
-                      <img id="tournamentWallpaper2">
-                      <div class="tournamentCardText">
-                        <h6 class="tournamentCardTitle" id="tournamentTitle2"></h6>
-                        <ul class="tournamentCardDetails">
-                          <li class="tournamentCardDetail" id="tournamentGame2"></li>
-                          <li class="tournamentCardDetail" id="tournamentDate2"></li>
-                          <li class="tournamentCardDetail" id="tournamentParticipants2"></li>
-                        </ul>
-                      </div>
-                    </div>
-                    <button class="tournamentCardButton" id="tournamentCardButton2" onclick="enroll(2)">Sign Up</button>
-                  </div>
-                </div>
-
-
-
+              <div class="row" id="row" style="margin-left: 0px !important; margin-right: 0px; !important">
+                <script type="text/babel">
+                class TournamentCard extends React.Component {
+                  render() {
+                    return (
+                        <div className="tournamentCard" id={"tournamentCard" + this.props.tournamentNumber}>
+                          <div className="tournamentCardBackground">
+                            <div className="tournamentCardContent" id={"tournamentContent" + this.props.tournamentNumber}>
+                            <img id="tournamentWallpaper1"></img>
+                              <div className="tournamentCardText">
+                                  <h6 className="tournamentCardTitle" id={"tournamentTitle" + this.props.tournamentNumber}></h6>
+                                  <ul className="tournamentCardDetails">
+                                    <li className="tournamentCardDetail" id={"tournamentGame" + this.props.tournamentNumber}></li>
+                                    <li className="tournamentCardDetail" id={"tournamentDate" + this.props.tournamentNumber}></li>
+                                    <li className="tournamentCardDetail" id={"tournamentParticipants" + this.props.tournamentNumber}></li>
+                                  </ul>
+                              </div>
+                            </div>
+                            <button className="tournamentCardButton" id={"tournamentCardButton" + this.props.tournamentNumber}>Sign Up</button>
+                          </div>
+                        </div>
+                    );
+                  }
+                }
+                ReactDOM.render(
+                  <TournamentCard tournamentNumber={1} />,
+                  document.getElementById("row")
+                );
+                </script>
               </div>
             </div>
           </div>

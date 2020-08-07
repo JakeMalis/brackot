@@ -100,5 +100,7 @@ function loadTournaments() {
 
         tournamentNumber++;
     });
+  }).then(function() {
+    console.log(tournamentNumber);
   });
 }
