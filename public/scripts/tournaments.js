@@ -1,4 +1,5 @@
 const tournaments = new Array();
+const TournamentCardArray = [];
 
 function personalizeElements() {
   loadTournaments();
@@ -66,7 +67,45 @@ function refreshTournaments() {
   });
 }
 
+class TournamentCard extends React.Component {
+  render() {
+    return (
+        <div className="tournamentCard" id={"tournamentCard" + this.props.tournamentNumber}>
+          <div className="tournamentCardBackground">
+            <div className="tournamentCardContent" id={"tournamentContent" + this.props.tournamentNumber}>
+            <img id={"tournamentWallpaper" + this.props.tournamentNumber}></img>
+              <div className="tournamentCardText">
+                  <h6 className="tournamentCardTitle" id={"tournamentTitle" + this.props.tournamentNumber}></h6>
+                  <ul className="tournamentCardDetails">
+                    <li className="tournamentCardDetail" id={"tournamentGame" + this.props.tournamentNumber}></li>
+                    <li className="tournamentCardDetail" id={"tournamentDate" + this.props.tournamentNumber}></li>
+                    <li className="tournamentCardDetail" id={"tournamentParticipants" + this.props.tournamentNumber}></li>
+                  </ul>
+              </div>
+            </div>
+            <button className="tournamentCardButton" id={"tournamentCardButton" + this.props.tournamentNumber}>Sign Up</button>
+          </div>
+        </div>
+    );
+  }
+};
+
 function loadTournaments() {
+  async function renderTournamentCards() {
+    var tournamentNumber = 1;
+    firebase.firestore().collection("tournaments").get().then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+          TournamentCardArray.push(<TournamentCard tournamentNumber={tournamentNumber} />);
+          tournamentNumber++
+      });
+    }).then(function() {
+      ReactDOM.render(
+        TournamentCardArray,
+        document.getElementById("row")
+      );
+    });
+  }
+  renderTournamentCards();
   var tournamentNumber = 1;
   firebase.firestore().collection("tournaments").get().then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
@@ -100,7 +139,5 @@ function loadTournaments() {
 
         tournamentNumber++;
     });
-  }).then(function() {
-    console.log(tournamentNumber);
   });
 }
