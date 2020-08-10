@@ -1,15 +1,23 @@
+:root{
+  --gradient: linear-gradient(120deg,#23F2AC,#23D0F2);
+  --aquamarine: #23F2AC;
+  --turquoise: #23D0F2;
+  --background: #202131;
+  --cardColor: #2b2c3c;
+  --tournamentCardColor: #3a3b4a;
+}
 body{
   overflow-x: hidden;
   margin: 0px;
   width: 100vw;
   min-height: 100vh;
-  background-color: #EFF7FD !important;
+  background-color: var(--background) !important;
 }
 
 h1{
   font-family: 'MuseoSans500', sans-serif !important;
   font-weight: bold;
-  color: #232323;
+  color: #eeeeee;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -17,7 +25,7 @@ h1{
 
 h2{
   font-family: 'MuseoSans700', sans-serif !important;
-  color: #232323;
+  color: rgba(255,255,255,0.9) !important;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -25,7 +33,7 @@ h2{
 
 h3{
   font-family: 'MuseoSans500', sans-serif !important;
-  color: #232323;
+  color: rgba(255,255,255,0.9) !important;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -33,7 +41,7 @@ h3{
 
 h4{
   font-family: 'MuseoSans500', sans-serif !important;
-  color: #232323;
+  color: rgba(255,255,255,0.9) !important;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -41,7 +49,7 @@ h4{
 
 h5{
   font-family: 'MuseoSans500', sans-serif !important;
-  color: #232323;
+  color: rgba(255,255,255,0.9) !important;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -58,7 +66,7 @@ h6{
 
 p{
   font-family: 'MuseoSans500', sans-serif;
-  color: #232323;
+  color: #eeeeee;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -79,7 +87,7 @@ p{
 }
 
 .gradientHeader{
-  background-image: linear-gradient(135deg,#0069ff,#00dbff);
+  background-image: var(--gradient);
 }
 
 #tournamentWallpaper{
@@ -125,7 +133,7 @@ p{
 
 .gradientTextAnimated{
   font-weight: bold;
-  background: -webkit-linear-gradient(45deg, #0073ff, #00d7ff);
+  background: -webkit-linear-gradient(45deg, #23f2ac, #19d5d2);
   background-size: 400% 400%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -161,7 +169,7 @@ p{
 .gradientButton{
   display: block;
   font-size: 18px;
-  background-image: linear-gradient(90deg, #0084ff, #00c6ff);
+  background-image: var(--gradient);
   font-family: 'MuseoSans700', sans-serif;
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -217,14 +225,14 @@ overflow:hidden;
 }
 
 .main-menu {
-background:#ffffff;
+background: var(--cardColor);
 box-shadow: 1px 0px 12px 0px rgba(10,10,10,0.15);
-border-right:0px solid #0084ff;
+border-right:0px solid var(--aquamarine);
 border-image:
     linear-gradient(
       to bottom,
-      #0084ff,
-      #00c6ff
+      var(--aquamarine),
+       var(--turquoise)
     ) 1 100%;
 position:fixed;
 top:0;
@@ -254,7 +262,7 @@ position:relative;
 display:table;
 border-collapse:collapse;
 border-spacing:0;
-color:#0084ff;
+color: #eeeeee;
 font-family: 'MuseoSans500', sans-serif;
 font-size: 15px;
 text-decoration:none;
@@ -316,12 +324,12 @@ margin:0;
 padding:0;
 }
 .main-menu li:hover>a,nav.main-menu li.active>a,.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus,.dropdown-menu>.active>a,.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus,.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,.dashboard-page nav.dashboard-menu ul li.active a {
-color:#ffffff;
-background-image: linear-gradient(135deg,#0069ff,#00dbff);
+color: var(--aquamarine) !important;
+background: #3a3b4a;
 }
 .area {
 float: left;
-background: #e2e2e2;
+background: rgba(255,255,255,0.09);
 width: 100%;
 height: 100%;
 }
@@ -330,14 +338,14 @@ height: 100%;
 }
 
 #firstGreetingMessage{
-  color: #ffffff;
+  color: #eeeeee;
   display: normal;
   font-size: 50px;
   text-align: center;
 }
 
 #greetingMessage{
-  color: #ffffff;
+  color: #eeeeee;
   display: none;
   font-size: 50px;
   text-align: center;
@@ -345,7 +353,7 @@ height: 100%;
 
 /* BOOSTS PAGE CODE */
 #boostsMessage{
-  color: #ffffff;
+  color: #eeeeee;
   font-size: 50px;
   text-align: center;
 }
@@ -392,11 +400,13 @@ height: 100%;
 }
 
 .boostsPrice{
+  color: #eeeeee;
 text-align: center;
 }
 
 .priceDetail{
   font-size: 18px;
+  color: #888888;
 }
 /* END BOOSTS PAGE CODE */
 
@@ -438,7 +448,7 @@ text-align: center;
   padding-right: 16px;
   float: right;
   position: relative;
-  color: #ffffff;
+  color: #eeeeee;
   text-align: center;
   width: auto;
 }
@@ -492,7 +502,7 @@ text-align: center;
   border-radius: 12px;
   border: 0px;
   box-shadow: 0px 0px 13px 0px rgba(0,0,0,0.2);
-  background-color: #ffffff;
+  background-color: var(--tournamentCardColor);
 }
 
 .tournamentCardContent{
@@ -519,7 +529,7 @@ text-align: center;
   font-size: 19px;
   letter-spacing: 1px;
   font-weight: 700;
-  color: #232323 !important;
+  color: #eeeeee !important;
   text-align: center;
   font-family: 'MuseoSans500', sans-serif;
 }
@@ -533,13 +543,13 @@ text-align: center;
 
 .tournamentCardDetail{
   font-size: 14px;
-  color: #555555 !important;
+  color: #bbbbbb !important;
   font-family: 'MuseoSans300', sans-serif;
 }
 
 .tournamentCardButton{
   font-family: 'MuseoSans700', sans-serif;
-  background-image: linear-gradient(135deg,#0069ff,#00dbff);
+  background-image: var(--gradient);
   margin-top: 13px;
   height: 50px;
   border: 0px;
@@ -547,7 +557,7 @@ text-align: center;
   border-top-right-radius: 0px;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
-  color: #ffffff;
+  color: #eeeeee;
   width: 100%;
   font-size: 15px;
   font-weight: bold;
@@ -598,7 +608,7 @@ text-align: center;
   border-radius: 12px;
   border: 1px solid rgba(0,0,0,0.05);
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.05);
-  background-color: #ffffff;
+  background-color: var(--cardColor);
 }
 
 .smallCardContent{
@@ -633,7 +643,7 @@ text-align: center;
   border-radius: 12px;
   border: 1px solid rgba(0,0,0,0.05);
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.05);
-  background-color: #ffffff;
+  background-color: var(--cardColor);
   transition-duration: 0.2s;
 }
 
@@ -658,7 +668,7 @@ text-align: center;
   border-radius: 12px;
   border: 1px solid rgba(0,0,0,0.05);
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.05);
-  background-color: #ffffff;
+  background-color: var(--cardColor);
 }
 
 .wideCardContent{
@@ -712,8 +722,8 @@ text-align: center;
   padding: 11px;
   font-size: 20px;
   border-radius: 11px;
-  background-color: #f6faff;
-  border: 1px solid #dddddd;
+  background-color: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.09);
 }
 
 .shortProfileInputs{
@@ -722,8 +732,8 @@ text-align: center;
   padding: 11px;
   font-size: 20px;
   border-radius: 11px;
-  background-color: #f6faff;
-  border: 1px solid #dddddd;
+  background-color: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.09);
 }
 
 .longProfileInputs{
@@ -736,8 +746,8 @@ text-align: center;
   font-size: 18px;
   font-family: 'MuseoSans300', sans-serif;
   border-radius: 11px;
-  background-color: #f6faff;
-  border: 1px solid #dddddd;
+  background-color: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.09);
 }
 
 .profileInputTitle{
@@ -761,7 +771,7 @@ text-align: center;
   font-family: 'MuseoSans700', sans-serif;
   letter-spacing: 1.7px;
   font-weight: 800px;
-  color: #ffffff;
+  color: #eeeeee;
   border: 0px;
   border-radius: 9px;
   cursor: pointer;
@@ -778,7 +788,7 @@ text-align: center;
 }
 
 #editProfileButton{
-  background-image: linear-gradient(135deg,#0069ff,#00dbff);
+  background-image: var(--gradient);
   visibility: visible;
 }
 
@@ -788,7 +798,7 @@ text-align: center;
 }
 
 #editPreferencesButton{
-  background-image: linear-gradient(135deg,#0069ff,#00dbff);
+  background-image: var(--gradient);
   visibility: visible;
   transition-duration: 0s;
 }
@@ -893,7 +903,7 @@ text-align: center;
 }
 
 .quickDetailHeader{
-  background-color: #f6f9fb;
+  background-color: rgba(255,255,255,0.16);
   margin-top: -20px;
   border-top-right-radius: 12px;
   border-top-left-radius: 12px;
@@ -939,14 +949,14 @@ text-align: center;
   padding-left: 14px;
   padding-right: 14px;
   cursor: pointer;
-  border-bottom: 4px solid rgba(0,132,255,0);
+  border-bottom: 4px solid rgba(35,242,172,0);
 }
 .quickNavbarItem:hover{
-  border-bottom: 4px solid rgba(0,132,255,0.3);
+  border-bottom: 4px solid rgba(35,242,172,0.3);
 }
 
 .quickNavbarItemSelected{
-  border-bottom: 4px solid rgba(0,132,255,1);
+  border-bottom: 4px solid rgba(35,242,172,1);
 }
 
 .quickNavbarItemLink:hover{
