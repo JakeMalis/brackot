@@ -2,6 +2,7 @@
   --gradient: linear-gradient(300deg,#23F2AC,#23D0F2);
   --aquamarine: #23F2AC;
   --turquoise: #23D0F2;
+  --background: #202131;
 }
 
 * {
@@ -11,7 +12,7 @@
 
 body {
     overflow: hidden;
-    background-color: #202131 !important;
+    background-color: var(--background) !important;
     margin: 0px;
     padding: 0px;
     width: 100vw;
@@ -219,10 +220,10 @@ h1{
 
 #registrationLogo{
   display: none;
-  width: 120px;
+  width: 260px;
   height: 120px;
-  top: 50px;
-  left: 40px;
+  top: 20px;
+  left: 50px;
   object-fit:contain;
   position: absolute;
 }
