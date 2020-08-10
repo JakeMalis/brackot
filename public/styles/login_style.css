@@ -1,8 +1,10 @@
 :root{
-  --gradient: linear-gradient(300deg,#23F2AC,#23D0F2);
+  --gradient: linear-gradient(120deg,#23F2AC,#23D0F2);
   --aquamarine: #23F2AC;
   --turquoise: #23D0F2;
   --background: #202131;
+  --cardColor: #2b2c3c;
+  --tournamentCardColor: #3a3b4a;
 }
 
 * {
@@ -76,10 +78,6 @@ h1{
 .roundedBottomBorder10{
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-}
-
-.blueBottomBorder{
-  box-shadow: inset 0px -5px 0px 0px #0084ff;
 }
 
 .error {
