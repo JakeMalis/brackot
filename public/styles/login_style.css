@@ -1,5 +1,7 @@
 :root{
-  --blueGradient: linear-gradient(90deg,#0084ff,#00c6ff);
+  --gradient: linear-gradient(300deg,#23F2AC,#23D0F2);
+  --aquamarine: #23F2AC;
+  --turquoise: #23D0F2;
 }
 
 * {
@@ -9,7 +11,7 @@
 
 body {
     overflow: hidden;
-    background-color: #EFF7FD !important;
+    background-color: #202131 !important;
     margin: 0px;
     padding: 0px;
     width: 100vw;
@@ -23,9 +25,11 @@ input {
     padding: 14px;
     width: 100%;
     font-size: 17px;
-    border: 1px solid #EEEEEE;
-    background-color: #FFFFFF;
+    border: 1px solid rgba(255,255,255,0.11);
+    background-color: rgba(255,255,255,0.09);
     transition-duration: 0.2s;
+    border-radius: 5px;
+    color: #eeeeee;
 }
 
 
@@ -36,18 +40,31 @@ select{
   padding: 14px;
   width: 100%;
   font-size: 17px;
-  border: 1px solid #dddddd;
-  background-color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.11);
+  background-color: rgba(255,255,255,0.09);
+  color: #eeeeee;
 }
 
 h1{
     font-family: 'MuseoSans500' !important;
     -webkit-font-smoothing: antialiased;
-    color: #262626;
+    color: #eeeeee;
     text-align: center;
     font-size: 30px;
     letter-spacing: 1.6px;
     margin-bottom: 4vh;
+}
+
+.smallRoundedBorders{
+  border-radius: 5px;
+}
+
+.mediumRoundedBorders{
+  border-radius: 10px;
+}
+
+.largeRoundedBorders{
+  border-radius: 20px;
 }
 
 .roundedTopBorder10{
@@ -83,7 +100,7 @@ h1{
 }
 
 .gradientText{
-  background: -webkit-linear-gradient(0deg, #0084ff, #00c6ff);
+  background: var(--gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -114,6 +131,9 @@ h1{
 
 /* THE BELOW IS FOR THE LOGIN PAGE */
 
+.forgotPasswordText{
+  color: #bbbbbb;
+}
 
 /* BUTTONS */
 
@@ -123,19 +143,19 @@ h1{
   float: center;
   margin-top: 4vh;
   margin-bottom: 10px;
-  background: -webkit-linear-gradient(360deg, #0084ff, #00c6ff);
+  background: var(--gradient);
   text-transform: uppercase;
   width: 200px;
   max-width: 39%;
   height: 44px;
-  color: white;
+  color: #ffffff;
   border: transparent;
-  border-radius: 8px;
+  border-radius: 6px;
   transition-duration: 0.2s;
 }
 
 .loginButton:hover{
-  opacity: 70%;
+  opacity: 80%;
   transition-duration: 0.2s;
   box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.3);
   transform: translateY(-1px);
@@ -164,7 +184,7 @@ h1{
 }
 
 #loginForm {
-    background: #EFF7FD;
+    background: #202131;
     width: 100vw;
     margin-left: 0px;
     margin-right: 0px;
@@ -233,7 +253,7 @@ input[type="radio"] + label{
 
 input[type="radio"]:checked + label{
   transition-duration: 0.2s;
-  background: -webkit-linear-gradient(360deg, #0084ff, #00c6ff);
+  background: -webkit-linear-gradient(300deg, var(--aquamarine), var(--turquoise));
   color: white;
 }
 /* END PLAYER OR COACH INPUT BUTTONS */
@@ -287,14 +307,14 @@ input[type="checkbox"]:checked + label{
 
 .registrationTitle{
   font-family: 'MuseoSans500' !important;
-  color: #232323;
+  color: #eeeeee;
   font-size: 7vw;
   margin-bottom: 10px;
 }
 
 .registrationText{
   font-size: 18px;
-  color: #454545;
+  color: #aaaaaa;
   text-align: center;
   margin-bottom: 3vh;
   margin-left: auto;
@@ -309,7 +329,7 @@ input[type="checkbox"]:checked + label{
   font-size: 18px;
   margin-top: 8vh;
   margin-bottom: 1%;
-  background: -webkit-linear-gradient(360deg, #0084ff, #00c6ff);
+  background: var(--gradient);
   text-transform: uppercase;
   letter-spacing: 3px;
   font-weight: 600;
@@ -374,16 +394,16 @@ input[type="checkbox"]:checked + label{
 #allTeams li a {
   border: 1px solid #dddddd;
   margin-top: -1px; /* Prevent double borders */
-  background-color: #f9f9f9;
+  background-color: rgba(255,255,255,0.14);
   padding: 10px;
   text-decoration: none;
   font-size: 16px;
-  color: black;
+  color: #eeeeee;
   display: block;
 }
 
 #allTeams li a:hover:not(.header) {
-  background-color: #eee;
+  background-color: rgba(255,255,255,0.12);
   cursor: pointer;
 }
 
