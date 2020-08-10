@@ -100,7 +100,7 @@ h1{
 }
 
 .gradientText{
-  background: var(--gradient);
+  background: -webkit-linear-gradient(300deg,var(--aquamarine),var(--turquoise));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -168,7 +168,7 @@ h1{
 
 .logo{
     display: block;
-    width: 120px;
+    width: 260px;
     height: 120px;
     object-fit: contain;
     padding-left: 30px;
