@@ -73,8 +73,8 @@ p{
 }
 
 .main-page{
-  width: calc(100vw: - 60px);
-  margin-left: 60px;
+  width: calc(100vw: - 80px);
+  margin-left: 80px;
 }
 
 .headerImage{
@@ -227,13 +227,13 @@ font-size: 2em;
 }
 
 .fa-lg{
-  font-size: 1.33em;
+  font-size: 1.5em;
 }
 
 .fa {
 position: relative;
 display: table-cell;
-width: 60px;
+width: 80px;
 height: 30px;
 text-align: center;
 vertical-align: middle;
@@ -243,10 +243,13 @@ margin-top: 16px;
 }
 
 .sidebarLogo{
+  fill: var(--gradient);
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
-  height: 10%;
+  margin-top: 25px;
+  margin-bottom:20px;
+  width: 40px;
+  height: 40px;
   display: block;
 }
 
@@ -264,7 +267,7 @@ top:0;
 bottom:0;
 height:100%;
 left:0;
-width:60px;
+width:80px;
 overflow:hidden;
 -webkit-transition:width .25s ease-in-out;
 transition:width .25s ease-in-out;
@@ -287,9 +290,10 @@ position:relative;
 display:table;
 border-collapse:collapse;
 border-spacing:0;
-color: #aaaaaa;
+/*color: #aaaaaa;*/
+color: #aaaab9;
 font-family: 'MuseoSans500', sans-serif;
-font-size: 15px;
+font-size: 18px;
 text-decoration:none;
 -webkit-transform:translateZ(0) scale(1,1);
 -webkit-transition:all 0.1s linear;
@@ -349,7 +353,7 @@ margin:0;
 padding:0;
 }
 .main-menu li:hover>a,nav.main-menu li.active>a,.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus,.dropdown-menu>.active>a,.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus,.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,.dashboard-page nav.dashboard-menu ul li.active a {
-color: #eeeeee !important;
+color: #f6f6f6 !important;
 background: #3a3b4a;
 }
 .area {
@@ -442,7 +446,12 @@ text-align: center;
 }
 /* END BOOSTS PAGE CODE */
 
-
+.footer{
+  background-color: green;
+  width: 100%;
+  min-height: 100px;
+  height: auto;
+}
 
 .userInfobar{
   top: 0;
@@ -639,7 +648,7 @@ text-align: center;
   width: 90%;
   border-radius: 12px;
   border: 1px solid rgba(0,0,0,0.05);
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.05);
+  box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.15);
   background-color: var(--cardColor);
 }
 
@@ -681,7 +690,7 @@ text-align: center;
   width: 90%;
   border-radius: 12px;
   border: 1px solid rgba(0,0,0,0.05);
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.05);
+  box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.15);
   background-color: var(--cardColor);
   transition-duration: 0.2s;
 }
@@ -706,7 +715,7 @@ text-align: center;
   width: 90%;
   border-radius: 12px;
   border: 1px solid rgba(0,0,0,0.05);
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.05);
+  box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.15);
   background-color: var(--cardColor);
 }
 

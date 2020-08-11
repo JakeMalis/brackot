@@ -34,34 +34,15 @@
           }
         });
 
-        var imlocation = "media/login_images/";
-        var currentdate = 0;
-        var image_number = 0;
-        function ImageArray (n) {
-            this.length = n;
-            for (var i =1; i <= n; i++) {
-                this[i] = ' '
-            }
-        }
-        image = new ImageArray(3)
-        image[0] = '1.jpg'
-        image[1] = '2.jpg'
-        image[2] = '3.jpg'
-        var rand = 60/image.length
-        function randomimage() {
-            currentdate = new Date()
-            image_number = currentdate.getSeconds()
-            image_number = Math.floor(image_number/rand)
-            return(image[image_number])
-        }
-        document.write("<img id='loginImage' src='" + imlocation + randomimage()+ "'>");
-
     </script>
 </head>
 <body>
-  <div style="text-align: center;">
+  <div class="katSplash">
+  <div class="splashOverlay">
+    <div style="text-align: center;">
         <img class="logo" href="https://brackot.com" src="media/BrackotFullLogo.png">
-        <form id="loginForm" action="">
+        <div class="loginCard">
+          <form class="loginForms" action="">
                 <h1 class="loginText">Log in and <span class="gradientText">game on</span></h1>
                 <input class="loginInput" placeholder="Email Address..." id="email">
                 <br>
@@ -72,11 +53,14 @@
 
             <div style="overflow:auto;">
                 <div style="float:center;">
-                    <button type="button" class="loginButton" id="loginBtn" onclick="passwordSignIn();">Login</button>
-                    <button type="button" class="loginButton" id="registerBtn" onclick="location.href='register.html';">Sign Up</button>
+                    <button type="button" class="loginButton primaryBtn" onclick="passwordSignIn();">Login</button>
+                    <button type="button" class="loginButton secondaryBtn" onclick="location.href='register.html';">Sign Up</button>
                 </div>
             </div>
-        </form>
+          </form>
+        </div>
+      </div>
+    </div>
     </div>
 </body>
 </html>

@@ -14,20 +14,43 @@
 
 body {
     overflow: hidden;
-    background-color: var(--background) !important;
+    background-color: var(--background);
     margin: 0px;
     padding: 0px;
     width: 100vw;
     height: 100vh;
 }
 
+.katSplash{
+  background-image: url("../media/splash_art/katsplash.jpg");
+  background-size: cover;
+}
+
+.karmaSplash{
+  background-image: url("../media/splash_art/karmasplash.jpg");
+  background-size: cover;
+}
+
+.akaliSplash{
+  background-image: url("../media/splash_art/akalisplash.jpg");
+  background-size: cover;
+}
+
+.splashOverlay{
+  background: rgba(32,33,49,0.9);
+  margin: 0px;
+  padding: 0px;
+  width: 100vw;
+  height: 100vh;
+}
+
 input {
     font-family: 'MuseoSans500' !important;
     -webkit-font-smoothing: antialiased;
     margin-top: 0px;
-    padding: 14px;
+    padding: 14px !important;
     width: 100%;
-    font-size: 17px;
+    font-size: 15px !important;
     border: 1px solid rgba(255,255,255,0.11);
     background-color: rgba(255,255,255,0.09);
     transition-duration: 0.2s;
@@ -51,9 +74,9 @@ select{
 h1{
     font-family: 'MuseoSans500' !important;
     -webkit-font-smoothing: antialiased;
-    color: #eeeeee;
+    color: #eeeeee !important;
     text-align: center;
-    font-size: 30px;
+    font-size: 40px !important;
     letter-spacing: 1.6px;
     margin-bottom: 4vh;
 }
@@ -130,6 +153,23 @@ h1{
 
 /* THE BELOW IS FOR THE LOGIN PAGE */
 
+#forgot-password-block{
+  margin-left: -175px;
+  margin-top: -5px;
+}
+
+.loginCard{
+  border-radius: 16px;
+  padding: 30px;
+  background-color: var(--cardColor);
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 450px;
+  height: auto;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
+}
+
+
 .forgotPasswordText{
   color: #bbbbbb;
 }
@@ -137,20 +177,19 @@ h1{
 /* BUTTONS */
 
 .loginButton{
+  font-size: 18px;
   font-family: 'MuseoSans700' !important;
   letter-spacing: 1px;
   float: center;
-  margin-top: 4vh;
-  margin-bottom: 10px;
-  background: var(--gradient);
   text-transform: uppercase;
-  width: 200px;
-  max-width: 39%;
-  height: 44px;
+  width: 90%;
+  max-width: 90%;
+  height: 50px;
   color: #ffffff;
   border: transparent;
-  border-radius: 6px;
+  border-radius: 8px;
   transition-duration: 0.2s;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
 }
 
 .loginButton:hover{
@@ -160,18 +199,27 @@ h1{
   transform: translateY(-1px);
 }
 
-#registerBtn{
-    display: inline;
+.primaryBtn{
+  background: var(--gradient);
+  margin-top: 20px;
+}
+
+.secondaryBtn{
+  color: rgba(255,255,255,0.5);
+  margin-top: 20px;
+  background: var(--tournamentCardColor);
 }
 /* END BUTTONS */
 
 .logo{
     display: block;
-    width: 260px;
-    height: 120px;
+    width: 300px;
+    height: 180px;
     object-fit: contain;
-    padding-left: 30px;
+    margin-left: auto;
+    margin-right: auto;
     padding-top: 20px;
+    padding-bottom: 10px;
 }
 
 #loginImage{
@@ -182,27 +230,28 @@ h1{
     object-fit: cover;
 }
 
-#loginForm {
-    background: #202131;
-    width: 100vw;
+.loginForms {
+    background: var(--cardColor);
+    width: 100%;
     margin-left: 0px;
     margin-right: 0px;
-    margin-top: 13vh;
     padding: 0px;
+    margin-bottom: 20px;
 }
 
 .loginText{
-  margin-left: auto;
-  margin-right: auto;
+  margin-top: 10px;
+  margin-left: auto !important;
+  margin-right: auto !important;
   text-align: center;
   width: 80%;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .loginInput{
-  margin-bottom: 10px;
-  max-width: 420px;
-  width: 80%;
+  margin-bottom: 20px;
+  max-width: 90%;
+  width: 90%;
 }
 
 /*Shows raw firebase code*/
@@ -544,9 +593,7 @@ input[type="checkbox"]:checked + label{
   /* END REGISTRATION PAGE CODE */
 
   /*LOGIN PAGE CODE */
-  .loginInput{
-    width: 420px;
-  }
+
   /* END LOGIN PAGE CODE */
 
   /*FORGOT PASSWORD CODE */
@@ -580,8 +627,8 @@ input[type="checkbox"]:checked + label{
 
   /* LOGIN PAGE CODE */
   .loginButton{
-    width: 150px;
-    max-width: 100%;
+    width: 90%;
+    max-width: 90%;
   }
 
   #loginImage{
@@ -592,32 +639,9 @@ input[type="checkbox"]:checked + label{
     font-family: 'MuseoSans500';
   }
 
-  #loginBtn{
-    margin-right: 10px;
-  }
-
-  #registerBtn{
-    margin-right: 85px;
-  }
-
-  .loginText{
-    margin-left: 0px;
-    margin-bottom: 40px;
-  }
-
   #return-login-block{
     margin-left: -60px;
     margin-top: -20px;
   }
-
-  #forgot-password-block{
-    margin-left: -240px;
-    margin-top: -10px;
-  }
   /* END LOGIN PAGE CODE */
-
-  .loginInput{
-    margin-left: -3px;
-    width: 420px;
-  }
 }
