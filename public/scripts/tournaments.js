@@ -67,6 +67,7 @@ function refreshTournaments() {
   });
 }
 
+/*<button className="tournamentCardButton" id={"tournamentCardButton" + this.props.tournamentNumber}>Sign Up</button>*/
 class TournamentCard extends React.Component {
   render() {
     return (
@@ -77,13 +78,12 @@ class TournamentCard extends React.Component {
               <div className="tournamentCardText">
                   <h6 className="tournamentCardTitle" id={"tournamentTitle" + this.props.tournamentNumber}></h6>
                   <ul className="tournamentCardDetails">
-                    <li className="tournamentCardDetail" id={"tournamentGame" + this.props.tournamentNumber}></li>
-                    <li className="tournamentCardDetail" id={"tournamentDate" + this.props.tournamentNumber}></li>
-                    <li className="tournamentCardDetail" id={"tournamentParticipants" + this.props.tournamentNumber}></li>
+                    <li class="tournamentDetailsList"><i class="fa fa-gamepad tournamentCardIcon" aria-hidden="true"></i><div className="tournamentCardDetail" id={"tournamentGame" + this.props.tournamentNumber}></div></li>
+                    <li class="tournamentDetailsList"><i class="fa fa-calendar tournamentCardIcon" aria-hidden="true"></i><div className="tournamentCardDetail" id={"tournamentDate" + this.props.tournamentNumber}></div></li>
+                    <li class="tournamentDetailsList"><i class="fa fa-user tournamentCardIcon" aria-hidden="true"></i><div className="tournamentCardDetail" id={"tournamentParticipants" + this.props.tournamentNumber}></div></li>
                   </ul>
               </div>
             </div>
-            <button className="tournamentCardButton" id={"tournamentCardButton" + this.props.tournamentNumber}>Sign Up</button>
           </div>
         </div>
     );

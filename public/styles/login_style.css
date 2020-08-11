@@ -8,7 +8,7 @@
 }
 
 * {
-    font-family: 'MuseoSans500';
+    font-family: 'proxima-nova';
     font-style: normal;
 }
 
@@ -45,7 +45,7 @@ body {
 }
 
 input {
-    font-family: 'MuseoSans500' !important;
+    font-family: 'proxima-nova' !important;
     -webkit-font-smoothing: antialiased;
     margin-top: 0px;
     padding: 14px !important;
@@ -61,7 +61,7 @@ input {
 
 
 select{
-  font-family: 'MuseoSans500' !important;
+  font-family: 'proxima-nova' !important;
   margin: 0px;
   padding: 14px;
   width: 100%;
@@ -72,7 +72,7 @@ select{
 }
 
 h1{
-    font-family: 'MuseoSans500' !important;
+    font-family: 'proxima-nova' !important;
     -webkit-font-smoothing: antialiased;
     color: #eeeeee !important;
     text-align: center;
@@ -178,7 +178,7 @@ h1{
 
 .loginButton{
   font-size: 18px;
-  font-family: 'MuseoSans700' !important;
+  font-family: 'proxima-nova' !important;
   letter-spacing: 1px;
   float: center;
   text-transform: uppercase;
@@ -354,7 +354,7 @@ input[type="checkbox"]:checked + label{
 /*END GAME SELECT*/
 
 .registrationTitle{
-  font-family: 'MuseoSans500' !important;
+  font-family: 'proxima-nova' !important;
   color: #eeeeee;
   font-size: 7vw;
   margin-bottom: 10px;
@@ -636,7 +636,7 @@ input[type="checkbox"]:checked + label{
   }
 
   .forgotPasswordText{
-    font-family: 'MuseoSans500';
+    font-family: 'proxima-nova';
   }
 
   #return-login-block{

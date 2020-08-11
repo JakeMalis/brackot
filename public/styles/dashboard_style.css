@@ -15,8 +15,8 @@ body{
 }
 
 h1{
-  font-family: 'MuseoSans500', sans-serif !important;
-  font-weight: bold;
+  font-family: 'proxima-nova', sans-serif !important;
+  font-weight: 700;
   color: #eeeeee;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -24,7 +24,8 @@ h1{
 }
 
 h2{
-  font-family: 'MuseoSans700', sans-serif !important;
+  font-family: 'proxima-nova', sans-serif !important;
+  font-weight: 600 !important;
   color: rgba(255,255,255,0.9) !important;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -32,7 +33,7 @@ h2{
 }
 
 h3{
-  font-family: 'MuseoSans500', sans-serif !important;
+  font-family: 'proxima-nova', sans-serif !important;
   color: rgba(255,255,255,0.9) !important;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -40,7 +41,7 @@ h3{
 }
 
 h4{
-  font-family: 'MuseoSans500', sans-serif !important;
+  font-family: 'proxima-nova', sans-serif !important;
   color: rgba(255,255,255,0.9) !important;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -48,7 +49,7 @@ h4{
 }
 
 h5{
-  font-family: 'MuseoSans500', sans-serif !important;
+  font-family: 'proxima-nova', sans-serif !important;
   color: rgba(255,255,255,0.9) !important;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -56,7 +57,7 @@ h5{
 }
 
 h6{
-  font-family: 'MuseoSans700', sans-serif !important;
+  font-family: 'proxima-nova', sans-serif !important;
   color: #888888 !important;
   text-transform: uppercase;
   text-rendering: optimizeLegibility;
@@ -65,7 +66,7 @@ h6{
 }
 
 p{
-  font-family: 'MuseoSans500', sans-serif;
+  font-family: 'proxima-nova', sans-serif;
   color: #eeeeee;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -316,7 +317,8 @@ position:relative;
 display:table-cell;
 vertical-align:middle;
 width:190px;
-font-family: 'MuseoSans500', sans-serif;
+font-family: 'proxima-nova', sans-serif;
+font-weight: 400;
 letter-spacing: 1px;
 }
 
@@ -370,6 +372,7 @@ height: 100%;
   color: #eeeeee;
   display: normal;
   font-size: 50px;
+  font-weight: 600;
   text-align: center;
 }
 
@@ -524,7 +527,7 @@ text-align: center;
 .tournamentCard{
   flex: 0 0 100%;
   max-width: 100%;
-  height: 430px;
+  height: 400px;
   background: transparent;
   transition-duration: 0.2s;
   visibility: hidden;
@@ -540,7 +543,7 @@ text-align: center;
   margin-right: auto;
   height: 80%;
   width: 90%;
-  border-radius: 12px;
+  border-radius: 8px;
   border: 0px;
   box-shadow: 0px 0px 13px 0px rgba(0,0,0,0.2);
   background-color: var(--tournamentCardColor);
@@ -562,29 +565,58 @@ text-align: center;
   height: 150px;
   width: 100%;
   object-fit: cover;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 
 .tournamentCardTitle{
+  margin-bottom: 0px;
+  height: 40px;
+  max-height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 19px;
   letter-spacing: 1px;
   font-weight: 700;
   color: #eeeeee !important;
   text-align: center;
+  vertical-align: baseline;
   font-family: 'MuseoSans500', sans-serif;
 }
 
 .tournamentCardDetails{
+  overflow: hidden;
+  white-space: nowrap;
   list-style-type: none;
-  margin-top: 22px;
-  line-height: 24px;
+  margin-top: 20px;
+  line-height: 14px;
   margin-left: -30px;
 }
 
-.tournamentCardDetail{
+.tournamentDetailsList{
+  overflow: hidden;
+  width: auto;
+  color: #aaaaaa;
+  list-style: none;
+  display: block;
+  min-height: 23px;
+}
+
+.tournamentCardIcon{
+  max-height: 20px;
+  margin-top: 0px;
+  width: auto;
+  padding-right: 10px;
   font-size: 14px;
-  color: #bbbbbb !important;
+  color: #aaaaaa !important;
+  display: inline-block;
+}
+
+.tournamentCardDetail{
+  text-overflow: ellipsis;
+  font-size: 14px;
+  color: #aaaaaa !important;
+  display: inline-block;
   font-family: 'MuseoSans300', sans-serif;
 }
 
@@ -596,8 +628,8 @@ text-align: center;
   border: 0px;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
   color: #eeeeee;
   width: 100%;
   font-size: 15px;
