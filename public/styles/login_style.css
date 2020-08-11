@@ -153,8 +153,29 @@ h1{
 
 /* THE BELOW IS FOR THE LOGIN PAGE */
 
+.rememberMeBlock{
+  width: auto;
+  display: inline-block;
+  margin-left: -140px;
+  height: auto;
+}
+
+.rememberMeInput{
+  width: auto;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.rememberMeText{
+  display: inline-block;
+  margin: 0px;
+  color: #bbbbbb;
+  cursor: pointer;
+}
+
 #forgot-password-block{
-  margin-left: -175px;
+  display: inline-block;
+  margin-left: 50px;
   margin-top: -5px;
 }
 
