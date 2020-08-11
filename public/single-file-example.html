@@ -18,12 +18,12 @@
     class HelloWorldText extends React.Component {
       render() {
         return (
-            <h1>Hello, world!</h1>
+            <h1>Hello, {this.props.name} number {this.props.number}!</h1>
         );
       }
     };
     for (var index = 0; index < 4; index++) {
-      HelloWorld.push(<HelloWorldText />);
+      HelloWorld.push(<HelloWorldText name="Dani" number={index} />);
     }
 
       ReactDOM.render(
