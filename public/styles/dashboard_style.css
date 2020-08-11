@@ -239,7 +239,7 @@ text-align: center;
 vertical-align: middle;
 font-size:20px;
 font-weight: 200;
-margin-top: 16px;
+margin-top: 14px;
 }
 
 .sidebarLogo{
@@ -276,7 +276,7 @@ z-index:1000;
 }
 
 .main-menu>ul {
-margin:0px 0;
+margin:20px 0;
 }
 
 .main-menu li {
@@ -293,7 +293,7 @@ border-spacing:0;
 /*color: #aaaaaa;*/
 color: #aaaab9;
 font-family: 'MuseoSans500', sans-serif;
-font-size: 18px;
+font-size: 17px;
 text-decoration:none;
 -webkit-transform:translateZ(0) scale(1,1);
 -webkit-transition:all 0.1s linear;
@@ -726,6 +726,11 @@ text-align: center;
   margin-right: 28px;
 }
 
+.tournamentInfoCardBackground{
+  border: 0px !important;
+  box-shadow: 0px -2px 8px 0px rgba(0,0,0,0.25) !important;
+}
+
 #boostsContainer{
   margin-top: 85px;
   width: 50%;
@@ -943,15 +948,15 @@ text-align: center;
 
 /* PRETOURNAMENT INFO PAGE CODE */
 #tournamentTitle{
+  color: #eeeeee;
   margin-bottom: 0px;
   padding-top: 30px;
   padding-left: 42px;
   letter-spacing: 0.8px;
-  font-weight: bold;
 }
 
 .quickDetailHeader{
-  background-color: rgba(255,255,255,0.16);
+  background-color: rgba(255,255,255,0.07);
   margin-top: -20px;
   border-top-right-radius: 12px;
   border-top-left-radius: 12px;
@@ -965,6 +970,7 @@ text-align: center;
 }
 
 .quickDetail{
+  color: #aaaaaa;
   list-style: none;
   display: inline-block;
   margin-left: 10px;
@@ -981,6 +987,7 @@ text-align: center;
 }
 
 .quickDetailText{
+  color: #aaaaaa;
   font-size: 15px;
   display: inline-block;
   letter-spacing: 0.8px;
