@@ -153,6 +153,40 @@ select option{
   object-fit: contain;
 }
 
+.noGradientBorder{
+  transition-duration: 0.2s;
+  padding: 4px;
+  height: auto;
+  border-radius: 12px;
+  background: none;
+  background-size: 100% 100%;
+}
+
+.noGradientBorder:hover{
+  transform: scale(1.02);
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
+.gradientBorderAnimated{
+  transition-duration: 0.2s;
+  padding: 4px;
+  height: auto;
+  border-radius: 12px;
+  background: -webkit-linear-gradient(0deg, #23f8ac, #19d2d8);
+  background-size: 800% 800%;
+  -webkit-animation: flow 2s ease infinite;
+  -moz-animation: flow 2s ease infinite;
+  -o-animation: flow 2s ease infinite;
+  animation: flow 2s ease infinite;
+}
+
+.gradientBorderAnimated:hover{
+  transform: scale(1.02);
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
 .gradientTextAnimated{
   font-weight: bold;
   background: -webkit-linear-gradient(45deg, #23f2ac, #19d5d2);
@@ -720,6 +754,14 @@ text-align: center;
   max-width: 100%;
   height: auto;
   margin-bottom: 20px;
+}
+
+.boostsBackground{
+  width: 100% !important;
+}
+
+.boostsBackground:hover{
+  transform: none !important;
 }
 
 .longYCard{
