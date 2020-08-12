@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dashboard</title>
 
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
     <link rel="icon" type="image/png" href="media/favicon.png"/>
     <link rel="stylesheet" type="text/css" href="styles/dashboard_style.css">
     <link rel="stylesheet" type="text/css" href="styles/fonts.css">
-    <script src="scripts/dashboard.js"></script>
-    <script src="scripts/header.js"></script>
 
     <link rel="stylesheet" href="https://use.typekit.net/fyp1otf.css">
     <script src="https://kit.fontawesome.com/201b9c41aa.js" crossorigin="anonymous"></script>
@@ -24,6 +26,9 @@
     <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-functions.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-storage.js"></script>
+
+    <script type="text/babel" src="scripts/dashboard.js"></script>
+    <script src="scripts/header.js"></script>
 
     <script>
         var firebaseConfig = {
@@ -94,6 +99,8 @@
         <div class="carouselCardBackground wideCardBackground">
           <div class="wideCardContent">
             <h2>My Tournaments</h2>
+            <div class="row" id="row" style="margin-left: 0px !important; margin-right: 0px !important;">
+            </div>
           </div>
         </div>
       </div>
