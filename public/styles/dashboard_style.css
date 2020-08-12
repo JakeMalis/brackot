@@ -74,8 +74,8 @@ p{
 }
 
 .main-page{
-  width: calc(100vw: - 80px);
-  margin-left: 80px;
+  width: calc(100vw: - 70px);
+  margin-left: 70px;
 }
 
 .headerImage{
@@ -228,47 +228,43 @@ font-size: 2em;
 }
 
 .fa-lg{
-  font-size: 1.5em;
+  font-size: 1.3em !important;
 }
 
 .fa {
 position: relative;
 display: table-cell;
-width: 80px;
-height: 30px;
+width: 60px;
+height: 26px;
 text-align: center;
 vertical-align: middle;
 font-size:20px;
 font-weight: 200;
-margin-top: 14px;
+margin-top: 13px;
 }
 
 .sidebarLogo{
-  fill: var(--gradient);
-  margin-left: auto;
   margin-right: auto;
-  margin-top: 25px;
-  margin-bottom:20px;
-  width: 40px;
-  height: 40px;
+  max-width: 225px;
+  max-height: 61px;
   display: block;
 }
 
 .main-menu:hover,nav.main-menu.expanded {
-width:250px;
-overflow:hidden;
+  width:225px;
+  overflow:hidden;
 }
 
 .main-menu {
 background: #2a2a3a;
-box-shadow: 1px 0px 12px 0px rgba(10,10,10,0.15);
+box-shadow: 1px 0px 12px 0px rgba(0,0,0,0.15);
 border-right:0px solid var(--aquamarine);
 position:fixed;
 top:0;
 bottom:0;
 height:100%;
 left:0;
-width:80px;
+width:60px;
 overflow:hidden;
 -webkit-transition:width .25s ease-in-out;
 transition:width .25s ease-in-out;
@@ -277,7 +273,7 @@ z-index:1000;
 }
 
 .main-menu>ul {
-margin:20px 0;
+margin:0px 0;
 }
 
 .main-menu li {
@@ -291,10 +287,9 @@ position:relative;
 display:table;
 border-collapse:collapse;
 border-spacing:0;
-/*color: #aaaaaa;*/
-color: #aaaab9;
-font-family: 'MuseoSans500', sans-serif;
-font-size: 17px;
+color: #dfdfe9;
+font-family: 'proxima-nova', sans-serif;
+font-size: 13px !important;
 text-decoration:none;
 -webkit-transform:translateZ(0) scale(1,1);
 -webkit-transition:all 0.1s linear;
@@ -365,7 +360,7 @@ width: 100%;
 height: 100%;
 }
 @font-face {
-  font-family: 'MuseoSans500', sans-serif;
+  font-family: 'proxima-nova', sans-serif;
 }
 
 #firstGreetingMessage{
