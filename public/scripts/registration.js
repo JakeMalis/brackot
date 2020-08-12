@@ -1,74 +1,75 @@
 function createUser() {
-  async function doCreation() {
-    firebase.auth().createUserWithEmailAndPassword(document.getElementById('email').value, document.getElementById('password').value).catch(
-      function(error) {
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          if (errorCode == 'auth/invalid-email') {
-            var email = document.getElementById('email');
-            email.style.backgroundColor = '#ffdddd';
-            email.classList.add('error');
-            setTimeout(function() {
-              email.classList.remove('error');
-            }, 300);
-          }
-          else if (errorCode == 'auth/email-already-in-use') {
-            var email = document.getElementById('email');
-            email.style.backgroundColor = '#ffdddd';
-            email.classList.add('error');
-            setTimeout(function() {
-              email.classList.remove('error');
-            }, 300);
-          }
-          else if (errorCode == 'auth/weak-password') {
-            var password = document.getElementById('password');
-            password.style.backgroundColor = '#ffdddd';
-            password.classList.add('error');
-            setTimeout(function() {
-              email.classList.remove('error');
-            }, 300);
-            error.preventDefault();
-          }
-      }
-    );
-    firebase.auth().onAuthStateChanged(function(user) { if (user) {
-      firebase.auth().currentUser.sendEmailVerification();
-      firebase.auth().currentUser.updateProfile({
-        displayName: document.getElementById('name').value
-      });
-      firebase.firestore().collection("mail").doc(firebase.auth().currentUser.uid + "-welcome").set({
-        to: document.getElementById('email').value,
-        template: {
-          name: 'welcome',
-          data: {
-            name: document.getElementById('name').value,
-            email: firebase.auth().currentUser.email
-          }
+  firebase.auth().createUserWithEmailAndPassword(document.getElementById('email').value, document.getElementById('password').value).catch(
+    function(error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        if (errorCode == 'auth/invalid-email') {
+          var email = document.getElementById('email');
+          email.style.backgroundColor = '#ffdddd';
+          email.classList.add('error');
+          setTimeout(function() {
+            email.classList.remove('error');
+          }, 300);
         }
-      });
-      firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).set({
+        else if (errorCode == 'auth/email-already-in-use') {
+          var email = document.getElementById('email');
+          email.style.backgroundColor = '#ffdddd';
+          email.classList.add('error');
+          setTimeout(function() {
+            email.classList.remove('error');
+          }, 300);
+        }
+        else if (errorCode == 'auth/weak-password') {
+          var password = document.getElementById('password');
+          password.style.backgroundColor = '#ffdddd';
+          password.classList.add('error');
+          setTimeout(function() {
+            email.classList.remove('error');
+          }, 300);
+          error.preventDefault();
+        }
+    }
+  );
+  firebase.auth().onAuthStateChanged(function(user) { if (user) {
+    firebase.auth().currentUser.sendEmailVerification();
+    firebase.auth().currentUser.updateProfile({
+      displayName: document.getElementById('name').value
+    });
+    firebase.auth().currentUser.updateProfile({
+        photoURL: "media/BrackotLogo2.jpg"
+    });
+    firebase.firestore().collection("mail").doc(firebase.auth().currentUser.uid + "-welcome").set({
+      to: document.getElementById('email').value,
+      template: {
+        name: 'welcome',
+        data: {
           name: document.getElementById('name').value,
-          email: document.getElementById('email').value,
-          stats: {
-            coins: 0,
-            notifications: 0,
-            matches: 0,
-            wins: 0
-          },
-          subscription: {
-            boost: false,
-            unlimited: false
-          },
-          email_preferences: {
-            announcements: true,
-            newsletter: true,
-            thirdparty: true
-          }
-      });
-    }});
-  }
-  doCreation();
-  window.location = "index.html";
+          email: firebase.auth().currentUser.email
+        }
+      }
+    });
+    firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).set({
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        stats: {
+          coins: 0,
+          notifications: 0,
+          matches: 0,
+          wins: 0
+        },
+        subscription: {
+          boost: false,
+          unlimited: false
+        },
+        email_preferences: {
+          announcements: true,
+          newsletter: true,
+          thirdparty: true
+        }
+    }).then(function() {
+      window.location = "index.html";
+    });
+  }});
 }
 
 function openModal() {
