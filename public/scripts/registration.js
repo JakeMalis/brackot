@@ -57,10 +57,6 @@ function createUser() {
           matches: 0,
           wins: 0
         },
-        subscription: {
-          boost: false,
-          unlimited: false
-        },
         email_preferences: {
           announcements: true,
           newsletter: true,
