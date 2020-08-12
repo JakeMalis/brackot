@@ -73,6 +73,18 @@ p{
   -moz-osx-font-smoothing: grayscale;
 }
 
+input{
+  color: #dddddd !important;
+}
+
+input::placeholder{
+  color: #aaaaaa !important;
+}
+
+select{
+  color: #dddddd !important;
+}
+
 .main-page{
   width: calc(100vw: - 70px);
   margin-left: 70px;
@@ -824,7 +836,7 @@ text-align: center;
   margin-bottom: 15px;
   padding: 11px;
   font-size: 18px;
-  font-family: 'MuseoSans300', sans-serif;
+  font-family: 'proxima-nova', sans-serif;
   border-radius: 11px;
   background-color: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.09);
