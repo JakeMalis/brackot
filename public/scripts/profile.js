@@ -8,18 +8,17 @@ function personalizeElements() {
 
 
   firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).get().then(function(doc) {
-    document.getElementById("firstName").placeholder = doc.data().first;
-    document.getElementById("lastName").placeholder = doc.data().last;
+    document.getElementById("name").placeholder = doc.data().name;
     document.getElementById("email").placeholder = firebase.auth().currentUser.email;
     if (doc.data().teams.length === 0) { document.getElementById("team").placeholder = "None"; }
   });
 
   firebase.firestore().collection("teams").where("players", "array-contains", firebase.auth().currentUser.uid).get().then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
-      document.getElementById("team").placeholder = document.getElementById("team").placeholder + doc.data().name + ", ";
+      document.getElementById("teams").placeholder = document.getElementById("teams").placeholder + doc.data().name + ", ";
     });
   }).then(function() {
-    document.getElementById("team").placeholder = document.getElementById("team").placeholder.slice(0, -2);
+    document.getElementById("teams").placeholder = document.getElementById("teams").placeholder.slice(0, -2);
   });
 }
 
@@ -30,17 +29,12 @@ function editProfile() {
   document.getElementById("profileProfilePic").src = firebase.auth().currentUser.photoURL;
 
 
-  document.getElementById("firstName").disabled = false;
-  document.getElementById("firstName").value = document.getElementById("firstName").placeholder;
+  document.getElementById("name").disabled = false;
+  document.getElementById("name").value = document.getElementById("name").placeholder;
 
-  document.getElementById("lastName").disabled = false;
-  document.getElementById("lastName").value = document.getElementById("lastName").placeholder;
 
   document.getElementById("email").disabled = false;
   document.getElementById("email").value = document.getElementById("email").placeholder;
-
-  document.getElementById("highschool").disabled = false;
-  document.getElementById("highschool").value = document.getElementById("highschool").placeholder;
 }
 
 function saveProfile() {
@@ -50,44 +44,23 @@ function saveProfile() {
   document.getElementById("avatar").src = firebase.auth().currentUser.photoURL;
   document.getElementById("profileProfilePic").src = firebase.auth().currentUser.photoURL;
 
-  document.getElementById("firstName").disabled = true;
-  document.getElementById("firstName").placeholder = document.getElementById("firstName").value;
-  document.getElementById("firstName").value = "";
-
-  document.getElementById("lastName").disabled = true;
-  document.getElementById("lastName").placeholder = document.getElementById("lastName").value;
-  document.getElementById("lastName").value = "";
+  document.getElementById("name").disabled = true;
+  document.getElementById("name").placeholder = document.getElementById("name").value;
+  document.getElementById("name").value = "";
 
   document.getElementById("email").disabled = true;
   document.getElementById("email").placeholder = document.getElementById("email").value;
   document.getElementById("email").value = "";
 
-  document.getElementById("highschool").disabled = true;
-  document.getElementById("highschool").placeholder = document.getElementById("highschool").value;
-  document.getElementById("highschool").value = "";
-
 }
 
 function saveProfileChanges() {
-  if (document.getElementById("firstName").placeholder != document.getElementById("firstName").value) {
+  if (document.getElementById("name").placeholder != document.getElementById("name").value) {
     firebase.auth().currentUser.updateProfile({
-      displayName: document.getElementById('firstName').value + " " + document.getElementById('lastName').value,
+      displayName: document.getElementById('name').value,
     });
     firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
-        first: document.getElementById('firstName').value
-    }).then(function() {
-        saveProfile();
-    }).catch(function(error) {
-            console.error("Error writing document: ", error);
-    });
-  }
-
-  if (document.getElementById("lastName").placeholder != document.getElementById("lastName").value) {
-    firebase.auth().currentUser.updateProfile({
-      displayName: document.getElementById('firstName').value + " " + document.getElementById('lastName').value,
-    });
-    firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
-        last: document.getElementById('lastName').value
+        name: document.getElementById('name').value
     }).then(function() {
         saveProfile();
     }).catch(function(error) {
@@ -99,17 +72,7 @@ function saveProfileChanges() {
     $('#modal').modal();
   }
 
-  if (document.getElementById("highschool").placeholder != document.getElementById("highschool").value) {
-    firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
-        highschool: document.getElementById('highschool').value
-    }).then(function() {
-        saveProfile();
-    }).catch(function(error) {
-            console.error("Error writing document: ", error);
-    });
-  }
-
-  if ((document.getElementById("firstName").placeholder == document.getElementById("firstName").value) && (document.getElementById("lastName").placeholder == document.getElementById("lastName").value) && (document.getElementById("email").placeholder == document.getElementById("email").value) && (document.getElementById("highschool").placeholder == document.getElementById("highschool").value)) {
+  if ((document.getElementById("name").placeholder == document.getElementById("name").value) && (document.getElementById("email").placeholder == document.getElementById("email").value)) {
     saveProfile();
   }
 }
