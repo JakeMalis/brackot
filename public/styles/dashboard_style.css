@@ -182,7 +182,7 @@ select{
   display: block;
   font-size: 18px;
   background-color: var(--tournamentCardColor);
-  font-family: 'MuseoSans700', sans-serif;
+  font-family: 'proxima-nova', sans-serif;
   text-transform: uppercase;
   letter-spacing: 3px;
   font-weight: 600;
@@ -233,6 +233,10 @@ select{
   margin-top: 10px;
   width: 50px;
   height: 50px;
+}
+
+.myTournamentsHeader{
+  padding-bottom: 30px;
 }
 
 .fa-2x {
