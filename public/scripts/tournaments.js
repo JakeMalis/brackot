@@ -1,5 +1,4 @@
 const tournaments = new Array();
-const TournamentCardArray = [];
 
 function personalizeElements() {
   loadTournaments();
@@ -67,30 +66,32 @@ function refreshTournaments() {
   });
 }
 
-/*<button className="tournamentCardButton" id={"tournamentCardButton" + this.props.tournamentNumber}>Sign Up</button>*/
-class TournamentCard extends React.Component {
-  render() {
-    return (
-        <div className="tournamentCard" id={"tournamentCard" + this.props.tournamentNumber}>
-          <div className="tournamentCardBackground">
-            <div className="tournamentCardContent" id={"tournamentContent" + this.props.tournamentNumber}>
-            <img id={"tournamentWallpaper" + this.props.tournamentNumber}></img>
-              <div className="tournamentCardText">
-                  <h6 className="tournamentCardTitle" id={"tournamentTitle" + this.props.tournamentNumber}></h6>
-                  <ul className="tournamentCardDetails">
-                    <li className="tournamentDetailsList"><i className="fa fa-gamepad tournamentCardIcon" aria-hidden="true"></i><div className="tournamentCardDetail" id={"tournamentGame" + this.props.tournamentNumber}></div></li>
-                    <li className="tournamentDetailsList"><i className="fa fa-calendar tournamentCardIcon" aria-hidden="true"></i><div className="tournamentCardDetail" id={"tournamentDate" + this.props.tournamentNumber}></div></li>
-                    <li className="tournamentDetailsList"><i className="fa fa-user tournamentCardIcon" aria-hidden="true"></i><div className="tournamentCardDetail" id={"tournamentParticipants" + this.props.tournamentNumber}></div></li>
-                  </ul>
+
+function loadTournaments() {
+  var TournamentCardArray = [];
+
+  class TournamentCard extends React.Component {
+    render() {
+      return (
+          <div className="tournamentCard" id={"tournamentCard" + this.props.tournamentNumber}>
+            <div className="tournamentCardBackground">
+              <div className="tournamentCardContent" id={"tournamentContent" + this.props.tournamentNumber}>
+              <img id={"tournamentWallpaper" + this.props.tournamentNumber}></img>
+                <div className="tournamentCardText">
+                    <h6 className="tournamentCardTitle" id={"tournamentTitle" + this.props.tournamentNumber}></h6>
+                    <ul className="tournamentCardDetails">
+                      <li className="tournamentDetailsList"><i className="fa fa-gamepad tournamentCardIcon" aria-hidden="true"></i><div className="tournamentCardDetail" id={"tournamentGame" + this.props.tournamentNumber}></div></li>
+                      <li className="tournamentDetailsList"><i className="fa fa-calendar tournamentCardIcon" aria-hidden="true"></i><div className="tournamentCardDetail" id={"tournamentDate" + this.props.tournamentNumber}></div></li>
+                      <li className="tournamentDetailsList"><i className="fa fa-user tournamentCardIcon" aria-hidden="true"></i><div className="tournamentCardDetail" id={"tournamentParticipants" + this.props.tournamentNumber}></div></li>
+                    </ul>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-    );
+      );
+    }
   }
-}
 
-function loadTournaments() {
   async function renderTournamentCards() {
     var tournamentNumber = 1;
     firebase.firestore().collection("tournaments").get().then(function(querySnapshot) {
@@ -105,29 +106,16 @@ function loadTournaments() {
       );
     });
   }
+
   renderTournamentCards();
+
   var tournamentNumber = 1;
   firebase.firestore().collection("tournaments").get().then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
-        tournaments.push(doc.data());
 
         $('#tournamentContent' + tournamentNumber).click(function(){
           window.location = "tournament-info?tournamentId=" + doc.id;
         });
-
-        //This will have to change for team registration so that it says it for each registered player on a team
-        if ((doc.data().players).includes(firebase.auth().currentUser.uid)) {
-          document.getElementById("tournamentCardButton" + tournamentNumber).className = 'tournamentCardButtonSigned';
-          document.getElementById("tournamentCardButton" + tournamentNumber).innerHTML = "✓ Signed Up";
-          document.getElementById("tournamentCardButton" + tournamentNumber).disabled = true;
-        }
-
-        if ((doc.data().type) === "team") {
-          document.getElementById("tournamentCardButton" + tournamentNumber).innerHTML = "Pick Team Roster";
-          document.getElementById("tournamentCardButton" + tournamentNumber).onclick = function() {
-            $('#chooseTeamModal').modal();
-          };
-        }
 
         document.getElementById("tournamentCard" + tournamentNumber).style.visibility = "visible";
         document.getElementById("tournamentWallpaper" + tournamentNumber).src = "/media/game_wallpapers/" + doc.data().game + "-" + "gameplay.jpg";
@@ -149,7 +137,20 @@ function loadTournaments() {
           document.getElementById("tournamentGame" + tournamentNumber).innerHTML = doc.data().game.substring(0,1) + doc.data().game.substring(1).toLowerCase();
         }
 
-        document.getElementById("tournamentDate" + tournamentNumber).innerHTML = doc.data().elegant_date;
+        var date = new Date(doc.data().date.toDate());
+        var hour;
+        var meridiem;
+
+        if ((date.getHours() - 12) <= 0) {
+          hour = date.getHours();
+          meridiem = "A.M."
+        }
+        else {
+          hour = date.getHours() - 12;
+          meridiem = "P.M."
+        }
+
+        document.getElementById("tournamentDate" + tournamentNumber).innerHTML = date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear() + ' @ ' + hour + ':' + date.getMinutes() + ' ' + meridiem;
         document.getElementById("tournamentParticipants" + tournamentNumber).innerHTML = (doc.data().players.length) + " Participants";
 
 
