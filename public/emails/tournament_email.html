@@ -7,30 +7,28 @@
       margin: 0px;
       padding: 0px;
       overflow-x: hidden;
-      font-family: arial;
-      background-color: #f6faff;
+      font-family: 'arial';
+      background-color: #202131;
     }
     #header{
       width: 100%;
       height: 70px;
-      background-image: linear-gradient(90deg,#0084ff,#00C6ff);
+      background-image: linear-gradient(120deg,#23F2AC,#23D0F2);
     }
-    #starlogo{
+    #logo{
+      object-fit: contain;
       margin-left: auto;
       margin-right: auto;
-      padding-top: 3px;
-      width: 60px;
-      height: 60px;
+      padding-top: 30px;
+      width: 200px;
+      height: 0px;
     }
     #content{
       margin-top: 0px;
       height: auto;
       width: 100%;
       margin-bottom: 0px;
-      background-image: url("https://firebasestorage.googleapis.com/v0/b/all-star-esports/o/emailbackground.png?alt=media&token=2cc81e8e-24cf-452c-bdcc-2a4c52d6ac90");
-      background-size: cover;
-      background-position: center;
-      background-color: #ffffff;
+      background-color: #202131;
     }
     h1{
       margin-top: 30px;
@@ -39,7 +37,7 @@
       margin-left: auto;
       margin-right: auto;
       text-align: center;
-      color: #232323;
+      color: #eeeeee;
     }
     h2{
       margin-top: 0px;
@@ -48,11 +46,12 @@
       margin-right: auto;
       max-width: 80vw;
       text-align: center;
-      color: #343434;
+      color: #cfcfcf;
       font-size: 22px;
       font-weight: 500;
     }
     p{
+      color: #888888;
       margin-left: auto;
       margin-right: auto;
       width: 75vw;
@@ -69,13 +68,13 @@
       text-align: center;
       margin-left: auto;
       margin-right: auto;
-      background-image: linear-gradient(90deg,#0084ff,#00c6ff);
+      background-image: linear-gradient(120deg,#23F2AC,#23D0F2);
       padding-top: 20px;
       padding-bottom: 20px;
       font-size: 18px;
       font-weight: 700;
       border-radius: 4px;
-      color: white;
+      color: #eeeeee;
       text-decoration: none;
     }
     #spacing{
@@ -86,7 +85,7 @@
       padding-top: 60px;
       padding-bottom: 60px;
       width: 100%;
-      background-color: #f6faff;
+      background-color: #2b2c3c;
     }
     .bigFooter{
       line-height: 15px;
@@ -119,16 +118,17 @@
       font-size: 20px;
       line-height: 30px;
       text-align: center;
+      color: #999999;
     }
   </style>
 </head>
 <body>
   <div id="header">
-    <div id="starlogo">
-      <img style="height: 60px; width: 60px;" src="https://firebasestorage.googleapis.com/v0/b/all-star-esports/o/whitestarlogo.png?alt=media&token=8b1b8669-3db4-4d5e-9fa7-d069c59bdda9">
-    </div>
   </div>
   <div id="content">
+    <div id="logo">
+      <img style="height: 60px; width: 200px; object-fit: contain;" src="../media/BrackotFullLogo.png">
+    </div>
       <h2>Your sign-up has been confirmed</h2>
       <h1>{{name}}</h1>
         <img id="gameplayImage" src="{{tournamentImage}}">
@@ -141,7 +141,7 @@
       <div id="spacing"></div>
   </div>
   <div id="footer">
-    <p class="bigFooter">This email was sent to {{email}} because you've recently registered for All-Star eSports. You can always update your preferences by clicking <a href="https://app.allstaresports.com/email_preferences">here</a>.</p>
+    <p class="bigFooter">This email was sent to {{email}} because you've recently registered for a Brackot tournament. You can always update your preferences by clicking <a href="https://brackot.com/email-preferences">here</a>.</p>
     <p class="smallFooter">© 2020 All-Star eSports. All rights reserved.</p>
     <p class="smallFooter">All-Star eSports League, LLC. 1081 Holland Drive, Boca Raton, FL 33487, United States</p>
   </div>
