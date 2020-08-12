@@ -1223,3 +1223,7 @@ text-align: center;
     width: 97.3%;
   }
 }
+
+#myTournaments{
+  display: none;
+}

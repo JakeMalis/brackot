@@ -99,5 +99,11 @@ function personalizeElements() {
     document.getElementById("wins").innerHTML = doc.data().stats.wins;
   });
 
-  loadRegisteredTournaments();
+  firebase.firestore().collection("tournaments").where("players", "array-contains", firebase.auth().currentUser.uid).get().then(function(querySnapshot) {
+    if (!querySnapshot.empty) {
+      document.getElementById("myTournaments").style.display = "flex";
+      loadRegisteredTournaments();
+    }
+  });
+
 }
