@@ -68,7 +68,7 @@ function createUser() {
     }});
   }
   doCreation();
-  //window.location = "index.html";
+  window.location = "index.html";
 }
 
 function openModal() {
