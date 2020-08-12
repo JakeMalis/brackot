@@ -74,15 +74,24 @@ p{
 }
 
 input{
-  color: #dddddd !important;
+  color: #eeeeee;
 }
 
-input::placeholder{
-  color: #aaaaaa !important;
+::placeholder{
+  color: #888888 !important;
 }
 
 select{
-  color: #dddddd !important;
+  color: #eeeeee;
+}
+
+select option{
+  color: #aaaaaa;
+  background: var(--tournamentCardColor);
+}
+
+::placeholder{
+  color: #888888;
 }
 
 .main-page{
@@ -844,6 +853,11 @@ text-align: center;
   border-radius: 11px;
   background-color: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.09);
+  color: #eeeeee !important;
+}
+
+.longProfileInputs::placeholder{
+  color: #888888 !important;
 }
 
 .profileInputTitle{
