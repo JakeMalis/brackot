@@ -8,6 +8,14 @@ function personalizeElements() {
   $('#billingInfoButton').click(function(){
     openPortal();
   });
+
+  firebase.auth().currentUser.getIdTokenResult().then((idTokenResult) => {
+    if (idTokenResult.claims.subscription == "unlimited") {
+      document.getElementById("boostsBorder").className = "gradientBorderAnimated";
+    }
+  });
+
+
 }
 
 async function openPortal() {
