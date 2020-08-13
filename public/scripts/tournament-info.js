@@ -1,4 +1,4 @@
-function loadTournamentInfo() {
+function personalizeElements() {
   var url = new URL(window.location.href);
   var tournamentId = url.searchParams.get("tournamentId");
 

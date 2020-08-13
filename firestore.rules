@@ -5,21 +5,29 @@ service cloud.firestore {
       return request.auth.token.subscription == "unlimited";
     }
     function isTournamentCreator() {
-      return request.resource.data.creator == uid;
+      return request.resource.data.creator == request.auth.uid;
     }
     function isTeamOwner() {
-      return request.resource.data.owner == uid;
+      return request.resource.data.owner == request.auth.uid;
     }
 
     match /users/{userId} {
       allow read: if request.auth != null && request.auth.uid == userId;
-      allow update: if request.auth != null && request.auth.uid == userId && resource.data.stats == request.resource.stats;
+      allow update: if request.auth != null && request.auth.uid == userId && resource.data.stats == request.resource.data.stats;
       allow create: if request.auth != null;
     }
     match /tournaments/{document=**} {
       allow read: if true;
       allow create: if subscribedToUnlimited();
-      allow update: if isTournamentCreator();
+      allow update: if isTournamentCreator()
+      || (resource.data.creator == request.resource.data.creator
+      && resource.data.date == request.resource.data.date
+      && resource.data.earnings == request.resource.data.earnings
+      && resource.data.game == request.resource.data.game
+      && resource.data.name == request.resource.data.name
+      && resource.data.platform == request.resource.data.platform
+      && resource.data.type == request.resource.data.type
+      && resource.data.unlimited == request.resource.data.unlimited);
     }
     match /mail/{document=**} {
       allow create: if request.auth != null;
@@ -27,7 +35,7 @@ service cloud.firestore {
     match /teams/{document=**} {
       allow read: if request.auth != null;
       allow create: if request.auth != null;
-      allow update: if isTeamOwner() && resource.data.name == request.data.name;
+      allow update: if isTeamOwner() && resource.data.name == request.resource.data.name;
     }
 
     match /customers/{uid} {
