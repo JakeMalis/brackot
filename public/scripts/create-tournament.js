@@ -1,10 +1,3 @@
-window.onload = function() {
-  firebase.auth().onAuthStateChanged(function(user) {
-      if (user) { document.getElementById("avatar").src = firebase.auth().currentUser.photoURL; personalizeElements(); }
-      else { window.location = "login.html"; }
-  });
-}
-
 function personalizeElements() {
   var today = new Date();
   var dd = today.getDate();

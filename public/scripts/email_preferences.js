@@ -1,17 +1,5 @@
-window.onload = function() {
-  firebase.auth().onAuthStateChanged(function(user) {
-      if (user) { personalizeElements(); }
-      else { window.location = "login.html"; }
-  });
-}
-
 function personalizeElements() {
-  document.getElementById("avatar").src = firebase.auth().currentUser.photoURL;
-
   firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).get().then(function(doc) {
-    if (doc.data().unlimited == true) {
-      document.getElementById("unlimitedIcon").style.visibility = "visible";
-    }
     if (doc.data().email_preferences.announcements == true) {
         document.getElementById("announcements").checked = "true";
     }

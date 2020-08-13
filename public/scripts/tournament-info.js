@@ -1,13 +1,3 @@
-window.onload = function() {
-  firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        document.getElementById("avatar").src = firebase.auth().currentUser.photoURL;
-        loadTournamentInfo();
-      }
-      else { window.location = "login.html"; }
-  });
-}
-
 function loadTournamentInfo() {
   var url = new URL(window.location.href);
   var tournamentId = url.searchParams.get("tournamentId");
