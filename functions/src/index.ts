@@ -8,21 +8,28 @@ exports.subscribeUserToUnlimited = functions.region('us-east1').auth.user().onCr
 });
 
 exports.deleteOldMail = functions.region('us-east1').firestore.document('mail/{documentId}').onCreate((snap, context) => {
-      let count: number = 0;
-
       async function removeMail() {
         await admin.firestore().collection('mail').get().then(querySnapshot => {
           querySnapshot.forEach(documentSnapshot => {
             const sendDate: Date = new Date(documentSnapshot.data().delivery.startTime.toDate());
-            let currentDate: Date = new Date();
-            currentDate.setDate(currentDate.getDate() - 1);
+            const currentDate: Date = new Date();
+            currentDate.setDate(currentDate.getHours() - 1);
 
-            if (sendDate <= currentDate) {
-              count++;
-            }
+            async function deleteMail() {
+              if (sendDate.getTime() <= currentDate.getTime()) {
+                return admin.firestore().runTransaction(transaction => {
+                  transaction.delete(admin.firestore().doc('mail/' + documentSnapshot.id));
+                  return Promise.resolve();
+                });
+                functions.logger.log("Email ", documentSnapshot.id, "was sent more than 1 hour ago.");
+              }
+              else {
+                return sendDate;
+              }
+            };
+            void deleteMail();
           });
         });
-        functions.logger.log(count, " emails were sent more than 1 day ago.");
       };
       void removeMail();
 });
