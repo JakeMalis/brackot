@@ -1,0 +1,174 @@
+:root{
+  --gradient: linear-gradient(120deg,#23F2AC,#23D0F2);
+  --aquamarine: #23F2AC;
+  --turquoise: #23D0F2;
+  --background: #202131;
+  --cardColor: #2b2c3c;
+  --tournamentCardColor: #3a3b4a;
+}
+body{
+  overflow-x: hidden;
+  margin: 0px;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: var(--background) !important;
+}
+
+h1{
+  font-family: 'proxima-nova', sans-serif !important;
+  font-weight: 700;
+  color: #eeeeee;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h2{
+  font-family: 'proxima-nova', sans-serif !important;
+  font-weight: 600 !important;
+  color: rgba(255,255,255,0.9) !important;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h3{
+  font-family: 'proxima-nova', sans-serif !important;
+  color: rgba(255,255,255,0.9) !important;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h4{
+  font-family: 'proxima-nova', sans-serif !important;
+  color: rgba(255,255,255,0.9) !important;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h5{
+  font-family: 'proxima-nova', sans-serif !important;
+  color: rgba(255,255,255,0.9) !important;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h6{
+  font-family: 'proxima-nova', sans-serif !important;
+  color: #888888 !important;
+  text-transform: uppercase;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+p{
+  font-family: 'proxima-nova', sans-serif;
+  color: #eeeeee;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+input{
+  color: #eeeeee;
+}
+
+::placeholder{
+  color: #888888 !important;
+}
+
+select{
+  color: #eeeeee;
+}
+
+select option{
+  color: #aaaaaa;
+  background: var(--tournamentCardColor);
+}
+
+::placeholder{
+  color: #888888;
+}
+
+.grayButton{
+  display: block;
+  font-size: 18px;
+  background-color: var(--tournamentCardColor);
+  font-family: 'proxima-nova', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 600;
+  padding-left: 30px;
+  padding-right: 30px;
+  width: auto;
+  height: 44px;
+  color: white;
+  border: transparent;
+  border-radius: 8px;
+  transition-duration: 0.2s;
+}
+
+.grayButton:hover{
+  opacity: 70%;
+  transition-duration: 0.2s;
+  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+  transform: translateY(-1px);
+}
+
+.gradientButton{
+  display: block;
+  font-size: 18px;
+  background-image: var(--gradient);
+  font-family: 'MuseoSans700', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 600;
+  padding-left: 30px;
+  padding-right: 30px;
+  width: auto;
+  height: 44px;
+  color: white;
+  border: transparent;
+  border-radius: 8px;
+  transition-duration: 0.2s;
+}
+
+.gradientButton:hover{
+  opacity: 70%;
+  transition-duration: 0.2s;
+  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+  transform: translateY(-1px);
+}
+
+.topNavbar{
+  width: 100%;
+  height: 70px;
+  background: red;
+}
+
+.indexPage{
+  width: 100%;
+}
+
+.tallIndex{
+  height:750px;
+  background-color: blue;
+  background-size: cover;
+}
+
+#firstLanding{
+  background-image: url("../media/splash_art/jaxsplash.jpg");
+}
+
+.shortIndex{
+  height: 400px;
+  background-color: green;
+}
+
+.gradientOverlay{
+  /*Find the hex values for gradient, convert to rgba, add layer of transparency*/
+}
