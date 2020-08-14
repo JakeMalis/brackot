@@ -75,7 +75,7 @@ function sendConfirmationEmail(tournamentId) {
   var game, date, name, tournamentImage;
 
   firebase.firestore().collection("tournaments").doc(tournamentId).get().then(function(doc) {
-    tournamentImage = "https://firebasestorage.googleapis.com/v0/b/all-star-esports/o/games%2F" + doc.data().game + "-gameplay.jpg?alt=media";
+    tournamentImage = "../media/game_wallpapers" + doc.data().game + "-gameplay.jpg";
 
     if (doc.data().game == "SMASH") {
       game = "Super Smash Bros. Ultimate";
