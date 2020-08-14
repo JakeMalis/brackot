@@ -8,17 +8,21 @@ exports.subscribeUserToUnlimited = functions.region('us-east1').auth.user().onCr
 });
 
 exports.deleteOldMail = functions.region('us-east1').firestore.document('mail/{documentId}').onCreate((snap, context) => {
-      //const newValue = snap.data();
-      //return newValue;
-      //var currentDate = new Date(newValue.startTime.toDate());
-      let count: number = 1;
+      let count: number = 0;
+
       async function removeMail() {
         await admin.firestore().collection('mail').get().then(querySnapshot => {
           querySnapshot.forEach(documentSnapshot => {
-            count++;
+            const sendDate: Date = new Date(documentSnapshot.data().delivery.startTime.toDate());
+            let currentDate: Date = new Date();
+            currentDate.setDate(currentDate.getDate() - 1);
+
+            if (sendDate <= currentDate) {
+              count++;
+            }
           });
         });
-        functions.logger.log("Hello from Firebase. Here's the number: ", count);
+        functions.logger.log(count, " emails were sent more than 1 day ago.");
       };
       void removeMail();
 });
