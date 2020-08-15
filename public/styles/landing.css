@@ -95,7 +95,7 @@ select option{
 }
 
 .grayButton{
-  display: block;
+  display: inline-block;
   font-size: 18px;
   background-color: var(--tournamentCardColor);
   font-family: 'proxima-nova', sans-serif;
@@ -108,7 +108,7 @@ select option{
   height: 44px;
   color: white;
   border: transparent;
-  border-radius: 8px;
+  border-radius: 6px;
   transition-duration: 0.2s;
 }
 
@@ -120,10 +120,10 @@ select option{
 }
 
 .gradientButton{
-  display: block;
+  display: inline-block;
   font-size: 18px;
   background-image: var(--gradient);
-  font-family: 'MuseoSans700', sans-serif;
+  font-family: 'proxima-nova', sans-serif;
   text-transform: uppercase;
   letter-spacing: 3px;
   font-weight: 600;
@@ -133,7 +133,7 @@ select option{
   height: 44px;
   color: white;
   border: transparent;
-  border-radius: 8px;
+  border-radius: 6px;
   transition-duration: 0.2s;
 }
 
@@ -150,7 +150,7 @@ select option{
   position: fixed;
   width: 100%;
   height: 70px;
-  background-color: rgba(0,0,0,0.35);
+  background-color: rgba(0,0,0,0.30);
   z-index: 100;
   border-bottom: 1px solid rgba(100,100,100,0.2);
 }
@@ -166,39 +166,99 @@ select option{
   z-index: 101;
 }
 
+#loginButton{
+  top: 17px;
+  right: 20px;
+  position: fixed;
+  display: inline-block;
+  font-size: 15px;
+  background-image: var(--gradient);
+  font-family: 'proxima-nova', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+  padding-left: 18px;
+  padding-right: 18px;
+  width: auto;
+  height: 34px;
+  color: white;
+  border: transparent;
+  border-radius: 4px;
+  transition-duration: 0.2s;
+}
+
+#loginButton:hover{
+  opacity: 70%;
+  transition-duration: 0.2s;
+  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+}
+
 .indexPage{
   width: 100%;
 }
 
 .tallIndex{
   height:750px;
-  background-color: blue;
+  background-color: var(--background);
   background-size: cover;
 }
 
 #firstLanding{
-  background-image: url("../media/splash_art/baron.jpeg");
+  background-image: url("../media/splash_art/zedsplash.jpg");
 }
 
 .shortIndex{
   height: 400px;
-  background-color: green;
+  background-color: var(--background);
 }
 
 .grayscaleOverlay{
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(0,0,0,0.6);
 }
 
 .gradientOverlay{
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(90deg,rgba(35, 242, 172, 0.7),rgba(35, 208, 242, 0.7));
-  /*Find the hex values for gradient, convert to rgba, add layer of transparency*/
+  background-image: linear-gradient(90deg,rgba(35, 242, 172, 0.5),rgba(35, 208, 242, 0.5));
 }
+
 .fadeOverlay{
   width: 100%;
   height: 100%;
   background-image: linear-gradient(180deg, rgba(0,0,0,0), rgba(32, 33, 49, 1) 95%);
+}
+
+.contentBox{
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 230px;
+  padding-left: 50px;
+  padding-right: 50px;
+  max-width: 700px;
+  text-align: center;
+}
+
+.landingHeader{
+  font-size: 38.5px;
+  margin: 0px;
+  padding: 0px;
+  padding-bottom: 17px;
+  font-weight: 700;
+  color: #eeeeee !important;
+}
+
+.landingSubheader{
+  line-height: 22px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 570px;
+  font-size: 18px;
+  padding: 0px;
+  padding-bottom: 50px;
+  font-weight: 400;
+  color: #aaaaaa !important;
 }

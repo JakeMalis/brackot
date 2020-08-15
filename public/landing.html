@@ -46,12 +46,25 @@
 <body>
   <div class="landingPage">
     <div class="topNavbar">
-      <img class="logo" src="media/BrackotFullLogo.png">
+      <a href="https://brackot.com"><img class="logo" src="media/BrackotSidebarLogo.png"></a>
+      <div class="primaryTabs">
+      </div>
+      <div class="secondaryTabs">
+        <button id="loginButton" onclick="location.href='login.html';">Log In</button>
+      </div>
     </div>
     <div id="firstLanding" class="indexPage tallIndex">
       <div class="grayscaleOverlay">
         <div class="gradientOverlay">
           <div class="fadeOverlay">
+            <div class="contentBox">
+              <h1 id="landingHeader" class="landingHeader">Compete in Online Tournaments</h1>
+              <h4 id="landingSubheader" class="landingSubheader">Countless players, teams, publishers, and organizations all use Brackot to manage their tournaments and communities.</h4>
+              <div class="twoButtonContainer">
+                <button id="playNowButton" class="gradientButton" onclick="location.href='index.html';">Play Now</button>
+                <button id="hostTournamentButton" class="grayButton" onclick="location.href='create-tournament.html';">Host Tournament</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
