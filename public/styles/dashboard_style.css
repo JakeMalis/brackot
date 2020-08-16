@@ -221,6 +221,20 @@ select option{
 100%{background-position:0% 50%}
 }
 
+.buttonlessButton{
+  display: block;
+  background: transparent;
+  border: 0px;
+  font-family: 'proxima-nova', sans-serif;
+  font-size: 18px;
+  transition-duration: 0.1s;
+}
+
+.buttonlessButton:hover{
+  opacity: 60%;
+  transition-duration: 0.1s;
+}
+
 .grayButton{
   display: block;
   font-size: 18px;
@@ -250,7 +264,7 @@ select option{
   display: block;
   font-size: 18px;
   background-image: var(--gradient);
-  font-family: 'MuseoSans700', sans-serif;
+  font-family: 'proxima-nova', sans-serif;
   text-transform: uppercase;
   letter-spacing: 3px;
   font-weight: 600;
@@ -563,6 +577,20 @@ text-align: center;
   margin-right: 0px !important;
 }
 
+.singleColumn{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.cardColumn{
+  align-content: flex-start;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
 .column{
   display: flex;
   flex-direction: column;
@@ -635,7 +663,7 @@ text-align: center;
   color: #eeeeee !important;
   text-align: center;
   vertical-align: baseline;
-  font-family: 'MuseoSans500', sans-serif;
+  font-family: 'proxima-nova', sans-serif;
 }
 
 .tournamentCardDetails{
@@ -671,11 +699,11 @@ text-align: center;
   font-size: 14px;
   color: #aaaaaa !important;
   display: inline-block;
-  font-family: 'MuseoSans300', sans-serif;
+  font-family: 'proxima-nova', sans-serif;
 }
 
 .tournamentCardButton{
-  font-family: 'MuseoSans700', sans-serif;
+  font-family: 'proxima-nova', sans-serif;
   background-image: var(--gradient);
   margin-top: 13px;
   height: 50px;
@@ -697,7 +725,7 @@ text-align: center;
 }
 
 .tournamentCardButtonSigned{
-  font-family: 'MuseoSans700', sans-serif;
+  font-family: 'proxima-nova', sans-serif;
   background-image: linear-gradient(70deg,#36bf70,#12fe7b);
   margin-top: 13px;
   height: 50px;
@@ -712,6 +740,31 @@ text-align: center;
   font-weight: bold;
   letter-spacing: 3px;
   text-transform: uppercase;
+}
+
+.seeProfileStatsContainer{
+  text-align: left;
+  width: 100%;
+  padding-bottom: 30px;
+}
+
+#seeStatsButton{
+  margin-left: 3%;
+  margin-right: auto;
+  color: #aaaaaa;
+}
+
+.statCard{
+  flex: 0 0 100%;
+  max-width: 100%;
+  height: 200px;
+  background: transparent;
+  transition-duration: 0.2s;
+}
+
+.statCard:hover{
+  transform: scale(1.03);
+  transition-duration: 0.2s;
 }
 
 .smallCard{
@@ -910,22 +963,17 @@ text-align: center;
 }
 
 .profileButton{
-  position: relative;
-  float: right;
+  margin-top: 22px !important;
   display: inline-block;
-  margin-top: -100px;
-  margin-right: -20px;
   height: 40px;
-  min-width: 70px;
-  max-width: 100px;
-  width: 40%;
+  width: 100%;
   font-size: 18px;
-  font-family: 'MuseoSans700', sans-serif;
+  font-family: 'proxima-nova', sans-serif;
   letter-spacing: 1.7px;
   font-weight: 800px;
   color: #eeeeee;
   border: 0px;
-  border-radius: 9px;
+  border-radius: 8px;
   cursor: pointer;
   transition-duration: 0.1s;
 }
@@ -1228,6 +1276,13 @@ text-align: center;
 }
 
 @media only screen and (min-width: 900px){
+  .singleColumn{
+    width: 100%;
+  }
+
+  .cardColumn{
+    width: 50%;
+  }
   .column{
     width: 47%;
   }
@@ -1245,9 +1300,17 @@ text-align: center;
     flex: 0 0 50%;
     max-width: 50%;
   }
+  .statCard{
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
   .longYCard{
     flex: 0 0 50%;
     max-width: 50%;
+  }
+  .profileCard{
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
   }
   .boostsCard{
     flex: 0 0 50%;
@@ -1274,6 +1337,10 @@ text-align: center;
   .smallCard{
     flex: 0 0 25%;
     max-width: 25%;
+  }
+  .statCard{
+    flex: 0 0 50%;
+    max-width: 50%;
   }
   .carouselCardBackground{
     width: 97.3%;

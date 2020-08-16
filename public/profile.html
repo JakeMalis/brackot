@@ -50,26 +50,25 @@
       <script> $( "#topbar" ).load( "ajax/topbar.html" ); </script>
     </div>
 
-      <div style="margin-top: 90px;" class="row">
-        <div id="profileStatsCard" class="wideCard">
-          <div class="wideCardBackground">
-            <div class="wideCardContent">
+    <div style="margin-top: 90px;" class="row">
+      <div class="cardColumn">
+        <div id="profileStatsCard" class="longYCard">
+          <div class="longYCardBackground">
+            <div class="longYCardContent">
               <h2 style="margin-bottom: 30px;">Player Stats</h2>
             </div>
           </div>
         </div>
-        <div id="profileInfoCard" class="wideCard">
-          <div class="wideCardBackground">
-            <div class="wideCardContent">
-              <h2 id="profileCardTitle">Profile Information</h2>
-              <button class="profileButton" id="editProfileButton">EDIT</button>
-              <button class="profileButton" id="saveProfileButton">SAVE</button>
+        <div id="profileInfoCard" class="longYCard profileCard">
+          <div class="longYCardBackground">
+            <div class="longYCardContent">
+
               <label style="width: 100%;" for="avatarUploader">
                 <div id="profilePicContainer"><img id="profileProfilePic"></div>
                 <input type="file" name="avatarUploader" id="avatarUploader" style="display:none" accept="image/jpg, image/jpeg, image/png, image/img, image/gif">
               </label>
               <div style="margin: 0px !important;" class="row">
-                <div class="column leftColumn">
+                <div class="singleColumn">
                   <h6 class="profileInputTitle">Display Name</h6>
                   <input placeholder="" type="text" class="longProfileInputs" disabled id='name'>
                   <h6 class="profileInputTitle">Email</h6>
@@ -83,20 +82,13 @@
                     <img id="smashID" class="gameProfilePic" src="media/game_images/supersmash.jpg">
                     <img id="valorantID" class="gameProfilePic" src="media/game_images/valorant.jpg">
                   </div>-->
-                </div>
-                <div class="column rightColumn">
-                  <!--
-                  <h6 class="profileInputTitle">Password</h6>
-                  <input placeholder="" type="password" class="longProfileInputs" disabled id='password'>
-                  <h6 class="profileInputTitle">Confirm Password</h6>
-                  <input placeholder="" type="password" class="longProfileInputs" disabled id='confirmPassword'>
-                -->
+                  <button class="profileButton" id="editProfileButton">EDIT</button>
+                  <button class="profileButton" id="saveProfileButton">SAVE</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
         <div class="modal fade" id="modal" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -115,8 +107,49 @@
           </div>
         </div>
 
-
+      </div>
+      <div class="cardColumn">
+        <div id="stat1Card" class="statCard">
+          <div class="smallCardBackground">
+            <div class="smallCardContent">
+            </div>
+          </div>
+        </div>
+        <div id="stat2Card" class="statCard">
+          <div class="smallCardBackground">
+            <div class="smallCardContent">
+            </div>
+          </div>
+        </div>
+        <div id="stat3Card" class="statCard">
+          <div class="smallCardBackground">
+            <div class="smallCardContent">
+            </div>
+          </div>
+        </div>
+        <div id="stat4Card" class="statCard">
+          <div class="smallCardBackground">
+            <div class="smallCardContent">
+            </div>
+          </div>
+        </div>
+        <div id="stat5Card" class="statCard">
+          <div class="smallCardBackground">
+            <div class="smallCardContent">
+            </div>
+          </div>
+        </div>
+        <div id="stat6Card" class="statCard">
+          <div class="smallCardBackground">
+            <div class="smallCardContent">
+            </div>
+          </div>
+        </div>
+        <div id="seeProfileStatsContainer" class="seeProfileStatsContainer">
+          <button id="seeStatsButton" class="buttonlessButton">See all profile stats...</button>
+        </div>
       </div>
     </div>
+  </div>
 </body>
 </html>
