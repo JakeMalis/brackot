@@ -767,6 +767,34 @@ text-align: center;
   transition-duration: 0.2s;
 }
 
+.statContent{
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+
+.iconAndNum{
+  display: inline-block;
+  color: #dddddd;
+}
+
+.statIcon{
+  display: inline-block;
+  font-size: 33px;
+  padding-right: 13px;
+}
+
+.statNum{
+  display: inline-block;
+  font-size: 45px;
+}
+
+.statDescription{
+  color: #888888;
+  padding-top: 0px;
+  font-size: 16px;
+}
+
 .smallCard{
   flex: 0 0 100%;
   max-width: 100%;
