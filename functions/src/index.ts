@@ -7,9 +7,9 @@ exports.subscribeUserToUnlimited = functions.region('us-east1').auth.user().onCr
   return admin.auth().setCustomUserClaims(user.uid, {subscription: "unlimited"});
 });
 
-exports.deleteOldMail = functions.region('us-east1').firestore.document('mail/{documentId}').onCreate(async (snap, context) => {
+exports.deleteOldMail = functions.region('us-east1').pubsub.schedule('every 1 hours').onRun(async (context) => {
   const currentDate: Date = new Date();
-  currentDate.setDate(currentDate.getHours() - 1);
+  currentDate.setHours(currentDate.getHours() - 1);
 
   await admin.firestore().collection('mail').where("delivery.attempts", ">", 0).get().then(querySnapshot => {
     querySnapshot.forEach(documentSnapshot => {
