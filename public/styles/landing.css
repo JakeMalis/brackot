@@ -166,12 +166,12 @@ select option{
 }
 
 .logo{
-  top: 0;
+  top: 4px;
   position: fixed;
   display: block;
-  left: 20px;
-  width: 170px;
-  height: 70px;
+  left: 18px;
+  width: 179px;
+  height: 61px;
   object-fit: contain;
   z-index: 101;
 }

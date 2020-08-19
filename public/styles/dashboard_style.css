@@ -5,6 +5,7 @@
   --background: #202131;
   --cardColor: #2b2c3c;
   --tournamentCardColor: #3a3b4a;
+  --sidebarWidth: 60px;
 }
 body{
   overflow-x: hidden;
@@ -19,7 +20,6 @@ h1{
   font-weight: 700;
   color: #eeeeee;
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
@@ -28,7 +28,6 @@ h2{
   font-weight: 600 !important;
   color: rgba(255,255,255,0.9) !important;
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
@@ -36,7 +35,6 @@ h3{
   font-family: 'proxima-nova', sans-serif !important;
   color: rgba(255,255,255,0.9) !important;
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
@@ -44,7 +42,6 @@ h4{
   font-family: 'proxima-nova', sans-serif !important;
   color: rgba(255,255,255,0.9) !important;
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
@@ -52,7 +49,6 @@ h5{
   font-family: 'proxima-nova', sans-serif !important;
   color: rgba(255,255,255,0.9) !important;
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
@@ -61,7 +57,6 @@ h6{
   color: #888888 !important;
   text-transform: uppercase;
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
@@ -69,7 +64,6 @@ p{
   font-family: 'proxima-nova', sans-serif;
   color: #eeeeee;
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
@@ -95,8 +89,8 @@ select option{
 }
 
 .main-page{
-  width: calc(100vw: - 70px);
-  margin-left: 70px;
+  width: 100%;
+  margin-left: 0px;
 }
 
 .headerImage{
@@ -307,7 +301,7 @@ font-size: 2em;
 .fa {
 position: relative;
 display: table-cell;
-width: 60px;
+width: var(--sidebarWidth);
 height: 26px;
 text-align: center;
 vertical-align: middle;
@@ -318,26 +312,25 @@ margin-top: 13px;
 
 .sidebarLogo{
   margin-right: auto;
-  max-width: 225px;
+  max-width: 179px;
   max-height: 61px;
   display: block;
 }
 
 .main-menu:hover,nav.main-menu.expanded {
-  width:225px;
+  height: auto;
   overflow:hidden;
 }
 
 .main-menu {
 background: #2a2a3a;
-box-shadow: 1px 0px 12px 0px rgba(0,0,0,0.15);
+box-shadow: 0px 1px 12px 0px rgba(0,0,0,0.15);
 border-right:0px solid var(--aquamarine);
 position:fixed;
 top:0;
-bottom:0;
-height:100%;
-left:0;
-width:60px;
+left: 0;
+height: 61px;
+width:100%;
 overflow:hidden;
 -webkit-transition:width .25s ease-in-out;
 transition:width .25s ease-in-out;
@@ -352,7 +345,7 @@ margin:0px 0;
 .main-menu li {
 position:relative;
 display:block;
-width:250px;
+width:100%;
 }
 
 .main-menu li>a {
@@ -391,9 +384,7 @@ letter-spacing: 1px;
 }
 
 .main-menu>ul.logout {
-position:absolute;
-left:0;
-bottom:0;
+position:relative;
 }
 
 .no-touch .scrollable.hover {
@@ -531,6 +522,7 @@ text-align: center;
   width: auto;
   height: 80px;
   position: absolute;
+  display: none;
 }
 
 .userPicInfobar{
@@ -686,10 +678,10 @@ text-align: center;
 
 .tournamentCardIcon{
   max-height: 20px;
-  margin-top: 0px;
-  width: auto;
+  margin-top: 3px !important;
+  width: 40px !important;
   padding-right: 10px;
-  font-size: 14px;
+  font-size: 14px !important;
   color: #aaaaaa !important;
   display: inline-block;
 }
@@ -1274,9 +1266,172 @@ text-align: center;
 
 /* END PRETOURNAMENT INFO PAGE CODE */
 
+#mobilebar{
+  display: block;
+}
 
 /* THE BELOW SECTION IS MEANT FOR MOBILE DEVICES ONLY */
 @media only screen and (min-width: 480px){
+  .main-page{
+    width: calc(100vw - 60px);
+    margin-left: 60px;
+  }
+
+  .userInfobar{
+    display: block;
+  }
+  /*SIDEBAR ON DESKTOP*/
+  .fa-2x {
+  font-size: 2em;
+  }
+
+  .fa-lg{
+    font-size: 1.3em !important;
+  }
+
+  .fa {
+  position: relative;
+  display: table-cell;
+  width: 60px;
+  height: 26px;
+  text-align: center;
+  vertical-align: middle;
+  font-size:20px;
+  font-weight: 200;
+  margin-top: 13px;
+  }
+
+  .sidebarLogo{
+    margin-right: auto;
+    max-width: 225px;
+    max-height: 61px;
+    display: block;
+  }
+
+  .main-menu:hover,nav.main-menu.expanded {
+    width:225px;
+    overflow:hidden;
+  }
+
+  .main-menu {
+  background: #2a2a3a;
+  box-shadow: 1px 0px 12px 0px rgba(0,0,0,0.15);
+  border-right:0px solid var(--aquamarine);
+  position:fixed;
+  top:0;
+  bottom:0;
+  height:100%;
+  left:0;
+  width:60px;
+  overflow:hidden;
+  -webkit-transition:width .25s ease-in-out;
+  transition:width .25s ease-in-out;
+  -webkit-transform:translateZ(0) scale(1,1);
+  z-index:1000;
+  }
+
+  .main-menu>ul {
+  margin:0px 0;
+  }
+
+  .main-menu li {
+  position:relative;
+  display:block;
+  width:250px;
+  }
+
+  .main-menu li>a {
+  position:relative;
+  display:table;
+  border-collapse:collapse;
+  border-spacing:0;
+  color: #dfdfe9;
+  font-family: 'proxima-nova', sans-serif;
+  font-size: 13px !important;
+  text-decoration:none;
+  -webkit-transform:translateZ(0) scale(1,1);
+  -webkit-transition:all 0.1s linear;
+  transition:all 0.1s linear;
+
+  }
+
+  .main-menu .nav-icon {
+  position:relative;
+  display:table-cell;
+  width:60px;
+  height:36px;
+  text-align:center;
+  vertical-align:middle;
+  font-size:18px;
+  }
+
+  .main-menu .nav-text {
+  position:relative;
+  display:table-cell;
+  vertical-align:middle;
+  width:190px;
+  font-family: 'proxima-nova', sans-serif;
+  font-weight: 400;
+  letter-spacing: 1px;
+  }
+
+  .main-menu>ul.logout {
+  position:absolute;
+  left:0;
+  bottom:0;
+  }
+
+  .no-touch .scrollable.hover {
+  overflow-y:hidden;
+  }
+
+  .no-touch .scrollable.hover:hover {
+  overflow-y:auto;
+  overflow:visible;
+  }
+
+  a:hover,a:focus {
+  text-decoration:none;
+  }
+
+  nav {
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  -o-user-select:none;
+  user-select:none;
+  }
+
+  nav ul,nav li {
+  outline:0;
+  margin:0;
+  padding:0;
+  }
+  .main-menu li:hover>a,nav.main-menu li.active>a,.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus,.dropdown-menu>.active>a,.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus,.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,.dashboard-page nav.dashboard-menu ul li.active a {
+  color: #f6f6f6 !important;
+  background: #3a3b4a;
+  }
+  .area {
+  float: left;
+  background: rgba(255,255,255,0.09);
+  width: 100%;
+  height: 100%;
+  }
+  @font-face {
+    font-family: 'proxima-nova', sans-serif;
+  }
+
+
+
+
+
+  #sidebar{
+    display: block;
+  }
+  #mobilebar{
+    display: none;
+  }
+
   .profileButton{
     margin-top: -60px;
     margin-right: 0px;
