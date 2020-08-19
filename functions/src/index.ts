@@ -7,22 +7,28 @@ exports.subscribeUserToUnlimited = functions.region('us-east1').auth.user().onCr
   return admin.auth().setCustomUserClaims(user.uid, {subscription: "unlimited"});
 });
 
-exports.deleteOldMail = functions.region('us-east1').firestore.document('mail/{documentId}').onCreate((snap, context) => {
-  async function removeMail() {
-    const currentDate: Date = new Date();
-    currentDate.setDate(currentDate.getHours() - 1);
+exports.deleteOldMail = functions.region('us-east1').firestore.document('mail/{documentId}').onCreate(async (snap, context) => {
+  const currentDate: Date = new Date();
+  currentDate.setDate(currentDate.getHours() - 1);
 
-    await admin.firestore().collection('mail').where("delivery.attempts", ">", 0).get().then(querySnapshot => {
-      querySnapshot.forEach(documentSnapshot => {
-        const sendDate: Date = new Date(documentSnapshot.data().delivery.startTime.toDate());
-        if (sendDate.getTime() <= currentDate.getTime()) {
-          return admin.firestore().doc('mail/' + documentSnapshot.id).delete;
-        }
-        else {
-          return false;
-        }
-      });
+  await admin.firestore().collection('mail').where("delivery.attempts", ">", 0).get().then(querySnapshot => {
+    querySnapshot.forEach(documentSnapshot => {
+      const sendDate: Date = new Date(documentSnapshot.data().delivery.startTime.toDate());
+      if (sendDate.getTime() <= currentDate.getTime()) {
+        return admin.firestore().doc('mail/' + documentSnapshot.id).delete();
+      }
+      else {
+        return null;
+      }
     });
-  };
-  void removeMail();
+  });
 });
+
+/*
+exports.sendWelcomeEmail = functions.region('us-east1').auth.user().onCreate(async (user) => {
+  const email: string = user.email || "jake@allstaresports.com";
+  await admin.auth().generateEmailVerificationLink(email, { url: 'https://brackot.com/confirm-email', }).then(link => {
+    functions.logger.log(link);
+  });
+});
+*/
