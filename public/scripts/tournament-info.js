@@ -125,3 +125,33 @@ function sendConfirmationEmail(tournamentId) {
     });
   });
 }
+
+function setTab(tab) {
+  if(tab === "overview") {
+    document.getElementById("overviewTab").style.display = "block";
+    document.getElementById("participantsTab").style.display = "none";
+    document.getElementById("bracketTab").style.display = "none";
+
+    document.getElementById("overviewNavbar").className = "quickNavbarItem quickNavbarItemSelected";
+    document.getElementById("participantsNavbar").className = "quickNavbarItem";
+    document.getElementById("bracketNavbar").className = "quickNavbarItem";
+  }
+  else if(tab === "participants") {
+    document.getElementById("overviewTab").style.display = "none";
+    document.getElementById("participantsTab").style.display = "block";
+    document.getElementById("bracketTab").style.display = "none";
+
+    document.getElementById("overviewNavbar").className = "quickNavbarItem";
+    document.getElementById("participantsNavbar").className = "quickNavbarItem quickNavbarItemSelected";
+    document.getElementById("bracketNavbar").className = "quickNavbarItem";
+  }
+  else if(tab === "bracket") {
+    document.getElementById("overviewTab").style.display = "none";
+    document.getElementById("participantsTab").style.display = "none";
+    document.getElementById("bracketTab").style.display = "block";
+
+    document.getElementById("overviewNavbar").className = "quickNavbarItem";
+    document.getElementById("participantsNavbar").className = "quickNavbarItem";
+    document.getElementById("bracketNavbar").className = "quickNavbarItem quickNavbarItemSelected";
+  }
+}
