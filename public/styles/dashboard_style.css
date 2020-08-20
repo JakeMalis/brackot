@@ -950,6 +950,14 @@ text-align: center;
   box-shadow: 0px -2px 8px 0px rgba(0,0,0,0.25) !important;
 }
 
+#overviewTab{
+  display: block;
+}
+
+.infoTab{
+  display:none;
+}
+
 #boostsContainer{
   margin-top: 85px;
   width: 50%;
@@ -1199,10 +1207,10 @@ text-align: center;
 
 .quickDetailIcon{
   display: inline-block;
-  margin-top: 12px;
-  font-size: 15px;
-  width: 20px;
-  padding-right: 26px;
+  margin-top: 9px !important;
+  font-size: 15px !important;
+  width: 30px !important;
+  padding-right: 10px !important;
 }
 
 .quickDetailText{
@@ -1292,9 +1300,9 @@ text-align: center;
 }
 
 .tournamentInfoPrizingIcon{
-  font-size: 24px;
+  font-size: 24px !important;
   display: inline-block;
-  margin-top: 0px;
+  margin-top: 0px !important;
 }
 
 .tournamentInfoDetail{

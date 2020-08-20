@@ -51,7 +51,7 @@
       <div style="margin-top: 150px;">
         <div class="wideCard tournamentInfoCard">
           <div class="wideCardBackground tournamentInfoCardBackground">
-            <div class="quickDetailHeader">
+            <div class="quickDetailHeader" onload="setTab('overview')">
               <h2 id="tournamentTitle"></h2>
               <ul class="tournamentQuickDetails">
                 <li class="quickDetail"><i class="fa fa-user quickDetailIcon" aria-hidden="true"></i><p id="participantsQuick" class="quickDetailText"></p></li>
@@ -74,7 +74,7 @@
                   <div class="tournamentInfoColumn">
                     <h6 class="tournamentInfoSubheader">Prizes</h6>
                     <ul class="prizingList">
-                      <li class="prizingListItem"><i class="fa fa-trophy tournamentInfoPrizingIcon goldColor" aria-hidden="true"></i><p id="tournamentInfoFirstPrizing" class="tournamentInfoDetail font18"></p></li>
+                      <li class="prizingListItem" id="firstPlace"><i class="fa fa-trophy tournamentInfoPrizingIcon goldColor" aria-hidden="true"></i><p id="tournamentInfoFirstPrizing" class="tournamentInfoDetail font18"></p></li>
                       <li class="prizingListItem" id="secondPlace"><i class="fa fa-trophy tournamentInfoPrizingIcon silverColor" aria-hidden="true"></i><p id="tournamentInfoSecondPrizing" class="tournamentInfoDetail font18"></p></li>
                       <li class="prizingListItem" id="thirdPlace"><i class="fa fa-trophy tournamentInfoPrizingIcon bronzeColor" aria-hidden="true"></i><p id="tournamentInfoThirdPrizing" class="tournamentInfoDetail font18"></p></li>
                     </ul>
@@ -86,7 +86,7 @@
                 </div>
               </div>
               <div id="participantsTab" class="infoTab">
-                <h1>HELLO MAN</h2>
+                <h1>HELLO MAN</h1>
               </div>
               <div id="bracketTab" class="infoTab">
                 <h1>test2</h1>
