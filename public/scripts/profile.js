@@ -23,8 +23,8 @@ function personalizeElements() {
 }
 
 function editProfile() {
-  document.getElementById('editProfileButton').style.visibility = "hidden";
-  document.getElementById('saveProfileButton').style.visibility = "visible";
+  document.getElementById('editProfileButton').style.display = "none";
+  document.getElementById('saveProfileButton').style.display = "inline-block";
   document.getElementById("avatar").src = firebase.auth().currentUser.photoURL;
   document.getElementById("profileProfilePic").src = firebase.auth().currentUser.photoURL;
 
@@ -38,8 +38,8 @@ function editProfile() {
 }
 
 function saveProfile() {
-  document.getElementById('editProfileButton').style.visibility = "visible";
-  document.getElementById('saveProfileButton').style.visibility = "hidden";
+  document.getElementById('editProfileButton').style.display = "inline-block";
+  document.getElementById('saveProfileButton').style.display = "none";
 
   document.getElementById("avatar").src = firebase.auth().currentUser.photoURL;
   document.getElementById("profileProfilePic").src = firebase.auth().currentUser.photoURL;
