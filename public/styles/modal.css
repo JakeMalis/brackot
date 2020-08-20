@@ -1,14 +1,24 @@
+:root{
+  --gradient: linear-gradient(120deg,#23F2AC,#23D0F2);
+  --aquamarine: #23F2AC;
+  --turquoise: #23D0F2;
+  --background: #202131;
+  --cardColor: #2b2c3c;
+  --tournamentCardColor: #3a3b4a;
+  --sidebarWidth: 60px;
+}
+
 .modal > * {
-    font-family: 'MuseoSans300', sans-serif;
+    font-family: 'proxima-nova', sans-serif;
     font-style: normal;
 }
 
-.modal > .loginInput{
+.modal .loginInput{
   margin-left: -3px;
   width: 420px;
 }
 
-.modalInput {
+.modal input {
   margin-left: auto;
   margin-right: auto;
   margin-top: 0px;
@@ -53,7 +63,7 @@
 }
 
 .gradientText{
-  background: -webkit-linear-gradient(360deg, #0084ff, #00c6ff);
+  background: -webkit-linear-gradient(45deg, #23f2ac, #19d5d2);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -77,8 +87,8 @@
 .gradientButton{
   display: block;
   font-size: 18px;
-  background-image: linear-gradient(90deg, #0084ff, #00c6ff);
-  font-family: 'MuseoSans700', sans-serif;
+  background-image: var(--gradient);
+  font-family: 'proxima-nova', sans-serif;
   text-transform: uppercase;
   letter-spacing: 3px;
   font-weight: 600;
@@ -86,7 +96,7 @@
   padding-right: 30px;
   width: auto;
   height: 44px;
-  color: white;
+  color: #eeeeee;
   border: transparent;
   border-radius: 8px;
   transition-duration: 0.2s;

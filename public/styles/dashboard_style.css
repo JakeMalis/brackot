@@ -597,6 +597,58 @@ text-align: center;
   margin: 0px;
 }
 
+.filterAndSearchbar{
+  display: inline-block;
+  float: right;
+  max-width: 420px;
+  width: 100%;
+}
+
+.filterLabel{
+  margin-right: 20px;
+  margin-top: 4px;
+  width: 120px;
+  min-height: 40px;
+  max-height: 40px;
+  display: inline-block;
+  float: right;
+  width: auto;
+}
+
+.filterLabel:hover{
+  opacity: 60%;
+  cursor: pointer;
+}
+
+.filterIcon{
+  width: 40px !important;
+  margin-top: 6px !important;
+  display: inline-block;
+  color: #eeeeee;
+}
+
+.filterLabelText{
+  letter-spacing: 0.8px;
+  height: 42px;
+  display: inline-block;
+}
+
+.tournamentSearchbar{
+  display: inline-block;
+  float: right;
+  width: 100%;
+  max-width: 250px;
+  min-height: 40px;
+  max-height: 40px;
+  margin-bottom: 15px;
+  padding: 11px;
+  font-size: 14px;
+  font-family: 'proxima-nova', sans-serif;
+  border-radius: 8px;
+  background-color: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.09);
+  color: #eeeeee !important;
+}
 
 .tournamentCard{
   flex: 0 0 100%;
@@ -649,9 +701,9 @@ text-align: center;
   max-height: 40px;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 19px;
-  letter-spacing: 1px;
-  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.9px;
+  font-weight: 600;
   color: #eeeeee !important;
   text-align: center;
   vertical-align: baseline;
@@ -696,7 +748,7 @@ text-align: center;
 
 .tournamentCardButton{
   font-family: 'proxima-nova', sans-serif;
-  background-image: var(--gradient);
+  background: rgba(255,255,255,0.16);
   margin-top: 13px;
   height: 50px;
   border: 0px;
