@@ -667,6 +667,7 @@ text-align: center;
 .tournamentCardBackground{
   margin-left: auto;
   margin-right: auto;
+  margin-top: 10%;
   height: 80%;
   width: 90%;
   border-radius: 8px;
