@@ -1326,6 +1326,67 @@ text-align: center;
   clear: both;
 }
 
+#participantsTab{
+  margin-left: auto;
+  margin-right: auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.infoParticipant{
+  margin: 10px;
+  display: inline-block;
+  border-radius: 8px;
+  height: 55px;
+  min-width: 260px;
+  width: 23%;
+  background-color: rgba(255,255,255,0.07);
+}
+
+.gradientSide{
+  display: inline-block;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  height: 55px;
+  float: left;
+  width: 8px;
+  background-image: var(--gradient);
+}
+
+.infoParticipantPicContainer{
+  float: left;
+  display: inline-block;
+  height: 55px;
+  width: 55px;
+}
+
+.infoParticipantPic{
+  height: 55px;
+  width: 55px;
+  object-fit: cover;
+}
+
+.infoParticipantNameContainer{
+  height: 55px;
+  float: left;
+  width: calc(100% - 63px);
+  display: inline-block;
+  overflow: hidden;
+}
+
+.infoParticipantName{
+  display: table-cell;
+  height: 55px;
+  vertical-align: middle;
+  margin:0px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 15px;
+  font-size: 16px;
+  color: #aaaaaa;
+}
+
 /* END PRETOURNAMENT INFO PAGE CODE */
 
 #mobilebar{
