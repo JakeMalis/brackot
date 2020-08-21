@@ -741,7 +741,7 @@ text-align: center;
   margin-top: 10%;
   height: 80%;
   width: 90%;
-  border-radius: 8px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: 0px 0px 13px 0px rgba(0,0,0,0.2);
   background-color: var(--tournamentCardColor);
@@ -763,8 +763,8 @@ text-align: center;
   height: 150px;
   width: 100%;
   object-fit: cover;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  border-top-left-radius:4px;
+  border-top-right-radius: 4px;
 }
 
 .tournamentCardTitle{
@@ -803,7 +803,7 @@ text-align: center;
 .tournamentCardIcon{
   max-height: 20px;
   margin-top: 3px !important;
-  width: 40px !important;
+  width: 30px !important;
   padding-right: 10px;
   font-size: 14px !important;
   color: #aaaaaa !important;
@@ -1461,6 +1461,53 @@ text-align: center;
 
 #mobilebar{
   display: block;
+}
+
+#page404{
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.container404{
+  text-align: center;
+}
+
+.logo404{
+  width: 80%;
+  max-width: 300px;
+  object-fit: contain;
+}
+
+.h1404{
+  padding-bottom: 30px;
+  font-size: 30px;
+  text-align: center;
+  color: #aaaaaa !important;
+}
+
+.h2404{
+  text-align: center;
+  color: #eeeeee !important;
+}
+
+.h3404{
+  text-align: center;
+  font-size: 18px;
+  color: #aaaaaa !important;
+}
+
+.buttons404{
+  padding-top: 30px;
+  text-align: center;
+  display: inline-block;
+}
+
+.button404{
+  display: inline-block;
 }
 
 /* THE BELOW SECTION IS MEANT FOR MOBILE DEVICES ONLY */

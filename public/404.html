@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Page Not Found | Brackot</title>
+
+    <link rel="icon" type="image/png" href="media/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="styles/landing.css">
+    <link rel="stylesheet" type="text/css" href="styles/dashboard_style.css">
+    <link rel="stylesheet" type="text/css" href="styles/fonts.css">
+
+    <link rel="stylesheet" href="https://use.typekit.net/fyp1otf.css">
+    <script src="https://kit.fontawesome.com/201b9c41aa.js" crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-functions.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-storage.js"></script>
+
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyBSjggPyShfi3JJGmfuf2p_BFLMeEeVTLY",
+            authDomain: "all-star-esports.firebaseapp.com",
+            databaseURL: "https://all-star-esports.firebaseio.com",
+            projectId: "all-star-esports",
+            storageBucket: "all-star-esports.appspot.com",
+            messagingSenderId: "894423381350",
+            appId: "1:894423381350:web:3fe3b4195ae678bd6704a7"
+        };
+        firebase.initializeApp(firebaseConfig);
+    </script>
+</head>
+
+<body>
+  <div id="page404" class="page404">
+          <div class="container404">
+            <img class="logo404" src="../media/BrackotFullLogo.png">
+            <h2 class="h2404">Uh-oh! We couldn't find the page you're looking for.</h2>
+            <h3 class="h3404">Let's try looking somewhere else, shall we?</h3>
+            <div class="buttons404">
+              <button class="gradientButton button404" onclick="location.href='index.html';">Home</button>
+              <button class="grayButton button404" onclick="location.href='tournaments.html';">Find Tournament</button>
+            </div>
+          </div>
+  </div>
+</body>
+</html>

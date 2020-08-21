@@ -321,21 +321,24 @@ select option{
 }
 
 .onePlatformContent{
+  flex-wrap: wrap;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 80px;
   max-width: 1050px;
   width: 80%;
 }
 
 .onePlatformText{
+  margin-top: 80px;
   width:65%;
   padding-right: 5%;
   float: left;
 }
 
-.onePlatformImage{
+.onePlatformImageContainer{
   height: 20px;
-  width: 30%;
-  float: left;
+}
+
+.onePlatformImage{
+  object-fit: contain;
 }
