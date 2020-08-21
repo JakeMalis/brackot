@@ -92,61 +92,73 @@
         <div class="wideCard" style="min-height: 1200px;">
           <div class="wideCardBackground">
             <div class="wideCardContent">
+              <h2 class="tournamentsHeader" style="margin-bottom: 10px;">Tournaments</h2>
               <div class="filterAndSearchbar">
                 <input id="tournamentSearchbar" class="tournamentSearchbar" type="text" placeholder="Find tournaments..."></input>
-                <a id="filterButton" onclick="toggleFilterPopup()">
-                  <label id="filterButtonLabel" class="filterButtonLabel">
-                    <i class="fa fa-sliders-h filterIcon"></i>
-                    <p class="filterLabelText">Filter</p>
+                <a id="gameFilterButton" onclick="toggleGamePopup()">
+                  <label id="gameButtonLabel" class="filterLabel">
+                    <p class="filterLabelText">Game</p>
+                    <p id="filterLabelField" class="filterLabelField">League of Legends</p>
                   </label>
                 </a>
-                <div id="filterPopup" class="filterPopup">
-                  <div id="dateFilterColumn" class="filterRow">
-                    <h6 class="filterTitle">Date</h6>
-                    <label class="filterLabel">
-                      <input id="todayFilter" class="filterInput" type="checkbox"><p class="filterText">Today</p></input>
-                    </label>
-                    <label class="filterLabel">
-                      <input id="thisWeekFilter" class="filterInput" type="checkbox"><p class="filterText">This Week</p></input>
-                    </label>
-                    <label class="filterLabel">
-                      <input id="thisMonthFilter" class="filterInput" type="checkbox"><p class="filterText">This Month</p></input>
-                    </label>
-                  </div>
+                <a id="dateFilterButton" onclick="toggleDatePopup()">
+                  <label id="dateButtonLabel" class="filterLabel">
+                    <p class="filterLabelText">Date</p>
+                    <p id="filterLabelField" class="filterLabelField">This Month</p>
+                  </label>
+                </a>
+
+
+                <div id="gamePopup" class="filterPopup">
                   <div id="gameFilterColumn" class="filterRow">
                     <h6 class="filterTitle">Game</h6>
-                    <label class="filterLabel">
+                    <label class="filterOption">
                       <input id="CSGOFilter" class="filterInput" type="checkbox"><p class="filterText">Counter-Strike: Global Offensive</p></input>
                     </label>
-                    <label class="filterLabel">
+                    <label class="filterOption">
                       <input id="FALLGUYSFilter" class="filterInput" type="checkbox"><p class="filterText">Fall Guys</p></input>
                     </label>
-                    <label class="filterLabel">
+                    <label class="filterOption">
                       <input id="FORTNITEFilter" class="filterInput" type="checkbox"><p class="filterText">Fortnite</p></input>
                     </label>
-                    <label class="filterLabel">
+                    <label class="filterOption">
                       <input id="LEAGUEFilter" class="filterInput" type="checkbox"><p class="filterText">League of Legends</p></input>
                     </label>
-                    <label class="filterLabel">
+                    <label class="filterOption">
                       <input id="MINECRAFTFilter" class="filterInput" type="checkbox"><p class="filterText">Minecraft</p></input>
                     </label>
-                    <label class="filterLabel">
+                    <label class="filterOption">
                       <input id="OVERWATCHFilter" class="filterInput" type="checkbox"><p class="filterText">Overwatch</p></input>
                     </label>
-                    <label class="filterLabel">
+                    <label class="filterOption">
                       <input id="ROCKETFilter" class="filterInput" type="checkbox"><p class="filterText">Rocket League</p></input>
                     </label>
-                    <label class="filterLabel">
+                    <label class="filterOption">
                       <input id="SMASHFilter" class="filterInput" type="checkbox"><p class="filterText">Super Smash Bros. Ultimate</p></input>
                     </label>
-                    <label class="filterLabel">
+                    <label class="filterOption">
                       <input id="VALORANTFilter" class="filterInput" type="checkbox"><p class="filterText">Valorant</p></input>
                     </label>
                   </div>
                 </div>
+
+                <div id="datePopup" class="filterPopup">
+                  <div id="dateFilterColumn" class="filterRow">
+                    <h6 class="filterTitle">Date</h6>
+                    <label class="filterOption">
+                      <input id="todayFilter" class="filterInput" type="checkbox"><p class="filterText">Today</p></input>
+                    </label>
+                    <label class="filterOption">
+                      <input id="thisWeekFilter" class="filterInput" type="checkbox"><p class="filterText">This Week</p></input>
+                    </label>
+                    <label class="filterOption">
+                      <input id="thisMonthFilter" class="filterInput" type="checkbox"><p class="filterText">This Month</p></input>
+                    </label>
+                  </div>
+                </div>
+
               </div>
-              <h2 style="margin-bottom: 10px;">Tournaments</h2>
-              <div class="row" id="row" style="margin-left: 0px !important; margin-right: 0px !important;">
+              <div class="row" id="row" style="margin-top: 80px;margin-left: 0px !important; margin-right: 0px !important;">
               </div>
             </div>
           </div>

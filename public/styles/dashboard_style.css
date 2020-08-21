@@ -5,7 +5,10 @@
   --background: #202131;
   --cardColor: #2b2c3c;
   --tournamentCardColor: #3a3b4a;
+  --tournamentCardColorHover: #454656;
   --sidebarWidth: 60px;
+
+  --filterLabelWidth: 130px;
 }
 body{
   overflow-x: hidden;
@@ -284,6 +287,10 @@ select option{
   margin-top: 10px;
   width: 50px;
   height: 50px;
+}
+
+.tournamentsHeader{
+  font-size: 40px;
 }
 
 .myTournamentsHeader{
@@ -598,27 +605,41 @@ text-align: center;
 }
 
 .filterAndSearchbar{
-  height: 40px;
+  padding-top: 20px;
+  padding-left: 12px;
+  padding-right: 12px;
+  height: 70px;
   display: inline-block;
-  float: right;
-  max-width: 420px;
+  float: left;
   width: 100%;
 }
 
-.filterButtonLabel{
-  margin-right: 20px;
-  margin-top: 4px;
-  width: 120px;
-  min-height: 40px;
-  max-height: 40px;
+.filterLabel{
+  margin-right: 1px;
+  border-top: 9px solid var(--tournamentCardColor);
+  border-bottom: 9px solid var(--tournamentCardColor);
+  border-right: 15px solid var(--tournamentCardColor);
+  border-left: 15px solid var(--tournamentCardColor);
+  background-color: var(--tournamentCardColor);
+  border-radius: 2px;
+  width: var(--filterLabelWidth) !important;
+  height: 60px;
   display: inline-block;
-  float: right;
+  float: left;
   width: auto;
+  cursor: pointer;
+  overflow:hidden;
+  white-space: nowrap;
 }
 
-.filterButtonLabel:hover{
-  opacity: 60%;
-  cursor: pointer;
+.filterLabel:hover{
+  border-color: var(--tournamentCardColorHover);
+  background-color: var(--tournamentCardColorHover);
+}
+
+.filterButtonLabelActive{
+  border-color: var(--tournamentCardColorHover);
+  background-color: var(--tournamentCardColorHover);
 }
 
 .filterIcon{
@@ -629,32 +650,68 @@ text-align: center;
 }
 
 .filterLabelText{
-  letter-spacing: 0.8px;
-  height: 42px;
+  font-size: 13px;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.9px;
   display: inline-block;
 }
 
-.filterPopup{
-  padding: 10px;
-  position: relative;
-  background-color: var(--tournamentCardColor);
-  margin-top: 50px;
-  margin-left: 65px;
-  width: 85%;
-  height: auto;
-  display: none;
-  color: #aaaaaa;
-  border-radius: 8px;
-  box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.25);
+.filterLabelField{
+  font-size: 13px;
+  margin: 0px;
+  color: #888888;
 }
 
-.filterPopup::before{
-  content: "";
-  position: absolute;
-  top: -20px;
-  left: 13px;
-  border: solid 10px transparent;
-  border-bottom-color: var(--tournamentCardColor);
+.filterOption{
+  margin: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 100% !important;
+  cursor: pointer;
+}
+
+.filterOption:hover{
+  background-color: rgba(255,255,255,0.06);
+}
+
+.filterOption:hover .filterText{
+  color: #eeeeee;
+}
+
+.filterInput{
+  display: none;
+}
+
+.filterText{
+  margin: 0px;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: #aaaaaa;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.filterPopup{
+  margin: 10px;
+  position: relative;
+  background-color: var(--tournamentCardColorHover);
+  margin-top: 61px;
+  margin-left: 0px;
+  min-width: var(--filterLabelWidth);
+  max-width: calc(2 * var(--filterLabelWidth));
+  height: auto;
+  max-height: 170px;
+  /*overflow-y: scroll;*/ /* CAUSES THE BOX TO SHIFT OVER TO THE RIGHT AND GLITCH */
+  display: none;
+  color: #eeeeee;
+  border-radius: 2px;
+}
+
+#datePopup{
+  max-width: var(--filterLabelWidth);
+  margin-left: calc(1px + var(--filterLabelWidth));
 }
 
 .show{
@@ -668,39 +725,7 @@ text-align: center;
   margin-bottom: 5px;
 }
 
-.filterText{
-  padding-right: 15px;
-  color: #aaaaaa !important;
-  font-size: 13px;
-  font-weight: 400;
-  display: inline-block;
-}
-
-.filterInput{
-  margin-top: 0px !important;
-  margin-right: 6px !important;
-  display: inline-block;
-}
-
 .filterRow{
-  padding: 10px;
-  display: inline-block;
-}
-
-.filterLabel{
-  float: left;
-  min-height: 20px;
-  max-height: 20px;
-  display: inline-block;
-  width: auto;
-}
-
-.filterLabel:hover{
-  opacity: 60%;
-  cursor: pointer;
-}
-
-.filterLabelText{
   display: inline-block;
 }
 
@@ -1483,6 +1508,8 @@ text-align: center;
 }
 
 .h1404{
+  padding-left: 20px;
+  padding-right: 20px;
   padding-bottom: 30px;
   font-size: 30px;
   text-align: center;
@@ -1490,6 +1517,8 @@ text-align: center;
 }
 
 .h2404{
+  padding-left: 20px;
+  padding-right: 20px;
   text-align: center;
   color: #eeeeee !important;
 }
