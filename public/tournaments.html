@@ -28,6 +28,7 @@
   <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-storage.js"></script>
 
   <script type="text/babel" src="scripts/tournaments.js"></script>
+  <script src="scripts/toggle-filters.js"></script>
   <script src="scripts/header.js"></script>
 
   <script>
@@ -93,9 +94,56 @@
             <div class="wideCardContent">
               <div class="filterAndSearchbar">
                 <input id="tournamentSearchbar" class="tournamentSearchbar" type="text" placeholder="Find tournaments..."></input>
-                <a id="filterButton" href="">
-                  <label id="filterLabel" class="filterLabel"><i class="fa fa-sliders-h filterIcon"></i><p class="filterLabelText">Filter</p></label>
+                <a id="filterButton" onclick="toggleFilterPopup()">
+                  <label id="filterButtonLabel" class="filterButtonLabel">
+                    <i class="fa fa-sliders-h filterIcon"></i>
+                    <p class="filterLabelText">Filter</p>
+                  </label>
                 </a>
+                <div id="filterPopup" class="filterPopup">
+                  <div id="dateFilterColumn" class="filterRow">
+                    <h6 class="filterTitle">Date</h6>
+                    <label class="filterLabel">
+                      <input id="todayFilter" class="filterInput" type="checkbox"><p class="filterText">Today</p></input>
+                    </label>
+                    <label class="filterLabel">
+                      <input id="thisWeekFilter" class="filterInput" type="checkbox"><p class="filterText">This Week</p></input>
+                    </label>
+                    <label class="filterLabel">
+                      <input id="thisMonthFilter" class="filterInput" type="checkbox"><p class="filterText">This Month</p></input>
+                    </label>
+                  </div>
+                  <div id="gameFilterColumn" class="filterRow">
+                    <h6 class="filterTitle">Game</h6>
+                    <label class="filterLabel">
+                      <input id="CSGOFilter" class="filterInput" type="checkbox"><p class="filterText">Counter-Strike: Global Offensive</p></input>
+                    </label>
+                    <label class="filterLabel">
+                      <input id="FALLGUYSFilter" class="filterInput" type="checkbox"><p class="filterText">Fall Guys</p></input>
+                    </label>
+                    <label class="filterLabel">
+                      <input id="FORTNITEFilter" class="filterInput" type="checkbox"><p class="filterText">Fortnite</p></input>
+                    </label>
+                    <label class="filterLabel">
+                      <input id="LEAGUEFilter" class="filterInput" type="checkbox"><p class="filterText">League of Legends</p></input>
+                    </label>
+                    <label class="filterLabel">
+                      <input id="MINECRAFTFilter" class="filterInput" type="checkbox"><p class="filterText">Minecraft</p></input>
+                    </label>
+                    <label class="filterLabel">
+                      <input id="OVERWATCHFilter" class="filterInput" type="checkbox"><p class="filterText">Overwatch</p></input>
+                    </label>
+                    <label class="filterLabel">
+                      <input id="ROCKETFilter" class="filterInput" type="checkbox"><p class="filterText">Rocket League</p></input>
+                    </label>
+                    <label class="filterLabel">
+                      <input id="SMASHFilter" class="filterInput" type="checkbox"><p class="filterText">Super Smash Bros. Ultimate</p></input>
+                    </label>
+                    <label class="filterLabel">
+                      <input id="VALORANTFilter" class="filterInput" type="checkbox"><p class="filterText">Valorant</p></input>
+                    </label>
+                  </div>
+                </div>
               </div>
               <h2 style="margin-bottom: 10px;">Tournaments</h2>
               <div class="row" id="row" style="margin-left: 0px !important; margin-right: 0px !important;">

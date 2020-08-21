@@ -605,7 +605,7 @@ text-align: center;
   width: 100%;
 }
 
-.filterLabel{
+.filterButtonLabel{
   margin-right: 20px;
   margin-top: 4px;
   width: 120px;
@@ -616,7 +616,7 @@ text-align: center;
   width: auto;
 }
 
-.filterLabel:hover{
+.filterButtonLabel:hover{
   opacity: 60%;
   cursor: pointer;
 }
@@ -631,6 +631,76 @@ text-align: center;
 .filterLabelText{
   letter-spacing: 0.8px;
   height: 42px;
+  display: inline-block;
+}
+
+.filterPopup{
+  padding: 10px;
+  position: relative;
+  background-color: var(--tournamentCardColor);
+  margin-top: 50px;
+  margin-left: 65px;
+  width: 85%;
+  height: auto;
+  display: none;
+  color: #aaaaaa;
+  border-radius: 8px;
+  box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.25);
+}
+
+.filterPopup::before{
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 13px;
+  border: solid 10px transparent;
+  border-bottom-color: var(--tournamentCardColor);
+}
+
+.show{
+  display: block;
+}
+
+.filterTitle{
+  color: #cccccc !important;
+  font-size: 13px;
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+
+.filterText{
+  padding-right: 15px;
+  color: #aaaaaa !important;
+  font-size: 13px;
+  font-weight: 400;
+  display: inline-block;
+}
+
+.filterInput{
+  margin-top: 0px !important;
+  margin-right: 6px !important;
+  display: inline-block;
+}
+
+.filterRow{
+  padding: 10px;
+  display: inline-block;
+}
+
+.filterLabel{
+  float: left;
+  min-height: 20px;
+  max-height: 20px;
+  display: inline-block;
+  width: auto;
+}
+
+.filterLabel:hover{
+  opacity: 60%;
+  cursor: pointer;
+}
+
+.filterLabelText{
   display: inline-block;
 }
 
