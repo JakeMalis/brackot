@@ -109,8 +109,10 @@ function loadTournaments() {
 
   renderTournamentCards();
 
+  var now = new Date();
+
   var tournamentNumber = 1;
-  firebase.firestore().collection("tournaments").orderBy("date", "asc").get().then(function(querySnapshot) {
+  firebase.firestore().collection("tournaments").where("date", ">=", now).orderBy("date", "asc").get().then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
 
         $('#tournamentContent' + tournamentNumber).click(function(){
