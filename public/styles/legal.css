@@ -1,0 +1,51 @@
+:root{
+  --gradient: linear-gradient(120deg,#23F2AC,#23D0F2);
+  --aquamarine: #23F2AC;
+  --turquoise: #23D0F2;
+  --background: #202131;
+  --cardColor: #2b2c3c;
+  --tournamentCardColor: #3a3b4a;
+  --tournamentCardColorHover: #454656;
+}
+
+body{
+  width: 100vw !important;
+  height: 100vh !important;
+  background-color: var(--background) !important;
+}
+
+h1{
+  font-family: 'proxima-nova', sans-serif !important;
+  color: #eeeeee !important;
+  font-size: 40px !important;
+}
+h2{
+  font-family: 'proxima-nova', sans-serif !important;
+  color: #aaaaaa !important;
+  font-size: 26px !important;
+  font-weight: 800 !important;
+  text-transform: uppercase;
+}
+p{
+  font-family: 'proxima-nova', sans-serif !important;
+  color: #aaaaaa !important;
+  font-size: 18px;
+}
+
+ul{
+  font-family: 'proxima-nova', sans-serif !important;
+  color: #aaaaaa !important;
+  font-size: 18px;
+}
+
+li{
+  font-family: 'proxima-nova', sans-serif !important;
+  color: #aaaaaa !important;
+  font-size: 18px;
+}
+
+.container{
+  padding-top: 50px;
+  width: 85%;
+  max-width: 1100px;
+}
