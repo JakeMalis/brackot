@@ -38,16 +38,6 @@ function createUser() {
     firebase.auth().currentUser.updateProfile({
         photoURL: "media/BrackotLogo2.jpg"
     });
-    firebase.firestore().collection("mail").doc(firebase.auth().currentUser.uid + "-welcome").set({
-      to: document.getElementById('email').value,
-      template: {
-        name: 'welcome',
-        data: {
-          name: document.getElementById('name').value,
-          email: firebase.auth().currentUser.email
-        }
-      }
-    });
     firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).set({
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
