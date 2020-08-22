@@ -58,8 +58,6 @@ input {
     color: #eeeeee;
 }
 
-
-
 select{
   font-family: 'proxima-nova' !important;
   margin: 0px;
@@ -152,13 +150,6 @@ h1{
 
 
 /* THE BELOW IS FOR THE LOGIN PAGE */
-
-.rememberMeBlock{
-  width: auto;
-  display: inline-block;
-  margin-left: -140px;
-  height: auto;
-}
 
 .rememberMeInput{
   width: auto;
