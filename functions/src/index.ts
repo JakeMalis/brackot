@@ -24,11 +24,15 @@ exports.deleteOldMail = functions.region('us-east1').pubsub.schedule('every 1 ho
   });
 });
 
-/*
+
 exports.sendWelcomeEmail = functions.region('us-east1').auth.user().onCreate(async (user) => {
-  const email: string = user.email || "jake@allstaresports.com";
-  await admin.auth().generateEmailVerificationLink(email, { url: 'https://brackot.com/confirm-email', }).then(link => {
-    functions.logger.log(link);
+  const email: string = user.email;
+
+  await admin.auth().generateEmailVerificationLink(email, { url: 'https://brackot.com/confirm-email' }).then(async (link) => {
+
+    await admin.firestore().collection('mail').add({to: email,template: {name: 'welcome',data: {link: link,email: email}}}).then(async (documentRef) => {
+      functions.logger.log('Sent mail document');
+    });
+
   });
 });
-*/
