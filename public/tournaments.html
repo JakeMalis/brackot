@@ -98,13 +98,13 @@
                 <a id="gameFilterButton" onclick="toggleGamePopup()">
                   <label id="gameButtonLabel" class="filterLabel">
                     <p class="filterLabelText">Game</p>
-                    <p id="filterLabelField" class="filterLabelField">League of Legends</p>
+                    <p id="gameLabelField" class="filterLabelField">All</p>
                   </label>
                 </a>
                 <a id="dateFilterButton" onclick="toggleDatePopup()">
                   <label id="dateButtonLabel" class="filterLabel">
                     <p class="filterLabelText">Date</p>
-                    <p id="filterLabelField" class="filterLabelField">This Month</p>
+                    <p id="dateLabelField" class="filterLabelField">All</p>
                   </label>
                 </a>
 
@@ -112,31 +112,34 @@
                 <div id="gamePopup" class="filterPopup">
                   <div id="gameFilterColumn" class="filterRow">
                     <input id="gameFilterSearchbar" class="filterSearchbar" placeholder="Find a game..."></input>
-                    <label class="filterOption">
+                    <label class="filterOption" onclick="changeGame('All')">
+                      <input id="allGameFilter" class="filterInput" type="radio"><p class="filterText">All</p></input>
+                    </label>
+                    <label class="filterOption" onclick="changeGame('Counter-Strike: Global Offensive')">
                       <input id="CSGOFilter" class="filterInput" type="radio"><p class="filterText">Counter-Strike: Global Offensive</p></input>
                     </label>
-                    <label class="filterOption">
+                    <label class="filterOption" onclick="changeGame('Fall Guys')">
                       <input id="FALLGUYSFilter" class="filterInput" type="radio"><p class="filterText">Fall Guys</p></input>
                     </label>
-                    <label class="filterOption">
+                    <label class="filterOption" onclick="changeGame('Fortnite')">
                       <input id="FORTNITEFilter" class="filterInput" type="radio"><p class="filterText">Fortnite</p></input>
                     </label>
-                    <label class="filterOption">
+                    <label class="filterOption" onclick="changeGame('League of Legends')">
                       <input id="LEAGUEFilter" class="filterInput" type="radio"><p class="filterText">League of Legends</p></input>
                     </label>
-                    <label class="filterOption">
+                    <label class="filterOption" onclick="changeGame('Minecraft')">
                       <input id="MINECRAFTFilter" class="filterInput" type="radio"><p class="filterText">Minecraft</p></input>
                     </label>
-                    <label class="filterOption">
+                    <label class="filterOption" onclick="changeGame('Overwatch')">
                       <input id="OVERWATCHFilter" class="filterInput" type="radio"><p class="filterText">Overwatch</p></input>
                     </label>
-                    <label class="filterOption">
+                    <label class="filterOption" onclick="changeGame('Rocket League')">
                       <input id="ROCKETFilter" class="filterInput" type="radio"><p class="filterText">Rocket League</p></input>
                     </label>
-                    <label class="filterOption">
+                    <label class="filterOption" onclick="changeGame('Super Smash Bros. Ultimate')">
                       <input id="SMASHFilter" class="filterInput" type="radio"><p class="filterText">Super Smash Bros. Ultimate</p></input>
                     </label>
-                    <label class="filterOption">
+                    <label class="filterOption" onclick="changeGame('Valorant')">
                       <input id="VALORANTFilter" class="filterInput" type="radio"><p class="filterText">Valorant</p></input>
                     </label>
                   </div>
@@ -144,13 +147,16 @@
 
                 <div id="datePopup" class="filterPopup">
                   <div id="dateFilterColumn" class="filterRow">
-                    <label class="filterOption">
+                    <label class="filterOption" onclick="changeDate('All')">
+                      <input id="allDateFilter" class="filterInput" type="radio"><p class="filterText">All</p></input>
+                    </label>
+                    <label class="filterOption" onclick="changeDate('Today')">
                       <input id="todayFilter" class="filterInput" type="radio"><p class="filterText">Today</p></input>
                     </label>
-                    <label class="filterOption">
+                    <label class="filterOption" onclick="changeDate('This Week')">
                       <input id="thisWeekFilter" class="filterInput" type="radio"><p class="filterText">This Week</p></input>
                     </label>
-                    <label class="filterOption">
+                    <label class="filterOption" onclick="changeDate('This Month')">
                       <input id="thisMonthFilter" class="filterInput" type="radio"><p class="filterText">This Month</p></input>
                     </label>
                   </div>
