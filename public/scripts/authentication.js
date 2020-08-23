@@ -37,6 +37,12 @@ function passwordSignIn() {
   }
 }
 
+function signInGooglePopup() {
+  var provider = new firebase.auth.GoogleAuthProvider();
+  provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+  firebase.auth().signInWithPopup(provider);
+}
+
 window.onload = function() {
   firebase.auth().onAuthStateChanged(function(user) { if (user) { window.location = "dashboard.html"; }});
 }
