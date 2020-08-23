@@ -29,10 +29,21 @@ exports.sendWelcomeEmail = functions.region('us-east1').auth.user().onCreate(asy
   const email: string = user.email;
 
   await admin.auth().generateEmailVerificationLink(email, { url: 'https://brackot.com/confirm-email' }).then(async (link) => {
-
+    //attempt at making code work
     await admin.firestore().collection('mail').add({to: email,template: {name: 'welcome',data: {link: link,email: email}}}).then(async (documentRef) => {
       functions.logger.log('Sent mail document');
     });
 
+    /* Original Javascript code to be converted to Admin SDK
+    firebase.firestore().collection("mail").add({
+      to: document.getElementById('email').value,
+      template: {
+        name: 'welcome',
+        data: {
+          email: firebase.auth().currentUser.email
+        }
+      }
+    });
+    */
   });
 });
