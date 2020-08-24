@@ -189,6 +189,53 @@ h1{
 
 /* BUTTONS */
 
+.thirdpartyButton{
+  padding: 0px;
+  font-size: 15px;
+  font-family: 'proxima-nova' !important;
+  float: center;
+  text-transform: uppercase;
+  width: 44%;
+  height: 35px;
+  color: #ffffff;
+  border: transparent;
+  border-radius: 0px;
+  transition-duration: 0.1s;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
+}
+
+.thirdpartyButtonLeft{
+  margin-right: 1%;
+}
+
+.thirdpartyButtonIcon{
+  color: #ffffff;
+  font-size: 20px;
+  position: relative;
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  vertical-align: middle;
+  font-size:20px;
+}
+
+.thirdpartyButtonText{
+  display: inline-block;
+  color: #ffffff;
+  font-size: 14px;
+  height: 35px !important;
+  width: auto;
+}
+
+.googleBtn{
+  background-color: #4285F4 !important;
+}
+
+.googleBtn:hover{
+  background-color: #3367d6 !important;
+}
+
 .loginButton{
   font-size: 18px;
   font-family: 'proxima-nova' !important;
@@ -663,11 +710,6 @@ input[type="checkbox"]:checked + label{
 
 
   /* LOGIN PAGE CODE */
-  .loginButton{
-    width: 90%;
-    max-width: 90%;
-  }
-
   #loginImage{
     display: inline;
   }

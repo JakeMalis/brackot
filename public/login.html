@@ -44,6 +44,9 @@
         <div class="loginCard">
           <form class="loginForms" action="">
                 <h1 class="loginText">Log in and <span class="gradientText">game on</span></h1>
+                <div style="display: none;" class="thirdpartyButtonContainer">
+                  <button type="button" class="thirdpartyButton thirdpartyButtonLeft googleBtn" onclick="signInGooglePopup();"><i class="fas fa-train thirdpartyButtonIcon "></i><p class="thirdpartyButtonText">Google</p></button>
+                </div>
                 <input class="loginInput" placeholder="Email Address..." id="email" autocomplete="on">
                 <br>
                 <input class="loginInput" placeholder="Password..." id="password" type="password" autocomplete="on">
@@ -57,7 +60,6 @@
             <div style="overflow:auto;">
                 <div style="float:center;">
                     <button type="button" class="loginButton primaryBtn" onclick="passwordSignIn();">Login</button>
-                    <button type="button" class="loginButton primaryBtn" onclick="signInGooglePopup();">Google</button>
                     <button type="button" class="loginButton secondaryBtn" onclick="location.href='register.html';">Sign Up</button>
                 </div>
             </div>
