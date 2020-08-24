@@ -34,8 +34,10 @@ function toggleDatePopup() {
 
 function changeGame(game) {
   document.getElementById("gameLabelField").innerHTML = game;
+  detoggleGame();
 }
 
 function changeDate(range) {
   document.getElementById("dateLabelField").innerHTML = range;
+  detoggleDate();
 }
