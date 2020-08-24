@@ -39,7 +39,7 @@ function passwordSignIn() {
 
 function signInGooglePopup() {
   var provider = new firebase.auth.GoogleAuthProvider();
-  provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+  provider.addScope('https://www.googleapis.com/auth/userinfo.email');
   firebase.auth().signInWithPopup(provider);
 }
 
