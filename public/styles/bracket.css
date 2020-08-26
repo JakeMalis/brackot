@@ -1,55 +1,64 @@
+:root{
+  --gradient: linear-gradient(120deg,#23F2AC,#23D0F2);
+  --aquamarine: #23F2AC;
+  --turquoise: #23D0F2;
+  --background: #202131;
+  --cardColor: #2b2c3c;
+  --tournamentCardColor: #3a3b4a;
+  --tournamentCardColorHover: #454656;
+
+  --participantWidth: 170px;
+  --participantHeight: calc(0.175 * var(--participantWidth));
+}
+
 body{
   overflow-x: hidden;
   margin: 0px;
   width: 100vw;
   min-height: 100vh;
-  background-color: #EFF7FD !important;
+  background-color: var(--background);
 }
 
 h1{
-  font-family: 'MuseoSans500', sans-serif;
-  color: #232323;
+  font-family: 'proxima-nova', sans-serif;
+  color: #eeeeee;
 }
 
 h2{
-  font-family: 'MuseoSans500', sans-serif;
-  color: #232323;
+  font-family: 'proxima-nova', sans-serif;
+  color: #eeeeee;
 }
 
 h3{
-  font-family: 'MuseoSans500', sans-serif;
-  color: #232323;
+  font-family: 'proxima-nova', sans-serif;
+  color: #eeeeee;
 }
 
 h4{
-  font-family: 'MuseoSans500', sans-serif;
-  color: #232323;
+  font-family: 'proxima-nova', sans-serif;
+  color: #eeeeee;
 }
 
 h5{
-  font-family: 'MuseoSans500', sans-serif;
-  color: #232323;
+  font-family: 'proxima-nova', sans-serif;
+  color: #eeeeee;
 }
 
 h6{
-  font-family: 'MuseoSans500', sans-serif;
-  color: #777777 !important;
+  font-family: 'proxima-nova', sans-serif;
+  color: #aaaaaa !important;
   text-transform: uppercase;
 }
 
 p{
-  font-family: 'MuseoSans500', sans-serif;
-  color: #232323;
+  font-family: 'proxima-nova', sans-serif;
+  color: #eeeeee;
 }
 
 .main-page{
   width: calc(100vw: - 60px);
   margin-left: 60px;
 }
-
-
-
-
 
 .teamName{
   margin: 0px;
@@ -62,7 +71,7 @@ p{
   height: 35px;
   padding-top: 10px;
   font-size: 13px;
-  color: #232323;
+  color: #eeeeee;
   padding-left: 14px;
 }
 
@@ -73,11 +82,11 @@ p{
 .bracketColumn{
   float: left;
   height: auto;
-  width: 200px;
+  width: var(--participantWidth);
 }
 
 .divider{
-  width: 200px;
+  width: var(--participantWidth);
   height: 1px;
   background-color: rgba(15,15,20,0.2);
 }
@@ -87,7 +96,7 @@ p{
   border-top-right-radius: 8px;
   background-color: #ffffff;
   height: 35px;
-  width: 200px;
+  width: var(--participantWidth);
 }
 
 .lowerHalf{
@@ -95,12 +104,12 @@ p{
   border-bottom-right-radius: 8px;
   background-color: #ffffff;
   height: 35px;
-  width: 200px;
+  width: var(--participantWidth);
 }
 
 .match{
   height: 71px;
-  width: 200px;
+  width: var(--participantWidth);
   border-radius: 8px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -123,11 +132,11 @@ p{
 }
 
 .upperHalf > .profilePic{
-  border-top-left-radius: 8px;
+  border-top-left-radius: 4px;
 }
 
 .lowerHalf > .profilePic{
-  border-bottom-left-radius: 8px;
+  border-bottom-left-radius: 4px;
 }
 
 .score{
@@ -142,11 +151,11 @@ p{
 }
 
 .upperHalf > .score{
-  border-top-right-radius: 8px;
+  border-top-right-radius: 4px;
 }
 
 .lowerHalf > .score{
-  border-bottom-right-radius: 8px;
+  border-bottom-right-radius: 4px;
 }
 
 .win{

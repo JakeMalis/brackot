@@ -1,28 +1,31 @@
-
+function personalizeElements() {
+  //shuffleParticipants();
+}
 
 /* shuffleParticipants */
 function shuffleParticipants(){
-  firebase.firestore().collection("tournaments").doc("N5zMErfmRQVRsWfJ76xM").get().then(function(doc){
-
-    doc.data().players
-    var shuffled = array[];
-    for(let i = doc.data().players.length; i > )
-    shuffled.add(players);
-
-
-
-    for(let i = shuffled.length — 1; i > 0; i--){
+  var shuffledParticipants = [];
+  firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").get().then(function(doc){
+    shuffledParticipants = doc.data().players;
+    for(var i = doc.data().players.length - 1; i > 0; i--){
       const j = Math.floor(Math.random() * i);
-      const temp = array[i];
-      players[i] = array[j];
-      array[j] = temp;
+      const temp = shuffledParticipants[i];
+      shuffledParticipants[i] = shuffledParticipants[j];
+      shuffledParticipants[j] = temp;
+    }
 
       /* Set the players attribute */
-}
-
-
-
   });
+
+//  shuffledParticipants.forEach(async function (element) {
+  //  console.log(element);
+    /
+    firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
+        shuffledParticipants: shuffledParticipants
+    });
+    */
+  });
+
 }
 
 function getByesAndRounds(numParticipants){
@@ -40,4 +43,11 @@ function getByesAndRounds(numParticipants){
   }
   /* rounds returns number of rounds in the tournament */
   /* byes returns number of players that need byes in the first round */
+}
+
+
+function createMatches(shuffledParticipants){
+  getByesAndRounds(shuffledParticipants.length);
+
+
 }
