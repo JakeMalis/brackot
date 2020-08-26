@@ -6,9 +6,11 @@
   --cardColor: #2b2c3c;
   --tournamentCardColor: #3a3b4a;
   --tournamentCardColorHover: #454656;
+  --participantHover: #555666;
 
-  --participantWidth: 170px;
-  --participantHeight: calc(0.175 * var(--participantWidth));
+  --participantWidth: 200px;
+  --participantHeight: calc(0.15 * var(--participantWidth));
+  --dividerHeight: 0px;
 }
 
 body{
@@ -16,7 +18,7 @@ body{
   margin: 0px;
   width: 100vw;
   min-height: 100vh;
-  background-color: var(--background);
+  background-color: var(--cardColor) !important;
 }
 
 h1{
@@ -67,16 +69,17 @@ p{
   overflow: hidden;
   text-overflow: ellipsis;
   letter-spacing: 0.75px;
-  width: 130px;
-  height: 35px;
-  padding-top: 10px;
+  width: calc(0.698 * var(--participantWidth));
+  height: var(--participantHeight);
+  padding-top: 6px;
   font-size: 13px;
   color: #eeeeee;
-  padding-left: 14px;
+  padding-left: calc(0.07 * var(--participantWidth));
+  padding-right: calc(0.07 * var(--participantWidth));
 }
 
 .whiteText{
-  color: white;
+  color: #eeeeee;
 }
 
 .bracketColumn{
@@ -87,48 +90,60 @@ p{
 
 .divider{
   width: var(--participantWidth);
-  height: 1px;
-  background-color: rgba(15,15,20,0.2);
+  height: var(--dividerHeight);
+  background-color: var(--tournamentCardColor);
+}
+
+.participant{
+  background-color: var(--tournamentCardColorHover);
+  height: var(--participantHeight);
+  width: var(--participantWidth);
+  box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.7);
+}
+
+.participant:hover{
+  background-color: var(--participantHover);
+  cursor: pointer;
 }
 
 .upperHalf{
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  background-color: #ffffff;
-  height: 35px;
-  width: var(--participantWidth);
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
 
 .lowerHalf{
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-  background-color: #ffffff;
-  height: 35px;
-  width: var(--participantWidth);
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 
 .match{
-  height: 71px;
+  height: calc(2 * var(--participantHeight) + var(--dividerHeight));
   width: var(--participantWidth);
-  border-radius: 8px;
+  border-radius: 4px;
   margin-top: 10px;
   margin-bottom: 10px;
-  box-shadow: 0px 3px 2px 0px rgba(0,0,0,0.15);
-  transition-duration: 0.2s;
-  background-color: #ffffff;
+  box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.4);
+  transition-duration: 0.15s;
+  background-color: var(--tournamentCardColorHover);
+}
+.match:hover{
+  transform: scale(1.02);
+  transition-duration: 0.15s;
 }
 
-.match:hover{
-  cursor: pointer;
-  transform: scale(1.03);
-  transition-duration: 0.2s;
+.emptyMatch{
+  box-shadow: none;
+  background-color: var(--background);
+}
+.emptyMatch:hover{
+  transform: none;
 }
 
 .profilePic{
   float: left;
-  height: 35px;
-  width: 35px;
-  transition-duration: 0.2s;
+  height: var(--participantHeight);
+  width: var(--participantHeight);
+  transition-duration: 0.15s;
 }
 
 .upperHalf > .profilePic{
@@ -140,14 +155,14 @@ p{
 }
 
 .score{
-  height: 35px;
-  padding-top: 6px;
+  height: var(--participantHeight);
+  padding-top: 5px;
   text-align: center;
   font-size: 16px;
-  width: 35px;
+  width: var(--participantHeight);
   float: left;
   margin: 0px;
-  background-color: rgba(0,0,0,0.09);
+  background-color: var(--tournamentCardColor);
 }
 
 .upperHalf > .score{
@@ -159,13 +174,15 @@ p{
 }
 
 .win{
-  background-color: rgba(119, 221, 119);
-  font-family: 'MuseoSans700', sans-serif;
+  background-color: rgba(89, 201, 89);
+  font-family: 'proxima-nova', sans-serif;
+  font-weight: 600;
 }
 
 .loss{
-  background-color: rgba(237,67,55);
-  font-family: 'MuseoSans700', sans-serif;
+  background-color: rgba(227,57,45);
+  font-family: 'proxima-nova', sans-serif;
+  font-weight: 600;
 }
 
 
@@ -191,11 +208,10 @@ p{
 
 .emptyCard{
   margin: 10px;
-  height: 44px;
-  border-radius: 8px;
-  width: 240px;
-  background-color: rgba(200,200,200,0.2);
-  box-shadow: 0px 2px 1px 0px rgba(0,0,0,0.25);
+  height: calc(2 * var(--participantHeight) + var(--dividerHeight));
+  border-radius: 4px;
+  width: calc(1.2 * var(--participantWidth));
+  background-color: var(--cardColor);
   transition-duration: 0.2s;
   margin-right: 20px;
 }
@@ -203,23 +219,23 @@ p{
 .teamCard{
   cursor: pointer;
   margin: 10px;
-  height: 44px;
-  border-radius: 8px;
-  width: 240px;
-  background-color: #FFFFFF;
+  height: calc(2 * var(--participantHeight) + var(--dividerHeight));
+  border-radius: 4px;
+  width: calc(1.2 * var(--participantWidth));
+  background-color: var(--tournamentCardColorHover);
   box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.25);
   transition-duration: 0.2s;
   margin-right: 20px;
 }
 
 .teamCard:hover{
-  transform: scale(1.03);
-  transition-duration: 0.2s;
+  transform: scale(1.02);
+  transition-duration: 0.15s;
 }
 
 .teamCard:hover > .profilePic{
-  transform: scale(1.014);
-  transition-duration: 0.2s;
+  transform: scale(1.02);
+  transition-duration: 0.15s;
 }
 
 .goldTeamCard{

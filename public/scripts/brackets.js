@@ -49,5 +49,13 @@ function getByesAndRounds(numParticipants){
 function createMatches(shuffledParticipants){
   getByesAndRounds(shuffledParticipants.length);
 
+  var count = shuffledParticipants.length;
+  var matches = arr{}
+
+  while(count > 0){
+    var
+    count--;
+  }
+
 
 }
