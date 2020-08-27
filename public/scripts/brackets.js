@@ -2,6 +2,22 @@ function personalizeElements() {
   //shuffleParticipants();
 }
 
+function findCenterY(element){
+  var div = $(element)[0].getBoundingClientRect();
+  var divY = div.top + div.height/2;
+  return divY;
+}
+
+function heightBetween(element1, element2){
+  // find the vertical center of each element
+  var divY1 = findCenterY(element1);
+  var divY2 = findCenterY(element2);
+  // find the distance between the two vertical centers
+  var distance = (divY1 - divY2);
+  return distance;
+}
+
+
 /* shuffleParticipants */
 function shuffleParticipants(){
   var shuffledParticipants = [];

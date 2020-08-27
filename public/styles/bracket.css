@@ -82,10 +82,18 @@ p{
   color: #eeeeee;
 }
 
-.bracketColumn{
+.matchColumn{
   float: left;
   height: auto;
   width: var(--participantWidth);
+}
+
+.connectorColumn{
+  float: left;
+  height: 1000px;
+  width: 40px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .divider{
