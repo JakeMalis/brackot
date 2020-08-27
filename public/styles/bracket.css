@@ -7,6 +7,7 @@
   --tournamentCardColor: #3a3b4a;
   --tournamentCardColorHover: #454656;
   --participantHover: #555666;
+  --white: #eeeeee;
 
   --participantWidth: 200px;
   --participantHeight: calc(0.15 * var(--participantWidth));
@@ -90,10 +91,119 @@ p{
 
 .connectorColumn{
   float: left;
-  height: 1000px;
-  width: 40px;
-  margin-left: 5px;
-  margin-right: 5px;
+  height: auto;
+  width: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.match1{
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.match2{
+  margin-top: calc((1.5 * 15px) + var(--participantHeight));
+  margin-bottom: calc((2 * 15px) + (2 * var(--participantHeight)));
+}
+
+.match3{
+  margin-top: calc((2.5 * 15px) + (3 * var(--participantHeight)));
+  margin-bottom: calc((4 * 15px) + (6 * var(--participantHeight)));
+}
+
+.match4{
+  margin-top: calc((4.5 * 15px) + (7 * var(--participantHeight)));
+  margin-bottom: calc((6 * 15px) + (15 * var(--participantHeight)));
+}
+
+.match5{
+  margin-top: calc((8.5 * 15px) + (15 * var(--participantHeight)));
+  margin-bottom: calc((8 * 15px) + (34 * var(--participantHeight)));
+}
+
+.match6{
+  margin-top: calc((16.5 * 15px) + (31 * var(--participantHeight)));
+  margin-bottom: calc((10 * 15px) + (73 * var(--participantHeight)));
+}
+
+.match7{
+  margin-top: calc((32.5 * 15px) + (63 * var(--participantHeight)));
+  margin-bottom: calc((12 * 15px) + (152 * var(--participantHeight)));
+}
+
+.match8{
+  margin-top: calc((64.5 * 15px) + (127 * var(--participantHeight)));
+  margin-bottom: calc((14 * 15px) + (311 * var(--participantHeight)));
+}
+
+.connector1{
+  margin-top: 15px;
+  margin-bottom: 15px;
+  height: calc(4 * var(--participantHeight) + 15px);
+}
+
+.connector2{
+  margin-top: calc((1.5 * 15px) + var(--participantHeight));
+  margin-bottom: calc(2 * (15px + var(--participantHeight)));
+  height: calc(6 * var(--participantHeight) + (2 * 15px));
+}
+
+.connector3{
+  margin-top: calc((2.5 * 15px) + (3 * var(--participantHeight)));
+  margin-bottom: calc((4 * 15px) + (6 * var(--participantHeight)));
+  height: calc(10 * var(--participantHeight) + (4 * 15px));
+}
+
+.connector4{
+  margin-top: calc((4.5 * 15px) + (7 * var(--participantHeight)));
+  margin-bottom: calc((6 * 15px) + (15 * var(--participantHeight)));
+  height: calc(18 * var(--participantHeight) + (8 * 15px));
+}
+
+.connector5{
+  margin-top: calc((8.5 * 15px) + (15 * var(--participantHeight)));
+  margin-bottom: calc((8 * 15px) + (34 * var(--participantHeight)));
+  height: calc(34 * var(--participantHeight) + (16 * 15px));
+}
+
+.connector6{
+  margin-top: calc((16.5 * 15px) + (31 * var(--participantHeight)));
+  margin-bottom: calc((10 * 15px) + (73 * var(--participantHeight)));
+  height: calc(66 * var(--participantHeight) + (32 * 15px));
+}
+
+.connector7{
+  margin-top: calc((32.5 * 15px) + (63 * var(--participantHeight)));
+  margin-bottom: calc((12 * 15px) + (152 * var(--participantHeight)));
+  height: calc(130 * var(--participantHeight) + (64 * 15px));
+}
+
+.connector8{
+  margin-top: calc((64.5 * 15px) + (127 * var(--participantHeight)));
+  margin-bottom: calc((14 * 15px) + (311 * var(--participantHeight)));
+  height: calc(258 * var(--participantHeight) + (128 * 15px));
+}
+
+.bottom{
+  margin-bottom: 0px;
+}
+
+.connectorLeft{
+  float: left;
+  height: 100%;
+  width: calc(50% + 1px) !important;
+  border-right: 2px solid #eeeeee;
+  border-top: 2px solid #eeeeee;
+  border-bottom: 2px solid #eeeeee;
+}
+
+.connectorRight{
+  display: block;
+  float: left;
+  width: calc(50% - 1px) !important;
+  height: calc(50% + 1px) !important;
+  border-bottom: 2px solid #eeeeee;
 }
 
 .divider{
@@ -128,8 +238,6 @@ p{
   height: calc(2 * var(--participantHeight) + var(--dividerHeight));
   width: var(--participantWidth);
   border-radius: 4px;
-  margin-top: 10px;
-  margin-bottom: 10px;
   box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.4);
   transition-duration: 0.15s;
   background-color: var(--tournamentCardColorHover);
@@ -137,6 +245,12 @@ p{
 .match:hover{
   transform: scale(1.02);
   transition-duration: 0.15s;
+}
+
+.connector{
+  padding-top: var(--participantHeight);
+  padding-bottom: var(--participantHeight);
+  width: 100%;
 }
 
 .emptyMatch{
@@ -192,6 +306,9 @@ p{
   font-family: 'proxima-nova', sans-serif;
   font-weight: 600;
 }
+
+
+
 
 
 

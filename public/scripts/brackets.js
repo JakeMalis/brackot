@@ -1,11 +1,23 @@
+var shuffledParticipants = [];
+var numParticipants = 0;
+var check = true;
+
 function personalizeElements() {
-  //shuffleParticipants();
+  firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").get().then(function(doc){
+    shuffledParticipants = doc.data().players;
+    numParticipants = doc.data().players.length;
+  });
+
 }
 
 function findCenterY(element){
   var div = $(element)[0].getBoundingClientRect();
   var divY = div.top + div.height/2;
   return divY;
+}
+
+function setConnectorHeight(parent1, parent2, connector){
+  document.getElementById(connector).style.height = heightBetween(parent1, parent2);
 }
 
 function heightBetween(element1, element2){
@@ -20,31 +32,25 @@ function heightBetween(element1, element2){
 
 /* shuffleParticipants */
 function shuffleParticipants(){
-  var shuffledParticipants = [];
-  firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").get().then(function(doc){
-    shuffledParticipants = doc.data().players;
-    for(var i = doc.data().players.length - 1; i > 0; i--){
-      const j = Math.floor(Math.random() * i);
-      const temp = shuffledParticipants[i];
-      shuffledParticipants[i] = shuffledParticipants[j];
-      shuffledParticipants[j] = temp;
-    }
-
-      /* Set the players attribute */
-  });
+  for(var i = doc.data().players.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * i);
+    const temp = shuffledParticipants[i];
+    shuffledParticipants[i] = shuffledParticipants[j];
+    shuffledParticipants[j] = temp;
+  }
 
 //  shuffledParticipants.forEach(async function (element) {
   //  console.log(element);
-    /
+    /*
     firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
         shuffledParticipants: shuffledParticipants;
     });
     */
-  });
+  };
 
 }
 
-function getByesAndRounds(numParticipants){
+function getByesAndRounds(){
   var byes = 0;
   var rounds = 0;
   var test = true;
@@ -63,23 +69,22 @@ function getByesAndRounds(numParticipants){
 }
 
 
-function createInitialMatches(shuffledParticipants){
-
-  var count = shuffledParticipants.length - getByesAndRounds(shuffledParticipants.length)[0];
+function createInitialMatches(){
   var matches = [];
-
-  while(count > 0){
-    matches.push([shuffledParticipants.pop(), shuffledParticipants.pop()]);
-    count = count - 2;
+  var byes = getByesAndRounds()[0];
+  for(int m = 0; m < numParticipants - byes; m+=2){
+    matches.push([shuffledParticipants[m], shuffledParticipants[m+1]);
   }
+
+  /*for(int i = 0; i < byes; i++){
+    matches.push([shuffledParticipants[i+byes]])
+  }*/
 
   return matches;
 }
 
-function findWinner(index){
-  var playerOne = createInitialMatches(shuffledParticipants)[index].pop();
-  var playerTwo = createInitialMatches(shuffledParticipants)matches[index].pop();
 
+function assignWinner([playerOne, playerTwo]){
   /* if winning button pressed return true else return false*/
   /* if both press true send an error */
   var winner;
@@ -87,26 +92,55 @@ function findWinner(index){
   return winner;
 }
 
-function implementByes(shuffledParticipants){    /* creates second round of matches */
-  var matches = [];
-  var rounds = getByesAndRounds(shuffledParticipants).pop;
-  var numOfWinners = createInitialMatches(shuffledParticipants).length;
 
-  for(int x = 0; x <= numOfWinners - 2; x+=2){
-    matches.push([findWinner(x), findWinner(x+1)]);
+function implementByes(){    /* creates second round of matches */
+  var matches = [];
+  var numOfWinners = createInitialMatches().length;
+  var count = 0;
+  var index = numParticipants - getByesAndRounds()[0];
+
+  while(count < 2 * numOfWinners){
+    matches.push([assignWinner(createInitialMatches()[count]), assignWinner(createInitialMatches()[count+1]]);
+    count+=2;
   }
 
-  if
+  if(numOfWinners % 2 != 0){
+    matches.push([assignWinner(createInitialMatches()[count]), shuffledParticipants[index + 1] ]);
+    index++;
+  }
 
+  while(index < numParticipants){
+    matches.push([shuffledParticipants[index], shuffledParticipants[index + 1]]);
+    index+=2;
+  }
 
-
-
+  return matches;
 }
 
+function nextRound(previous){
+  var matches = [];
 
+  if(getByesAndRounds()[0] != 0 && check){
+    var secondRoundMatches = implementByes();
+    for(int x = 0; x < secondRoundMatches.length; x+=2){
+      matches.push([assignWinner(secondRoundMatches[x]), assignWinner(secondRoundMatches[x+1])]);
+      check = false;
+      return matches;
+    }
+  else if(check){
+    var previous = createInitialMatches();
+    for(int y = 0; y < previous.length; y+=2){
+    matches.push([assignWinner(previous[x], assignWinner(previous[x+1]])));
+    check = false;
+    return matches;
+    }
+  }
 
-
-
-
-
+  for(int z = 0; z < nextRound(matches).length; z+=2){
+    var next = [];
+    next.push([assignWinner(matches[z], matches[z+1])]);
+    matches = [];
+    matches = next;
+    return matches;
+  }
 }
