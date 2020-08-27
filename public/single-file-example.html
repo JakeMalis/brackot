@@ -12,38 +12,45 @@
   <body>
     <div id="root"></div>
     <script type="text/babel">
+    var numberOfPlayers = 4;
+    const AddToTeam = [];
+    const Players = ["Daniela", "Jake", "Jorndan", "Ethan"]; //eventually pulls from list of players
 
-    const HelloWorld = [];
 
-    class HelloWorldText extends React.Component {
+
+    class Buttons extends React.Component {
       render() {
         return (
-            <h1>Hello, {this.props.name} number {this.props.number}!</h1>
+          <button type="button" class="gradientButton modalButton" id= number onclick="changeText();">+</button>
         );
       }
     };
-    for (var index = 0; index < 4; index++) {
-      HelloWorld.push(<HelloWorldText name="Dani" number={index} />);
+
+   AddToTeam.push(<h1>Players:</h1>);
+
+   for (var index = 0; index < numberOfPlayers; index++){
+        AddToTeam.push(<Buttons playerName= {Players[index]} number={index} /> );
+        AddToTeam.push(<h3> playerName </h3>);
+
     }
 
       ReactDOM.render(
-        HelloWorld,
+        AddToTeam,
         document.getElementById('root')
       );
 
+      function changeText(idElement) {
+          var element = document.getElementById(idElement);
+              if (element.innerHTML === '+')
+                  element.innerHTML = '-';
+              else {
+                  element.innerHTML = '+';
+          }
+      }
+
+
+
     </script>
-    <!--
-      Note: this page is a great way to try React but it's not suitable for production.
-      It slowly compiles JSX with Babel in the browser and uses a large development build of React.
 
-      Read this section for a production-ready setup with JSX:
-      https://reactjs.org/docs/add-react-to-a-website.html#add-jsx-to-a-project
-
-      In a larger project, you can use an integrated toolchain that includes JSX instead:
-      https://reactjs.org/docs/create-a-new-react-app.html
-
-      You can also use React without JSX, in which case you can remove Babel:
-      https://reactjs.org/docs/react-without-jsx.html
-    -->
   </body>
 </html>

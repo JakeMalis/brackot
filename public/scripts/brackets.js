@@ -37,7 +37,7 @@ function shuffleParticipants(){
   //  console.log(element);
     /
     firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
-        shuffledParticipants: shuffledParticipants
+        shuffledParticipants: shuffledParticipants;
     });
     */
   });
@@ -57,21 +57,56 @@ function getByesAndRounds(numParticipants){
       test = false;
     }
   }
+  return [byes, rounds];
   /* rounds returns number of rounds in the tournament */
   /* byes returns number of players that need byes in the first round */
 }
 
 
-function createMatches(shuffledParticipants){
-  getByesAndRounds(shuffledParticipants.length);
+function createInitialMatches(shuffledParticipants){
 
-  var count = shuffledParticipants.length;
-  var matches = arr{}
+  var count = shuffledParticipants.length - getByesAndRounds(shuffledParticipants.length)[0];
+  var matches = [];
 
   while(count > 0){
-    var
-    count--;
+    matches.push([shuffledParticipants.pop(), shuffledParticipants.pop()]);
+    count = count - 2;
   }
+
+  return matches;
+}
+
+function findWinner(index){
+  var playerOne = createInitialMatches(shuffledParticipants)[index].pop();
+  var playerTwo = createInitialMatches(shuffledParticipants)matches[index].pop();
+
+  /* if winning button pressed return true else return false*/
+  /* if both press true send an error */
+  var winner;
+
+  return winner;
+}
+
+function implementByes(shuffledParticipants){    /* creates second round of matches */
+  var matches = [];
+  var rounds = getByesAndRounds(shuffledParticipants).pop;
+  var numOfWinners = createInitialMatches(shuffledParticipants).length;
+
+  for(int x = 0; x <= numOfWinners - 2; x+=2){
+    matches.push([findWinner(x), findWinner(x+1)]);
+  }
+
+  if
+
+
+
+
+}
+
+
+
+
+
 
 
 }
