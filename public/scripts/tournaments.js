@@ -29,7 +29,7 @@ function loadTournaments() {
 
   async function renderTournamentCards() {
     var tournamentNumber = 1;
-    firebase.firestore().collection("tournaments").where("date", ">=", new Date()).orderBy("date", "asc").get().then(function(querySnapshot) {
+    firebase.firestore().collection("tournaments").where("date", ">=", new Date()).get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
           TournamentCardArray.push(<TournamentCard tournamentNumber={tournamentNumber} />);
           tournamentNumber++
@@ -43,6 +43,7 @@ function loadTournaments() {
   }
 
   renderTournamentCards();
+
   var tournamentNumber = 1;
   firebase.firestore().collection("tournaments").where("date", ">=", new Date()).orderBy("date", "asc").get().then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
