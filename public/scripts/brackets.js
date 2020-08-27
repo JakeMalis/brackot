@@ -85,8 +85,11 @@ function createInitialMatches(){
 
 
 function assignWinner([playerOne, playerTwo]){
-  /* if winning button pressed return true else return false*/
-  /* if both press true send an error */
+  /* if winning button pressed return true else return false
+   if both press true send an error
+   if neither has won return an empty slot
+  */
+
   var winner;
 
   return winner;
@@ -117,7 +120,7 @@ function implementByes(){    /* creates second round of matches */
   return matches;
 }
 
-function nextRound(previous){
+function nextRound(lastRound){
   var matches = [];
 
   if(getByesAndRounds()[0] != 0 && check){
@@ -136,7 +139,7 @@ function nextRound(previous){
     }
   }
 
-  for(int z = 0; z < nextRound(matches).length; z+=2){
+  for(int z = 0; z < nextRound(matches).length; z+=2){ // WORK ON THIS FUNCTION STOPS AFTER RETURNS MAY NEED NEW FUNCTION OF JUST RECURSION
     var next = [];
     next.push([assignWinner(matches[z], matches[z+1])]);
     matches = [];
