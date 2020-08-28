@@ -22,8 +22,7 @@ body {
 }
 
 .katSplash{
-  background-image: url("../media/splash_art/katsplash.jpg");
-  background-size: cover;
+  background-image: url("../media/splash_art/katsplashmobile.jpg");
 }
 
 .karmaSplash{
@@ -564,6 +563,11 @@ input[type="checkbox"]:checked + label{
 
 
 @media only screen and (min-width: 480px){
+  .katSplash{
+    background-image: url("../media/splash_art/katsplash.jpg");
+    background-size: cover;
+  }
+
   .loginCard{
     width: 100%;
   }

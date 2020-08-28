@@ -252,33 +252,6 @@ select option{
   border-bottom: 4px solid rgba(35,242,172,0);
 }
 
-@media only screen and (min-width: 480px){
-  .topbarLogo{
-    top: 1px;
-    left: 15px;
-    width: 179px;
-    height: 66px;
-    content: url("../media/BrackotSidebarLogo.png");
-  }
-
-  .primaryTabs{
-    margin-left: 160px;
-    margin-right: 10px;
-  }
-
-  .primaryTabsList{
-    padding-left: 40px;
-  }
-
-  #expandTopbarTab{
-    display: none;
-  }
-
-  .primaryTab{
-    display: inline-block;
-  }
-}
-
 #avatar{
   width: 40px;
   height: 40px;
@@ -367,7 +340,7 @@ select option{
 }
 
 #firstLanding{
-  background-image: url("../media/splash_art/zedsplash.jpg");
+  background-image: url("../media/splash_art/zedsplashmobile.jpg");
 }
 
 .shortIndex{
@@ -450,4 +423,35 @@ select option{
 
 .onePlatformImage{
   object-fit: contain;
+}
+
+@media only screen and (min-width: 480px){
+  .topbarLogo{
+    top: 1px;
+    left: 15px;
+    width: 179px;
+    height: 66px;
+    content: url("../media/BrackotSidebarLogo.png");
+  }
+
+  .primaryTabs{
+    margin-left: 160px;
+    margin-right: 10px;
+  }
+
+  .primaryTabsList{
+    padding-left: 40px;
+  }
+
+  #expandTopbarTab{
+    display: none;
+  }
+
+  .primaryTab{
+    display: inline-block;
+  }
+
+  #firstLanding{
+    background-image: url("../media/splash_art/zedsplash.jpg");
+  }
 }
