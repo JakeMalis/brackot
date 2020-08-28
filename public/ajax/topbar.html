@@ -1,7 +1,27 @@
-<div class="userInfobar">
-  <a href="profile.html">
-    <div class="userPicInfobar"><img id="avatar" width="48px" height="48px" style="object-fit: cover; border-radius: 50%;"></div>
-    <div class="unlimitedIconInfobar"><img id="unlimitedIcon" src="media/brackotunlimitedcheckborder.svg" width="22px" height="22px" style="object-fit: cover"</div>
-    <!-- <div style="padding-top: 14px;" class="userNameInfobar"><h3 style="font-size: 17px;" id="name">First Last</h3></div> -->
-  </a>
+<div class="topbar">
+  <div id="topNavbar" class="topNavbar">
+    <a href="https://brackot.com"><img class="topbarLogo"></a>
+    <div class="primaryTabs">
+      <ul class="primaryTabsList">
+        <li id="expandTopbarTab" class="menuTab" onclick="toggleMenu()"><a id="expandTopbar" class="primaryTabLink"><p class="primaryTabText"><i class="fa fa-bars"></i>Menu</p></a></li>
+        <li id="tournamentsTab" class="primaryTab"><a href="tournaments.html" class="primaryTabLink"><p class="primaryTabText">Tournaments</p></a></li>
+        <li id="teamsTab" class="primaryTab"><a href="profile.html" class="primaryTabLink"><p class="primaryTabText">Profile</p></a></li>
+        <li id="helpCenterTab" class="primaryTab"><a href="create-tournament.html" class="primaryTabLink"><p class="primaryTabText">Create Tournament</p></a></li>
+      </ul>
+    </div>
+    <div class="secondaryTabs">
+      <div id="loginTab" class="secondaryTab">
+        <button id="loginButton" onclick="location.href='login.html';">Log In</button>
+      </div>
+      <div id="profileTab" class="secondaryTab" onclick="location.href='profile.html';">
+        <div class="profilePic"><img id="avatar" width="45px" height="45px"></div>
+        <div class="unlimitedIconContainer"><img id="unlimitedIcon" src="media/brackotunlimitedcheckborder.svg"></div>
+      </div>
+      <!--<form id="navbarSearch" class="navbarSearch">
+      <input id="searchInput" class="searchInput" type="text" placeholder="Search..."></input>
+      </form>-->
+    </div>
+  </div>
+  <div id="topbarExpansion" class="topbarExpansion">
+  </div>
 </div>
