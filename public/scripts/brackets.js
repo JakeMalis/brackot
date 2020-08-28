@@ -1,12 +1,23 @@
 var shuffledParticipants = [];
 var numParticipants = 0;
-var check = true;
 
 function personalizeElements() {
   firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").get().then(function(doc){
     shuffledParticipants = doc.data().players;
     numParticipants = doc.data().players.length;
   });
+
+  shuffleParticipants();
+  createInitialMatches();
+  implementByes();
+  var matches = checkByes();  //add something to print or save each round
+  var rounds = getByesAndRounds()[1];
+  if(rounds > 3){
+      for(int x = 0; x < rounds - 3; x++){
+        matches = nextRound(matches);   //add something to print or save each round
+      }
+
+  }
 
 }
 
@@ -120,30 +131,28 @@ function implementByes(){    /* creates second round of matches */
   return matches;
 }
 
-function nextRound(lastRound){
+function checkByes(){
   var matches = [];
-
-  if(getByesAndRounds()[0] != 0 && check){
+  if(getByesAndRounds()[0] != 0){
     var secondRoundMatches = implementByes();
     for(int x = 0; x < secondRoundMatches.length; x+=2){
       matches.push([assignWinner(secondRoundMatches[x]), assignWinner(secondRoundMatches[x+1])]);
-      check = false;
       return matches;
     }
-  else if(check){
+  }
+  else{
     var previous = createInitialMatches();
     for(int y = 0; y < previous.length; y+=2){
-    matches.push([assignWinner(previous[x], assignWinner(previous[x+1]])));
-    check = false;
-    return matches;
+      matches.push([assignWinner(previous[x], assignWinner(previous[x+1]])));
+      return matches;
     }
   }
+}
 
-  for(int z = 0; z < nextRound(matches).length; z+=2){ // WORK ON THIS FUNCTION STOPS AFTER RETURNS MAY NEED NEW FUNCTION OF JUST RECURSION
-    var next = [];
-    next.push([assignWinner(matches[z], matches[z+1])]);
-    matches = [];
-    matches = next;
+function nextRound(lastRound){
+  for(int z = 0; z < lastRound.length; z+=2){
+    var matches = [];
+    matches.push([assignWinner(lastRound[z], lastRound[z+1])]);
     return matches;
   }
 }
