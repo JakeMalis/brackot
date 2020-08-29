@@ -10,7 +10,7 @@ function personalizeElements() {
   shuffleParticipants();
   createInitialMatches();
   implementByes();
-  var matches = checkByes();  //add something to print or save each round
+
   var rounds = getByesAndRounds()[1];
   if(rounds > 3){
       for(int x = 0; x < rounds - 3; x++){
@@ -83,14 +83,14 @@ function getByesAndRounds(){
 function createInitialMatches(){
   var matches = [];
   var byes = getByesAndRounds()[0];
-  for(int m = 0; m < numParticipants - byes; m+=2){
-    matches.push([shuffledParticipants[m], shuffledParticipants[m+1]);
+  var initialNumRounds = (numParticipants - byes)/2;
+  for(int x = 0; x < 2 * initialNumRounds; x+=2){
+    matches.push([shuffledParticipants[x], shuffledParticipants[x+1]]);
+    matches.push([[], []]);
   }
-
-  /*for(int i = 0; i < byes; i++){
-    matches.push([shuffledParticipants[i+byes]])
-  }*/
-
+  for(int y = 0; y < byes - initialNumRounds; y+=2){
+    matches.push([[],[]]);
+  }
   return matches;
 }
 
@@ -98,7 +98,7 @@ function createInitialMatches(){
 function assignWinner([playerOne, playerTwo]){
   /* if winning button pressed return true else return false
    if both press true send an error
-   if neither has won return an empty slot
+   if neither has won return an empty slot [ , ]
   */
 
   var winner;
@@ -109,49 +109,27 @@ function assignWinner([playerOne, playerTwo]){
 
 function implementByes(){    /* creates second round of matches */
   var matches = [];
-  var numOfWinners = createInitialMatches().length;
-  var count = 0;
-  var index = numParticipants - getByesAndRounds()[0];
+  var initialMatches = createInitialMatches();
+  var byes = getByesAndRounds()[0];
+  var numOfWinners = (numParticipants-byes)/2;
+  var count = 1;
 
-  while(count < 2 * numOfWinners){
-    matches.push([assignWinner(createInitialMatches()[count]), assignWinner(createInitialMatches()[count+1]]);
-    count+=2;
+  for(int x = 0; x < 2*numOfWinners; x+=2){
+    matches.push([assignWinner(initialMatches()[count]), shuffledParticipants[shuffledParticipants.length - count]]);
+    count++;
   }
 
-  if(numOfWinners % 2 != 0){
-    matches.push([assignWinner(createInitialMatches()[count]), shuffledParticipants[index + 1] ]);
-    index++;
-  }
-
-  while(index < numParticipants){
-    matches.push([shuffledParticipants[index], shuffledParticipants[index + 1]]);
-    index+=2;
+  for(int y = 0; y < byes - numofWinners; y+=2){
+    matches.push([shuffledParticipants[2*numOfWinners + y], shuffledParticipants[2*numOfWinners + y + 1]]);
   }
 
   return matches;
 }
 
-function checkByes(){
-  var matches = [];
-  if(getByesAndRounds()[0] != 0){
-    var secondRoundMatches = implementByes();
-    for(int x = 0; x < secondRoundMatches.length; x+=2){
-      matches.push([assignWinner(secondRoundMatches[x]), assignWinner(secondRoundMatches[x+1])]);
-      return matches;
-    }
-  }
-  else{
-    var previous = createInitialMatches();
-    for(int y = 0; y < previous.length; y+=2){
-      matches.push([assignWinner(previous[x], assignWinner(previous[x+1]])));
-      return matches;
-    }
-  }
-}
 
 function nextRound(lastRound){
+  var matches = [];
   for(int z = 0; z < lastRound.length; z+=2){
-    var matches = [];
     matches.push([assignWinner(lastRound[z], lastRound[z+1])]);
     return matches;
   }
