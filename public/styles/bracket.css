@@ -59,8 +59,7 @@ p{
 }
 
 .main-page{
-  width: calc(100vw: - 60px);
-  margin-left: 60px;
+  width: 100vw;
 }
 
 .teamName{
@@ -259,6 +258,10 @@ p{
 }
 .emptyMatch:hover{
   transform: none;
+}
+
+.emptySpace{
+  visibility: hidden;
 }
 
 .profilePic{

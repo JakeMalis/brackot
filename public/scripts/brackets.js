@@ -1,6 +1,34 @@
 var shuffledParticipants = [];
 var numParticipants = 0;
 
+class MatchCard extends React.Component {
+  render() {
+    return (
+        <div className={"match " + this.props.matchClass + " match" + this.props.roundNumber} id={"matchCard" + this.props.matchNumber}>
+          <div class={"participant " + this.props.half + "Half"}><img class="profilePic" id={"participantLogo" + this.props.participantNumber}><p class="teamName" id={"participantName" + this.props.participantNumber}></p><p class="score whiteText" id={"participant" + this.props.participantNumber + "Match" + this.props.matchNumber + "Score"}></p></div>
+          <div class={"participant " + this.props.half + "Half"}><img class="profilePic" id={"participantLogo" + this.props.participantNumber}><p class="teamName" id={"participantName" + this.props.participantNumber}></p><p class="score whiteText" id={"participant" + this.props.participantNumber + "Match" + this.props.matchNumber + "Score"}></p></div>
+        </div>
+    );
+  }
+}
+
+async function renderMatchCards() {
+  var participantNumber = 1;
+  query.get().then(function(querySnapshot) {
+    querySnapshot.forEach(function(doc) {
+        TournamentCardArray.push(<TournamentCard tournamentNumber={doc.data().number} />);
+        participantNumber++
+    });
+  }).then(function() {
+    ReactDOM.render(
+      TournamentCardArray,
+      document.getElementById("row")
+    );
+  });
+}
+
+
+
 function personalizeElements() {
   firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").get().then(function(doc){
     shuffledParticipants = doc.data().players;
@@ -77,19 +105,30 @@ function getByesAndRounds(){
   return [byes, rounds];
   /* rounds returns number of rounds in the tournament */
   /* byes returns number of players that need byes in the first round */
-}
 
 
 function createInitialMatches(){
   var matches = [];
   var byes = getByesAndRounds()[0];
   var initialNumRounds = (numParticipants - byes)/2;
-  for(int x = 0; x < 2 * initialNumRounds; x+=2){
-    matches.push([shuffledParticipants[x], shuffledParticipants[x+1]]);
-    matches.push([[], []]);
+  if(byes >= initialNumRounds){
+    for(int x = 0; x < 2 * initialNumRounds; x+=2){
+      matches.push([shuffledParticipants[x], shuffledParticipants[x+1]]);
+      matches.push([[], []]);
+    }
+    for(int y = 0; y < byes - initialNumRounds; y+=2){
+      matches.push([[],[]]);
+    }
   }
-  for(int y = 0; y < byes - initialNumRounds; y+=2){
-    matches.push([[],[]]);
+  else{
+    for(int z = 0; z < 2 * byes; z+=2){
+      matches.push([shuffledParticipants[z], shuffledParticipants[z+1]]);
+      matches.push([[], []]);
+    }
+    for(int w = 0; w < 2 * (initialNumRounds - byes); w+=2){
+      var indexStart = 2 * (byes + 1) - 1;
+      matches.push([shuffledParticipants[indexStart + w], shuffledParticipants[indexStart + w+1]]);
+    }
   }
   return matches;
 }
