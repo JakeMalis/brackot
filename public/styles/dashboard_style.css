@@ -6,7 +6,7 @@
   --cardColor: #2b2c3c;
   --tournamentCardColor: #3a3b4a;
   --tournamentCardColorHover: #454656;
-  --sidebarWidth: 60px;
+  --sidebarWidth: 0px;
 
   --filterLabelWidth: 130px;
 }
@@ -373,7 +373,7 @@ transition:all 0.1s linear;
 .main-menu .nav-icon {
 position:relative;
 display:table-cell;
-width:60px;
+width: var(--sidebarWidth);
 height:36px;
 text-align:center;
 vertical-align:middle;
@@ -1557,7 +1557,7 @@ text-align: center;
 /* THE BELOW SECTION IS MEANT FOR MOBILE DEVICES ONLY */
 @media only screen and (min-width: 480px){
   .main-page{
-    width: calc(100vw - 60px);
+    width: calc(100vw - var(--sidebarWidth));
     margin-left: 60px;
   }
 

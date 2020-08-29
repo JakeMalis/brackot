@@ -8,7 +8,10 @@
     <link rel="icon" type="image/png" href="media/favicon.png"/>
     <link rel="stylesheet" type="text/css" href="styles/landing.css">
     <link rel="stylesheet" type="text/css" href="styles/dashboard_style.css">
+    <link rel="stylesheet" type="text/css" href="styles/topbar.css">
     <link rel="stylesheet" type="text/css" href="styles/fonts.css">
+
+    <script src="scripts/topbar.js"></script>
 
     <link rel="stylesheet" href="https://use.typekit.net/fyp1otf.css">
     <script src="https://kit.fontawesome.com/201b9c41aa.js" crossorigin="anonymous"></script>
@@ -38,6 +41,9 @@
 </head>
 
 <body>
+  <div id="topbar">
+    <script> $( "#topbar" ).load( "ajax/topbar.html" ); </script>
+  </div>
   <div id="page404" class="page404">
           <div class="container404">
             <img class="logo404" src="../media/BrackotFullLogo.png">
@@ -45,7 +51,7 @@
             <h3 class="h3404">Let's try looking somewhere else, shall we?</h3>
             <div class="buttons404">
               <button class="gradientButton button404" onclick="location.href='index.html';">Home</button>
-              <button class="grayButton button404" onclick="location.href='tournaments.html';">Find Tournament</button>
+              <button class="grayButton button404" onclick="location.href='tournaments.html';">Tournaments</button>
             </div>
           </div>
   </div>
