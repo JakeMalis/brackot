@@ -664,6 +664,10 @@ text-align: center;
   color: #888888;
 }
 
+.filterListItem{
+  list-style: none;
+}
+
 .filterOption{
   margin: 0px;
   padding-top: 5px;
