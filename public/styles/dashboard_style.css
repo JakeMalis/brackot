@@ -2,6 +2,7 @@
   --gradient: linear-gradient(120deg,#23F2AC,#23D0F2);
   --aquamarine: #23F2AC;
   --turquoise: #23D0F2;
+  --topbarColor: #161722;
   --background: #202131;
   --cardColor: #2b2c3c;
   --tournamentCardColor: #3a3b4a;
@@ -1557,8 +1558,8 @@ text-align: center;
 /* THE BELOW SECTION IS MEANT FOR MOBILE DEVICES ONLY */
 @media only screen and (min-width: 480px){
   .main-page{
-    width: calc(100vw - var(--sidebarWidth));
-    margin-left: 60px;
+    width: 100vw;
+    margin-left: 0px;
   }
 
   .userInfobar{
@@ -1606,7 +1607,7 @@ text-align: center;
   bottom:0;
   height:100%;
   left:0;
-  width:60px;
+  width: var(--sidebarWidth);
   overflow:hidden;
   -webkit-transition:width .25s ease-in-out;
   transition:width .25s ease-in-out;
@@ -1642,7 +1643,7 @@ text-align: center;
   .main-menu .nav-icon {
   position:relative;
   display:table-cell;
-  width:60px;
+  width: var(--sidebarWidth);
   height:36px;
   text-align:center;
   vertical-align:middle;
