@@ -51,22 +51,7 @@ function loadRegisteredTournaments() {
         document.getElementById("tournamentCard" + tournamentNumber).style.visibility = "visible";
         document.getElementById("tournamentWallpaper" + tournamentNumber).src = "/media/game_wallpapers/" + doc.data().game + "-" + "gameplay.jpg";
         document.getElementById("tournamentTitle" + tournamentNumber).innerHTML = doc.data().name;
-
-        if (doc.data().game == "SMASH") {
-          document.getElementById("tournamentGame" + tournamentNumber).innerHTML = "Super Smash Bros. Ultimate";
-        }
-        else if (doc.data().game == "CSGO") {
-          document.getElementById("tournamentGame" + tournamentNumber).innerHTML = "Counter-Strike: Global Offensive";
-        }
-        else if (doc.data().game == "LEAGUE") {
-          document.getElementById("tournamentGame" + tournamentNumber).innerHTML = "League of Legends";
-        }
-        else if (doc.data().game == "ROCKET") {
-          document.getElementById("tournamentGame" + tournamentNumber).innerHTML = "Rocket League";
-        }
-        else {
-          document.getElementById("tournamentGame" + tournamentNumber).innerHTML = doc.data().game.substring(0,1) + doc.data().game.substring(1).toLowerCase();
-        }
+        document.getElementById("tournamentGame" + tournamentNumber).innerHTML = doc.data().game.substring(0,1) + doc.data().game.substring(1).toLowerCase();
 
         var date = new Date(doc.data().date.toDate());
         var hour;
@@ -97,7 +82,7 @@ function personalizeElements() {
     return decodedToken.claims.subscription;
   }
   getCustomClaimRole();
-  
+
   firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).get().then(function(doc) {
     document.getElementById("firstGreetingMessage").innerHTML = "Welcome back, " + firebase.auth().currentUser.displayName + "!";
     document.getElementById("notifications").innerHTML = doc.data().stats.notifications;

@@ -77,21 +77,7 @@ function sendConfirmationEmail(tournamentId) {
   firebase.firestore().collection("tournaments").doc(tournamentId).get().then(function(doc) {
     tournamentImage = "../media/game_wallpapers" + doc.data().game + "-gameplay.jpg";
 
-    if (doc.data().game == "SMASH") {
-      game = "Super Smash Bros. Ultimate";
-    }
-    else if (doc.data().game == "CSGO") {
-      game = "Counter-Strike: Global Offensive";
-    }
-    else if (doc.data().game == "LEAGUE") {
-      game = "League of Legends";
-    }
-    else if (doc.data().game == "ROCKET") {
-      game = "Rocket League";
-    }
-    else {
-      game = doc.data().game.substring(0,1) + doc.data().game.substring(1).toLowerCase();
-    }
+    game = doc.data().game;
 
     date = new Date(doc.data().date.toDate());
     var hour, meridiem;
