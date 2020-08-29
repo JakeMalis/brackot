@@ -746,6 +746,7 @@ text-align: center;
 }
 
 .filterRow{
+  width: 100%;
   display: inline-block;
 }
 
