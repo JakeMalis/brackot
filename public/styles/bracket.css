@@ -392,7 +392,7 @@ p{
 /* ================================ MODAL ========================================================= */
 /* The Modal (background) */
 .matchModal {
-  display: none; /* Hidden by default */
+  display: block; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 9999;
   padding-top: 100px; /* Location of the box */
@@ -406,6 +406,7 @@ p{
 
 /* Modal Content */
 .matchModal-content {
+  border-radius: 4px;
   background-color: var(--cardColor);
   margin: auto;
   padding: 20px;
@@ -415,20 +416,50 @@ p{
 
 /* The Close Button */
 .close {
-  color: #aaaaaa;
+  width: 100%;
+  padding-left: calc(100% - 24px);
+  position: block;
+  color: #ffffff !important;
   float: right;
-  font-size: 28px;
-  font-weight: bold;
+  font-size: 32px !important;
+  font-weight: normal !important;
 }
 
 .close:hover,
 .close:focus {
-  color: #eeeeee;
+  color: #ffffff !important;
   text-decoration: none;
   cursor: pointer;
 }
 
+.participantInfobox{
+  float: left;
+  width: 50%;
+  margin: 0px;
+  height: 300px;
+}
+
+.leftBox{
+  border-right: 1px solid var(--tournamentCardColorHover);
+}
+
+.rightBox{
+  border-left: 1px solid var(--tournamentCardColorHover);
+}
+
+.modalTop{
+  height: 332px;
+}
+
+.modalBottom{
+  padding-top: 20px;
+}
+
 .reportMatchResultsButton{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
   font-size: 16px;
   letter-spacing: 1.2px;
 }
