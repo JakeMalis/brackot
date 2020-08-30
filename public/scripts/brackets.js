@@ -116,19 +116,23 @@ function personalizeElements() {
       shuffledParticipants: shuffledParticipants,
       matchupsRound1: firstround
     }).then(function() {
-      console.log('Uploaded data')
+      console.log('Uploaded 1st round')
     });
     if(byes > 0 & numParticipants > 2){
       secondRound = implementByes();
       firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
         matchupsRound2: secondRound
-      )};
+      }).then(function() {
+        console.log('Uploaded 2nd round')
+      });
     }
     else if(numParticipants > 2){
       secondRound = nextRound(firstRound);
       firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
         matchupsRound2: secondRound
-      )};
+      }).then(function() {
+        console.log('Uploaded 2nd round')
+      });
     }
 
     var matches = [];
@@ -137,32 +141,49 @@ function personalizeElements() {
       matches = nextRound(secondRound);
       firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
         matchupsRound3: matches
+      }).then(function() {
+        console.log('Uploaded 3rd round')
+      });
       )}
     }
     if(rounds > 3){
       matches = nextRound(matches);
       firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
         matchupsRound4: matches
+      }).then(function() {
+        console.log('Uploaded 4th round')
+      });
     }
     if(rounds > 4){
       matches = nextRound(secondRound);
       firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
         matchupsRound5: matches
+      }).then(function() {
+        console.log('Uploaded 5th round')
+      });
     }
     if(rounds > 5){
       matches = nextRound(matches);
       firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
         matchupsRound6: matches
+      }).then(function() {
+        console.log('Uploaded 6th round')
+      });
     }
     if(rounds > 6){
       matches = nextRound(matches);
       firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
         matchupsRound7: matches
+      }).then(function() {
+        console.log('Uploaded 7th round')
+      });
     }
     if(rounds > 7){
       matches = nextRound(secondRound);
       firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
         matchupsRound8: matches
+      }).then(function() {
+        console.log('Uploaded 8th round')
       });
     }
   }
