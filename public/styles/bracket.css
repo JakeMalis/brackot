@@ -215,12 +215,17 @@ p{
   background-color: var(--tournamentCardColorHover);
   height: var(--participantHeight);
   width: var(--participantWidth);
-  box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.7);
+  box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.8);
 }
 
 .participant:hover{
   background-color: var(--participantHover);
   cursor: pointer;
+}
+
+.noParticipant{
+  visibility: hidden;
+  box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
 }
 
 .upperHalf{
@@ -237,9 +242,9 @@ p{
   height: calc(2 * var(--participantHeight) + var(--dividerHeight));
   width: var(--participantWidth);
   border-radius: 4px;
-  box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.4);
+
   transition-duration: 0.15s;
-  background-color: var(--tournamentCardColorHover);
+  background-color: var(--background);
 }
 .match:hover{
   transform: scale(1.02);
@@ -264,18 +269,18 @@ p{
   visibility: hidden;
 }
 
-.profilePic{
+.participantProfilePic{
   float: left;
   height: var(--participantHeight);
   width: var(--participantHeight);
   transition-duration: 0.15s;
 }
 
-.upperHalf > .profilePic{
+.upperHalf > .participantProfilePic{
   border-top-left-radius: 4px;
 }
 
-.lowerHalf > .profilePic{
+.lowerHalf > .participantProfilePic{
   border-bottom-left-radius: 4px;
 }
 
@@ -361,7 +366,7 @@ p{
   transition-duration: 0.15s;
 }
 
-.teamCard:hover > .profilePic{
+.teamCard:hover > .participantProfilePic{
   transform: scale(1.02);
   transition-duration: 0.15s;
 }

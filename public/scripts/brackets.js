@@ -5,7 +5,7 @@ class MatchCard extends React.Component {
   render() {
     return (
         <div className={"match " + this.props.matchClass + " match" + this.props.roundNumber} id={"matchCard" + this.props.matchNumber}>
-          <div class={"participant " + this.props.half + "Half"}><img class="profilePic" id={"participantLogo" + this.props.participantNumber}><p class="teamName" id={"participantName" + this.props.participantNumber}></p><p class="score whiteText" id={"participant" + this.props.participantNumber + "Match" + this.props.matchNumber + "Score"}></p></div>
+          <div class={"participant " + this.props.half + "Half"}><img class="participantProfilePic" id={"participantLogo" + this.props.participantNumber}><p class="teamName" id={"participantName" + this.props.participantNumber}></p><p class="score whiteText" id={"participant" + this.props.participantNumber + "Match" + this.props.matchNumber + "Score"}></p></div>
           <div class={"participant " + this.props.half + "Half"}><img class="profilePic" id={"participantLogo" + this.props.participantNumber}><p class="teamName" id={"participantName" + this.props.participantNumber}></p><p class="score whiteText" id={"participant" + this.props.participantNumber + "Match" + this.props.matchNumber + "Score"}></p></div>
         </div>
     );
