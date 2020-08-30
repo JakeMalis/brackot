@@ -37,7 +37,7 @@
   display: none;
   top: 70px;
   width: 100%;
-  height: 200px;
+  height: auto;
   position: fixed;
   background-color: var(--cardColor);
   z-index: 100;
@@ -99,6 +99,26 @@
 
 .secondaryTab{
   cursor: pointer;
+}
+
+.primaryTabsListExpansion{
+  padding: 0px;
+}
+
+.primaryTabTextExpansion{
+  height: 100%;
+  margin: 0px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.primaryTabExpansion{
+  padding-left: 40px;
+  border-bottom: 1px solid var(--tournamentCardColor);
+}
+
+.faExpansion{
+  margin-right: 35px;
 }
 
 #avatar{
