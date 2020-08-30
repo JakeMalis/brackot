@@ -16,6 +16,7 @@
 
 body{
   overflow-x: hidden;
+  margin-top: 70px;
   margin: 0px;
   width: 100vw;
   min-height: 100vh;
@@ -58,7 +59,7 @@ p{
   color: #eeeeee;
 }
 
-.main-page{
+.bracket{
   width: 100vw;
 }
 
@@ -381,4 +382,53 @@ p{
 
 .bronzeTeamCard{
   background-color: #BD6F22;
+}
+
+
+
+
+
+
+/* ================================ MODAL ========================================================= */
+/* The Modal (background) */
+.matchModal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 9999;
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.matchModal-content {
+  background-color: var(--cardColor);
+  margin: auto;
+  padding: 20px;
+  width: 80%;
+  max-width: 800px;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #eeeeee;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.reportMatchResultsButton{
+  font-size: 16px;
+  letter-spacing: 1.2px;
 }

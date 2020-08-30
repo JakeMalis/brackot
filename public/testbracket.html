@@ -14,16 +14,6 @@
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
-  <script src="scripts/topbar.js"></script>
-
-  <link rel="stylesheet" type="text/css" href="styles/mobile.css">
-  <script src="scripts/mobilebar.js"></script>
-
-  <script src="scripts/header.js"></script>
-  <script src="scripts/brackets.js"></script>
-
-
-
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="https://use.typekit.net/fyp1otf.css">
@@ -38,6 +28,13 @@
   <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-functions.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-storage.js"></script>
+
+  <script src="scripts/topbar.js"></script>
+  <link rel="stylesheet" type="text/css" href="styles/mobile.css">
+  <script src="scripts/mobilebar.js"></script>
+
+  <script src="scripts/header.js"></script>
+  <script type="text/babel" src="scripts/brackets.js"></script>
 
   <script>
       var firebaseConfig = {
@@ -57,14 +54,14 @@
     <script> $( "#topbar" ).load( "ajax/topbar.html" ); </script>
   </div>
 
-  <div class="main-page">
+  <div id="bracket" class="bracket">
 
-    <div class="matchColumn">
-      <div class="match match1" onclick="shuffleParticipants()">
+    <div class="matchColumn" id="matchColumn1">
+      <div class="match match1" id="coolBoyMatch" onclick="openMatchModal()">
         <div class="participant upperHalf"><img class="participantProfilePic" src="media/BrackotLogo2.jpg"><p id="tester" class="teamName">Stanford University</p><p class="score whiteText">L</p></div></a>
-        <div class="participant lowerHalf"><img class="participantProfilePic" src="media/BrackotLogo2.jpg"><p class="teamName">Pine Crest</p><p class="score whiteText win">W</p></div>
+        <div class="participant lowerHalf"><img class="participantProfilePic" src="media/BrackotLogo2.jpg"><p class="teamName">Pine Crest CRONK</p><p class="score whiteText win">W</p></div>
       </div>
-      <div class="match match1">
+      <div class="match match1" onclick="openMatchModal()">
         <div class="participant upperHalf"><img class="participantProfilePic" src="media/BrackotLogo2.jpg"><p class="teamName">Park Vista</p><p class="score whiteText win">W</p></div>
         <div class="participant lowerHalf"><img class="participantProfilePic" src="media/BrackotLogo2.jpg"><p class="teamName">Carnegie-Mellon University</p><p class="score whiteText">L</p></div>
       </div>
@@ -161,7 +158,7 @@
       </div>
     </div>
 
-    <div class="matchColumn">
+    <div class="matchColumn" id="matchColumn2">
       <div class="match match2" onclick="shuffleParticipants()">
         <div class="participant upperHalf"><img class="participantProfilePic" src="media/BrackotLogo2.jpg"><p id="tester" class="teamName">Stanford University</p><p class="score whiteText">L</p></div></a>
         <div class="participant lowerHalf"><img class="participantProfilePic" src="media/BrackotLogo2.jpg"><p class="teamName">Pine Crest</p><p class="score whiteText win">W</p></div>
@@ -204,7 +201,7 @@
     </div>
 
 
-    <div class="matchColumn">
+    <div class="matchColumn" id="matchColumn3">
       <div class="match match3" onclick="shuffleParticipants()">
         <div class="participant upperHalf"><img class="participantProfilePic" src="media/BrackotLogo2.jpg"><p id="tester" class="teamName">Stanford University</p><p class="score whiteText">L</p></div></a>
         <div class="participant lowerHalf"><img class="participantProfilePic" src="media/BrackotLogo2.jpg"><p class="teamName">Pine Crest</p><p class="score whiteText win">W</p></div>
@@ -232,7 +229,7 @@
     </div>
 
 
-    <div class="matchColumn">
+    <div class="matchColumn" id="matchColumn4">
       <div class="match match4" onclick="shuffleParticipants()">
         <div class="participant upperHalf"><img class="participantProfilePic" src="media/BrackotLogo2.jpg"><p id="tester" class="teamName">Stanford University</p><p class="score whiteText">L</p></div></a>
         <div class="participant lowerHalf"><img class="participantProfilePic" src="media/BrackotLogo2.jpg"><p class="teamName">Pine Crest</p><p class="score whiteText win">W</p></div>
@@ -251,12 +248,32 @@
       </div>
     </div>
 
-    <div class="matchColumn">
+    <div class="matchColumn" id="matchColumn5">
       <div class="match match5" onclick="shuffleParticipants()">
         <div class="participant upperHalf"><img class="participantProfilePic" src="media/BrackotLogo2.jpg"><p id="tester" class="teamName">Stanford University</p><p class="score whiteText">L</p></div></a>
         <div class="participant lowerHalf"><img class="participantProfilePic" src="media/BrackotLogo2.jpg"><p class="teamName">Pine Crest</p><p class="score whiteText win">W</p></div>
       </div>
     </div>
+
+
+
+
+
+
+    <div id="matchModal" class="matchModal">
+      <div class="matchModal-content">
+        <span class="close">&times;</span>
+        <div class="modalTop">
+          <div class="leftParticipant"></div>
+          <div class="rightParticipant"></div>
+        </div>
+        <div class="modalBottom">
+          <button id="reportMatchResultsButton" class="gradientButton reportMatchResultsButton">Report Match Results</button>
+        </div>
+
+      </div>
+    </div>
+
 
 
   </div>
