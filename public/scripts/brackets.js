@@ -1,6 +1,5 @@
 var shuffledParticipants = [];
 var numParticipants = 0;
-<TournamentCard tournamentNumber={tournamentNumber} />
 
 class MatchCard extends React.Component {
   render() {
@@ -67,15 +66,16 @@ async function renderMatchCards() {
     var MatchColumnCards = []
     var matchNumber = 1;
     tournament.get().then(function(doc) {
-      var matchups = doc.data().("matchupsRound" + round);
+      var matchupsRound = "matchUpsRound" + round;
+      var matchups = doc.data().matchupsRound;
       matchups.forEach(function(entry) {
         var upper = entry[0];
         var lower = entry[1];
-        var upperParticipant, lowerParticipant;\
+        var upperParticipant, lowerParticipant;
         var participants = [];
 
         if (entry === [[],[]]) { var empty = " emptySpace"; } else { var empty = ""; }
-        entry.forEach(function(childrenEntry, index)) {
+        entry.forEach(function(childrenEntry, index) {
           if (childrenEntry === upper){
             upperParticipant = { uid: childrenEntry };
             participants.push(upperParticipant);
@@ -114,7 +114,7 @@ function personalizeElements() {
 
     firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
       shuffledParticipants: shuffledParticipants,
-      matchupsRound1: firstround
+      matchupsRound1: firstRound
     }).then(function() {
       console.log('Uploaded 1st round')
     });
@@ -144,7 +144,6 @@ function personalizeElements() {
       }).then(function() {
         console.log('Uploaded 3rd round')
       });
-      )}
     }
     if(rounds > 3){
       matches = nextRound(matches);
@@ -186,7 +185,7 @@ function personalizeElements() {
         console.log('Uploaded 8th round')
       });
     }
-  }
+  });
 }
 
 function shuffleParticipants(){
