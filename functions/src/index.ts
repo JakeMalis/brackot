@@ -26,24 +26,30 @@ exports.deleteOldMail = functions.region('us-east1').pubsub.schedule('every 1 ho
 
 
 exports.sendWelcomeEmail = functions.region('us-east1').auth.user().onCreate(async (user) => {
-  const email: string = user.email;
+  try {
+    const { email } = user;
 
-  await admin.auth().generateEmailVerificationLink(email, { url: 'https://brackot.com/confirm-email' }).then(async (link) => {
-    //attempt at making code work
-    await admin.firestore().collection('mail').add({to: email,template: {name: 'welcome',data: {link: link,email: email}}}).then(async (documentRef) => {
-      functions.logger.log('Sent mail document');
-    });
+    if (!email) {
+      throw new Error('Email is invalid');
+    }
 
-    /* Original Javascript code to be converted to Admin SDK
-    firebase.firestore().collection("mail").add({
-      to: document.getElementById('email').value,
-      template: {
-        name: 'welcome',
-        data: {
-          email: firebase.auth().currentUser.email
+    const link: string = await admin.auth().generateEmailVerificationLink(email, { url: 'https://brackot.com/confirm-email' });
+
+    await admin.firestore()
+      .collection('mail')
+      .add({
+        to: email,
+        template: {
+          name: 'welcome',
+          data: {
+            link,
+            email
+          }
         }
-      }
-    });
-    */
-  });
+      });
+
+    functions.logger.log('Sent mail document');
+  } catch (err) {
+    functions.logger.log(err);
+  }
 });
