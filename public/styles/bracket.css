@@ -439,6 +439,11 @@ p{
   height: 300px;
 }
 
+.participantInfobox:hover{
+  background-color: var(--tournamentCardColor);
+  cursor: pointer;
+}
+
 .leftBox{
   border-right: 1px solid var(--tournamentCardColorHover);
 }
