@@ -12,6 +12,8 @@
   --participantWidth: 200px;
   --participantHeight: calc(0.15 * var(--participantWidth));
   --dividerHeight: 0px;
+
+  --infoboxHeight: 130px;
 }
 
 body{
@@ -410,14 +412,16 @@ p{
   background-color: var(--cardColor);
   margin: auto;
   padding: 20px;
-  width: 80%;
-  max-width: 800px;
+  padding-left: 40px;
+  padding-right: 40px;
+  width: 90%;
+  max-width: 750px;
 }
 
 /* The Close Button */
 .close {
-  width: 100%;
-  padding-left: calc(100% - 24px);
+  width: 18px;
+  margin-left: calc(100% + 18px);
   position: block;
   color: #ffffff !important;
   float: right;
@@ -433,36 +437,96 @@ p{
 }
 
 .participantInfobox{
+  position: relative;
   float: left;
-  width: 50%;
+  width: 100%;
   margin: 0px;
-  height: 300px;
+  height: var(--infoboxHeight);
 }
 
 .participantInfobox:hover{
   background-color: var(--tournamentCardColor);
   cursor: pointer;
 }
+/*
+.participantInfobox:hover .infoboxPic{
+  filter: blur(5px) !important;
+}
+.participantInfobox:hover .infoboxName{
+  filter: blur(5px) !important;
+}
+.participantInfobox:hover .infoboxScore{
+  filter: blur(5px) !important;
+}*/
 
-.leftBox{
-  border-right: 1px solid var(--tournamentCardColorHover);
+
+.topBox{
+  border-bottom: 1px solid var(--tournamentCardColorHover);
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
 }
 
-.rightBox{
-  border-left: 1px solid var(--tournamentCardColorHover);
+.bottomBox{
+  border-top: 1px solid var(--tournamentCardColorHover);
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.infoboxPic{
+  flex: left;
+  display: inline-block;
+  margin: calc(0.15 * var(--infoboxHeight));
+  height: calc(0.7 * var(--infoboxHeight));
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.infoboxName{
+  position: absolute;
+  top: calc((var(--infoboxHeight) - 30px) / 2);
+  display: inline-block;
+  color: #eeeeee;
+  margin: 0px;
+  font-size: 28px;
+}
+
+.infoboxScore{
+  position: absolute;
+  text-align: center;
+  width: 32px;
+  top: calc((var(--infoboxHeight) - 52px) / 2);
+  right: calc(0.3 * var(--infoboxHeight));
+  display: inline-block;
+  color: #eeeeee !important;
+  margin: 0px;
+  font-size: 50px;
+}
+
+.infoboxWinner{
+  position: absolute;
+  top: calc((var(--infoboxHeight) + 30px) / 2);
+  display: none;
+  color: var(--aquamarine) !important;
+  margin: 0px;
+  font-size: 17px;
 }
 
 .modalTop{
-  height: 332px;
+  height: calc(2 * var(--infoboxHeight));
+  margin-top: 32px;
 }
 
-.modalBottom{
-  padding-top: 20px;
+#editScoresButton{
+  display: block;
 }
 
-.reportMatchResultsButton{
+#submitResultsButton{
+  display: none;
+}
+
+.submitResultsButton{
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   margin-left: auto;
   margin-right: auto;
   font-size: 16px;
