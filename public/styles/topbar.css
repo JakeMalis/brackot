@@ -3,10 +3,7 @@
   margin: 0px;
   padding-right: 25px;
   font-size: 16px;
-}
-
-.solidNavbar{
-  background-color: var(--topbarColor) !important;
+  max-width: 26px;
 }
 
 .topNavbar{
@@ -15,10 +12,15 @@
   height: 70px;
   display: block;
   position: fixed;
-  background-color: rgba(0,0,0,0.30);
+  background-color: rgba(22, 23, 34,0.2);
   z-index: 100;
-  border-bottom: 1px solid rgba(100,100,100,0.2);
   overflow: hidden;
+  transition-duration: 0.2s;
+  border-bottom: 1px solid rgba(100,100,100,0.2);
+}
+
+.solidNavbar{
+  background-color: rgb(32, 33, 49);
 }
 
 .topbarLogo{
@@ -41,7 +43,6 @@
   position: fixed;
   background-color: var(--cardColor);
   z-index: 100;
-  border-bottom: 1px solid rgba(100,100,100,0.2);
   overflow: hidden;
 }
 
@@ -50,6 +51,7 @@
 }
 
 .primaryTabs{
+  height: 70px;
   float: left;
   width: auto;
   position: relative;
@@ -60,6 +62,7 @@
 .primaryTabsList{
   list-style: none;
   padding-left: 0px;
+  margin: 0px;
 }
 
 .primaryTab{
@@ -94,7 +97,7 @@
 
 .secondaryTabs{
   float: right;
-  margin-right: 40px;
+  margin-right: 20px;
 }
 
 .secondaryTab{
@@ -103,6 +106,7 @@
 
 .primaryTabsListExpansion{
   padding: 0px;
+  margin: 0px;
 }
 
 .primaryTabTextExpansion{
@@ -113,11 +117,14 @@
 }
 
 .primaryTabExpansion{
+  height: 52px;
   padding-left: 40px;
   border-bottom: 1px solid var(--tournamentCardColor);
 }
 
 .faExpansion{
+  width: 0px;
+  margin-top: 13px;
   margin-right: 35px;
 }
 
@@ -129,7 +136,7 @@
 }
 
 .profilePic{
-  right: 45px;
+  right: 25px;
   top: 15px;
   position: fixed;
   height: 40px;
@@ -150,7 +157,7 @@
 
 .unlimitedIconContainer{
   position: absolute;
-  right: 40px;
+  right: 20px;
   top: 40px;
   visibility: hidden;
 }

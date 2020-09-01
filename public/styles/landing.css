@@ -250,8 +250,16 @@ select option{
   object-fit: contain;
 }
 
+#hostTournamentButton{
+  display: none;
+}
+
 @media only screen and (min-width: 480px){
   #firstLanding{
     background-image: url("../media/splash_art/zedsplash.jpg");
+  }
+
+  #hostTournamentButton{
+    display: inline-block;
   }
 }
