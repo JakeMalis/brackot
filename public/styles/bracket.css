@@ -394,7 +394,7 @@ p{
 /* ================================ MODAL ========================================================= */
 /* The Modal (background) */
 .matchModal {
-  display: block; /* Hidden by default */
+  display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 9999;
   padding-top: 100px; /* Location of the box */
