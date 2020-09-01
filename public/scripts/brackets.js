@@ -1,6 +1,7 @@
 var shuffledParticipants = [];
 var numParticipants = 0;
 
+
 class MatchCard extends React.Component {
   render() {
     return (
@@ -187,6 +188,12 @@ function personalizeElements() {
     }
   });
 }
+function match(p1, p2) {
+  this.playerOne = p1;
+  this.playerTwo = p2;
+
+}
+
 
 function shuffleParticipants(){
   for(var i = numParticipants - 1; i > 0; i--){
@@ -222,21 +229,21 @@ function createInitialMatches(){
   var initialNumRounds = (numParticipants - byes)/2;
   if(byes >= initialNumRounds){
     for(var x = 0; x < 2 * initialNumRounds; x+=2){
-      matches.push([shuffledParticipants[x], shuffledParticipants[x+1]]);
-      matches.push([[], []]);
+      matches.push(new match(shuffledParticipants[x], shuffledParticipants[x+1]));
+      matches.push(new match(null, null));
     }
     for(var y = 0; y < byes - initialNumRounds; y+=2){
-      matches.push([[],[]]);
+      matches.push(new match(null, null));
     }
   }
   else{
     for(var z = 0; z < 2 * byes; z+=2){
-      matches.push([shuffledParticipants[z], shuffledParticipants[z+1]]);
-      matches.push([[], []]);
+      matches.push(new match(shuffledParticipants[z], shuffledParticipants[z+1]));
+      matches.push(new match(null, null));
     }
     for(var w = 0; w < 2 * (initialNumRounds - byes); w+=2){
       var indexStart = 2 * (byes + 1) - 1;
-      matches.push([shuffledParticipants[indexStart + w], shuffledParticipants[indexStart + w+1]]);
+      matches.push(new match(shuffledParticipants[indexStart + w], shuffledParticipants[indexStart + w+1]));
     }
   }
   return matches;
@@ -262,12 +269,12 @@ function implementByes(){    /* creates second round of matches */
   var count = 1;
 
   for(var x = 0; x < 2*numOfWinners; x+=2){
-    matches.push([assignWinner(initialMatches[count]), shuffledParticipants[shuffledParticipants.length - count]]);
+    matches.push(new match(assignWinner(initialMatches[count]), shuffledParticipants[shuffledParticipants.length - count]));
     count++;
   }
 
   for(var y = 0; y < byes - numofWinners; y+=2){
-    matches.push([shuffledParticipants[2*numOfWinners + y], shuffledParticipants[2*numOfWinners + y + 1]]);
+    matches.push(new match(shuffledParticipants[2*numOfWinners + y], shuffledParticipants[2*numOfWinners + y + 1]));
   }
 
   return matches;
@@ -278,7 +285,7 @@ function nextRound(lastRound){
   var matches = [];
   if(lastRound.length > 1){
   for(var z = 0; z < lastRound.length; z+=2){
-    matches.push([assignWinner(lastRound[z], lastRound[z+1])]);
+    matches.push(new match(assignWinner(lastRound[z], lastRound[z+1])));
   }
   return matches;
 }
