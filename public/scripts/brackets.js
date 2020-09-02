@@ -305,7 +305,11 @@ function assignScores(){
     match = doc.data.matchupsRound1;
   }).then(function() {
   firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
+<<<<<<< HEAD
     playerOneScore: test 
+=======
+    playerOneScore:
+>>>>>>> ff4a4a7efe70aee944f3ac0a26f94bba93da85ed
   }).then(function() {
     console.log('Uploaded new score P1')
   });
