@@ -268,11 +268,15 @@ select option{
   color: var(--tournamentCardColorHover);
 }
 
-.rightArrow{
+.hiddenArrow{
+  display: none !important;
+}
+
+#rightArrow{
   right: -60px;
 }
 
-.leftArrow{
+#leftArrow{
   left: -70px;
 }
 
