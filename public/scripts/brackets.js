@@ -6,8 +6,8 @@ class MatchCard extends React.Component {
   render() {
     return (
       <div className={"match " + "match" + this.props.roundNumber + this.props.empty} id={"matchCard" + this.props.matchNumber}>
-        <UpperParticipant participant={this.props.participants[0].uid} matchNumber={this.props.matchNumber} />
-        <LowerParticipant participant={this.props.participants[1].uid} matchNumber={this.props.matchNumber} />
+        <UpperParticipant participantNumber={this.props.participants[0].uid} matchNumber={this.props.matchNumber} />
+        <LowerParticipant participantNumber={this.props.participants[1].uid} matchNumber={this.props.matchNumber} />
       </div>
     );
   }
@@ -17,7 +17,7 @@ class UpperParticipant extends React.Component {
   render() {
     return(
       <React.Fragment>
-        <div className={"participant UpperHalf"}><img className="participantProfilePic" id={"participantLogo" + this.props.participant}></img><p className="teamName" id={"participantName" + this.props.participantNumber}></p><p className="score whiteText" id={"participant" + this.props.participant + "Match" + this.props.matchNumber + "Score"}></p></div>
+        <div className={"participant UpperHalf"}><img className="participantProfilePic" id={"participantLogo" + this.props.participantNumber}></img><p className="teamName" id={"participantName" + this.props.participantNumber}></p><p className="score whiteText" id={"participant" + this.props.participantNumber + "Match" + this.props.matchNumber + "Score"}></p></div>
       </React.Fragment>
     );
   }
@@ -28,65 +28,58 @@ class LowerParticipant extends React.Component {
   render() {
     return(
       <React.Fragment>
-        <div className={"participant LowerHalf"}><img className="participantProfilePic" id={"participantLogo" + this.props.participant}></img><p className="teamName" id={"participantName" + this.props.participantNumber}></p><p className="score whiteText" id={"participant" + this.props.participant + "Match" + this.props.matchNumber + "Score"}></p></div>
+        <div className={"participant LowerHalf"}><img className="participantProfilePic" id={"participantLogo" + this.props.participantNumber}></img><p className="teamName" id={"participantName" + this.props.participantNumber}></p><p className="score whiteText" id={"participant" + this.props.participantNumber + "Match" + this.props.matchNumber + "Score"}></p></div>
       </React.Fragment>
     );
   }
 }
 
-//match
+/*
+variable names: roundNumber, matchNumber, participantNumber, half, empty
+
+classNames = The rectangle containing two participants within it is called a match.  Every match has the class match.
+              Depending on what round the match is in, it will have ANOTHER class, called match(insertRoundNumberHere).
+              Finally, if the match is an empty space, and it is merely a space placeholder, and nobody will EVER players
+              in that spot, then you add the class emptySpace as well.
+EXAMPLES
+match match2  -  a match in the second round with people playing in it
+match match4  -  a match in the fourth round with people playing in it
+match match1 emptySpace  -  an empty space of nothing at all used for spacing in the first round
 
 
-//variable names: roundNumber, matchNumber, participantNumber, half, empty
-
-//classNames = The rectangle containing two participants within it is called a match.  Every match has the class match.
-//              Depending on what round the match is in, it will have ANOTHER class, called match(insertRoundNumberHere).
-//              Finally, if the match is an empty space, and it is merely a space placeholder, and nobody will EVER players
-//              in that spot, then you add the class emptySpace as well.
-//EXAMPLES
-//match match2  -  a match in the second round with people playing in it
-//match match4  -  a match in the fourth round with people playing in it
-//match match1 emptySpace  -  an empty space of nothing at all used for spacing in the first round
-
-
-//              Now, for participants.  Each match has two participant elements within it.
-//              Participant elements have the class participant, and also have either the class upperHalf or lowerHalf
-//              Finally, there will be slots for participants that are TEMPORARILY empty, waiting for the next winner to
-//              fill that spot. In that case, the participant also has the class noParticipant, until someone fills it,
-//              at which point it is removed.
-//EXAMPLES
-//participant upperHalf  -  the first person in the index of a match, filling the "upper" spot in the match
-//participant lowerHalf  -  the second person in the index of a match, filling the "lower" spot in the match
-//participant upperHalf noParticipant  -  the upper half of a match doesn't have its player yet from the last match
-//                                         therefore, it has the noParticipant class to leave an empty spot in upperHalf
+              Now, for participants.  Each match has two participant elements within it.
+              Participant elements have the class participant, and also have either the class upperHalf or lowerHalf
+              Finally, there will be slots for participants that are TEMPORARILY empty, waiting for the next winner to
+              fill that spot. In that case, the participant also has the class noParticipant, until someone fills it,
+              at which point it is removed.
+EXAMPLES
+participant upperHalf  -  the first person in the index of a match, filling the "upper" spot in the match
+participant lowerHalf  -  the second person in the index of a match, filling the "lower" spot in the match
+participant upperHalf noParticipant  -  the upper half of a match doesn't have its player yet from the last match
+                                         therefore, it has the noParticipant class to leave an empty spot in upperHalf
+*/
 
 async function renderMatchCards() {
   var tournament = firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B");
 
   for (var round = 1; round <= getByesAndRounds()[1]; round++){
-    var MatchColumnCards = []
+    var MatchColumnCards = [];
     var matchNumber = 1;
     tournament.get().then(function(doc) {
       var matchupsRound = "matchUpsRound" + round;
       var matchups = doc.data().matchupsRound;
       matchups.forEach(function(entry) {
-        var upper = entry[0];
-        var lower = entry[1];
         var upperParticipant, lowerParticipant;
         var participants = [];
 
-        if (entry === [[],[]]) { var empty = " emptySpace"; } else { var empty = ""; }
-        entry.forEach(function(childrenEntry, index) {
-          if (childrenEntry === upper){
-            upperParticipant = { uid: childrenEntry };
-            participants.push(upperParticipant);
-          }
-          else {
-            lowerParticipant = { uid: childrenEntry };
-            participants.push(lowerParticipant);
-          }
-        });
-        MatchColumnCards.push(<MatchCard participantNumber={childrenEntry} roundNumber={round} matchNumber={matchNumber} empty={empty} participants={participants} />);
+        if ((entry.playerOne === null) && (entry.playerTwo === null)) { var empty = " emptySpace"; } else { var empty = ""; }
+
+        upperParticipant = { uid: entry.playerOne };
+        participants.push(upperParticipant);
+        lowerParticipant = { uid: entry.playerTwo };
+        participants.push(lowerParticipant);
+
+        MatchColumnCards.push(<MatchCard roundNumber={round} matchNumber={matchNumber} empty={empty} participants={participants} />);
         matchNumber++;
       });
     }).then(function() {
@@ -105,7 +98,6 @@ function personalizeElements() {
     shuffledParticipants = doc.data().players;
     numParticipants = doc.data().players.length;
   }).then(function() {
-    console.log(shuffledParticipants);
     shuffleParticipants();
 
     var byes = getByesAndRounds()[0];
@@ -120,6 +112,7 @@ function personalizeElements() {
       console.log('Uploaded 1st round')
     });
     if(byes > 0 & numParticipants > 2){
+      console.log("hi");
       secondRound = implementByes();
       firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
         matchupsRound2: secondRound
@@ -188,9 +181,12 @@ function personalizeElements() {
     }
   });
 }
+
 function match(p1, p2) {
   this.playerOne = p1;
   this.playerTwo = p2;
+  var playerOneScore = 0;
+  var playerTwoScore = 0;
 
 }
 
@@ -229,35 +225,39 @@ function createInitialMatches(){
   var initialNumRounds = (numParticipants - byes)/2;
   if(byes >= initialNumRounds){
     for(var x = 0; x < 2 * initialNumRounds; x+=2){
-      matches.push(new match(shuffledParticipants[x], shuffledParticipants[x+1]));
-      matches.push(new match(null, null));
+      matches.push(Object.assign({}, new match(shuffledParticipants[x], shuffledParticipants[x+1])));
+      matches.push(Object.assign({}, new match(null, null)));
     }
     for(var y = 0; y < byes - initialNumRounds; y+=2){
-      matches.push(new match(null, null));
+      matches.push(Object.assign({},new match(null, null)));
     }
   }
   else{
     for(var z = 0; z < 2 * byes; z+=2){
-      matches.push(new match(shuffledParticipants[z], shuffledParticipants[z+1]));
-      matches.push(new match(null, null));
+      matches.push(Object.assign({},new match(shuffledParticipants[z], shuffledParticipants[z+1])));
+      matches.push(Object.assign({},Object.assign({}, new match(null, null))));
     }
     for(var w = 0; w < 2 * (initialNumRounds - byes); w+=2){
       var indexStart = 2 * (byes + 1) - 1;
-      matches.push(new match(shuffledParticipants[indexStart + w], shuffledParticipants[indexStart + w+1]));
+      matches.push(Object.assign({}, new match(shuffledParticipants[indexStart + w], shuffledParticipants[indexStart + w+1])));
     }
   }
   return matches;
 }
 
 
-function assignWinner([playerOne, playerTwo]){
-  /* if winning button pressed return true else return false
-   if both press true send an error
-   if neither has won return an empty slot [ , ]
-  */
-  var winner;
+function assignWinner(matchUp){
+  /*if(matchUp.playerOneScore > matchUp.playerTwoScore){
+    return matchUp.playerOne;
+  }
+  else if(matchUp.playerOneScore < matchUp.playerTwoScore){
+    return matchUp.plaayerTwoScore;
+  }
+  else if(matchUp.playerOneScore == null && matchUp.playerTwoScore == null){
 
-  return playerOne;
+  }
+*/
+  return matchUp.playerOne;
 }
 
 
@@ -266,15 +266,15 @@ function implementByes(){    /* creates second round of matches */
   var initialMatches = createInitialMatches();
   var byes = getByesAndRounds()[0];
   var numOfWinners = (numParticipants-byes)/2;
-  var count = 1;
+  var count = 0;
 
   for(var x = 0; x < 2*numOfWinners; x+=2){
-    matches.push(new match(assignWinner(initialMatches[count]), shuffledParticipants[shuffledParticipants.length - count]));
+    matches.push(Object.assign({}, new match(assignWinner(initialMatches[x]), shuffledParticipants[shuffledParticipants.length - count])));
     count++;
   }
 
-  for(var y = 0; y < byes - numofWinners; y+=2){
-    matches.push(new match(shuffledParticipants[2*numOfWinners + y], shuffledParticipants[2*numOfWinners + y + 1]));
+  for(var y = 0; y < byes - numOfWinners; y+=2){
+    matches.push(Object.assign({}, new match(shuffledParticipants[2*numOfWinners + y], shuffledParticipants[2*numOfWinners + y + 1])));
   }
 
   return matches;
@@ -284,15 +284,17 @@ function implementByes(){    /* creates second round of matches */
 function nextRound(lastRound){
   var matches = [];
   if(lastRound.length > 1){
-  for(var z = 0; z < lastRound.length; z+=2){
-    matches.push(new match(assignWinner(lastRound[z], lastRound[z+1])));
+    for(var z = 0; z < lastRound.length; z+=2){
+      matches.push(Object.assign({},new match(assignWinner(lastRound[z], lastRound[z+1]))));
+    }
+    return matches;
   }
-  return matches;
-}
-return assignWinner(lastRound[0]);
+  return assignWinner(lastRound[0]);
 }
 
-
+function assignScores(){
+  var modal = document.getElementById("matchModal");
+}
 
 
 
