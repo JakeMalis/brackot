@@ -5,6 +5,7 @@
   --background: #202131;
   --cardColor: #2b2c3c;
   --tournamentCardColor: #3a3b4a;
+  --tournamentCardColorHover: #454656;
 }
 body{
   overflow-x: hidden;
@@ -159,7 +160,7 @@ select option{
 }
 
 .tallIndex{
-  height:750px;
+  height:700px;
   background-color: var(--background);
   background-size: cover;
 }
@@ -169,7 +170,6 @@ select option{
 }
 
 .shortIndex{
-  max-height: 400px;
   height: auto;
   padding-bottom: 40px;
   background-color: var(--background);
@@ -241,6 +241,8 @@ select option{
 }
 
 .browseGamesCarousel{
+  scroll-behavior: smooth;
+  position: relative;
   white-space: nowrap;
   overflow: hidden;
   overflow-x: scroll;
@@ -249,6 +251,29 @@ select option{
   height: 270px;
   margin-left: -10px;
   margin-right: -10px;
+}
+
+.carouselArrow{
+  display: none !important;
+  z-index: 2;
+  position: absolute;
+  top: 160px;
+  font-size: 60px;
+  color: var(--tournamentCardColor);
+  cursor: pointer;
+  transition-duration: 0.2s;
+}
+
+.carouselArrow:hover{
+  color: var(--tournamentCardColorHover);
+}
+
+.rightArrow{
+  right: -60px;
+}
+
+.leftArrow{
+  left: -70px;
 }
 
 .browseGamesLabel{
@@ -274,6 +299,7 @@ select option{
 }
 
 .landingContent{
+  position: relative;
   flex-wrap: wrap;
   margin-left: auto;
   margin-right: auto;
@@ -304,6 +330,9 @@ select option{
 }
 
 @media only screen and (min-width: 480px){
+  .carouselArrow{
+    display: inherit !important;
+  }
   #firstLanding{
     background-image: url("../media/splash_art/zedsplash.jpg");
   }
@@ -313,7 +342,7 @@ select option{
   }
 
   #thirdLandingContent{
-    padding-top: 70px;
+    padding-top: 40px;
     min-width: 800px;
   }
 
