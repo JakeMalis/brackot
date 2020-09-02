@@ -110,7 +110,7 @@ select option{
   background-color: var(--tournamentCardColor);
   font-family: 'proxima-nova', sans-serif;
   text-transform: uppercase;
-  letter-spacing: 3px;
+  letter-spacing: 1px;
   font-weight: 600;
   padding-left: 30px;
   padding-right: 30px;
@@ -135,7 +135,7 @@ select option{
   background-image: var(--gradient);
   font-family: 'proxima-nova', sans-serif;
   text-transform: uppercase;
-  letter-spacing: 3px;
+  letter-spacing: 1px;
   font-weight: 600;
   padding-left: 30px;
   padding-right: 30px;
@@ -234,12 +234,14 @@ select option{
 #browseGamesParagraph{
   font-size: 16px;
   padding-left: 4px;
+  padding-bottom: 0px;
   cursor: pointer;
 }
 
 .browseGamesCarousel{
   white-space: nowrap;
   overflow: hidden;
+  overflow-x: scroll;
   display: inline-block;
   width: 100%;
   height: 270px;
@@ -252,13 +254,21 @@ select option{
   margin: 10px;
   width: 172px;
   height: 250px;
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
+.browseGamesLabel:hover{
+  transition-duration: 0.2s;
+  transform: translateY(-4px);
+  box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.45);
 }
 
 .browseGamesImage{
   width: 172px;
   height: 250px;
-  border-radius: 2px;
-  box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.3);
+  border-radius: 4px;
+  box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.35);
 }
 
 .landingContent{
@@ -270,18 +280,20 @@ select option{
 }
 
 .onePlatformText{
-  margin-top: 80px;
-  width:65%;
-  padding-right: 5%;
-  float: left;
-}
-
-.onePlatformImageContainer{
-  height: 20px;
+  display: inline-block;
+  width:100%;
+  height: auto;
 }
 
 .onePlatformImage{
+  max-width: 400px;
+  width: 100%;
+  display: inline-block;
   object-fit: contain;
+}
+
+#thirdLanding{
+  margin-top: 60px;
 }
 
 #hostTournamentButton{
@@ -293,7 +305,27 @@ select option{
     background-image: url("../media/splash_art/zedsplash.jpg");
   }
 
+  #thirdLandingContent{
+    margin-top: 100px;
+    min-width: 800px;
+  }
+
   #hostTournamentButton{
     display: inline-block;
+  }
+
+  .browseGamesCarousel{
+    overflow-x: hidden;
+  }
+
+  .onePlatformImage{
+    margin-top: -90px;
+    padding-right: 5%;
+  }
+
+  .onePlatformText{
+    display: inline-block;
+    width: calc(100% - 404px);
+    height: auto;
   }
 }
