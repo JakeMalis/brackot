@@ -111,8 +111,7 @@ function personalizeElements() {
     }).then(function() {
       console.log('Uploaded 1st round')
     });
-    if(byes > 0 & numParticipants > 2){
-      console.log("hi");
+    if(byes > 0 && numParticipants > 2){
       secondRound = implementByes();
       firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
         matchupsRound2: secondRound
@@ -179,14 +178,23 @@ function personalizeElements() {
         console.log('Uploaded 8th round')
       });
     }
+    if(matches.length == 1){
+      var winner = [assignWinner(matches[0])];
+      firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
+        matchupsRound9: winner
+      }).then(function() {
+        console.log('Uploaded final round')
+      });
+    }
+
   });
 }
 
 function match(p1, p2) {
   this.playerOne = p1;
   this.playerTwo = p2;
-  var playerOneScore = 0;
-  var playerTwoScore = 0;
+  var playerOneScore = null;
+  var playerTwoScore = null;
 
 }
 
@@ -247,16 +255,14 @@ function createInitialMatches(){
 
 
 function assignWinner(matchUp){
-  /*if(matchUp.playerOneScore > matchUp.playerTwoScore){
+  if(matchUp.playerOneScore > matchUp.playerTwoScore){
     return matchUp.playerOne;
   }
   else if(matchUp.playerOneScore < matchUp.playerTwoScore){
     return matchUp.plaayerTwoScore;
   }
   else if(matchUp.playerOneScore == null && matchUp.playerTwoScore == null){
-
   }
-*/
   return matchUp.playerOne;
 }
 
@@ -266,7 +272,7 @@ function implementByes(){    /* creates second round of matches */
   var initialMatches = createInitialMatches();
   var byes = getByesAndRounds()[0];
   var numOfWinners = (numParticipants-byes)/2;
-  var count = 0;
+  var count = 1;
 
   for(var x = 0; x < 2*numOfWinners; x+=2){
     matches.push(Object.assign({}, new match(assignWinner(initialMatches[x]), shuffledParticipants[shuffledParticipants.length - count])));
@@ -285,7 +291,7 @@ function nextRound(lastRound){
   var matches = [];
   if(lastRound.length > 1){
     for(var z = 0; z < lastRound.length; z+=2){
-      matches.push(Object.assign({},new match(assignWinner(lastRound[z], lastRound[z+1]))));
+      matches.push(Object.assign({},new match(assignWinner(lastRound[z]), assignWinner(lastRound[z+1]))));
     }
     return matches;
   }
