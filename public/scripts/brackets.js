@@ -262,6 +262,7 @@ function assignWinner(matchUp){
     return matchUp.plaayerTwoScore;
   }
   else if(matchUp.playerOneScore == null && matchUp.playerTwoScore == null){
+    return null;
   }
   return matchUp.playerOne;
 }
