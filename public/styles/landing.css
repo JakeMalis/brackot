@@ -227,7 +227,41 @@ select option{
   max-width: 570px;
 }
 
-.onePlatformContent{
+#browseGamesHeader{
+  margin-top: 20px;
+}
+
+#browseGamesParagraph{
+  font-size: 16px;
+  padding-left: 4px;
+  cursor: pointer;
+}
+
+.browseGamesCarousel{
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  width: 100%;
+  height: 270px;
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+.browseGamesLabel{
+  display: inline-block;
+  margin: 10px;
+  width: 172px;
+  height: 250px;
+}
+
+.browseGamesImage{
+  width: 172px;
+  height: 250px;
+  border-radius: 2px;
+  box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.3);
+}
+
+.landingContent{
   flex-wrap: wrap;
   margin-left: auto;
   margin-right: auto;
