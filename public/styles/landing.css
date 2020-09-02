@@ -169,7 +169,9 @@ select option{
 }
 
 .shortIndex{
-  height: 400px;
+  max-height: 400px;
+  height: auto;
+  padding-bottom: 40px;
   background-color: var(--background);
 }
 
@@ -293,7 +295,8 @@ select option{
 }
 
 #thirdLanding{
-  margin-top: 60px;
+  padding-top: 40px;
+  background-color: var(--cardColor);
 }
 
 #hostTournamentButton{
@@ -305,8 +308,12 @@ select option{
     background-image: url("../media/splash_art/zedsplash.jpg");
   }
 
+  #secondLanding{
+    margin-bottom: 60px;
+  }
+
   #thirdLandingContent{
-    margin-top: 100px;
+    padding-top: 70px;
     min-width: 800px;
   }
 
