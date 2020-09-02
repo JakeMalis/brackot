@@ -1,5 +1,6 @@
 var shuffledParticipants = [];
 var numParticipants = 0;
+var tempMatch = new match(null, null);
 
 
 class MatchCard extends React.Component {
@@ -186,6 +187,7 @@ function personalizeElements() {
         console.log('Uploaded final round')
       });
     }
+    assignScores();
 
   });
 }
@@ -193,8 +195,8 @@ function personalizeElements() {
 function match(p1, p2) {
   this.playerOne = p1;
   this.playerTwo = p2;
-  var playerOneScore = null;
-  var playerTwoScore = null;
+  this.playerOneScore = null;
+  this.playerTwoScore = null;
 
 }
 
@@ -264,7 +266,6 @@ function assignWinner(matchUp){
   else if(matchUp.playerOneScore == null && matchUp.playerTwoScore == null){
     return null;
   }
-  return matchUp.playerOne;
 }
 
 
@@ -300,7 +301,14 @@ function nextRound(lastRound){
 }
 
 function assignScores(){
-  var modal = document.getElementById("matchModal");
+  firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").get().then(function(doc){
+    match = doc.data.matchupsRound1;
+  }).then(function() {
+  firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
+    playerOneScore: test 
+  }).then(function() {
+    console.log('Uploaded new score P1')
+  });
 }
 
 
