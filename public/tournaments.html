@@ -9,6 +9,7 @@
   <link rel="stylesheet" type="text/css" href="styles/dashboard_style.css">
   <link rel="stylesheet" type="text/css" href="styles/selectPlayers.css">
   <link rel="stylesheet" type="text/css" href="styles/topbar.css">
+  <link rel="stylesheet" type="text/css" href="styles/footer.css">
   <link rel="stylesheet" type="text/css" href="styles/fonts.css">
 
   <script src="scripts/topbar.js"></script>
@@ -88,7 +89,7 @@
   <div class="headerImage"></div>
   <div class="main-page">
       <div style="margin-top: 90px;">
-        <div class="wideCard" style="min-height: 1200px;">
+        <div class="wideCard">
           <div class="wideCardBackground">
             <div class="wideCardContent">
               <h2 class="tournamentsHeader" style="margin-bottom: 10px;">Tournaments</h2>
@@ -199,6 +200,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div id="footer">
+      <script> $( "#footer" ).load( "ajax/footer.html" ); </script>
     </div>
 </body>
 </html>

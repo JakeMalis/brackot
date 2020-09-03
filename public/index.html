@@ -12,6 +12,7 @@
     <link rel="icon" type="image/png" href="media/favicon.png"/>
     <link rel="stylesheet" type="text/css" href="styles/landing.css">
     <link rel="stylesheet" type="text/css" href="styles/topbar.css">
+    <link rel="stylesheet" type="text/css" href="styles/footer.css">
     <link rel="stylesheet" type="text/css" href="styles/fonts.css">
 
     <link rel="stylesheet" href="https://use.typekit.net/fyp1otf.css">
@@ -58,9 +59,9 @@
 
 
     <div id="firstLanding" class="indexPage tallIndex">
-      <div class="grayscaleOverlay">
-        <div class="gradientOverlay">
-          <div class="fadeOverlay">
+      <div class="overlay grayscaleOverlay">
+        <div class="overlay gradientOverlay">
+          <div class="overlay fadeOverlay">
             <div class="contentBox">
               <h1 id="landingHeader" class="landingHeader">Compete in Online Tournaments</h1>
               <h4 id="landingSubheader" class="landingSubheader">Countless players, teams, publishers, and organizations all use Brackot to manage their tournaments and communities.</h4>
@@ -95,14 +96,33 @@
       </div>
     </div>
     <div id="thirdLanding" class="indexPage shortIndex">
-      <div id="thirdLandingContent" class="landingContent">
-        <img class="onePlatformImage" src="media/characters/fallguysmob.png">
-        <div class="onePlatformText">
-          <h1 id="onePlatformHeader" class="landingHeader">It's Time To Get Your Game On</h1>
-          <h4 id="onePlatformSubheader" class="landingSubheader">Whether you're a professional esports athlete looking for the next big-ticket competiton or just a video game enthusiast searching for a like-minded community, we've got you covered.</h4>
+      <div id="thirdLandingTop" class="thirdLandingTop">
+        <div class="overlay thirdLandingTopOverlay">
+          <div id="thirdLandingContent1" class="landingContent thirdLandingContent">
+            <div class="onePlatformText">
+              <h1 id="onePlatformHeader" class="landingHeader">It's Time To Get Your Game On</h1>
+              <h4 id="onePlatformSubheader" class="landingSubheader thirdLandingSubheader">Whether you're a professional esports athlete looking for the next big-ticket competiton or just a video game enthusiast searching for a like-minded community, we've got you covered.</h4>
+              <button onclick="location.href='tournaments.html';" class="gradientButton">Play Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="thirdLandingBottom" class="thirdLandingBottom">
+        <div class="overlay thirdLandingBottomOverlay">
+          <div id="thirdLandingContent2" class="landingContent thirdLandingContent">
+            <div class="onePlatformText">
+              <h1 id="onePlatformHeader" class="landingHeader">Advanced Tools for Organizers</h1>
+              <h4 id="onePlatformSubheader" class="landingSubheader thirdLandingSubheader">With platform specific integrations and features built for a frictionless user experience, hosting tournaments has never been this easy.</h4>
+              <button onclick="location.href='create-tournament.html';" class="gradientButton">Get Started</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+
+  <div id="footer">
+    <script> $( "#footer" ).load( "ajax/footer.html" ); </script>
   </div>
 </body>
 </html>

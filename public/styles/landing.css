@@ -171,25 +171,23 @@ select option{
 
 .shortIndex{
   height: auto;
-  padding-bottom: 40px;
   background-color: var(--background);
 }
 
-.grayscaleOverlay{
+.overlay{
   width: 100%;
   height: 100%;
+}
+
+.grayscaleOverlay{
   background-color: rgba(0,0,0,0.6);
 }
 
 .gradientOverlay{
-  width: 100%;
-  height: 100%;
   background-image: linear-gradient(90deg,rgba(35, 242, 172, 0.5),rgba(35, 208, 242, 0.5));
 }
 
 .fadeOverlay{
-  width: 100%;
-  height: 100%;
   background-image: linear-gradient(180deg, rgba(0,0,0,0), rgba(32, 33, 49, 1) 95%);
 }
 
@@ -221,6 +219,10 @@ select option{
   padding-bottom: 50px;
   font-weight: 400;
   color: #aaaaaa !important;
+}
+
+.thirdLandingSubheader{
+  padding-bottom: 30px;
 }
 
 #landingSubheader{
@@ -312,6 +314,8 @@ select option{
 }
 
 .onePlatformText{
+  padding-left: 10%;
+  padding-right: 10%;
   display: inline-block;
   width:100%;
   height: auto;
@@ -324,9 +328,42 @@ select option{
   object-fit: contain;
 }
 
+.mobileImage{
+  display: inline-block;
+}
+
+.desktopImage{
+  display: none;
+}
+
 #thirdLanding{
+  padding-top: 70px;
+}
+
+#thirdLandingTop{
+  background-image: url("../media/characters/fallguysart.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: left;
+}
+#thirdLandingBottom{
+  background-image: url("../media/splash_art/baron.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+.thirdLandingTopOverlay{
+  background-image: linear-gradient(90deg, rgba(32, 33, 49, 0.9), rgba(32, 33, 49, 0.9));
+}
+.thirdLandingBottomOverlay{
+    background-image: linear-gradient(90deg, rgba(32, 33, 49, 0.9), rgba(32, 33, 49, 0.9));
+}
+
+.thirdLandingContent{
   padding-top: 40px;
-  background-image: linear-gradient(180deg, var(--background), var(--cardColor) 35%);
+  padding-bottom: 40px;
+  width: 100%;
 }
 
 #hostTournamentButton{
@@ -334,6 +371,14 @@ select option{
 }
 
 @media only screen and (min-width: 480px){
+  .thirdLandingTopOverlay{
+    background-image: linear-gradient(90deg, rgba(35, 242, 172, 0.1), rgba(32, 33, 49, 1) 42%);
+  }
+
+  .thirdLandingBottomOverlay{
+      background-image: linear-gradient(270deg, rgba(35, 242, 172, 0.1), rgba(32, 33, 49, 1) 42%);
+  }
+
   .carouselArrow{
     display: inherit !important;
   }
@@ -341,13 +386,22 @@ select option{
     background-image: url("../media/splash_art/zedsplash.jpg");
   }
 
-  #secondLanding{
-    margin-bottom: 40px;
+  #thirdLanding{
+    padding-top: 140px;
   }
 
-  #thirdLandingContent{
-    padding-top: 100px;
-    min-width: 800px;
+  #thirdLandingContent1{
+    margin-left: 42%;
+  }
+
+  #thirdLandingContent2{
+    margin-right: 42%;
+  }
+
+  .thirdLandingContent{
+    padding-top: 70px;
+    padding-bottom: 70px;
+    max-width: 58%;
   }
 
   #hostTournamentButton{
@@ -356,16 +410,5 @@ select option{
 
   .browseGamesCarousel{
     overflow-x: hidden;
-  }
-
-  .onePlatformImage{
-    margin-top: -90px;
-    padding-right: 5%;
-  }
-
-  .onePlatformText{
-    display: inline-block;
-    width: calc(100% - 404px);
-    height: auto;
   }
 }
