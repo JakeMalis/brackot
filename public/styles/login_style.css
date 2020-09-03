@@ -171,7 +171,7 @@ h1{
 }
 
 .loginCard{
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 30px;
   background-color: var(--cardColor);
   margin-left: auto;
@@ -179,7 +179,7 @@ h1{
   width: 90%;
   max-width: 400px;
   height: auto;
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
+  box-shadow: 0px 0px 20px 10px rgba(0,0,0,0.2);
 }
 
 
@@ -301,6 +301,7 @@ h1{
 }
 
 .loginText{
+  line-height: 38px;
   margin-top: 10px;
   margin-left: auto !important;
   margin-right: auto !important;
