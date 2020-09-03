@@ -54,7 +54,7 @@
           <div class="wideCardBackground">
             <div class="wideCardContent">
               <h2 style="margin-bottom: 30px;">Create a Tournament</h2>
-              <form>
+              <form id="createTournamentForm">
                 <h6>Tournament Name</h6>
                 <input type="text" name="newTournamentName" class="longProfileInputs" id="tournamentName"></input>
                 <br>
@@ -69,13 +69,24 @@
                 <br>
                 <br>
                 <h6>Game</h6>
-                <select name="newTournamentGame" class="longProfileInputs" id="game">
+                <!--<select name="newTournamentGame" class="longProfileInputs" id="game">
                   <option value="null">Select a Game...</option>
                   <option id="fortnite" value="Fortnite">Fortnite</option>
                   <option id="overwatch" value="Overwatch">Overwatch</option>
                   <option id="smash" value="Super Smash Bros. Ultimate">Super Smash Bros. Ultimate</option>
                   <option id="valorant" value="Valorant">Valorant</option>
-                </select>
+                </select>-->
+                <div class="createTournamentGameCarousel">
+                  <label id="createTournamentLeagueLabel" onclick="animateGameCarousel(this.id)" class="createTournamentGamesLabel"><input name="newTournamentGame" class="createTournamentGamesRadio" type="radio" id="league" value="League of Legends"></input><img class="createTournamentGamesImage" src="media/game_images/LeagueBig.jpg"></label>
+                  <label id="createTournamentFortniteLabel" onclick="animateGameCarousel(this.id)" class="createTournamentGamesLabel"><input name="newTournamentGame" class="createTournamentGamesRadio" type="radio" id="fortnite" value="Fortnite"></input><img class="createTournamentGamesImage" src="media/game_images/FortniteBig.jpg"></label>
+                  <label id="createTournamentFallGuysLabel" onclick="animateGameCarousel(this.id)" class="createTournamentGamesLabel"><input name="newTournamentGame" class="createTournamentGamesRadio" type="radio" id="fallguys" value="Fall Guys"></input><img class="createTournamentGamesImage" src="media/game_images/FallGuysBig.jpg"></label>
+                  <label id="createTournamentValorantLabel" onclick="animateGameCarousel(this.id)" class="createTournamentGamesLabel"><input name="newTournamentGame" class="createTournamentGamesRadio" type="radio" id="valorant" value="Valorant"></input><img class="createTournamentGamesImage" src="media/game_images/ValorantBig.jpg"></label>
+                  <label id="createTournamentRocketLabel" onclick="animateGameCarousel(this.id)" class="createTournamentGamesLabel"><input name="newTournamentGame" class="createTournamentGamesRadio" type="radio" id="rocket" value="Rocket League"></input><img class="createTournamentGamesImage" src="media/game_images/RocketLeagueBig.jpg"></label>
+                  <label id="createTournamentMinecraftLabel" onclick="animateGameCarousel(this.id)" class="createTournamentGamesLabel"><input name="newTournamentGame" class="createTournamentGamesRadio" type="radio" id="minecraft" value="Minecraft"></input><img class="createTournamentGamesImage" src="media/game_images/MinecraftBig.jpg"></label>
+                  <label id="createTournamentOverwatchLabel" onclick="animateGameCarousel(this.id)" class="createTournamentGamesLabel"><input name="newTournamentGame" class="createTournamentGamesRadio" type="radio" id="overwatch" value="Overwatch"></input><img class="createTournamentGamesImage" src="media/game_images/OverwatchBig.jpg"></label>
+                  <label id="createTournamentCounterstrikeLabel" onclick="animateGameCarousel(this.id)" class="createTournamentGamesLabel"><input name="newTournamentGame" class="createTournamentGamesRadio" type="radio" id="counterstrike" value="Counter-Strike: Global Offensive"></input><img class="createTournamentGamesImage" src="media/game_images/CounterStrikeGlobalOffensiveBig.jpg"></label>
+                  <label id="createTournamentSmashLabel" onclick="animateGameCarousel(this.id)" class="createTournamentGamesLabel"><input name="newTournamentGame" class="createTournamentGamesRadio" type="radio" id="smash" value="Super Smash Bros. Ultimate"></input><img class="createTournamentGamesImage" src="media/game_images/SuperSmashBrosUltimateBig.jpg"></label>
+                </div>
                 <br>
                 <br>
                 <h6>Platform</h6>
@@ -109,11 +120,11 @@
                 <label for="unlimited"><p>Unlimited</p></label>
                 <br>
                 <br>
-                <h6>Is the tournament for teams to register, or for individual players?</h6>
-                <select name="newTournamentParticipantType" class="longProfileInputs" id="participantType">
-                  <option value="individual">Individual</option>
-                  <option value="team">Team</option>
-                </select>
+                <h6>Participant Type</h6>
+                <div class="createTournamentParticipantType"  id="participantType">
+                  <label id="individualLabel" onclick="animateParticipantType(this.id)" class="createTournamentParticipantLabel"><input name="newTournamentParticipantType" class="createTournamentParticipantRadio" type="radio" id="individual" value="individual"><i class="fas fa-user participantTypeIcon"></i>Players</input></label>
+                  <label id="teamLabel" onclick="animateParticipantType(this.id)" class="createTournamentParticipantLabel"><input name="newTournamentParticipantType" class="createTournamentParticipantRadio" type="radio" id="team" value="team"><i class="fas fa-users participantTypeIcon"></i>Teams</input></label>
+                </div>
                 <br>
                 <br>
               </form>

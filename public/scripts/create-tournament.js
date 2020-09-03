@@ -14,6 +14,18 @@ function personalizeElements() {
   document.getElementById("date").setAttribute("min", today);
 }
 
+function animateGameCarousel(selected){
+  var colored = "#" + selected;
+  $('.createTournamentGamesLabel').addClass('uncheckedGamesLabel');
+  $(colored).removeClass('uncheckedGamesLabel');
+}
+
+function animateParticipantType(selected){
+  var clicked = "#" + selected;
+  $('.createTournamentParticipantLabel').removeClass('createTournamentParticipantLabelChecked');
+  $(clicked).addClass('createTournamentParticipantLabelChecked');
+}
+
 function addTournament() {
   var date = document.getElementById("date").value, time = document.getElementById("time").value;
 

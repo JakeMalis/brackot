@@ -248,7 +248,7 @@ h1{
   height: 50px;
   color: #ffffff;
   border: transparent;
-  border-radius: 8px;
+  border-radius: 4px;
   transition-duration: 0.2s;
   box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
 }
@@ -456,7 +456,7 @@ input[type="checkbox"]:checked + label{
   height: 44px;
   color: white;
   border: transparent;
-  border-radius: 8px;
+  border-radius: 4px;
   transition-duration: 0.2s;
 }
 
