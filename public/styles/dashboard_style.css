@@ -117,27 +117,39 @@ select option{
 }
 
 .overwatchWallpaper{
-  background-image: url('../media/game_wallpapers/OVERWATCH-gameplay.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-image: url('../media/game_wallpapers/Overwatch-gameplay.jpg');
 }
 
 .valorantWallpaper{
-  background-image: url('../media/game_wallpapers/VALORANT-gameplay.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-image: url('../media/game_wallpapers/Valorant-gameplay.jpg');
 }
 
 .fortniteWallpaper{
-  background-image: url('../media/game_wallpapers/FORTNITE-gameplay.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-image: url('../media/game_wallpapers/Fortnite-gameplay.jpg');
 }
 
 .smashWallpaper{
-  background-image: url('../media/game_wallpapers/SMASH-gameplay.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-image: url('../media/game_wallpapers/Super Smash Bros Ultimate-gameplay.jpg');
+}
+
+.minecraftWallpaper{
+  background-image: url('../media/game_wallpapers/Minecraft-gameplay.jpg');
+}
+
+.rocketWallpaper{
+  background-image: url('../media/game_wallpapers/Rocket League-gameplay.jpg');
+}
+
+.fallguysWallpaper{
+  background-image: url('../media/game_wallpapers/Fall Guys-gameplay.jpg');
+}
+
+.csgoWallpaper{
+  background-image: url('../media/game_wallpapers/Counter-Strike Global Offensive-gameplay.jpg');
+}
+
+.leagueWallpaper{
+  background-image: url('../media/game_wallpapers/League of Legends-gameplay.jpg');
 }
 
 .prizingIcons{
@@ -1275,10 +1287,18 @@ text-align: center;
 }
 
 /* ================================================= CREATE-TOURNAMENT =================================================================== */
+.inputTitle{
+  margin: 0px;
+}
+
+.inputSubtitle{
+}
+
 .createTournamentTextInput{
   width: 100%;
+  margin-top: 6px;
+  margin-bottom: 30px;
   height: 50px;
-  margin-bottom: 10px;
   padding: 11px;
   font-size: 18px;
   font-family: 'proxima-nova', sans-serif;
@@ -1305,6 +1325,9 @@ text-align: center;
 .leftInputColumn{
 }
 
+.middleInputColumn{
+}
+
 .rightInputColumn{
 }
 
@@ -1325,9 +1348,9 @@ text-align: center;
   display: inline-block;
   width: 100%;
   height: 290px;
-  margin-top: -10px;
   margin-left: -10px;
   margin-right: -10px;
+  margin-bottom: 30px;
 }
 
 .createTournamentGamesLabel{
@@ -1361,12 +1384,21 @@ text-align: center;
   box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.35);
 }
 
+.createTournamentPlatform{
+  margin-bottom: 30px;
+  display: inline-block;
+  width: 100%;
+}
+
 .createTournamentParticipantType{
+  margin-bottom: 30px;
   display: inline-block;
   width: 100%;
 }
 
 .createTournamentLabel{
+  margin-top: 6px;
+  margin-bottom: 0px;
   text-align: center;
   border-radius: 4px;
   background-color: var(--tournamentCardColor);
@@ -1705,6 +1737,11 @@ text-align: center;
 
   .leftInputColumn{
     padding-right: 2.5%;
+  }
+
+  .middleInputColumn{
+    padding-right: 1.25%;
+    padding-left: 1.25%;
   }
 
   .rightInputColumn{

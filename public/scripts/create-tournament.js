@@ -37,23 +37,23 @@ function addTournament() {
   firebase.firestore().collection("tournaments").add({
       creator: firebase.auth().currentUser.uid,
       date: new Date(date + " " + time),
-      game: document.getElementById('game').value,
+      game: document.querySelector('input[name="newTournamentGame"]:checked').value,
       name: document.getElementById('tournamentName').value,
       players: [],
+      platform: {
+          pc: document.getElementById("pc").checked,
+          xbox: document.getElementById("xbox").checked,
+          ps: document.getElementById("ps").checked,
+          switch: document.getElementById("switch").checked,
+          mobile: document.getElementById("mobile").checked
+      },
       earnings: {
           1: parseInt(document.getElementById('firstEarnings').value),
           2: parseInt(document.getElementById('secondEarnings').value),
           3: parseInt(document.getElementById('thirdEarnings').value)
       },
-      platform: {
-          pc: document.getElementById("pc").selected,
-          xbox: document.getElementById("xbox").selected,
-          ps: document.getElementById("ps").selected,
-          switch: document.getElementById("switch").selected,
-          mobile: document.getElementById("mobile").selected
-      },
       unlimited: document.getElementById("unlimited").checked,
-      type: document.getElementById('participantType').value
+      type: document.querySelector('input[name="newTournamentParticipantType"]:checked').value
   }).then(function() {
       alert("Added tournament!");
   }).catch(function(error) {

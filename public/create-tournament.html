@@ -49,13 +49,13 @@
     <div class="headerImage"></div>
 
       <div class="row">
-        <div class="wideCard" style="height:auto; margin-bottom: 40px;">
+        <div class="wideCard" style="margin-bottom: 40px;">
           <div class="wideCardBackground">
             <div class="wideCardContent">
               <h2 style="margin-bottom: 30px;">Create a Tournament</h2>
               <form id="createTournamentForm">
-                <h6>Tournament Name</h6>
-                <input type="text" name="newTournamentName" class="createTournamentTextInput bigInput" id="tournamentName"></input>
+                <h6 class="inputTitle">Tournament Name</h6>
+                <input type="text" name="newTournamentName" class="createTournamentTextInput" id="tournamentName"></input>
                 <div id="newTournamentDateAndTimeRow" class="inlineInputRow">
                   <div class="createTournamentInputColumn leftInputColumn halfWidth">
                     <h6 class="inputTitle">Tournament Date</h6>
@@ -66,43 +66,52 @@
                     <input type="time" name="newTournamentStartTime" class="createTournamentTextInput" id="time"></input>
                   </div>
                 </div>
-                <h6>Game</h6>
+                <h6 class="inputTitle">Game</h6>
                 <div class="createTournamentGameCarousel">
-                  <label id="createTournamentLeagueLabel" onclick="animateGameCarousel(this.id)" class="createTournamentGamesLabel"><input name="newTournamentGame" class="createTournamentGamesRadio" type="radio" id="league" value="League of Legends"></input><img class="createTournamentGamesImage" src="media/game_images/LeagueBig.jpg"></label>
+                  <label id="createTournamentLeagueLabel" onclick="animateGameCarousel(this.id)" class="createTournamentGamesLabel"><input name="newTournamentGame" class="createTournamentGamesRadio" type="radio" id="league" value="League"></input><img class="createTournamentGamesImage" src="media/game_images/LeagueBig.jpg"></label>
                   <label id="createTournamentFortniteLabel" onclick="animateGameCarousel(this.id)" class="createTournamentGamesLabel"><input name="newTournamentGame" class="createTournamentGamesRadio" type="radio" id="fortnite" value="Fortnite"></input><img class="createTournamentGamesImage" src="media/game_images/FortniteBig.jpg"></label>
                   <label id="createTournamentFallGuysLabel" onclick="animateGameCarousel(this.id)" class="createTournamentGamesLabel"><input name="newTournamentGame" class="createTournamentGamesRadio" type="radio" id="fallguys" value="Fall Guys"></input><img class="createTournamentGamesImage" src="media/game_images/FallGuysBig.jpg"></label>
                   <label id="createTournamentValorantLabel" onclick="animateGameCarousel(this.id)" class="createTournamentGamesLabel"><input name="newTournamentGame" class="createTournamentGamesRadio" type="radio" id="valorant" value="Valorant"></input><img class="createTournamentGamesImage" src="media/game_images/ValorantBig.jpg"></label>
                   <label id="createTournamentRocketLabel" onclick="animateGameCarousel(this.id)" class="createTournamentGamesLabel"><input name="newTournamentGame" class="createTournamentGamesRadio" type="radio" id="rocket" value="Rocket League"></input><img class="createTournamentGamesImage" src="media/game_images/RocketLeagueBig.jpg"></label>
                   <label id="createTournamentMinecraftLabel" onclick="animateGameCarousel(this.id)" class="createTournamentGamesLabel"><input name="newTournamentGame" class="createTournamentGamesRadio" type="radio" id="minecraft" value="Minecraft"></input><img class="createTournamentGamesImage" src="media/game_images/MinecraftBig.jpg"></label>
                   <label id="createTournamentOverwatchLabel" onclick="animateGameCarousel(this.id)" class="createTournamentGamesLabel"><input name="newTournamentGame" class="createTournamentGamesRadio" type="radio" id="overwatch" value="Overwatch"></input><img class="createTournamentGamesImage" src="media/game_images/OverwatchBig.jpg"></label>
-                  <label id="createTournamentCounterstrikeLabel" onclick="animateGameCarousel(this.id)" class="createTournamentGamesLabel"><input name="newTournamentGame" class="createTournamentGamesRadio" type="radio" id="counterstrike" value="Counter-Strike: Global Offensive"></input><img class="createTournamentGamesImage" src="media/game_images/CounterStrikeGlobalOffensiveBig.jpg"></label>
+                  <label id="createTournamentCSGOLabel" onclick="animateGameCarousel(this.id)" class="createTournamentGamesLabel"><input name="newTournamentGame" class="createTournamentGamesRadio" type="radio" id="csgo" value="Counter-Strike Global Offensive"></input><img class="createTournamentGamesImage" src="media/game_images/CounterStrikeGlobalOffensiveBig.jpg"></label>
                   <label id="createTournamentSmashLabel" onclick="animateGameCarousel(this.id)" class="createTournamentGamesLabel"><input name="newTournamentGame" class="createTournamentGamesRadio" type="radio" id="smash" value="Super Smash Bros. Ultimate"></input><img class="createTournamentGamesImage" src="media/game_images/SuperSmashBrosUltimateBig.jpg"></label>
                 </div>
-                <h6>Platform(s)</h6>
+                <h6 class="inputTitle">Platform(s)</h6>
                 <div class="createTournamentPlatform"  id="platform">
                   <label id="pcLabel" class="createTournamentLabel"><input onclick="animatePlatform(this.id)" name="newTournamentPlatform"  class="createTournamentInput" type="checkbox" id="pc" value="pc"><i class="fas fa-laptop createTournamentIcon"></i>PC</input></label>
                   <label id="xboxLabel" class="createTournamentLabel"><input onclick="animatePlatform(this.id)" name="newTournamentPlatform"  class="createTournamentInput" type="checkbox" id="xbox" value="xbox"><i class="fab fa-xbox createTournamentIcon"></i>Xbox</input></label>
-                  <label id="playstationLabel" class="createTournamentLabel"><input onclick="animatePlatform(this.id)" name="newTournamentPlatform"  class="createTournamentInput" type="checkbox" id="playstation" value="playstation"><i class="fab fa-playstation createTournamentIcon"></i>Playstation</input></label>
+                  <label id="psLabel" class="createTournamentLabel"><input onclick="animatePlatform(this.id)" name="newTournamentPlatform"  class="createTournamentInput" type="checkbox" id="ps" value="ps"><i class="fab fa-playstation createTournamentIcon"></i>Playstation</input></label>
                   <label id="switchLabel" class="createTournamentLabel"><input onclick="animatePlatform(this.id)" name="newTournamentPlatform"  class="createTournamentInput" type="checkbox" id="switch" value="switch"><i class="fas fa-gamepad createTournamentIcon"></i>Switch</input></label>
                   <label id="mobileLabel" class="createTournamentLabel"><input onclick="animatePlatform(this.id)" name="newTournamentPlatform"  class="createTournamentInput" type="checkbox" id="mobile" value="mobile"><i class="fas fa-mobile-alt createTournamentIcon"></i>Mobile</input></label>
                 </div>
 
-                <!--
-                <h6>1st Place Prize</h6>
-                <p style="margin: 0px; padding: 0px; font-size: 14px;">*In Star Coins</p>
-                <input type="text" name="newTournamentFirstPrize" class="longProfileInputs" id="firstEarnings"></input>
-                <h6>2nd Place Prize</h6>
-                <p style="margin: 0px; padding: 0px; font-size: 14px;">*In Star Coins</p>
-                <input type="text" name="newTournamentSecondPrize" class="longProfileInputs" id="secondEarnings"></input>
-                <h6>3rd Place Prize</h6>
-                <p style="margin: 0px; padding: 0px; font-size: 14px;">*In Star Coins</p>
-                <input type="text" name="newTournamentThirdPrize" class="longProfileInputs" id="thirdEarnings"></input>
-                <h6>All-Star Unlimited Exclusive</h6>
+                <div id="newTournamentPrizingRow" class="inlineInputRow">
+                  <div class="createTournamentInputColumn leftInputColumn thirdWidth">
+                    <h6 class="inputTitle">1st Place</h6>
+                    <p style="margin: 0px; padding: 0px; font-size: 12px;">*In Star Coins</p>
+                    <input type="text" name="newTournamentFirstPrize" class="createTournamentTextInput" id="firstEarnings"></input>
+                  </div>
+                  <div class="createTournamentInputColumn middleInputColumn thirdWidth">
+                    <h6 class="inputTitle">2nd Place</h6>
+                    <p style="margin: 0px; padding: 0px; font-size: 12px;">*In Star Coins</p>
+                    <input type="text" name="newTournamentSecondPrize" class="createTournamentTextInput" id="secondEarnings"></input>
+                  </div>
+                  <div class="createTournamentInputColumn rightInputColumn thirdWidth">
+                    <h6 class="inputTitle">3rd Place</h6>
+                    <p style="margin: 0px; padding: 0px; font-size: 12px;">*In Star Coins</p>
+                    <input type="text" name="newTournamentThirdPrize" class="createTournamentTextInput" id="thirdEarnings"></input>
+                  </div>
+                </div>
+
+
+                <h6 class="inputTitle">All-Star Unlimited Exclusive</h6>
                 <input type="checkbox" id="unlimited" name="selection" value="true">
                 <label for="unlimited"><p>Unlimited</p></label>
-                -->
 
-                <h6>Participant Type</h6>
+
+                <h6 class="inputTitle">Participant Type</h6>
                 <div class="createTournamentParticipantType"  id="participantType">
                   <label id="individualLabel" class="createTournamentLabel participantLabel"><input onclick="animateParticipantType(this.id)" name="newTournamentParticipantType" class="createTournamentInput" type="radio" id="individual" value="individual"><i class="fas fa-user createTournamentIcon"></i>Players</input></label>
                   <label id="teamLabel" class="createTournamentLabel participantLabel"><input onclick="animateParticipantType(this.id)" name="newTournamentParticipantType" class="createTournamentInput" type="radio" id="team" value="team"><i class="fas fa-users createTournamentIcon"></i>Teams</input></label>
