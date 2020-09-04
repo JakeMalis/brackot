@@ -1309,12 +1309,12 @@ text-align: center;
   width: 100%;
 }
 
-.createTournamentParticipantLabel{
+.createTournamentLabel{
   text-align: center;
   border-radius: 4px;
   background-color: var(--tournamentCardColor);
   width: 50%;
-  max-width: 130px;
+  max-width: 135px;
   height: 44px;
   color: #888888;
   padding-top: 8px;
@@ -1324,26 +1324,25 @@ text-align: center;
   border: 3px solid var(--tournamentCardColor);
 }
 
-.createTournamentParticipantLabel:hover{
+.createTournamentLabel:hover{
   transition-duration: 0.2s;
   transform: translateY(-2px);
   box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.25);
 }
 
-.createTournamentParticipantLabelChecked{
+.createTournamentLabelChecked{
   background-color: var(--tournamentCardColorHover);
   border: 2px solid var(--aquamarine);
   color: #eeeeee;
 }
 
-.createTournamentParticipantRadio{
+.createTournamentInput{
   display: none;
 }
 
-.participantTypeIcon{
-  padding-right: 6px;
+.createTournamentIcon{
+  padding-right: 8px;
 }
-
 
 /* EMAIL PREFERENCES PAGE CODE */
 .preferenceCheckbox{

@@ -21,9 +21,14 @@ function animateGameCarousel(selected){
 }
 
 function animateParticipantType(selected){
-  var clicked = "#" + selected;
-  $('.createTournamentParticipantLabel').removeClass('createTournamentParticipantLabelChecked');
-  $(clicked).addClass('createTournamentParticipantLabelChecked');
+  var clicked = "#" + selected + "Label";
+  $('.participantLabel').removeClass('createTournamentLabelChecked');
+  $(clicked).addClass('createTournamentLabelChecked');
+}
+
+function animatePlatform(selected){
+  var clicked = "#" + selected + "Label";
+  $(clicked).toggleClass('createTournamentLabelChecked');
 }
 
 function addTournament() {

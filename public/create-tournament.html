@@ -89,15 +89,20 @@
                 </div>
                 <br>
                 <br>
-                <h6>Platform</h6>
-                <p style="margin: 0px; padding: 0px; font-size: 14px;">*Hold CTRL to select more than one</p>
-                <select style="min-height: 160px;" name="newTournamentPlatform" class="longProfileInputs" multiple id="platform">
-                  <option id="pc">PC</option>
+                <h6>Platform(s)</h6>
+                  <!--<option id="pc">PC</option>
                   <option id="xbox">Xbox</option>
                   <option id="ps">Playstation</option>
                   <option id="switch">Switch</option>
                   <option id="mobile">Mobile</option>
-                </select>
+                </select>-->
+                <div class="createTournamentPlatform"  id="platform">
+                  <label id="pcLabel" class="createTournamentLabel"><input onclick="animatePlatform(this.id)" name="newTournamentPlatform"  class="createTournamentInput" type="checkbox" id="pc" value="pc"><i class="fas fa-laptop createTournamentIcon"></i>PC</input></label>
+                  <label id="xboxLabel" class="createTournamentLabel"><input onclick="animatePlatform(this.id)" name="newTournamentPlatform"  class="createTournamentInput" type="checkbox" id="xbox" value="xbox"><i class="fab fa-xbox createTournamentIcon"></i>Xbox</input></label>
+                  <label id="playstationLabel" class="createTournamentLabel"><input onclick="animatePlatform(this.id)" name="newTournamentPlatform"  class="createTournamentInput" type="checkbox" id="playstation" value="playstation"><i class="fab fa-playstation createTournamentIcon"></i>Playstation</input></label>
+                  <label id="switchLabel" class="createTournamentLabel"><input onclick="animatePlatform(this.id)" name="newTournamentPlatform"  class="createTournamentInput" type="checkbox" id="switch" value="switch"><i class="fas fa-gamepad createTournamentIcon"></i>Switch</input></label>
+                  <label id="mobileLabel" class="createTournamentLabel"><input onclick="animatePlatform(this.id)" name="newTournamentPlatform"  class="createTournamentInput" type="checkbox" id="mobile" value="mobile"><i class="fas fa-mobile-alt createTournamentIcon"></i>Mobile</input></label>
+                </div>
                 <br>
                 <br>
                 <h6>1st Place Prize</h6>
@@ -122,8 +127,8 @@
                 <br>
                 <h6>Participant Type</h6>
                 <div class="createTournamentParticipantType"  id="participantType">
-                  <label id="individualLabel" onclick="animateParticipantType(this.id)" class="createTournamentParticipantLabel"><input name="newTournamentParticipantType" class="createTournamentParticipantRadio" type="radio" id="individual" value="individual"><i class="fas fa-user participantTypeIcon"></i>Players</input></label>
-                  <label id="teamLabel" onclick="animateParticipantType(this.id)" class="createTournamentParticipantLabel"><input name="newTournamentParticipantType" class="createTournamentParticipantRadio" type="radio" id="team" value="team"><i class="fas fa-users participantTypeIcon"></i>Teams</input></label>
+                  <label id="individualLabel" class="createTournamentLabel participantLabel"><input onclick="animateParticipantType(this.id)" name="newTournamentParticipantType" class="createTournamentInput" type="radio" id="individual" value="individual"><i class="fas fa-user createTournamentIcon"></i>Players</input></label>
+                  <label id="teamLabel" class="createTournamentLabel participantLabel"><input onclick="animateParticipantType(this.id)" name="newTournamentParticipantType" class="createTournamentInput" type="radio" id="team" value="team"><i class="fas fa-users createTournamentIcon"></i>Teams</input></label>
                 </div>
                 <br>
                 <br>
