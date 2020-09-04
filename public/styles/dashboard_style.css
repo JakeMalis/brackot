@@ -152,6 +152,10 @@ select option{
   object-fit: contain;
 }
 
+#boostsBorder{
+  width: 100%;
+}
+
 .noGradientBorder{
   transition-duration: 0.2s;
   padding: 4px;
@@ -171,7 +175,7 @@ select option{
   transition-duration: 0.2s;
   padding: 4px;
   height: auto;
-  border-radius: 12px;
+  border-radius: 8px;
   background: -webkit-linear-gradient(0deg, #23f8ac, #19d2d8);
   background-size: 800% 800%;
   -webkit-animation: flow 2s ease infinite;
@@ -453,8 +457,13 @@ height: 100%;
 
 /* BOOSTS PAGE CODE */
 #boostsMessage{
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 20px;
+  padding-bottom: 40px;
   color: #eeeeee;
-  font-size: 50px;
+  font-size: 37px;
   text-align: center;
 }
 
@@ -465,6 +474,7 @@ height: 100%;
 }
 
 .boostsRow{
+  position: relative;
   display: table;
   width: 100%;
   margin: 0px;
@@ -478,12 +488,16 @@ height: 100%;
   line-height: 27px;
 }
 
+#allStarUnlimited{
+  position: relative;
+}
+
 .boostsGraphic{
-  margin-left: 5%;
-  float: right;
-  width: 35%;
-  height: 35%;
-  margin-top: -2vw;
+  top: 0px;
+  right: -10px;
+  height: 70px;
+  width: 70px;
+  position: absolute;
 }
 
 .clear{
@@ -491,19 +505,19 @@ height: 100%;
 }
 
 .boostsList{
-  padding-left: 20px;
+  padding-left: 0px;
   float: left;
-  max-width: 60%;
   list-style-type: circle;
 }
 
 .boostsListItem{
   font-size: 17px;
-  color: #bbbbbb;
+  color: #aaaaaa;
 }
 
 .boostsTitle{
   padding-bottom: 15px;
+  max-width: 250px;
 }
 
 .boostsPrice{
@@ -574,8 +588,8 @@ text-align: center;
   display: flex;
   flex-wrap: wrap;
   box-sizing: border-box;
-  margin-left: 0px !important;
-  margin-right: 0px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 .singleColumn{
@@ -994,10 +1008,12 @@ text-align: center;
 }
 
 .boostsCard{
-  flex: 0 0 100%;
-  max-width: 100%;
+  max-width: 750px;
+  width: 90%;
+  margin-bottom: 30px;
   height: auto;
-  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .boostsBackground{
@@ -1670,10 +1686,15 @@ text-align: center;
 
 .button404{
   display: inline-block;
+  letter-spacing: 0.8px;
 }
 
 /* THE BELOW SECTION IS MEANT FOR MOBILE DEVICES ONLY */
 @media only screen and (min-width: 480px){
+  .row{
+    margin-left: 50px !important;
+    margin-right: 50px !important;
+  }
   .halfWidth{
     width: 50%;
   }
@@ -1842,7 +1863,9 @@ text-align: center;
 
 
 
-
+  #boostsMessage{
+    font-size: 50px;
+  }
 
   #sidebar{
     display: block;
@@ -1871,9 +1894,17 @@ text-align: center;
   #profilePic{
     display: flex;
   }
-  .row{
-    margin-left: 50px !important;
-    margin-right: 50px !important;
+
+  .boostsTitle{
+    max-width: 100%;
+  }
+
+  .boostsGraphic{
+    top: 40px;
+    right: 0px;
+    height: 200px;
+    width: 200px;
+    position: absolute;
   }
 }
 
@@ -1913,10 +1944,6 @@ text-align: center;
   .profileCard{
     flex: 0 0 100% !important;
     max-width: 100% !important;
-  }
-  .boostsCard{
-    flex: 0 0 50%;
-    width: 400px;
   }
   .carouselCardBackground{
     width: 95%;
