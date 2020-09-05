@@ -1,13 +1,18 @@
 function personalizeElements() {
-  loadAvailableGames();
-  renderTournamentCards(query);
-  addTournamentCardData(query);
+  games.forEach(function(entry) {
+    $("#gameList").append('<li class="filterListItem"><label class="filterOption"><input id="CSGOFilter" class="filterInput" type="radio"><p class="filterText">' + entry + '</p></input></label></li>');
+  });
+  filterData();
+  renderTournamentCards();
+  addTournamentCardData();
 }
 
-var TournamentCardArray = [];
 var games = ["Counter-Strike: Global Offensive", "Fall Guys", "Fortnite", "League of Legends", "Minecraft", "Overwatch", "Rocket League", "Super Smash Bros. Ultimate", "Valorant"];
+var selectedGame = [];
 var tournamentsCollection = firebase.firestore().collection("tournaments");
-var query = tournamentsCollection.where("date", ">=", new Date()).where("game", "in", games);
+var date = new Date();
+var filteredDate = new Date(date.setMonth(date.getMonth() + 1));
+var query = tournamentsCollection.where("date", ">=", new Date()).where("date", "<=", filteredDate).where("game", "in", games);
 
 class TournamentCard extends React.Component {
   render() {
@@ -31,28 +36,22 @@ class TournamentCard extends React.Component {
   }
 }
 
-async function loadAvailableGames() {
-  games.forEach(function() {
-    $("#allTeams").append('<li><a class="teamName">' + doc.data().name + '</a></li>');
-  });
-
-
-
-  firebase.firestore().collection("teams").get().then(function(querySnapshot) {
-    querySnapshot.forEach(function(doc) {
-        $("#allTeams").append('<li><a class="teamName">' + doc.data().name + '</a></li>');
-    });
-  }).then(function() {
-    $(function(){
-      $('.teamName').on('click', function() {
-          $("#team").val($(this).text());
-          $("#allTeams").hide();
-      });
+async function filterData() {
+  $(function(){
+    $('.filterListItem').on('click', function() {
+        $("#gameLabelField").html($(this).text());
+        $("#gamePopup").removeClass("show");
+        $("#gameButtonLabel").removeClass("filterButtonLabelActive");
+        selectedGame = [$(this).text()];
+        query = tournamentsCollection.where("date", ">=", new Date()).where("game", "in", selectedGame);
+        renderTournamentCards();
+        addTournamentCardData();
     });
   });
 }
 
-async function renderTournamentCards(query) {
+async function renderTournamentCards() {
+  var TournamentCardArray = [];
   var tournamentNumber = 1;
   query.get().then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
@@ -67,7 +66,7 @@ async function renderTournamentCards(query) {
   });
 }
 
-async function addTournamentCardData(query) {
+async function addTournamentCardData() {
   var tournamentNumber = 1;
   query.get().then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
