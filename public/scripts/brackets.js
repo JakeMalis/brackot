@@ -2,6 +2,13 @@ var shuffledParticipants = [];
 var numParticipants = 0;
 var tempMatch = new match(null, null);
 
+class EmptyMatchCard extends React.Component {
+  render() {
+    return (
+      <div className={"match " + "match" + this.props.roundNumber + " empty"} id={"matchCard" + this.props.matchNumber}></div>
+    );
+  }
+}
 
 class MatchCard extends React.Component {
   render() {
@@ -23,7 +30,6 @@ class UpperParticipant extends React.Component {
     );
   }
 }
-
 
 class LowerParticipant extends React.Component {
   render() {
@@ -60,36 +66,44 @@ participant upperHalf noParticipant  -  the upper half of a match doesn't have i
                                          therefore, it has the noParticipant class to leave an empty spot in upperHalf
 */
 
-async function renderMatchCards() {
-  var tournament = firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B");
+var tournament = firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B");
+function renderMatchCards() {
+  tournament.get().then(function(doc) {
+    for (var round = 1; round <= getByesAndRounds()[1]; round++){
+      var MatchColumnCards = [];
+      var matchNumber = 1;
 
-  for (var round = 1; round <= getByesAndRounds()[1]; round++){
-    var MatchColumnCards = [];
-    var matchNumber = 1;
-    tournament.get().then(function(doc) {
-      var matchupsRound = "matchUpsRound" + round;
-      var matchups = doc.data().matchupsRound;
+      console.log(round);
+
+      if (round = 1) { var matchups = doc.data().matchupsRound1; }
+      else if (round = 2) { var matchups = doc.data().matchupsRound2; }
+      else if (round = 3) { var matchups = doc.data().matchupsRound3; }
+      else if (round = 4) { var matchups = doc.data().matchupsRound4; }
+      else if (round = 5) { var matchups = doc.data().matchupsRound5; }
+      else if (round = 6) { var matchups = doc.data().matchupsRound6; }
+      else if (round = 7) { var matchups = doc.data().matchupsRound7; }
+      else if (round = 8) { var matchups = doc.data().matchupsRound8; }
+      else if (round = 9) { var matchups = doc.data().matchupsRound9; }
+
       matchups.forEach(function(entry) {
         var upperParticipant, lowerParticipant;
         var participants = [];
 
-        if ((entry.playerOne === null) && (entry.playerTwo === null)) { var empty = " emptySpace"; } else { var empty = ""; }
+        if ((entry.playerOne === null) && (entry.playerTwo === null)) {
+          MatchColumnCards.push(<EmptyMatchCard roundNumber={round} matchNumber={matchNumber} />);
+        }
 
-        upperParticipant = { uid: entry.playerOne };
-        participants.push(upperParticipant);
-        lowerParticipant = { uid: entry.playerTwo };
-        participants.push(lowerParticipant);
-
-        MatchColumnCards.push(<MatchCard roundNumber={round} matchNumber={matchNumber} empty={empty} participants={participants} />);
-        matchNumber++;
+        else {
+          upperParticipant = { uid: entry.playerOne };
+          participants.push(upperParticipant);
+          lowerParticipant = { uid: entry.playerTwo };
+          participants.push(lowerParticipant);
+          MatchColumnCards.push(<MatchCard roundNumber={round} matchNumber={matchNumber} empty="" participants={participants} />);
+        }
       });
-    }).then(function() {
-      ReactDOM.render(
-        MatchColumnCards,
-        document.getElementById("matchColumn" + round)
-      );
-    });
-  }
+      matchNumber++;
+    }
+  });
 }
 
 
@@ -185,10 +199,10 @@ function personalizeElements() {
         matchupsRound9: winner
       }).then(function() {
         console.log('Uploaded final round')
+        //assignScores();
+        renderMatchCards();
       });
     }
-    assignScores();
-
   });
 }
 
@@ -257,6 +271,7 @@ function createInitialMatches(){
 
 
 function assignWinner(matchUp){
+  /*
   if(matchUp.playerOneScore > matchUp.playerTwoScore){
     return matchUp.playerOne;
   }
@@ -265,7 +280,8 @@ function assignWinner(matchUp){
   }
   else if(matchUp.playerOneScore == null && matchUp.playerTwoScore == null){
     return null;
-  }
+  }*/
+  return matchUp.playerOne;
 }
 
 
@@ -301,17 +317,7 @@ function nextRound(lastRound){
 }
 
 function assignScores(){
-  /*
-  firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").get().then(function(doc){
-    match = doc.data.matchupsRound1;
-  }).then(function() {
-  firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
-    playerOneScore: test,
-    playerOneScore: ff4a4a7efe70aee944f3ac0a26f94bba93da85ed
-  }).then(function() {
-    console.log('Uploaded new score P1')
-  });
-  */
+
 }
 
 
