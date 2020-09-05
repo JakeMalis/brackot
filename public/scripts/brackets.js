@@ -70,20 +70,21 @@ var tournament = firebase.firestore().collection("tournaments").doc("Sscjc6eqIdl
 function renderMatchCards() {
   tournament.get().then(function(doc) {
     for (var round = 1; round <= getByesAndRounds()[1]; round++){
+      console.log(round);
+
       var MatchColumnCards = [];
       var matchNumber = 1;
 
-      console.log(round);
 
-      if (round = 1) { var matchups = doc.data().matchupsRound1; }
-      else if (round = 2) { var matchups = doc.data().matchupsRound2; }
-      else if (round = 3) { var matchups = doc.data().matchupsRound3; }
-      else if (round = 4) { var matchups = doc.data().matchupsRound4; }
-      else if (round = 5) { var matchups = doc.data().matchupsRound5; }
-      else if (round = 6) { var matchups = doc.data().matchupsRound6; }
-      else if (round = 7) { var matchups = doc.data().matchupsRound7; }
-      else if (round = 8) { var matchups = doc.data().matchupsRound8; }
-      else if (round = 9) { var matchups = doc.data().matchupsRound9; }
+      if (round == 1) { var matchups = doc.data().matchupsRound1; }
+      else if (round == 2) { var matchups = doc.data().matchupsRound2; }
+      else if (round == 3) { var matchups = doc.data().matchupsRound3; }
+      else if (round == 4) { var matchups = doc.data().matchupsRound4; }
+      else if (round == 5) { var matchups = doc.data().matchupsRound5; }
+      else if (round == 6) { var matchups = doc.data().matchupsRound6; }
+      else if (round == 7) { var matchups = doc.data().matchupsRound7; }
+      else if (round == 8) { var matchups = doc.data().matchupsRound8; }
+      else if (round == 9) { var matchups = doc.data().matchupsRound9; }
 
       matchups.forEach(function(entry) {
         var upperParticipant, lowerParticipant;
@@ -100,8 +101,8 @@ function renderMatchCards() {
           participants.push(lowerParticipant);
           MatchColumnCards.push(<MatchCard roundNumber={round} matchNumber={matchNumber} empty="" participants={participants} />);
         }
+        matchNumber++;
       });
-      matchNumber++;
     }
   });
 }
