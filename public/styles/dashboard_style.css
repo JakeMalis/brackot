@@ -797,32 +797,36 @@ text-align: center;
 .tournamentCard{
   flex: 0 0 100%;
   max-width: 100%;
-  height: 400px;
+  height: 370px;
   background: transparent;
   transition-duration: 0.2s;
   visibility: hidden;
 }
 
-.tournamentCard:hover{
-  transform: scale(1.03);
-  transition-duration: 0.2s;
-}
-
 .tournamentCardBackground{
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10%;
-  height: 80%;
-  width: 90%;
+  transition-duration: 0.2s;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: calc(100% - 20px);
+  width: calc(100% - 20px);
   border-radius: 4px;
   border: 0px;
   box-shadow: 0px 0px 13px 0px rgba(0,0,0,0.2);
   background-color: var(--tournamentCardColor);
 }
 
+.tournamentCardBackground:hover{
+  transform: translateY(-4px);
+  transition-duration: 0.2s;
+}
+
 .tournamentCardContent{
+  position: relative;
   margin: 0px;
   cursor: pointer;
+  height: 100%;
 }
 
 .tournamentCardText{
@@ -841,17 +845,14 @@ text-align: center;
 }
 
 .tournamentCardTitle{
+  max-height: 42px;
   margin-bottom: 0px;
-  height: 40px;
-  max-height: 40px;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 18px;
-  letter-spacing: 0.9px;
-  font-weight: 600;
+  font-size: 21px;
+  font-weight: 700;
   color: #eeeeee !important;
   text-align: center;
-  vertical-align: baseline;
   font-family: 'proxima-nova', sans-serif;
 }
 
@@ -889,6 +890,39 @@ text-align: center;
   color: #aaaaaa !important;
   display: inline-block;
   font-family: 'proxima-nova', sans-serif;
+}
+
+.tournamentCardHostBar{
+  position: absolute;
+  bottom: 0px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-top: 2px solid rgba(100,100,100,0.2);
+  height: 44px;
+  width: 100%;
+}
+
+.tournamentCardHostPic{
+  vertical-align: top;
+  margin-left: 10px;
+  margin-right: 4px;
+  display: inline-block;
+  padding: 8px;
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+}
+
+.tournamentCardHostName{
+  display: inline-block;
+  text-transform: none;
+  overflow: hidden;
+  white-space: nowrap;
+  line-height: 43px;
+  font-size: 15px;
+  max-width: 100%;
+  margin: 0px;
+  color: #aaaaaa !important;
 }
 
 .tournamentCardButton{
