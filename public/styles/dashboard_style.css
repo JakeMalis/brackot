@@ -911,6 +911,7 @@ text-align: center;
   width: 43px;
   height: 43px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .tournamentCardHostName{

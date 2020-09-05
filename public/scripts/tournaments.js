@@ -30,7 +30,7 @@ class TournamentCard extends React.Component {
                   </ul>
               </div>
               <div className="tournamentCardHostBar">
-                <img className="tournamentCardHostPic" id={"tournamentHostPic" + this.props.tournamentNumber}></img>
+                <img className="tournamentCardHostPic" id={"tournamentHostPic" + this.props.tournamentNumber} src="media/BrackotLogo2.jpg"></img>
                 <h6 className="tournamentCardHostName" id={"tournamentHostName" + this.props.tournamentNumber}></h6>
               </div>
             </div>
@@ -82,18 +82,19 @@ async function addTournamentCardData() {
         document.getElementById("tournamentWallpaper" + tournamentNumber).src = "/media/game_wallpapers/" + doc.data().game + "-" + "gameplay.jpg";
         document.getElementById("tournamentTitle" + tournamentNumber).innerHTML = doc.data().name;
         document.getElementById("tournamentGame" + tournamentNumber).innerHTML = doc.data().game;
-
         document.getElementById("tournamentHostName" + tournamentNumber).innerHTML = doc.data().creatorName;
 
-
-
         var tournamentCreator = doc.data().creator;
-        var gsReference = firebase.storage().refFromURL("gs://all-star-esports.appspot.com/3nJZVWMibxRCzzfs2v6CdLQanIr2/profile");
-        document.getElementById("tournamentHostPic" + tournamentNumber).src = "media/BrackotLogo2.jpg";
-        let url = gsReference.getDownloadURL()
-        document.getElementById("tournamentHostPic" + tournamentNumber).src = url;
-
-
+        var gsReference = firebase.storage().refFromURL("gs://all-star-esports.appspot.com/" + tournamentCreator + "/profile");
+        var nNumber = tournamentNumber;
+        gsReference.getDownloadURL().then(function (url) {
+          // console.log(document.getElementById("tournamentHostPic" + nNumber));
+          document.getElementById("tournamentHostPic" + nNumber).src = url;
+        }).catch(
+          e => {
+            console.log(e);
+          }
+        )
 
 
         var date = new Date(doc.data().date.toDate());
