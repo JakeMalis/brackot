@@ -36,6 +36,7 @@ function addTournament() {
 
   firebase.firestore().collection("tournaments").add({
       creator: firebase.auth().currentUser.uid,
+      creatorName: firebase.auth().currentUser.displayName,
       date: new Date(date + " " + time),
       game: document.querySelector('input[name="newTournamentGame"]:checked').value,
       name: document.getElementById('tournamentName').value,
