@@ -272,6 +272,7 @@ p{
 }
 
 .participantProfilePic{
+  object-fit: cover;
   float: left;
   height: var(--participantHeight);
   width: var(--participantHeight);

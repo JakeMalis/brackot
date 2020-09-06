@@ -209,7 +209,7 @@ function personalizeElements() {
     }).then(function() {
       console.log('Uploaded 1st round')
     });
-    if(byes > 0 && numParticipants > 2){
+    if(numParticipants > 2){
       secondRound = implementByes();
       firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
         matchupsRound2: secondRound
@@ -217,14 +217,14 @@ function personalizeElements() {
         console.log('Uploaded 2nd round')
       });
     }
-    else if(numParticipants > 2){
+    /*else if(numParticipants > 2){
       secondRound = nextRound(firstRound);
       firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
         matchupsRound2: secondRound
       }).then(function() {
         console.log('Uploaded 2nd round')
       });
-    }
+    }*/
 
     var matches = [];
 
@@ -339,7 +339,12 @@ function createInitialMatches(){
       matches.push(Object.assign({},new match(null, null)));
     }
   }
-  else{
+  else if (byes == 0){
+    for(var v = 0; v < 2*initialNumRounds; v+=2){
+      matches.push(Object.assign({}, new match(shuffledParticipants[v], shuffledParticipants[v+1])));
+    }
+  }
+  else {
     for(var z = 0; z < 2 * byes; z+=2){
       matches.push(Object.assign({},new match(shuffledParticipants[z], shuffledParticipants[z+1])));
       matches.push(Object.assign({},Object.assign({}, new match(null, null))));
@@ -349,6 +354,7 @@ function createInitialMatches(){
       matches.push(Object.assign({}, new match(shuffledParticipants[indexStart + w], shuffledParticipants[indexStart + w+1])));
     }
   }
+
   return matches;
 }
 
@@ -374,14 +380,28 @@ function implementByes(){    /* creates second round of matches */
   var byes = getByesAndRounds()[0];
   var numOfWinners = (numParticipants-byes)/2;
   var count = 1;
-
-  for(var x = 0; x < 2*numOfWinners; x+=2){
-    matches.push(Object.assign({}, new match(assignWinner(initialMatches[x]), shuffledParticipants[shuffledParticipants.length - count])));
-    count++;
+  if(byes == 0){
+    for(var w = 0; w < numOfWinners; w+=2){
+      matches.push(Object.assign({}, new match(assignWinner(initialMatches[w]), assignWinner(initialMatches[w+1]))));
+    }
   }
-
-  for(var y = 0; y < byes - numOfWinners; y+=2){
-    matches.push(Object.assign({}, new match(shuffledParticipants[2*numOfWinners + y], shuffledParticipants[2*numOfWinners + y + 1])));
+  else if(numOfWinners - byes >= 2){
+    for(var z = 0; z < byes; z+=2){
+      matches.push(Object.assign({}, new match(assignWinner(initialMatches[z]), shuffledParticipants[shuffledParticipants.length - count])));
+      count++;
+    }
+    for(var v = 2*byes; v < numOfWinners + byes; v+=2){
+      matches.push(Object.assign({}, new match(assignWinner(initialMatches[v]), assignWinner(initialMatches[v+1]))));
+    }
+  }
+  else {
+    for(var x = 0; x < 2*numOfWinners; x+=2){
+      matches.push(Object.assign({}, new match(assignWinner(initialMatches[x]), shuffledParticipants[shuffledParticipants.length - count])));
+      count++;
+    }
+    for(var y = 0; y < byes - numOfWinners; y+=2){
+      matches.push(Object.assign({}, new match(shuffledParticipants[2*numOfWinners + y], shuffledParticipants[2*numOfWinners + y + 1])));
+    }
   }
 
   return matches;
@@ -405,7 +425,7 @@ function assignScores(){
 
 
 
-function openMatchModal() {
+function openMatchModal(match) {
   var modal = document.getElementById("matchModal");
   modal.style.display = "block";
 }
