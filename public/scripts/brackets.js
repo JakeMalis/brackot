@@ -5,7 +5,7 @@ var tempMatch = new match(null, null);
 class EmptyMatchCard extends React.Component {
   render() {
     return (
-      <div className={"match " + "match" + this.props.roundNumber + " empty"} id={"matchCard" + this.props.matchNumber}></div>
+      <div className={"match " + "match" + this.props.roundNumber + " empty"} id={"matchCardRound" + this.props.roundNumber + "Match" + this.props.matchNumber}></div>
     );
   }
 }
@@ -13,9 +13,9 @@ class EmptyMatchCard extends React.Component {
 class MatchCard extends React.Component {
   render() {
     return (
-      <div className={"match " + "match" + this.props.roundNumber + this.props.empty} id={"matchCard" + this.props.matchNumber}>
-        <UpperParticipant participantNumber={this.props.participants[0].uid} matchNumber={this.props.matchNumber} />
-        <LowerParticipant participantNumber={this.props.participants[1].uid} matchNumber={this.props.matchNumber} />
+      <div className={"match " + "match" + this.props.roundNumber + this.props.empty} id={"matchCardRound" + this.props.roundNumber + "Match" + this.props.matchNumber}>
+        <UpperParticipant participantNumber={this.props.participants[0].uid} roundNumber={this.props.roundNumber} matchNumber={this.props.matchNumber} />
+        <LowerParticipant participantNumber={this.props.participants[1].uid} roundNumber={this.props.roundNumber} matchNumber={this.props.matchNumber} />
       </div>
     );
   }
@@ -24,9 +24,11 @@ class MatchCard extends React.Component {
 class UpperParticipant extends React.Component {
   render() {
     return(
-      <React.Fragment>
-        <div className={"participant UpperHalf"}><img className="participantProfilePic" id={"participantLogo" + this.props.participantNumber}></img><p className="teamName" id={"participantName" + this.props.participantNumber}></p><p className="score whiteText" id={"participant" + this.props.participantNumber + "Match" + this.props.matchNumber + "Score"}></p></div>
-      </React.Fragment>
+      <div className={"participant UpperHalf"}>
+        <img className="participantProfilePic" id={"upperParticipantProfilePicRound" + this.props.roundNumber + "Match" + this.props.matchNumber + "-" + this.props.participantNumber}></img>
+        <p className="teamName" id={"upperParticipantNameRound" + this.props.roundNumber + "Match" + this.props.matchNumber + "-" + this.props.participantNumber}></p>
+        <p className="score whiteText" id={"upperParticipantScoreRound" + this.props.roundNumber + "Match" + this.props.matchNumber + "-" + this.props.participantNumber}></p>
+      </div>
     );
   }
 }
@@ -34,9 +36,22 @@ class UpperParticipant extends React.Component {
 class LowerParticipant extends React.Component {
   render() {
     return(
-      <React.Fragment>
-        <div className={"participant LowerHalf"}><img className="participantProfilePic" id={"participantLogo" + this.props.participantNumber}></img><p className="teamName" id={"participantName" + this.props.participantNumber}></p><p className="score whiteText" id={"participant" + this.props.participantNumber + "Match" + this.props.matchNumber + "Score"}></p></div>
-      </React.Fragment>
+      <div className={"participant LowerHalf"}>
+        <img className="participantProfilePic" id={"lowerParticipantProfilePicRound" + this.props.roundNumber + "Match" + this.props.matchNumber + "-" + this.props.participantNumber}></img>
+        <p className="teamName" id={"lowerParticipantNameRound" + this.props.roundNumber + "Match" + this.props.matchNumber + "-" + this.props.participantNumber}></p>
+        <p className="score whiteText" id={"lowerParticipantScoreRound" + this.props.roundNumber + "Match" + this.props.matchNumber + "-" + this.props.participantNumber}></p>
+      </div>
+    );
+  }
+}
+
+class Connector extends React.Component {
+  render() {
+    return (
+      <div className={"connector " + "connector" + this.props.roundNumber} id={"connector" + this.props.matchNumber}>
+        <div className="connectorLeft"></div>
+        <div className="connectorRight"></div>
+      </div>
     );
   }
 }
@@ -66,15 +81,11 @@ participant upperHalf noParticipant  -  the upper half of a match doesn't have i
                                          therefore, it has the noParticipant class to leave an empty spot in upperHalf
 */
 
-var tournament = firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B");
 function renderMatchCards() {
-  tournament.get().then(function(doc) {
+  firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").get().then(function(doc) {
     for (var round = 1; round <= getByesAndRounds()[1]; round++){
-      console.log(round);
-
       var MatchColumnCards = [];
       var matchNumber = 1;
-
 
       if (round == 1) { var matchups = doc.data().matchupsRound1; }
       else if (round == 2) { var matchups = doc.data().matchupsRound2; }
@@ -100,6 +111,53 @@ function renderMatchCards() {
           lowerParticipant = { uid: entry.playerTwo };
           participants.push(lowerParticipant);
           MatchColumnCards.push(<MatchCard roundNumber={round} matchNumber={matchNumber} empty="" participants={participants} />);
+        }
+        matchNumber++;
+      });
+      ReactDOM.render(
+        MatchColumnCards,
+        document.getElementById("matchColumn" + round)
+      );
+      /*ReactDOM.render(
+        document.getElementById("connectorColumn" + round)
+      );*/
+    }
+  }).then(function() {
+    loadMatchData();
+  });
+}
+
+function loadMatchData() {
+  firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").get().then(function(doc) {
+    for (var round = 1; round <= getByesAndRounds()[1]; round++){
+      var matchNumber = 1;
+
+      if (round == 1) { var matchups = doc.data().matchupsRound1; }
+      else if (round == 2) { var matchups = doc.data().matchupsRound2; }
+      else if (round == 3) { var matchups = doc.data().matchupsRound3; }
+      else if (round == 4) { var matchups = doc.data().matchupsRound4; }
+      else if (round == 5) { var matchups = doc.data().matchupsRound5; }
+      else if (round == 6) { var matchups = doc.data().matchupsRound6; }
+      else if (round == 7) { var matchups = doc.data().matchupsRound7; }
+      else if (round == 8) { var matchups = doc.data().matchupsRound8; }
+      else if (round == 9) { var matchups = doc.data().matchupsRound9; }
+
+      matchups.forEach(function(entry) {
+        var upperParticipant, lowerParticipant;
+        var participants = [];
+        if ((entry.playerOne === null) && (entry.playerTwo === null)) { console.log("No data for empty tournament"); }
+        else {
+          firebase.firestore().collection("users").doc(entry.playerOne).get().then(function(userDoc) {
+            console.log(matchNumber);
+            //console.log("upperParticipantNameRound" + round + "Match" + matchNumber + "-" + entry.playerOne);
+            //document.getElementById("upperParticipantNameRound" + round + "Match" + matchNumber + "-" + entry.playerOne).innerHTML = userDoc.data().name;
+          });
+
+
+          firebase.firestore().collection("users").doc(entry.playerTwo).get().then(function(userDoc) {
+            //console.log("lowerParticipantNameRound" + round + "Match" + matchNumber + "-" + entry.playerTwo)
+            //document.getElementById("lowerParticipantNameRound" + round + "Match" + matchNumber + "-" + entry.playerTwo).innerHTML = userDoc.data().name;
+          });
         }
         matchNumber++;
       });
