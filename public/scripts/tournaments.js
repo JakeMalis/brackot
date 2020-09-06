@@ -1,19 +1,22 @@
 function personalizeElements() {
-  $("#gameList").append('<li class="gameFilterListItem"><label class="filterOption"><input class="filterInput" type="radio"><p class="filterText">All</p></input></label></li>');
+  $("#gameList").append('<li class="filterListItem gameFilterListItem"><label class="filterOption"><input class="filterInput" type="radio"><p class="filterText">All</p></input></label></li>');
+  $("#dateList").append('<li class="filterListItem dateFilterListItem"><label class="filterOption"><input class="filterInput" type="radio"><p class="filterText">All</p></input></label></li>');
   games.forEach(function(entry) {
-    $("#gameList").append('<li class="gameFilterListItem"><label class="filterOption"><input class="filterInput" type="radio"><p class="filterText">' + entry + '</p></input></label></li>');
+    $("#gameList").append('<li class="filterListItem gameFilterListItem"><label class="filterOption"><input class="filterInput" type="radio"><p class="filterText">' + entry + '</p></input></label></li>');
+  });
+  dateOptions.forEach(function(entry) {
+    $("#dateList").append('<li class="filterListItem dateFilterListItem"><label class="filterOption"><input class="filterInput" type="radio"><p class="filterText">' + entry + '</p></input></label></li>');
   });
   filterData();
   renderTournamentCards();
-  addTournamentCardData();
 }
 
 var games = ["Counter-Strike: Global Offensive", "Fall Guys", "Fortnite", "League of Legends", "Minecraft", "Overwatch", "Rocket League", "Super Smash Bros. Ultimate", "Valorant"];
-var selectedGame = [];
+var selectedGame = games;
 var tournamentsCollection = firebase.firestore().collection("tournaments");
 var date = new Date();
 var dateOperator = ">=";
-var dateOptions = ["All", "Today", "This Week", "This Month"];
+var dateOptions = ["Today", "This Week", "This Month"];
 var filteredDate = new Date();
 var query = tournamentsCollection.where("date", ">=", new Date()).where("date", dateOperator, filteredDate).where("game", "in", games);
 
@@ -45,7 +48,7 @@ class TournamentCard extends React.Component {
 
 async function filterData() {
   $(function(){
-    $('.filterListItem').on('click', function() {
+    $('.gameFilterListItem').on('click', function() {
         $("#gameLabelField").html($(this).text());
         $("#gamePopup").removeClass("show");
         $("#gameButtonLabel").removeClass("filterButtonLabelActive");
@@ -55,8 +58,18 @@ async function filterData() {
         renderTournamentCards();
         addTournamentCardData();
     });
+    $('.dateFilterListItem').on('click', function() {
+        $("#dateLabelField").html($(this).text());
+        $("#datePopup").removeClass("show");
+        $("#dateButtonLabel").removeClass("filterButtonLabelActive");
+        if ($(this).text() === "All") { dateOperator = ">="; filteredDate = new Date(); }
+        else if ($(this).text() === "Today") { dateOperator = "<="; filteredDate = new Date(new Date().setDate(new Date().getDate() + 1)); }
+        else if ($(this).text() === "This Week") { dateOperator = "<="; filteredDate = new Date(new Date().setDate(new Date().getDate() + 7)); }
+        else if ($(this).text() === "This Month") { dateOperator = "<="; filteredDate = new Date(new Date().setMonth(new Date().getMonth() + 1)); }
+        query = tournamentsCollection.where("date", ">=", new Date()).where("date", dateOperator, filteredDate).where("game", "in", selectedGame);
+        renderTournamentCards();
+    });
   });
-  //new Date(date.setMonth(date.getMonth() + 1))
 }
 
 async function renderTournamentCards() {
@@ -72,6 +85,8 @@ async function renderTournamentCards() {
       TournamentCardArray,
       document.getElementById("row")
     );
+  }).then(function() {
+    addTournamentCardData();
   });
 }
 
@@ -93,10 +108,9 @@ async function addTournamentCardData() {
         var gsReference = firebase.storage().refFromURL("gs://all-star-esports.appspot.com/" + tournamentCreator + "/profile");
         var nNumber = tournamentNumber;
         gsReference.getDownloadURL().then(function (url) {
-          // console.log(document.getElementById("tournamentHostPic" + nNumber));
           document.getElementById("tournamentHostPic" + nNumber).src = url;
         }).catch((error) => {
-            console.log(error);
+            //console.log(error);
         });
 
 
