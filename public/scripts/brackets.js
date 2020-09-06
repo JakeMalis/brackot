@@ -13,7 +13,7 @@ class EmptyMatchCard extends React.Component {
 class MatchCard extends React.Component {
   render() {
     return (
-      <div className={"match " + "match" + this.props.roundNumber + this.props.empty} id={"matchCardRound" + this.props.roundNumber + "Match" + this.props.matchNumber}>
+      <div className={"match " + "match" + this.props.roundNumber + this.props.empty} id={"matchCardRound" + this.props.roundNumber + "Match" + this.props.matchNumber} onClick={() => { openMatchModal("matchCardRound" + this.props.roundNumber + "Match" + this.props.matchNumber)}}>
         <UpperParticipant participantNumber={this.props.participants[0].uid} roundNumber={this.props.roundNumber} matchNumber={this.props.matchNumber} />
         <LowerParticipant participantNumber={this.props.participants[1].uid} roundNumber={this.props.roundNumber} matchNumber={this.props.matchNumber} />
       </div>
@@ -147,10 +147,7 @@ function loadMatchData() {
       matchups.forEach(function(entry) {
         var upperParticipant, lowerParticipant;
         var participants = [];
-        if ((entry.playerOne === null) && (entry.playerTwo === null)) { console.log("No data for empty tournament"); }
-        else {
-          tempCode(entry, matchNumber, round);
-        }
+        if (!((entry.playerOne === null) && (entry.playerTwo === null))) { tempCode(entry, matchNumber, round); }
         matchNumber++;
       });
     }
@@ -160,7 +157,7 @@ function loadMatchData() {
 async function tempCode(entry, matchNumber, round) {
   firebase.firestore().collection("users").doc(entry.playerOne).get().then(function(userDoc) {
     document.getElementById("upperParticipantNameRound" + round + "Match" + matchNumber + "-" + entry.playerOne).innerHTML = userDoc.data().name;
-
+    document.getElementById("upperParticipantScoreRound" + round + "Match" + matchNumber + "-" + entry.playerOne).innerHTML = entry.playerOneScore;
     /*====================================GRAB USER PROFILE PICTURE========================================================== */
     var gsReference = firebase.storage().refFromURL("gs://all-star-esports.appspot.com/" + entry.playerOne + "/profile");
     gsReference.getDownloadURL().then(function (url) {
@@ -175,7 +172,7 @@ async function tempCode(entry, matchNumber, round) {
 
   firebase.firestore().collection("users").doc(entry.playerTwo).get().then(function(userDoc) {
     document.getElementById("lowerParticipantNameRound" + round + "Match" + matchNumber + "-" + entry.playerTwo).innerHTML = userDoc.data().name;
-
+    document.getElementById("lowerParticipantScoreRound" + round + "Match" + matchNumber + "-" + entry.playerTwo).innerHTML = entry.playerTwoScore;
     /*====================================GRAB USER PROFILE PICTURE========================================================== */
     var gsReference = firebase.storage().refFromURL("gs://all-star-esports.appspot.com/" + entry.playerTwo + "/profile");
     gsReference.getDownloadURL().then(function (url) {
@@ -196,6 +193,7 @@ function personalizeElements() {
     shuffledParticipants = doc.data().players;
     numParticipants = doc.data().players.length;
   }).then(function() {
+    /*
     shuffleParticipants();
 
     var byes = getByesAndRounds()[0];
@@ -217,14 +215,6 @@ function personalizeElements() {
         console.log('Uploaded 2nd round')
       });
     }
-    /*else if(numParticipants > 2){
-      secondRound = nextRound(firstRound);
-      firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
-        matchupsRound2: secondRound
-      }).then(function() {
-        console.log('Uploaded 2nd round')
-      });
-    }*/
 
     var matches = [];
 
@@ -286,6 +276,8 @@ function personalizeElements() {
         renderMatchCards();
       });
     }
+    */
+    renderMatchCards();
   });
 }
 
@@ -424,24 +416,78 @@ function assignScores(){
 }
 
 
-
+/* THIS IS THE ID OF A MATCH CARD         matchCardRound" + this.props.roundNumber + "Match" + this.props.matchNumber */
 function openMatchModal(match) {
   var modal = document.getElementById("matchModal");
   modal.style.display = "block";
+
+  var round = parseInt(match.substring(14,15));
+  var matchNum = parseInt(match.substring(20)) - 1;
+
+  firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").get().then(function(doc){
+      var matchInfo;
+      if(round == 1){matchInfo = doc.data().matchupsRound1}
+      if(round == 2){matchInfo = doc.data().matchupsRound2}
+      if(round == 3){matchInfo = doc.data().matchupsRound3}
+      if(round == 4){matchInfo = doc.data().matchupsRound4}
+      if(round == 5){matchInfo = doc.data().matchupsRound5}
+      if(round == 6){matchInfo = doc.data().matchupsRound6}
+      if(round == 7){matchInfo = doc.data().matchupsRound7}
+      if(round == 8){matchInfo = doc.data().matchupsRound8}
+      if(round == 9){matchInfo = doc.data().matchupsRound9}
+
+
+      var player1ID = matchInfo[matchNum].playerOne;
+      var player2ID = matchInfo[matchNum].playerTwo;
+      var player1Score = matchInfo[matchNum].playerOneScore;
+      var player2Score = matchInfo[matchNum].playerTwoScore;
+
+      document.getElementById("upperParticipantScoreModal").innerHTML = player1Score;
+      document.getElementById("lowerParticipantScoreModal").innerHTML = player2Score;
+
+
+      firebase.firestore().collection("users").doc(player1ID).get().then(function(userDoc){
+        document.getElementById("upperParticipantNameModal").innerHTML = userDoc.data().name;
+      });
+      firebase.firestore().collection("users").doc(player2ID).get().then(function(userDoc){
+        document.getElementById("lowerParticipantNameModal").innerHTML = userDoc.data().name;
+      });
+
+
+      /*====================================GRAB USER PROFILE PICTURE========================================================== */
+      var upperReference = firebase.storage().refFromURL("gs://all-star-esports.appspot.com/" + player1ID + "/profile");
+      upperReference.getDownloadURL().then(function (url) {
+        document.getElementById("upperParticipantPicModal").src = url;
+      }).catch(
+        e => {
+          console.log(e);
+        })
+
+      var lowerReference = firebase.storage().refFromURL("gs://all-star-esports.appspot.com/" + player2ID + "/profile");
+      lowerReference.getDownloadURL().then(function (url) {
+        document.getElementById("lowerParticipantPicModal").src = url;
+      }).catch(
+        e => {
+          console.log(e);
+        })
+
+
+    });
 }
 
 function closeMatchModal() {
   var modal = document.getElementById("matchModal");
-  var span = document.getElementsByClassName("close")[0];
-
-  span.onclick = function() {
   modal.style.display = "none";
-  }
+}
 
-  // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-      }
-    }
+function editMatchScores() {
+/*
+CHECK WHICH MATCH WITH IFS THEN PUT THIS IS EACH IF (player1Score should be replaced with the score maybe take it as a parameter depends how you're doing it with the modal)
+firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
+  matchupsRound1: player1Score,
+  matchupsRound2: player2Score
+}).then(function() {
+  console.log('Uploaded scores')
+});
+*/
 }

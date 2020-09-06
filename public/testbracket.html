@@ -58,60 +58,12 @@
     </div>
 
     <div class="connectorColumn" id="connectorColumn1">
-      <div class="connector connector1">
-        <div class="connectorLeft"></div>
-        <div class="connectorRight"></div>
-      </div>
-      <div class="connector connector1">
-        <div class="connectorLeft"></div>
-        <div class="connectorRight"></div>
-      </div>
-      <div class="connector connector1">
-        <div class="connectorLeft"></div>
-        <div class="connectorRight"></div>
-      </div>
-      <div class="connector connector1">
-        <div class="connectorLeft"></div>
-        <div class="connectorRight"></div>
-      </div>
-      <div class="connector connector1">
-        <div class="connectorLeft"></div>
-        <div class="connectorRight"></div>
-      </div>
-      <div class="connector connector1">
-        <div class="connectorLeft"></div>
-        <div class="connectorRight"></div>
-      </div>
-      <div class="connector connector1">
-        <div class="connectorLeft"></div>
-        <div class="connectorRight"></div>
-      </div>
-      <div class="connector connector1">
-        <div class="connectorLeft"></div>
-        <div class="connectorRight"></div>
-      </div>
     </div>
 
     <div class="matchColumn" id="matchColumn2">
     </div>
 
     <div class="connectorColumn" id="connectorColumn2">
-      <div class="connector connector2">
-        <div class="connectorLeft"></div>
-        <div class="connectorRight"></div>
-      </div>
-      <div class="connector connector2">
-        <div class="connectorLeft"></div>
-        <div class="connectorRight"></div>
-      </div>
-      <div class="connector connector2">
-        <div class="connectorLeft"></div>
-        <div class="connectorRight"></div>
-      </div>
-      <div class="connector connector2">
-        <div class="connectorLeft"></div>
-        <div class="connectorRight"></div>
-      </div>
     </div>
 
 
@@ -120,14 +72,6 @@
 
 
     <div class="connectorColumn" id="connectorColumn3">
-      <div class="connector connector3">
-        <div class="connectorLeft"></div>
-        <div class="connectorRight"></div>
-      </div>
-      <div class="connector connector3">
-        <div class="connectorLeft"></div>
-        <div class="connectorRight"></div>
-      </div>
     </div>
 
 
@@ -136,10 +80,6 @@
 
 
     <div class="connectorColumn" id="connectorColumn4">
-      <div class="connector connector4">
-        <div class="connectorLeft"></div>
-        <div class="connectorRight"></div>
-      </div>
     </div>
 
     <div class="matchColumn" id="matchColumn5">
@@ -171,23 +111,25 @@
 
     <div id="matchModal" class="matchModal">
       <div class="matchModal-content">
-        <span class="close">&times;</span>
+        <span id="closeModal" class="close" onclick="closeMatchModal()">&times;</span>
         <div class="modalTop">
-          <div class="participantInfobox topBox">
-            <img class="infoboxPic" src="media/BrackotLogo2.jpg">
-            <h1 class="infoboxName">All-Star Jordan</h1>
-            <h2 class="infoboxScore">-</h2>
-            <h2 class="infoboxWinner">Winner</h2>
+          <div id="upperParticipantModal" class="participantInfobox topBox">
+            <img id="upperParticipantPicModal" class="infoboxPic" src="media/BrackotLogo2.jpg">
+            <h1 id="upperParticipantNameModal" class="infoboxName">All-Star Jordan</h1>
+            <input type="number" id="upperParticipantScoreInput" class="scoreInputModal"></input>
+            <h2 id="upperParticipantScoreModal" class="infoboxScore">-</h2>
+            <h2 id="upperParticipantWinnerModal" class="infoboxWinner">Winner</h2>
           </div>
-          <div class="participantInfobox bottomBox">
-            <img class="infoboxPic" src="media/BrackotLogo2.jpg">
-            <h1 class="infoboxName">All-Star Jordan</h1>
-            <h2 class="infoboxScore">-</h2>
-            <h2 class="infoboxWinner">Winner</h2>
+          <div id="lowerParticipantModal" class="participantInfobox bottomBox">
+            <img id="lowerParticipantPicModal" class="infoboxPic" src="media/BrackotLogo2.jpg">
+            <h1 id="lowerParticipantNameModal" class="infoboxName">All-Star Jordan</h1>
+            <input type="number" id="lowerParticipantScoreInput" class="scoreInputModal"></input>
+            <h2 id="lowerParticipantScoreModal" class="infoboxScore">-</h2>
+            <h2 id="lowerParticipantWinnerModal" class="infoboxWinner">Winner</h2>
           </div>
         </div>
         <div class="modalBottom">
-          <button id="editScoresButton" class="grayButton submitResultsButton">Edit Scores</button>
+          <button onclick="editMatchScores()" id="editScoresButton" class="grayButton submitResultsButton">Edit Scores</button>
           <button id="submitResultsButton" class="gradientButton submitResultsButton">Submit Results</button>
         </div>
 
