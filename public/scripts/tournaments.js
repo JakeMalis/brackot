@@ -105,7 +105,7 @@ async function addTournamentCardData() {
         document.getElementById("tournamentHostName" + tournamentNumber).innerHTML = doc.data().creatorName;
 
         var tournamentCreator = doc.data().creator;
-        var gsReference = firebase.storage().refFromURL("gs://all-star-esports.appspot.com/" + tournamentCreator + "/profile");
+        var gsReference = firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + tournamentCreator + "/profile");
         var nNumber = tournamentNumber;
         gsReference.getDownloadURL().then(function (url) {
           document.getElementById("tournamentHostPic" + nNumber).src = url;
