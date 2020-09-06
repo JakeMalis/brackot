@@ -320,6 +320,9 @@ p{
 }
 
 .scoreInputModal{
+  position: absolute;
+  top: calc((var(--infoboxHeight) - 52px) / 2);
+  right: calc(0.3 * var(--infoboxHeight));
   height: 50px;
   width: 50px;
   padding: 11px;
@@ -508,7 +511,7 @@ p{
   width: 32px;
   top: calc((var(--infoboxHeight) - 52px) / 2);
   right: calc(0.3 * var(--infoboxHeight));
-  display: none;
+  display: inline-block;
   color: #eeeeee !important;
   margin: 0px;
   font-size: 50px;
