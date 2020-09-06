@@ -25,7 +25,7 @@ class UpperParticipant extends React.Component {
   render() {
     return(
       <div className={"participant UpperHalf"}>
-        <img className="participantProfilePic" id={"upperParticipantProfilePicRound" + this.props.roundNumber + "Match" + this.props.matchNumber + "-" + this.props.participantNumber}></img>
+        <img className="participantProfilePic" id={"upperParticipantProfilePicRound" + this.props.roundNumber + "Match" + this.props.matchNumber + "-" + this.props.participantNumber} src="media/BrackotLogo2.jpg"></img>
         <p className="teamName" id={"upperParticipantNameRound" + this.props.roundNumber + "Match" + this.props.matchNumber + "-" + this.props.participantNumber}></p>
         <p className="score whiteText" id={"upperParticipantScoreRound" + this.props.roundNumber + "Match" + this.props.matchNumber + "-" + this.props.participantNumber}></p>
       </div>
@@ -37,7 +37,7 @@ class LowerParticipant extends React.Component {
   render() {
     return(
       <div className={"participant LowerHalf"}>
-        <img className="participantProfilePic" id={"lowerParticipantProfilePicRound" + this.props.roundNumber + "Match" + this.props.matchNumber + "-" + this.props.participantNumber}></img>
+        <img className="participantProfilePic" id={"lowerParticipantProfilePicRound" + this.props.roundNumber + "Match" + this.props.matchNumber + "-" + this.props.participantNumber} src="media/BrackotLogo2.jpg"></img>
         <p className="teamName" id={"lowerParticipantNameRound" + this.props.roundNumber + "Match" + this.props.matchNumber + "-" + this.props.participantNumber}></p>
         <p className="score whiteText" id={"lowerParticipantScoreRound" + this.props.roundNumber + "Match" + this.props.matchNumber + "-" + this.props.participantNumber}></p>
       </div>
@@ -85,7 +85,9 @@ function renderMatchCards() {
   firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").get().then(function(doc) {
     for (var round = 1; round <= getByesAndRounds()[1]; round++){
       var MatchColumnCards = [];
+      var ConnectorColumnConnectors = [];
       var matchNumber = 1;
+      var connectorNumber = 1;
 
       if (round == 1) { var matchups = doc.data().matchupsRound1; }
       else if (round == 2) { var matchups = doc.data().matchupsRound2; }
@@ -147,21 +149,43 @@ function loadMatchData() {
         var participants = [];
         if ((entry.playerOne === null) && (entry.playerTwo === null)) { console.log("No data for empty tournament"); }
         else {
-          firebase.firestore().collection("users").doc(entry.playerOne).get().then(function(userDoc) {
-            console.log(matchNumber);
-            //console.log("upperParticipantNameRound" + round + "Match" + matchNumber + "-" + entry.playerOne);
-            //document.getElementById("upperParticipantNameRound" + round + "Match" + matchNumber + "-" + entry.playerOne).innerHTML = userDoc.data().name;
-          });
-
-
-          firebase.firestore().collection("users").doc(entry.playerTwo).get().then(function(userDoc) {
-            //console.log("lowerParticipantNameRound" + round + "Match" + matchNumber + "-" + entry.playerTwo)
-            //document.getElementById("lowerParticipantNameRound" + round + "Match" + matchNumber + "-" + entry.playerTwo).innerHTML = userDoc.data().name;
-          });
+          tempCode(entry, matchNumber, round);
         }
         matchNumber++;
       });
     }
+  });
+}
+
+async function tempCode(entry, matchNumber, round) {
+  firebase.firestore().collection("users").doc(entry.playerOne).get().then(function(userDoc) {
+    document.getElementById("upperParticipantNameRound" + round + "Match" + matchNumber + "-" + entry.playerOne).innerHTML = userDoc.data().name;
+
+    /*====================================GRAB USER PROFILE PICTURE========================================================== */
+    var gsReference = firebase.storage().refFromURL("gs://all-star-esports.appspot.com/" + entry.playerOne + "/profile");
+    gsReference.getDownloadURL().then(function (url) {
+      document.getElementById("upperParticipantProfilePicRound" + round + "Match" + matchNumber + "-" + entry.playerOne).src = url;
+    }).catch(
+      e => {
+        console.log(e);
+      })
+
+  });
+
+
+  firebase.firestore().collection("users").doc(entry.playerTwo).get().then(function(userDoc) {
+    document.getElementById("lowerParticipantNameRound" + round + "Match" + matchNumber + "-" + entry.playerTwo).innerHTML = userDoc.data().name;
+
+    /*====================================GRAB USER PROFILE PICTURE========================================================== */
+    var gsReference = firebase.storage().refFromURL("gs://all-star-esports.appspot.com/" + entry.playerTwo + "/profile");
+    gsReference.getDownloadURL().then(function (url) {
+      document.getElementById("lowerParticipantProfilePicRound" + round + "Match" + matchNumber + "-" + entry.playerTwo).src = url;
+    }).catch(
+      e => {
+        console.log(e);
+      })
+
+
   });
 }
 
