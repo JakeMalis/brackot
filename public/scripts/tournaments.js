@@ -1,6 +1,7 @@
 function personalizeElements() {
+  $("#gameList").append('<li class="gameFilterListItem"><label class="filterOption"><input class="filterInput" type="radio"><p class="filterText">All</p></input></label></li>');
   games.forEach(function(entry) {
-    $("#gameList").append('<li class="filterListItem"><label class="filterOption"><input id="CSGOFilter" class="filterInput" type="radio"><p class="filterText">' + entry + '</p></input></label></li>');
+    $("#gameList").append('<li class="gameFilterListItem"><label class="filterOption"><input class="filterInput" type="radio"><p class="filterText">' + entry + '</p></input></label></li>');
   });
   filterData();
   renderTournamentCards();
@@ -11,8 +12,10 @@ var games = ["Counter-Strike: Global Offensive", "Fall Guys", "Fortnite", "Leagu
 var selectedGame = [];
 var tournamentsCollection = firebase.firestore().collection("tournaments");
 var date = new Date();
-var filteredDate = new Date(date.setMonth(date.getMonth() + 1));
-var query = tournamentsCollection.where("date", ">=", new Date()).where("date", "<=", filteredDate).where("game", "in", games);
+var dateOperator = ">=";
+var dateOptions = ["All", "Today", "This Week", "This Month"];
+var filteredDate = new Date();
+var query = tournamentsCollection.where("date", ">=", new Date()).where("date", dateOperator, filteredDate).where("game", "in", games);
 
 class TournamentCard extends React.Component {
   render() {
@@ -46,12 +49,14 @@ async function filterData() {
         $("#gameLabelField").html($(this).text());
         $("#gamePopup").removeClass("show");
         $("#gameButtonLabel").removeClass("filterButtonLabelActive");
-        selectedGame = [$(this).text()];
-        query = tournamentsCollection.where("date", ">=", new Date()).where("game", "in", selectedGame);
+        if ($(this).text() === "All") { selectedGame = games; }
+        else { selectedGame = [$(this).text()]; }
+        query = tournamentsCollection.where("date", ">=", new Date()).where("date", dateOperator, filteredDate).where("game", "in", selectedGame);
         renderTournamentCards();
         addTournamentCardData();
     });
   });
+  //new Date(date.setMonth(date.getMonth() + 1))
 }
 
 async function renderTournamentCards() {
@@ -90,11 +95,9 @@ async function addTournamentCardData() {
         gsReference.getDownloadURL().then(function (url) {
           // console.log(document.getElementById("tournamentHostPic" + nNumber));
           document.getElementById("tournamentHostPic" + nNumber).src = url;
-        }).catch(
-          e => {
-            console.log(e);
-          }
-        )
+        }).catch((error) => {
+            console.log(error);
+        });
 
 
         var date = new Date(doc.data().date.toDate());
