@@ -85,9 +85,9 @@ function renderMatchCards() {
   firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").get().then(function(doc) {
     for (var round = 1; round <= getByesAndRounds()[1]; round++){
       var MatchColumnCards = [];
-      var ConnectorColumnConnectors = [];
+      //var ConnectorColumnConnectors = [];
       var matchNumber = 1;
-      var connectorNumber = 1;
+      //var connectorNumber = 1;
 
       if (round == 1) { var matchups = doc.data().matchupsRound1; }
       else if (round == 2) { var matchups = doc.data().matchupsRound2; }
@@ -159,7 +159,7 @@ async function tempCode(entry, matchNumber, round) {
     document.getElementById("upperParticipantNameRound" + round + "Match" + matchNumber + "-" + entry.playerOne).innerHTML = userDoc.data().name;
     document.getElementById("upperParticipantScoreRound" + round + "Match" + matchNumber + "-" + entry.playerOne).innerHTML = entry.playerOneScore;
     /*====================================GRAB USER PROFILE PICTURE========================================================== */
-    var gsReference = firebase.storage().refFromURL("gs://all-star-esports.appspot.com/" + entry.playerOne + "/profile");
+    var gsReference = firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + entry.playerOne + "/profile");
     gsReference.getDownloadURL().then(function (url) {
       document.getElementById("upperParticipantProfilePicRound" + round + "Match" + matchNumber + "-" + entry.playerOne).src = url;
     }).catch(
@@ -174,7 +174,7 @@ async function tempCode(entry, matchNumber, round) {
     document.getElementById("lowerParticipantNameRound" + round + "Match" + matchNumber + "-" + entry.playerTwo).innerHTML = userDoc.data().name;
     document.getElementById("lowerParticipantScoreRound" + round + "Match" + matchNumber + "-" + entry.playerTwo).innerHTML = entry.playerTwoScore;
     /*====================================GRAB USER PROFILE PICTURE========================================================== */
-    var gsReference = firebase.storage().refFromURL("gs://all-star-esports.appspot.com/" + entry.playerTwo + "/profile");
+    var gsReference = firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + entry.playerTwo + "/profile");
     gsReference.getDownloadURL().then(function (url) {
       document.getElementById("lowerParticipantProfilePicRound" + round + "Match" + matchNumber + "-" + entry.playerTwo).src = url;
     }).catch(
@@ -414,7 +414,6 @@ function nextRound(lastRound){
 function assignScores(){
 
 }
-
 
 /* THIS IS THE ID OF A MATCH CARD         matchCardRound" + this.props.roundNumber + "Match" + this.props.matchNumber */
 function openMatchModal(match) {
