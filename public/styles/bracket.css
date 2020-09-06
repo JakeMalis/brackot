@@ -320,11 +320,12 @@ p{
 }
 
 .scoreInputModal{
+  display: none;
   position: absolute;
   top: calc((var(--infoboxHeight) - 52px) / 2);
   right: calc(0.3 * var(--infoboxHeight));
   height: 50px;
-  width: 50px;
+  width: 65px;
   padding: 11px;
   font-size: 20px;
   border-radius: 8px;

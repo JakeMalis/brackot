@@ -82,7 +82,7 @@ participant upperHalf noParticipant  -  the upper half of a match doesn't have i
 */
 
 function renderMatchCards() {
-  firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").get().then(function(doc) {
+  firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").get().then(function(doc) {
     for (var round = 1; round <= getByesAndRounds()[1]; round++){
       var MatchColumnCards = [];
       var ConnectorColumnConnectors = [];
@@ -130,7 +130,7 @@ function renderMatchCards() {
 }
 
 function loadMatchData() {
-  firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").get().then(function(doc) {
+  firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").get().then(function(doc) {
     for (var round = 1; round <= getByesAndRounds()[1]; round++){
       var matchNumber = 1;
 
@@ -189,11 +189,11 @@ async function tempCode(entry, matchNumber, round) {
 
 
 function personalizeElements() {
-  firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").get().then(function(doc){
+  firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").get().then(function(doc){
     shuffledParticipants = doc.data().players;
     numParticipants = doc.data().players.length;
   }).then(function() {
-    /*
+
     shuffleParticipants();
 
     var byes = getByesAndRounds()[0];
@@ -201,7 +201,7 @@ function personalizeElements() {
     var firstRound = createInitialMatches();
     var secondRound = [];
 
-    firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
+    firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").update({
       shuffledParticipants: shuffledParticipants,
       matchupsRound1: firstRound
     }).then(function() {
@@ -209,7 +209,7 @@ function personalizeElements() {
     });
     if(numParticipants > 2){
       secondRound = implementByes();
-      firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
+      firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").update({
         matchupsRound2: secondRound
       }).then(function() {
         console.log('Uploaded 2nd round')
@@ -220,7 +220,7 @@ function personalizeElements() {
 
     if(rounds > 2){
       matches = nextRound(secondRound);
-      firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
+      firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").update({
         matchupsRound3: matches
       }).then(function() {
         console.log('Uploaded 3rd round')
@@ -228,7 +228,7 @@ function personalizeElements() {
     }
     if(rounds > 3){
       matches = nextRound(matches);
-      firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
+      firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").update({
         matchupsRound4: matches
       }).then(function() {
         console.log('Uploaded 4th round')
@@ -236,7 +236,7 @@ function personalizeElements() {
     }
     if(rounds > 4){
       matches = nextRound(secondRound);
-      firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
+      firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").update({
         matchupsRound5: matches
       }).then(function() {
         console.log('Uploaded 5th round')
@@ -244,7 +244,7 @@ function personalizeElements() {
     }
     if(rounds > 5){
       matches = nextRound(matches);
-      firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
+      firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").update({
         matchupsRound6: matches
       }).then(function() {
         console.log('Uploaded 6th round')
@@ -252,7 +252,7 @@ function personalizeElements() {
     }
     if(rounds > 6){
       matches = nextRound(matches);
-      firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
+      firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").update({
         matchupsRound7: matches
       }).then(function() {
         console.log('Uploaded 7th round')
@@ -260,7 +260,7 @@ function personalizeElements() {
     }
     if(rounds > 7){
       matches = nextRound(secondRound);
-      firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
+      firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").update({
         matchupsRound8: matches
       }).then(function() {
         console.log('Uploaded 8th round')
@@ -268,7 +268,7 @@ function personalizeElements() {
     }
     if(matches.length == 1){
       var winner = [assignWinner(matches[0])];
-      firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
+      firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").update({
         matchupsRound9: winner
       }).then(function() {
         console.log('Uploaded final round')
@@ -276,8 +276,8 @@ function personalizeElements() {
         renderMatchCards();
       });
     }
-    */
-    renderMatchCards();
+
+    //renderMatchCards();
   });
 }
 
@@ -424,7 +424,7 @@ function openMatchModal(match) {
   var round = parseInt(match.substring(14,15));
   var matchNum = parseInt(match.substring(20)) - 1;
 
-  firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").get().then(function(doc){
+  firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").get().then(function(doc){
       var matchInfo;
       if(round == 1){matchInfo = doc.data().matchupsRound1}
       if(round == 2){matchInfo = doc.data().matchupsRound2}
@@ -455,7 +455,7 @@ function openMatchModal(match) {
 
 
       /*====================================GRAB USER PROFILE PICTURE========================================================== */
-      var upperReference = firebase.storage().refFromURL("gs://all-star-esports.appspot.com/" + player1ID + "/profile");
+      var upperReference = firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + player1ID + "/profile");
       upperReference.getDownloadURL().then(function (url) {
         document.getElementById("upperParticipantPicModal").src = url;
       }).catch(
@@ -463,7 +463,7 @@ function openMatchModal(match) {
           console.log(e);
         })
 
-      var lowerReference = firebase.storage().refFromURL("gs://all-star-esports.appspot.com/" + player2ID + "/profile");
+      var lowerReference = firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + player2ID + "/profile");
       lowerReference.getDownloadURL().then(function (url) {
         document.getElementById("lowerParticipantPicModal").src = url;
       }).catch(
@@ -481,13 +481,27 @@ function closeMatchModal() {
 }
 
 function editMatchScores() {
-/*
-CHECK WHICH MATCH WITH IFS THEN PUT THIS IS EACH IF (player1Score should be replaced with the score maybe take it as a parameter depends how you're doing it with the modal)
-firebase.firestore().collection("tournaments").doc("Sscjc6eqIdlQLMMZrD3B").update({
-  matchupsRound1: player1Score,
-  matchupsRound2: player2Score
-}).then(function() {
-  console.log('Uploaded scores')
-});
-*/
+  document.getElementById("editScoresButton").style.display = "none";
+  document.getElementById("submitResultsButton").style.display = "block";
+  document.getElementById("upperParticipantScoreInput").style.display = "inline-block";
+  document.getElementById("lowerParticipantScoreInput").style.display = "inline-block";
+  document.getElementById("upperParticipantScoreModal").style.display = "none";
+  document.getElementById("lowerParticipantScoreModal").style.display = "none";
+}
+
+function saveMatchScores() {
+  document.getElementById("editScoresButton").style.display = "block";
+  document.getElementById("submitResultsButton").style.display = "none";
+  document.getElementById("upperParticipantScoreInput").style.display = "none";
+  document.getElementById("lowerParticipantScoreInput").style.display = "none";
+  document.getElementById("upperParticipantScoreModal").style.display = "inline-block";
+  document.getElementById("lowerParticipantScoreModal").style.display = "inline-block";
+  /*
+  CHECK WHICH MATCH WITH IFS THEN PUT THIS IS EACH IF (player1Score should be replaced with the score maybe take it as a parameter depends how you're doing it with the modal)*/
+  firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").update({
+    matchupsRound1: document.getElementById("upperParticipantScoreInput").value,
+    matchupsRound2: document.getElementById("lowerParticipantScoreInput").value
+  }).then(function() {
+    console.log('Uploaded scores!')
+  });
 }
