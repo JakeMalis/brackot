@@ -92,6 +92,7 @@ p{
 
 .connectorColumn{
   float: left;
+  min-height: 1px;
   height: auto;
   width: 20px;
   margin-left: 10px;
@@ -477,7 +478,8 @@ p{
   display: inline-block;
   margin: calc(0.15 * var(--infoboxHeight));
   height: calc(0.7 * var(--infoboxHeight));
-  object-fit: contain;
+  width: 91px;
+  object-fit: cover;
   border-radius: 50%;
 }
 
