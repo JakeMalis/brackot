@@ -319,6 +319,16 @@ p{
   font-weight: 600;
 }
 
+.scoreInputModal{
+  height: 50px;
+  width: 50px;
+  padding: 11px;
+  font-size: 20px;
+  border-radius: 8px;
+  background-color: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.09);
+}
+
 
 
 
@@ -498,7 +508,7 @@ p{
   width: 32px;
   top: calc((var(--infoboxHeight) - 52px) / 2);
   right: calc(0.3 * var(--infoboxHeight));
-  display: inline-block;
+  display: none;
   color: #eeeeee !important;
   margin: 0px;
   font-size: 50px;
