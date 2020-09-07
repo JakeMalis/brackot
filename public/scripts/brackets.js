@@ -496,10 +496,18 @@ function saveMatchScores() {
   document.getElementById("upperParticipantScoreModal").style.display = "inline-block";
   document.getElementById("lowerParticipantScoreModal").style.display = "inline-block";
   /*
-  CHECK WHICH MATCH WITH IFS THEN PUT THIS IS EACH IF (player1Score should be replaced with the score maybe take it as a parameter depends how you're doing it with the modal)*/
+  CHECK WHICH MATCH WITH IFS THEN PUT THIS IS EACH IF (player1Score should be replaced with
+  the score maybe take it as a parameter depends how you're doing it with the modal)
+
+  You can't do it the same way you were doing it above, simply because var is a reserved word in React.  That aside,
+  you need to first re-create matchInfo and matchNum variables because, keep in mind, this is a different function
+  so the variables we used above that we got to work don't exist anymore.  After that, the code below should work fine.
+
+  However, we are also getting an error thrown because I don't know how to reference any of these because it's confusing af.
+  */
   firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").update({
-    matchupsRound1: document.getElementById("upperParticipantScoreInput").value,
-    matchupsRound2: document.getElementById("lowerParticipantScoreInput").value
+    "matchupsRound2.0.playerOneScore": document.getElementById('upperParticipantScoreInput').value,
+    "matchupsRound2.0.playerTwoScore": document.getElementById('lowerParticipantScoreInput').value
   }).then(function() {
     console.log('Uploaded scores!')
   });
