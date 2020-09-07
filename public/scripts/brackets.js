@@ -266,13 +266,17 @@ function personalizeElements() {
         console.log('Uploaded 8th round')
       });
     }
-    if(matches.length == 1){
-      var winner = [assignWinner(matches[0])];
+    if(matches.length == 1 || secondRound.length == 1){
+      if(rounds == 2){
+        var winner = [assignWinner(secondRound[0])];
+      }
+      else {
+        var winner = [assignWinner(matches[0])];
+      }
       firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").update({
         matchupsRound9: winner
       }).then(function() {
         console.log('Uploaded final round')
-        //assignScores();
         renderMatchCards();
       });
     }
@@ -505,10 +509,20 @@ function saveMatchScores() {
 
   However, we are also getting an error thrown because I don't know how to reference any of these because it's confusing af.
   */
-  firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").update({
-    "matchupsRound2.0.playerOneScore": document.getElementById('upperParticipantScoreInput').value,
-    "matchupsRound2.0.playerTwoScore": document.getElementById('lowerParticipantScoreInput').value
-  }).then(function() {
-    console.log('Uploaded scores!')
+  firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").get().then(function(doc){
+    var matches = doc.data().matchupsRound2;
+    var newScore1 = document.getElementById('upperParticipantScoreInput').value;
+    var newScore2 = document.getElementById('lowerParticipantScoreInput').value;
+    if(matches[0].playerOneScore != newScore1){
+      matches[0].playerOneScore = newScore1;
+    }
+    if(matches[0].playerTwoScore != newScore2){
+      matches[0].playerTwoScore = newScore2;
+    }
+    firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").update({
+      matchupsRound2: matches
+    }).then(function() {
+      console.log('Uploaded scores!')
+    });
   });
 }
