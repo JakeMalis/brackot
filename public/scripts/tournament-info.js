@@ -9,20 +9,11 @@ function personalizeElements() {
     document.getElementById("tournamentInfoDescription").innerHTML = doc.data().description;
     document.getElementById("tournamentInfoFirstPrizing").innerHTML = doc.data().earnings[1] + " Star Coins";
 
-    if (doc.data().game == "SMASH") {
-      document.getElementById("gameQuick").innerHTML = "Super Smash Bros. Ultimate";
-    }
-    else if (doc.data().game == "CSGO") {
+    if (doc.data().game == "Counter-Strike Global Offensive") {
       document.getElementById("gameQuick").innerHTML = "Counter-Strike: Global Offensive";
     }
-    else if (doc.data().game == "LEAGUE") {
-      document.getElementById("gameQuick").innerHTML = "League of Legends";
-    }
-    else if (doc.data().game == "ROCKET") {
-      document.getElementById("gameQuick").innerHTML = "Rocket League";
-    }
     else {
-      document.getElementById("gameQuick").innerHTML = doc.data().game.substring(0,1) + doc.data().game.substring(1).toLowerCase();
+      document.getElementById("gameQuick").innerHTML = doc.data().game;
     }
 
     var date = new Date(doc.data().date.toDate());
@@ -37,7 +28,7 @@ function personalizeElements() {
       meridiem = "P.M."
     }
 
-    document.getElementById("dateAndTimeQuick").innerHTML = date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear() + ' @ ' + hour + ':' + date.getMinutes() + ' ' + meridiem;
+    document.getElementById("dateAndTimeQuick").innerHTML = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' @ ' + hour + ':' + date.getMinutes() + ' ' + meridiem;
 
     if (doc.data().earnings[2] != 0) {
       document.getElementById("tournamentInfoSecondPrizing").innerHTML = doc.data().earnings[2] + " Star Coins";
@@ -47,7 +38,7 @@ function personalizeElements() {
       document.getElementById("tournamentInfoThirdPrizing").innerHTML = doc.data().earnings[3] + " Star Coins";
     } else { $('#thirdPlace').remove(); }
 
-    document.getElementById("tournamentInfoDescription").className = "headerImage " + doc.data().game.toLowerCase() + "Wallpaper";
+    document.getElementById("tournamentInfoWallpaper").className = "headerImage tournamentInfoWallpaper " + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "InfoWallpaper";
 
     if ((doc.data().players).includes(firebase.auth().currentUser.uid)) {
       document.getElementById("tournamentSignUpButton").className = 'tournamentCardButtonSigned';
@@ -75,7 +66,7 @@ function sendConfirmationEmail(tournamentId) {
   var game, date, name, tournamentImage;
 
   firebase.firestore().collection("tournaments").doc(tournamentId).get().then(function(doc) {
-    tournamentImage = "../media/game_wallpapers" + doc.data().game + "-gameplay.jpg";
+    tournamentImage = "../media/game_wallpapers/" + doc.data().game + "-gameplay.jpg";
 
     game = doc.data().game;
 

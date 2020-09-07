@@ -111,44 +111,44 @@ select option{
   background-image: var(--gradient);
 }
 
-#tournamentWallpaper{
+.tournamentInfoWallpaper{
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-.overwatchWallpaper{
+.overwatchInfoWallpaper{
   background-image: url('../media/game_wallpapers/Overwatch-gameplay.jpg');
 }
 
-.valorantWallpaper{
+.valorantInfoWallpaper{
   background-image: url('../media/game_wallpapers/Valorant-gameplay.jpg');
 }
 
-.fortniteWallpaper{
+.fortniteInfoWallpaper{
   background-image: url('../media/game_wallpapers/Fortnite-gameplay.jpg');
 }
 
-.smashWallpaper{
-  background-image: url('../media/game_wallpapers/Super Smash Bros Ultimate-gameplay.jpg');
+.supersmashbrosultimateInfoWallpaper{
+  background-image: url('../media/game_wallpapers/Super Smash Bros. Ultimate-gameplay.jpg');
 }
 
-.minecraftWallpaper{
+.minecraftInfoWallpaper{
   background-image: url('../media/game_wallpapers/Minecraft-gameplay.jpg');
 }
 
-.rocketWallpaper{
+.rocketleagueInfoWallpaper{
   background-image: url('../media/game_wallpapers/Rocket League-gameplay.jpg');
 }
 
-.fallguysWallpaper{
+.fallguysInfoWallpaper{
   background-image: url('../media/game_wallpapers/Fall Guys-gameplay.jpg');
 }
 
-.csgoWallpaper{
+.counterstrikeglobaloffensiveInfoWallpaper{
   background-image: url('../media/game_wallpapers/Counter-Strike Global Offensive-gameplay.jpg');
 }
 
-.leagueWallpaper{
+.leagueoflegendsInfoWallpaper{
   background-image: url('../media/game_wallpapers/League of Legends-gameplay.jpg');
 }
 
