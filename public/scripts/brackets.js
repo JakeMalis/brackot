@@ -1,7 +1,8 @@
 var shuffledParticipants = [];
 var numParticipants = 0;
 var tempMatch = new match(null, null);
-
+var clickedRound = 0;
+var clickedMatch =0;
 class EmptyMatchCard extends React.Component {
   render() {
     return (
@@ -426,6 +427,8 @@ function openMatchModal(match) {
 
   var round = parseInt(match.substring(14,15));
   var matchNum = parseInt(match.substring(20)) - 1;
+  clickedRound = round;
+  clickedMatch = matchNum;
 
   firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").get().then(function(doc){
       var matchInfo;
@@ -493,12 +496,6 @@ function editMatchScores() {
 }
 
 function saveMatchScores() {
-  document.getElementById("editScoresButton").style.display = "block";
-  document.getElementById("submitResultsButton").style.display = "none";
-  document.getElementById("upperParticipantScoreInput").style.display = "none";
-  document.getElementById("lowerParticipantScoreInput").style.display = "none";
-  document.getElementById("upperParticipantScoreModal").style.display = "inline-block";
-  document.getElementById("lowerParticipantScoreModal").style.display = "inline-block";
   /*
   CHECK WHICH MATCH WITH IFS THEN PUT THIS IS EACH IF (player1Score should be replaced with
   the score maybe take it as a parameter depends how you're doing it with the modal)
@@ -510,19 +507,91 @@ function saveMatchScores() {
   However, we are also getting an error thrown because I don't know how to reference any of these because it's confusing af.
   */
   firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").get().then(function(doc){
-    var matches = doc.data().matchupsRound2;
+    var matches;
+    var round = clickedRound;
+    var matchNum = clickedMatch;
+    if(round == 1){matches = doc.data().matchupsRound1;}
+    if(round == 2){matches = doc.data().matchupsRound2;}
+    if(round == 3){matches = doc.data().matchupsRound3;}
+    if(round == 4){matches = doc.data().matchupsRound4;}
+    if(round == 5){matches = doc.data().matchupsRound5;}
+    if(round == 6){matches = doc.data().matchupsRound6;}
+    if(round == 7){matches = doc.data().matchupsRound7;}
+    if(round == 8){matches = doc.data().matchupsRound8;}
+    if(round == 9){matches = doc.data().matchupsRound9;}
     var newScore1 = document.getElementById('upperParticipantScoreInput').value;
     var newScore2 = document.getElementById('lowerParticipantScoreInput').value;
-    if(matches[0].playerOneScore != newScore1){
-      matches[0].playerOneScore = newScore1;
+    document.getElementById("upperParticipantScoreModal").innerHTML = newScore1;
+    document.getElementById("lowerParticipantScoreModal").innerHTML = newScore2;
+    if(matches[matchNum].playerOneScore != newScore1){
+      matches[matchNum].playerOneScore = newScore1;
     }
-    if(matches[0].playerTwoScore != newScore2){
-      matches[0].playerTwoScore = newScore2;
+    if(matches[matchNum].playerTwoScore != newScore2){
+      matches[matchNum].playerTwoScore = newScore2;
     }
-    firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").update({
-      matchupsRound2: matches
-    }).then(function() {
-      console.log('Uploaded scores!')
-    });
+    if(round == 1){
+      firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").update({
+        matchupsRound1: matches
+      }).then(function() {
+        console.log('Uploaded scores!')
+      });
+    }
+    if(round == 2){
+      firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").update({
+        matchupsRound2: matches
+      }).then(function() {
+        console.log('Uploaded scores!')
+      });
+    }
+    if(round == 3){
+      firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").update({
+        matchupsRound3: matches
+      }).then(function() {
+        console.log('Uploaded scores!')
+      });
+    }
+    if(round == 4){
+      firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").update({
+        matchupsRound4: matches
+      }).then(function() {
+        console.log('Uploaded scores!')
+      });
+    }
+    if(round == 5){
+      firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").update({
+        matchupsRound5: matches
+      }).then(function() {
+        console.log('Uploaded scores!')
+      });
+    }
+    if(round == 6){
+      firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").update({
+        matchupsRound6: matches
+      }).then(function() {
+        console.log('Uploaded scores!')
+      });
+    }
+    if(round == 7){
+      firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").update({
+        matchupsRound7: matches
+      }).then(function() {
+        console.log('Uploaded scores!')
+      });
+    }
+    if(round == 8){
+      firebase.firestore().collection("tournaments").doc("ryFCOXeP97rqHQeVFl0s").update({
+        matchupsRound8: matches
+      }).then(function() {
+        console.log('Uploaded scores!')
+      });
+    }
   });
+
+
+  document.getElementById("editScoresButton").style.display = "block";
+  document.getElementById("submitResultsButton").style.display = "none";
+  document.getElementById("upperParticipantScoreInput").style.display = "none";
+  document.getElementById("lowerParticipantScoreInput").style.display = "none";
+  document.getElementById("upperParticipantScoreModal").style.display = "inline-block";
+  document.getElementById("lowerParticipantScoreModal").style.display = "inline-block";
 }
