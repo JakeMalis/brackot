@@ -16,14 +16,6 @@
   --infoboxHeight: 130px;
 }
 
-body{
-  overflow-x: hidden;
-  margin: 0px;
-  width: 100vw;
-  min-height: 100vh;
-  background-color: var(--cardColor) !important;
-}
-
 h1{
   font-family: 'proxima-nova', sans-serif;
   color: #eeeeee;

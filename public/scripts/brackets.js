@@ -104,10 +104,12 @@ function renderMatchCards() {
         var upperParticipant, lowerParticipant;
         var participants = [];
 
-        if ((entry.playerOne === null) && (entry.playerTwo === null)) {
+        if ((entry.playerOne === null) && (entry.playerTwo === null) && (round !=1)) {
           MatchColumnCards.push(<EmptyMatchCard roundNumber={round} matchNumber={matchNumber} />);
         }
-
+        else if ((entry.playerOne === null) && (entry.playerTwo === null){
+          //MatchColumnCards.push(<EmptyMatchCard roundNumber={round} matchNumber={matchNumber} />);
+        }
         else {
           upperParticipant = { uid: entry.playerOne };
           participants.push(upperParticipant);
