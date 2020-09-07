@@ -76,13 +76,6 @@ function loadRegisteredTournaments() {
 }
 
 function personalizeElements() {
-  async function getCustomClaimRole() {
-    await firebase.auth().currentUser.getIdToken(true);
-    const decodedToken = await firebase.auth().currentUser.getIdTokenResult();
-    return decodedToken.claims.subscription;
-  }
-  getCustomClaimRole();
-
   firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).get().then(function(doc) {
     document.getElementById("firstGreetingMessage").innerHTML = "Welcome back, " + firebase.auth().currentUser.displayName + "!";
     document.getElementById("notifications").innerHTML = doc.data().stats.notifications;
