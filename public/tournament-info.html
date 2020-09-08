@@ -27,10 +27,10 @@
   <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-functions.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-storage.js"></script>
 
+  <script src="scripts/topbar.js"></script>
+  <script src="scripts/header.js"></script>
   <script type="text/babel" src="scripts/brackets.js"></script>
   <script src="scripts/tournament-info.js"></script>
-  <script src="scripts/header.js"></script>
-  <script src="scripts/topbar.js"></script>
 
   <script>
     var firebaseConfig = {
@@ -111,6 +111,11 @@
                   <div class="matchColumn" id="matchColumn1">
                   </div>
                   <div class="connectorColumn" id="connectorColumn1">
+                    <!--<div class="connector connector1">
+                      <div class="connectorLeftTop" id="connectorLeftTop1"></div>
+                      <div class="connectorRight" id="connectorRight1"></div>
+                      <div class="connectorLeftBottom" id="connectorLeftBottom1"></div>
+                    </div>-->
                   </div>
                   <div class="matchColumn" id="matchColumn2">
                   </div>
@@ -171,7 +176,7 @@
 
 
             </div>
-            <button class="tournamentCardButton" id="tournamentSignUpButton" onclick="enroll();">Sign Up</button>
+            <button class="tournamentCardButton" id="tournamentSignUpButton"></button>
           </div>
         </div>
       </div>

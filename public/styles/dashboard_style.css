@@ -929,7 +929,6 @@ text-align: center;
 .tournamentCardButton{
   font-family: 'proxima-nova', sans-serif;
   background: rgba(255,255,255,0.16);
-  margin-top: 13px;
   height: 50px;
   border: 0px;
   border-top-left-radius: 0px;
@@ -951,7 +950,6 @@ text-align: center;
 .tournamentCardButtonSigned{
   font-family: 'proxima-nova', sans-serif;
   background-image: linear-gradient(70deg,#36bf70,#12fe7b);
-  margin-top: 13px;
   height: 50px;
   border: 0px;
   border-top-left-radius: 0px;
@@ -1487,6 +1485,14 @@ text-align: center;
 
 
 /* PRETOURNAMENT INFO PAGE CODE */
+#participantsNavbar{
+  display: none;
+}
+
+#bracketNavbar{
+  display: none;
+}
+
 #tournamentTitle{
   color: #eeeeee;
   margin-bottom: 0px;

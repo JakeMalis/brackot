@@ -41,11 +41,6 @@
         appId: "1:941824737400:web:739688aaff7fde7c8cad8d"
       };
       firebase.initializeApp(firebaseConfig);
-      window.onload = function() {
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user) { window.location = "dashboard.html" }
-        });
-      }
     </script>
 </head>
 

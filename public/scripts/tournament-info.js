@@ -1,6 +1,13 @@
+var tournamentId;
+
 function personalizeElements() {
   var url = new URL(window.location.href);
-  var tournamentId = url.searchParams.get("tournamentId");
+  tournamentId = url.searchParams.get("tournamentId");
+
+  $.getScript('brackets.js', function() {
+    startTournament();
+    renderMatchCards();
+  });
 
   firebase.firestore().collection("tournaments").doc(tournamentId).get().then(function(doc) {
     document.getElementById("tournamentTitle").innerHTML = doc.data().name;
@@ -40,18 +47,35 @@ function personalizeElements() {
 
     document.getElementById("tournamentInfoWallpaper").className = "headerImage tournamentInfoWallpaper " + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "InfoWallpaper";
 
+
+    if (doc.data().creator === firebase.auth().currentUser.uid) {
+      document.getElementById("tournamentSignUpButton").innerHTML = "Start Tournament";
+      document.getElementById("tournamentSignUpButton").onclick = function() { startTournament(); };
+    }
+    else if (!(doc.data().creator === firebase.auth().currentUser.uid)) {
+      document.getElementById("tournamentSignUpButton").innerHTML = "Sign Up";
+      document.getElementById("tournamentSignUpButton").onclick = function() { enroll(); };
+    }
+
     if ((doc.data().players).includes(firebase.auth().currentUser.uid)) {
       document.getElementById("tournamentSignUpButton").className = 'tournamentCardButtonSigned';
       document.getElementById("tournamentSignUpButton").innerHTML = "✓ Signed Up";
       document.getElementById("tournamentSignUpButton").disabled = true;
     }
+
+    if (doc.data().tournamentStarted == true) {
+      document.getElementById("bracketNavbar").style.display = "inline-block";
+      renderMatchCards();
+    }
+
+    shuffledParticipants = doc.data().players;
+    numParticipants = doc.data().players.length;
   });
+
+
 }
 
 function enroll() {
-  var url = new URL(window.location.href);
-  var tournamentId = url.searchParams.get("tournamentId");
-
   firebase.firestore().collection("tournaments").doc(tournamentId).update({
     players: firebase.firestore.FieldValue.arrayUnion(firebase.auth().currentUser.uid)
   }).then(function() {
