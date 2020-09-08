@@ -1,16 +1,47 @@
 function personalizeElements() {
   document.getElementById("profileProfilePic").src = firebase.auth().currentUser.photoURL;
 
-
   document.getElementById('avatarUploader').addEventListener("change", uploadAvatar);
   document.getElementById('editProfileButton').addEventListener("click", editProfile);
   document.getElementById('saveProfileButton').addEventListener("click", saveProfileChanges);
 
+  var tournamentsJoined, tournamentsCreated, matchesPlayed, playersHosted, wins, bugsReported;
 
   firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).get().then(function(doc) {
     document.getElementById("name").placeholder = doc.data().name;
     document.getElementById("email").placeholder = firebase.auth().currentUser.email;
+
+    tournamentsJoined = doc.data().stats.tournamentsJoined;
+    tournamentsCreated = doc.data().stats.tournamentsCreated;
+    matchesPlayed = doc.data().stats.matchesPlayed;
+    playersHosted = doc.data().stats.playersHosted;
+    wins = doc.data().stats.wins;
+    bugsReported = doc.data().stats.bugsReported;
+
+
+
+
+
     //if (doc.data().teams.length === 0) { document.getElementById("team").placeholder = "None"; }
+  }).then(function() {
+    firebase.firestore().collection("tournaments").where("date", ">=", new Date()).where("players", "array-contains", firebase.auth().currentUser.uid).get().then(function(querySnapshot) {
+      if (!querySnapshot.empty) {
+        tournamentsJoined++;
+      }
+    }).then(function() {
+      firebase.firestore().collection("tournaments").where("date", ">=", new Date()).where("creator", "==", firebase.auth().currentUser.uid).get().then(function(querySnapshot) {
+        if (!querySnapshot.empty) {
+          tournamentsCreated++;
+        }
+      }).then(function() {
+        document.getElementById("tournamentsJoinedStat").innerHTML = tournamentsJoined;
+        document.getElementById("tournamentsCreatedStat").innerHTML = tournamentsCreated;
+        document.getElementById("matchesPlayedStat").innerHTML = matchesPlayed;
+        document.getElementById("playersHostedStat").innerHTML = playersHosted;
+        document.getElementById("victoryRoyalesStat").innerHTML = wins;
+        document.getElementById("bugsReportedStat").innerHTML = bugsReported;
+      });
+    });
   });
   /*
   firebase.firestore().collection("teams").where("players", "array-contains", firebase.auth().currentUser.uid).get().then(function(querySnapshot) {
@@ -21,6 +52,8 @@ function personalizeElements() {
     document.getElementById("teams").placeholder = document.getElementById("teams").placeholder.slice(0, -2);
   });
   */
+
+
 }
 
 function editProfile() {

@@ -42,9 +42,13 @@ function createUser() {
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
         stats: {
+          tournamentsJoined: 0,
+          tournamentsCreated: 0,
+          matchesPlayed: 0,
+          playersHosted: 0,
+          bugsReported: 0,
           coins: 0,
           notifications: 0,
-          matches: 0,
           wins: 0
         },
         email_preferences: {

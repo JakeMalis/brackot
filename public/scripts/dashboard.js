@@ -100,7 +100,7 @@ function personalizeElements() {
   firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).get().then(function(doc) {
     document.getElementById("firstGreetingMessage").innerHTML = "Welcome back, " + firebase.auth().currentUser.displayName + "!";
     document.getElementById("notifications").innerHTML = doc.data().stats.notifications;
-    document.getElementById("matches").innerHTML = doc.data().stats.matches;
+    document.getElementById("matches").innerHTML = doc.data().stats.matchesPlayed;
     document.getElementById("coins").innerHTML = doc.data().stats.coins;
     document.getElementById("wins").innerHTML = doc.data().stats.wins;
   });
