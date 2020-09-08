@@ -11,7 +11,7 @@ function personalizeElements() {
   renderTournamentCards();
 }
 
-var games = ["Counter-Strike: Global Offensive", "Fall Guys", "Fortnite", "League of Legends", "Minecraft", "Overwatch", "Rocket League", "Super Smash Bros. Ultimate", "Valorant"];
+var games = ["Counter-Strike Global Offensive", "Fall Guys", "Fortnite", "League of Legends", "Minecraft", "Overwatch", "Rocket League", "Super Smash Bros. Ultimate", "Valorant"];
 var selectedGame = games;
 var tournamentsCollection = firebase.firestore().collection("tournaments");
 var date = new Date();
@@ -26,7 +26,7 @@ class TournamentCard extends React.Component {
         <div className="tournamentCard" id={"tournamentCard" + this.props.tournamentNumber}>
           <div className="tournamentCardBackground">
             <div className="tournamentCardContent" id={"tournamentContent" + this.props.tournamentNumber}>
-              <img id={"tournamentWallpaper" + this.props.tournamentNumber}></img>
+              <img className="tournamentWallpaper" id={"tournamentWallpaper" + this.props.tournamentNumber}></img>
               <div className="tournamentCardText">
                   <h6 className="tournamentCardTitle" id={"tournamentTitle" + this.props.tournamentNumber}></h6>
                   <ul className="tournamentCardDetails">
@@ -99,13 +99,18 @@ async function addTournamentCardData() {
         });
 
         document.getElementById("tournamentCard" + tournamentNumber).style.visibility = "visible";
-        document.getElementById("tournamentWallpaper" + tournamentNumber).src = "/media/game_wallpapers/" + doc.data().game + "-" + "gameplay.jpg";
+        document.getElementById("tournamentWallpaper" + tournamentNumber).src = "/media/game_wallpapers/" + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "-" + "cardWallpaper.jpg";
         document.getElementById("tournamentTitle" + tournamentNumber).innerHTML = doc.data().name;
-        document.getElementById("tournamentGame" + tournamentNumber).innerHTML = doc.data().game;
+        if (doc.data().game == "Counter-Strike Global Offensive") {
+          document.getElementById("tournamentGame" + tournamentNumber).innerHTML = "Counter-Strike: Global Offensive";
+        }
+        else {
+          document.getElementById("tournamentGame" + tournamentNumber).innerHTML = doc.data().game;
+        }
         document.getElementById("tournamentHostName" + tournamentNumber).innerHTML = doc.data().creatorName;
 
         var tournamentCreator = doc.data().creator;
-        var gsReference = firebase.storage().refFromURL("gs://all-star-esports.appspot.com/" + tournamentCreator + "/profile");
+        var gsReference = firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + tournamentCreator + "/profile");
         var nNumber = tournamentNumber;
         gsReference.getDownloadURL().then(function (url) {
           document.getElementById("tournamentHostPic" + nNumber).src = url;
@@ -127,7 +132,7 @@ async function addTournamentCardData() {
           meridiem = "P.M."
         }
 
-        document.getElementById("tournamentDate" + tournamentNumber).innerHTML = date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear() + ' @ ' + hour + ':' + date.getMinutes() + ' ' + meridiem;
+        document.getElementById("tournamentDate" + tournamentNumber).innerHTML = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' @ ' + hour + ':' + date.getMinutes() + ' ' + meridiem;
         document.getElementById("tournamentParticipants" + tournamentNumber).innerHTML = (doc.data().players.length) + " Participants";
 
 

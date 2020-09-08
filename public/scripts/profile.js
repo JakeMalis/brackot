@@ -10,9 +10,9 @@ function personalizeElements() {
   firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).get().then(function(doc) {
     document.getElementById("name").placeholder = doc.data().name;
     document.getElementById("email").placeholder = firebase.auth().currentUser.email;
-    if (doc.data().teams.length === 0) { document.getElementById("team").placeholder = "None"; }
+    //if (doc.data().teams.length === 0) { document.getElementById("team").placeholder = "None"; }
   });
-
+  /*
   firebase.firestore().collection("teams").where("players", "array-contains", firebase.auth().currentUser.uid).get().then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
       document.getElementById("teams").placeholder = document.getElementById("teams").placeholder + doc.data().name + ", ";
@@ -20,6 +20,7 @@ function personalizeElements() {
   }).then(function() {
     document.getElementById("teams").placeholder = document.getElementById("teams").placeholder.slice(0, -2);
   });
+  */
 }
 
 function editProfile() {

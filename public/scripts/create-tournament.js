@@ -53,6 +53,7 @@ function addTournament() {
           2: parseInt(document.getElementById('secondEarnings').value),
           3: parseInt(document.getElementById('thirdEarnings').value)
       },
+      tournamentStarted: false,
       unlimited: document.getElementById("unlimited").checked,
       type: document.querySelector('input[name="newTournamentParticipantType"]:checked').value
   }).then(function() {

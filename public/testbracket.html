@@ -14,8 +14,6 @@
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="https://use.typekit.net/fyp1otf.css">
   <script src="https://kit.fontawesome.com/201b9c41aa.js" crossorigin="anonymous"></script>
 
@@ -35,79 +33,53 @@
 
 
   <script>
-      var firebaseConfig = {
-          apiKey: "AIzaSyBSjggPyShfi3JJGmfuf2p_BFLMeEeVTLY",
-          authDomain: "all-star-esports.firebaseapp.com",
-          databaseURL: "https://all-star-esports.firebaseio.com",
-          projectId: "all-star-esports",
-          storageBucket: "all-star-esports.appspot.com",
-          messagingSenderId: "894423381350",
-          appId: "1:894423381350:web:3fe3b4195ae678bd6704a7"
-      };
-      firebase.initializeApp(firebaseConfig);
+    var firebaseConfig = {
+      apiKey: "AIzaSyDZov-3KVt_ytrSQBWZ_fz2e4PaoOhZIt8",
+      authDomain: "brackot-app.firebaseapp.com",
+      databaseURL: "https://brackot-app.firebaseio.com",
+      projectId: "brackot-app",
+      storageBucket: "brackot-app.appspot.com",
+      messagingSenderId: "941824737400",
+      appId: "1:941824737400:web:739688aaff7fde7c8cad8d"
+    };
+    firebase.initializeApp(firebaseConfig);
   </script>
 </head>
 <body>
-  <div id="topbar">
-    <script> $( "#topbar" ).load( "ajax/topbar.html" ); </script>
-  </div>
-
+<!--
   <div id="bracket" class="bracket">
-
     <div class="matchColumn" id="matchColumn1">
     </div>
-
     <div class="connectorColumn" id="connectorColumn1">
     </div>
-
     <div class="matchColumn" id="matchColumn2">
     </div>
-
     <div class="connectorColumn" id="connectorColumn2">
     </div>
-
-
     <div class="matchColumn" id="matchColumn3">
     </div>
-
-
     <div class="connectorColumn" id="connectorColumn3">
     </div>
-
-
     <div class="matchColumn" id="matchColumn4">
     </div>
-
-
     <div class="connectorColumn" id="connectorColumn4">
     </div>
-
     <div class="matchColumn" id="matchColumn5">
     </div>
-
     <div class="connectorColumn" id="connectorColumn5">
     </div>
-
     <div class="matchColumn" id="matchColumn6">
     </div>
-
     <div class="connectorColumn" id="connectorColumn6">
     </div>
-
     <div class="matchColumn" id="matchColumn7">
     </div>
-
     <div class="connectorColumn" id="connectorColumn7">
     </div>
-
     <div class="matchColumn" id="matchColumn8">
     </div>
-
     <div class="connectorColumn" id="connectorColumn8">
     </div>
-
-
-
 
     <div id="matchModal" class="matchModal">
       <div class="matchModal-content">
@@ -115,14 +87,14 @@
         <div class="modalTop">
           <div id="upperParticipantModal" class="participantInfobox topBox">
             <img id="upperParticipantPicModal" class="infoboxPic" src="media/BrackotLogo2.jpg">
-            <h1 id="upperParticipantNameModal" class="infoboxName">All-Star Jordan</h1>
+            <h1 id="upperParticipantNameModal" class="infoboxName"></h1>
             <input type="number" id="upperParticipantScoreInput" class="scoreInputModal"></input>
             <h2 id="upperParticipantScoreModal" class="infoboxScore">-</h2>
             <h2 id="upperParticipantWinnerModal" class="infoboxWinner">Winner</h2>
           </div>
           <div id="lowerParticipantModal" class="participantInfobox bottomBox">
             <img id="lowerParticipantPicModal" class="infoboxPic" src="media/BrackotLogo2.jpg">
-            <h1 id="lowerParticipantNameModal" class="infoboxName">All-Star Jordan</h1>
+            <h1 id="lowerParticipantNameModal" class="infoboxName"></h1>
             <input type="number" id="lowerParticipantScoreInput" class="scoreInputModal"></input>
             <h2 id="lowerParticipantScoreModal" class="infoboxScore">-</h2>
             <h2 id="lowerParticipantWinnerModal" class="infoboxWinner">Winner</h2>
@@ -130,17 +102,11 @@
         </div>
         <div class="modalBottom">
           <button onclick="editMatchScores()" id="editScoresButton" class="grayButton submitResultsButton">Edit Scores</button>
-          <button id="submitResultsButton" class="gradientButton submitResultsButton">Submit Results</button>
+          <button onclick="saveMatchScores()" id="submitResultsButton" class="gradientButton submitResultsButton">Submit Results</button>
         </div>
-
       </div>
     </div>
-
-
-
   </div>
-  <div id="footer">
-    <script> $( "#footer" ).load( "ajax/footer.html" ); </script>
-  </div>
+-->
 </body>
 </html>

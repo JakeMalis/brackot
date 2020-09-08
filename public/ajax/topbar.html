@@ -1,12 +1,12 @@
 <div class="topbar">
   <div id="topNavbar" class="topNavbar">
-    <a href="dashboard.html"><img class="topbarLogo" src="media/BrackotSidebarLogo.png"></a>
+    <a href="index.html"><img class="topbarLogo" src="media/BrackotSidebarLogo.png"></a>
     <div class="primaryTabs">
       <ul class="primaryTabsList">
         <li id="expandTopbarTab" class="menuTab" onclick="toggleMenu()"><a id="expandTopbar" class="primaryTabLink"><p class="primaryTabText"><i class="fa fa-bars"></i>Menu</p></a></li>
+        <li id="dashboardTab" class="primaryTab" onclick="location.href='dashboard.html';"><a class="primaryTabLink"><p class="primaryTabText">Dashboard</p></a></li>
         <li id="tournamentsTab" class="primaryTab" onclick="location.href='tournaments.html';"><a class="primaryTabLink"><p class="primaryTabText">Tournaments</p></a></li>
-        <li id="profileTab" class="primaryTab" onclick="location.href='profile.html';"><a class="primaryTabLink"><p class="primaryTabText">Profile</p></a></li>
-        <li id="helpCenterTab" class="primaryTab" onclick="location.href='create-tournament.html';"><a class="primaryTabLink"><p class="primaryTabText">Create Tournament</p></a></li>
+        <li id="createTournamentTab" class="primaryTab" onclick="location.href='create-tournament.html';"><a class="primaryTabLink"><p class="primaryTabText">Organize</p></a></li>
       </ul>
     </div>
     <div class="secondaryTabs">
@@ -25,9 +25,10 @@
   <div id="topbarExpansion" class="topbarExpansion">
     <div class="primaryTabsExpansion">
       <ul class="primaryTabsListExpansion">
+        <li class="primaryTabExpansion" onclick="location.href='dashboard.html';"><a class="primaryTabLink"><p class="primaryTabTextExpansion"><i class="fa fa-home fa-lg faExpansion"></i>Dashboard</p></a></li>
         <li class="primaryTabExpansion" onclick="location.href='tournaments.html';"><a class="primaryTabLink"><p class="primaryTabTextExpansion"><i class="fa fa-trophy fa-lg faExpansion"></i>Tournaments</p></a></li>
+        <li class="primaryTabExpansion" onclick="location.href='create-tournament.html';"><a class="primaryTabLink"><p class="primaryTabTextExpansion"><i class="fa fa-plus-square fa-lg faExpansion"></i>Organize</p></a></li>
         <li class="primaryTabExpansion" onclick="location.href='profile.html';"><a class="primaryTabLink"><p class="primaryTabTextExpansion"><i class="fa fa-user fa-lg faExpansion"></i>Profile</p></a></li>
-        <li class="primaryTabExpansion" onclick="location.href='create-tournament.html';"><a class="primaryTabLink"><p class="primaryTabTextExpansion"><i class="fa fa-plus-square fa-lg faExpansion"></i>Create Tournament</p></a></li>
         <li class="primaryTabExpansion" onclick="location.href='logout.html';"><a class="primaryTabLink"><p class="primaryTabTextExpansion"><i class="fa fa-sign-out fa-lg faExpansion"></i>Log Out</p></a></li>
       </ul>
     </div>

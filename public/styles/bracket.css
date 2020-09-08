@@ -16,14 +16,6 @@
   --infoboxHeight: 130px;
 }
 
-body{
-  overflow-x: hidden;
-  margin: 0px;
-  width: 100vw;
-  min-height: 100vh;
-  background-color: var(--cardColor) !important;
-}
-
 h1{
   font-family: 'proxima-nova', sans-serif;
   color: #eeeeee;
@@ -61,7 +53,8 @@ p{
 }
 
 .bracket{
-  width: 100vw;
+  overflow-x: auto;
+  min-height: 1px;
 }
 
 .teamName{
@@ -191,20 +184,33 @@ p{
   margin-bottom: 0px;
 }
 
-.connectorLeft{
-  float: left;
-  height: 100%;
+.connectorLeftTop{
+  /*visibility: hidden;*/
+  position: absolute;
+  top: 30px;
+  height: calc(50% - 30px);
   width: calc(50% + 1px) !important;
   border-right: 2px solid #eeeeee;
   border-top: 2px solid #eeeeee;
+}
+
+.connectorLeftBottom{
+  /*visibility: hidden;*/
+  position: absolute;
+  top: 50%;
+  height: calc(50% - 30px);
+  width: calc(50% + 1px) !important;
+  border-right: 2px solid #eeeeee;
   border-bottom: 2px solid #eeeeee;
 }
 
 .connectorRight{
-  display: block;
-  float: left;
+  /*visibility: hidden;*/
+  position: absolute;
+  top: calc(50% - 1px);
+  left: calc(50% + 1px) !important;
   width: calc(50% - 1px) !important;
-  height: calc(50% + 1px) !important;
+  height: 2px;
   border-bottom: 2px solid #eeeeee;
 }
 
@@ -254,7 +260,12 @@ p{
   transition-duration: 0.15s;
 }
 
+.visible{
+  visibility: visible !important;
+}
+
 .connector{
+  position: relative;
   padding-top: var(--participantHeight);
   padding-bottom: var(--participantHeight);
   width: 100%;
@@ -320,16 +331,18 @@ p{
 }
 
 .scoreInputModal{
+  display: none;
   position: absolute;
   top: calc((var(--infoboxHeight) - 52px) / 2);
   right: calc(0.3 * var(--infoboxHeight));
   height: 50px;
-  width: 50px;
+  width: 65px;
   padding: 11px;
   font-size: 20px;
   border-radius: 8px;
   background-color: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.09);
+  color: #eeeeee;
 }
 
 

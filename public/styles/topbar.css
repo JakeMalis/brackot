@@ -135,6 +135,14 @@
   border-radius: 50%;
 }
 
+#profilePicTab{
+  display: none;
+}
+
+#loginTab{
+  display: inline-block;
+}
+
 .profilePic{
   right: 25px;
   top: 15px;
