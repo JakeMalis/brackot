@@ -138,6 +138,50 @@ p{
   height: calc(4 * var(--participantHeight) + 15px);
 }
 
+.connectorLeftTop{
+  /*visibility: hidden;*/
+  position: absolute;
+  top: 30px;
+  height: calc(50% - 30px);
+  width: calc(50% + 1px) !important;
+  border-right: 2px solid #eeeeee;
+  border-top: 2px solid #eeeeee;
+}
+
+.connectorLeftBottom{
+  /*visibility: hidden;*/
+  position: absolute;
+  top: 50%;
+  height: calc(50% - 30px);
+  width: calc(50% + 1px) !important;
+  border-right: 2px solid #eeeeee;
+  border-bottom: 2px solid #eeeeee;
+}
+
+.connectorRight{
+  /*visibility: hidden;*/
+  position: absolute;
+  top: calc(50% - 1px);
+  left: calc(50% + 1px) !important;
+  width: calc(50% - 1px) !important;
+  height: 2px;
+  border-bottom: 2px solid #eeeeee;
+}
+
+.topConnector{
+  position: relative;
+  margin-top: 15px;
+  padding-top: var(--participantHeight);
+  height: calc((4 * var(--participantHeight) + 15px)/2);
+}
+
+.bottomConnector{
+  position: relative;
+  margin-bottom: 15px;
+  padding-bottom: var(--participantHeight);
+  height: calc((4 * var(--participantHeight) + 15px)/2);
+}
+
 .connector2{
   margin-top: calc((1.5 * 15px) + var(--participantHeight));
   margin-bottom: calc(2 * (15px + var(--participantHeight)));
@@ -184,34 +228,44 @@ p{
   margin-bottom: 0px;
 }
 
-.connectorLeftTop{
+.connectorUpperLeft{
   /*visibility: hidden;*/
   position: absolute;
   top: 30px;
-  height: calc(50% - 30px);
+  height: 37.5px;
   width: calc(50% + 1px) !important;
   border-right: 2px solid #eeeeee;
   border-top: 2px solid #eeeeee;
 }
 
-.connectorLeftBottom{
+.connectorLowerLeft{
   /*visibility: hidden;*/
   position: absolute;
-  top: 50%;
-  height: calc(50% - 30px);
+  top: 0px;
+  height: 37.5px;
   width: calc(50% + 1px) !important;
   border-right: 2px solid #eeeeee;
   border-bottom: 2px solid #eeeeee;
 }
 
-.connectorRight{
+.connectorUpperRight{
   /*visibility: hidden;*/
   position: absolute;
-  top: calc(50% - 1px);
+  top: 30px;
   left: calc(50% + 1px) !important;
   width: calc(50% - 1px) !important;
-  height: 2px;
+  height: 37.5px;
   border-bottom: 2px solid #eeeeee;
+}
+
+.connectorLowerRight{
+  /*visibility: hidden;*/
+  position: absolute;
+  top: 0px;
+  left: calc(50% + 1px) !important;
+  width: calc(50% - 1px) !important;
+  height: 37.5px;
+  border-top: 2px solid #eeeeee;
 }
 
 .divider{

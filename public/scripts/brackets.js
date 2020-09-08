@@ -47,14 +47,38 @@ class LowerParticipant extends React.Component {
   }
 }
 
+/*================================================USE THIS CONNECTOR IF THERE IS ONE PARENT MATCH=================================================*/
+class UpperConnector extends React.Component {
+  render() {
+    return (
+      <div className="topConnector" id={"connector" + this.props.connectorNumber}>
+        <div className={"connectorUpperLeft " + this.props.visibility} id={"connectorUpperLeft" + this.props.connectorNumber}></div>
+        <div className={"connectorUpperRight " + this.props.visibility} id={"connectorUpperRight" + this.props.connectorNumber}></div>
+      </div>
+    );
+  }
+}
 
+/*================================================USE THIS CONNECTOR IF THERE IS ONE PARENT MATCH=================================================*/
+class LowerConnector extends React.Component {
+  render() {
+    return (
+      <div className="bottomConnector" id={"connector" + this.props.connectorNumber}>
+        <div className={"connectorLowerLeft " + this.props.visibility} id={"connectorLowerLeft" + this.props.connectorNumber}></div>
+        <div className={"connectorLowerRight " + this.props.visibility} id={"connectorLowerRight" + this.props.connectorNumber}></div>
+      </div>
+    );
+  }
+}
+
+/*================================================USE THIS CONNECTOR IF THERE ARE TWO PARENT MATCHES=================================================*/
 class Connector extends React.Component {
   render() {
     return (
-      <div className={"connector " + "connector" + this.props.roundNumber} id={"connector" + this.props.connectorNumber}>
-        <div className={"connectorLeftTop"} id={"connectorLeftTop" + this.props.connectorNumber + " " + this.props.topVisibility}></div>
-        <div className={"connectorRight"} id={"connectorRight" + this.props.connectorNumber + " " + this.props.topVisibility + " " + this.props.bottomVisibility}></div>
-        <div className={"connectorLeftBottom"} id={"connectorLeftBottom" + this.props.connectorNumber + " " + this.props.bottomVisibility}></div>
+      <div className={"connector " + "connector" + this.props.roundNumber + " " +  + this.props.visibility} id={"connector" + this.props.connectorNumber}>
+        <div className={"connectorLeftTop"} id={"connectorLeftTop"}></div>
+        <div className={"connectorRight"} id={"connectorRight"}></div>
+        <div className={"connectorLeftBottom"} id={"connectorLeftBottom"}></div>
       </div>
     );
   }
