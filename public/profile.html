@@ -85,15 +85,15 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header" data-keyboard="false" data-backdrop="static">
-                <h1 class="modal-title" id="modalTitle">CONFIRM PASSWORD</h1>
+                <h1 class="modal-title" id="modalTitle">Confirm Password</h1>
               </div>
               <div class="modal-body">
                 <div class="row">
-                  <input class="pwInput" placeholder="Password..." id="passwordConfirmation" type="password">
+                  <form class="modal-form">
+                    <input class="pwInput" placeholder="Password..." id="passwordConfirmation" type="password">
+                    <input type="submit" class="gradientButton modalButton" id="confirmPassword" onsubmit="updateEmail();" value="Confirm"></input>
+                  </form>
                 </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="gradientButton" id="confirmPassword" onclick="updateEmail();">CONFIRM</button>
               </div>
             </div>
           </div>
@@ -114,7 +114,7 @@
             </div>
           </div>
         </div>
-        <div id="stat2Card" class="statCard">
+        <div id="stat2Card" class="statCard secondaryStatCard">
           <div class="smallCardBackground statCardBackground">
             <div class="statCardContent">
               <div class="statContent">
@@ -140,7 +140,7 @@
             </div>
           </div>
         </div>
-        <div id="stat4Card" class="statCard">
+        <div id="stat4Card" class="statCard secondaryStatCard">
           <div class="smallCardBackground statCardBackground">
             <div class="statCardContent">
               <div class="statContent">
@@ -166,7 +166,7 @@
             </div>
           </div>
         </div>
-        <div id="stat6Card" class="statCard">
+        <div id="stat6Card" class="statCard secondaryStatCard">
           <div class="smallCardBackground statCardBackground">
             <div class="statCardContent">
               <div class="statContent">

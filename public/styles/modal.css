@@ -19,15 +19,14 @@
 }
 
 .modal input {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 0px;
-  width: 70%;
+  font-size: 15px;
+  flex: 0 0 100%;
+  width: 100%;
   padding: 11px;
-  font-size: 20px;
-  border-radius: 11px;
-  background-color: #F6FAFF;
-  border: 1px solid #dddddd;
+  border-radius: 8px;
+  background-color: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.09);
+  color: #aaaaaa;
 }
 
 .modal{
@@ -36,16 +35,20 @@
 
 .modal-dialog{
   width: 90%;
-  max-width: 350px;
+  max-width: 450px;
   height: auto;
-  border-radius: 20px;
+  border-radius: 12px;
+}
+
+.modal-content{
+  background-color: var(--cardColor) !important;
 }
 
 .modal-title{
-  text-transform: capitalize;
-  font-family: 'MuseoSans500', sans-serif;
-  font-weight: 400;
-  color: #232323;
+  font-family: 'proxima-nova', sans-serif;
+  font-weight: 500;
+  color: #eeeeee;
+  line-height: 36px !important;
   text-align: center;
 }
 
@@ -53,8 +56,8 @@
   font-size: 27px;
   font-weight: bold;
   text-align: center;
-  font-family: 'MuseoSans300', sans-serif;
-  color: #232323;
+  font-family: 'proxima-nova', sans-serif;
+  color: #aaaaaa;
   max-width: 80%;
   margin-top: 35px;
   margin-bottom: 15px;
@@ -69,19 +72,26 @@
 }
 
 .modal-header{
-  padding-top: 25px !important;
+  padding-top: 40px !important;
   border-bottom: none !important;
-  padding-bottom: 0px !important;
+  padding-bottom: 30px !important;
+  padding-left: 40px !important;
+  padding-right: 40px !important;
 }
 
 .modal-body{
   padding-top: 0px !important;
   padding-bottom: 0px !important;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
 }
 
 .modal-footer{
-  padding-top: 20px !important;
+  padding-top: 35px !important;
+  padding-bottom: 35px !important;
   border-top: none !important;
+  padding-left: 40px !important;
+  padding-right: 40px !important;
 }
 
 .gradientButton{
@@ -90,7 +100,7 @@
   background-image: var(--gradient);
   font-family: 'proxima-nova', sans-serif;
   text-transform: uppercase;
-  letter-spacing: 3px;
+  letter-spacing: 1px;
   font-weight: 600;
   padding-left: 30px;
   padding-right: 30px;
@@ -103,6 +113,9 @@
 }
 
 .modalButton{
+  margin-top: 35px;
+  margin-bottom: 35px;
+  color: #eeeeee !important;
   float: right;
 }
 

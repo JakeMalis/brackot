@@ -38,6 +38,7 @@ function addTournament() {
       creator: firebase.auth().currentUser.uid,
       creatorName: firebase.auth().currentUser.displayName,
       date: new Date(date + " " + time),
+      description: document.getElementById('tournamentDescription').value,
       game: document.querySelector('input[name="newTournamentGame"]:checked').value,
       name: document.getElementById('tournamentName').value,
       players: [],
