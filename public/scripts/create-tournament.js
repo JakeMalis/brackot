@@ -20,10 +20,16 @@ function animateGameCarousel(selected){
   $(colored).removeClass('uncheckedGamesLabel');
 }
 
-function animateParticipantType(selected){
+function animatePrizing(selected){
   var clicked = "#" + selected + "Label";
-  $('.participantLabel').removeClass('createTournamentLabelChecked');
+  $('.prizingLabel').removeClass('createTournamentLabelChecked');
   $(clicked).addClass('createTournamentLabelChecked');
+  if ($('#prizing').prop("checked") == true){
+    $('#newTournamentPrizingRow').css("display", "inline-block");
+  }
+  else{
+    $('#newTournamentPrizingRow').css("display", "none");
+  }
 }
 
 function animatePlatform(selected){
@@ -31,8 +37,23 @@ function animatePlatform(selected){
   $(clicked).toggleClass('createTournamentLabelChecked');
 }
 
+function animateParticipantType(selected){
+  var clicked = "#" + selected + "Label";
+  $('.participantLabel').removeClass('createTournamentLabelChecked');
+  $(clicked).addClass('createTournamentLabelChecked');
+}
+
 function addTournament() {
   var date = document.getElementById("date").value, time = document.getElementById("time").value;
+
+  var firstEarnings = document.getElementById('firstEarnings').value;
+  var secondEarnings = document.getElementById('secondEarnings').value;
+  var thirdEarnings = document.getElementById('thirdEarnings').value;
+  if((firstEarnings === "") && (secondEarnings === "") && (thirdEarnings === "")){
+    firstEarnings = "0";
+    secondEarnings = "0";
+    thirdEarnings = "0";
+  }
 
   firebase.firestore().collection("tournaments").add({
       creator: firebase.auth().currentUser.uid,
@@ -50,9 +71,9 @@ function addTournament() {
           mobile: document.getElementById("mobile").checked
       },
       earnings: {
-          1: parseInt(document.getElementById('firstEarnings').value),
-          2: parseInt(document.getElementById('secondEarnings').value),
-          3: parseInt(document.getElementById('thirdEarnings').value)
+          1: parseInt(firstEarnings),
+          2: parseInt(secondEarnings),
+          3: parseInt(thirdEarnings)
       },
       tournamentStarted: false,
       unlimited: document.getElementById("unlimited").checked,

@@ -1295,6 +1295,16 @@ text-align: center;
   width: 100%;
 }
 
+.createTournamentPrizing{
+  margin-bottom: 30px;
+  display: inline-block;
+  width: 100%;
+}
+
+#newTournamentPrizingRow{
+  display: none;
+}
+
 .createTournamentParticipantType{
   margin-bottom: 30px;
   display: inline-block;
