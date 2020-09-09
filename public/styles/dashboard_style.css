@@ -215,27 +215,6 @@ select option{
   animation: flow 3.5s ease infinite;
 }
 
-@-webkit-keyframes flow {
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
-}
-@-moz-keyframes flow {
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
-}
-@-o-keyframes flow {
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
-}
-@keyframes flow {
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
-}
-
 .buttonlessButton{
   display: block;
   background: transparent;
@@ -818,7 +797,6 @@ text-align: center;
 
 .tournamentCardButton{
   font-family: 'proxima-nova', sans-serif;
-  background: rgba(255,255,255,0.16);
   height: 50px;
   border: 0px;
   border-top-left-radius: 0px;
@@ -829,29 +807,29 @@ text-align: center;
   width: 100%;
   font-size: 15px;
   font-weight: bold;
-  letter-spacing: 3px;
+  letter-spacing: 1px;
   text-transform: uppercase;
 }
 
-.tournamentCardButton:hover{
+.tournamentCardButtonGeneric{
+  background: rgba(255,255,255,0.16);
+}
+
+.tournamentCardButtonGeneric:hover{
   opacity: 70%;
 }
 
 .tournamentCardButtonSigned{
-  font-family: 'proxima-nova', sans-serif;
   background-image: linear-gradient(70deg,#36bf70,#12fe7b);
-  height: 50px;
-  border: 0px;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
-  color: #ffffff;
-  width: 100%;
-  font-size: 15px;
-  font-weight: bold;
-  letter-spacing: 3px;
-  text-transform: uppercase;
+}
+
+.tournamentCardButtonInProgress{
+  background: -webkit-linear-gradient(0deg, var(--aquamarine), var(--turquoise));
+  background-size: 300% 300%;
+  -webkit-animation: flow 3s ease infinite;
+  -moz-animation: flow 3s ease infinite;
+  -o-animation: flow 3s ease infinite;
+  animation: flow 3s ease infinite;
 }
 
 .seeProfileStatsContainer{
@@ -1843,4 +1821,25 @@ text-align: center;
 
 #myTournaments{
   display: none;
+}
+
+@-webkit-keyframes flow {
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+@-moz-keyframes flow {
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+@-o-keyframes flow {
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+@keyframes flow {
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
 }

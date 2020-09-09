@@ -444,6 +444,9 @@ function startTournament() {
     }
   });
   document.getElementById("bracketNavbar").style.display = "inline-block";
+  document.getElementById("tournamentSignUpButton").className = 'tournamentCardButton tournamentCardButtonInProgress';
+  document.getElementById("tournamentSignUpButton").innerHTML = "Tournament In Progress";
+  document.getElementById("tournamentSignUpButton").disabled = true;
 }
 
 function saveMatchScores() {

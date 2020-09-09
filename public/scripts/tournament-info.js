@@ -48,22 +48,26 @@ function personalizeElements() {
     document.getElementById("tournamentInfoWallpaper").className = "headerImage tournamentInfoWallpaper " + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "InfoWallpaper";
 
 
-    if (doc.data().creator === firebase.auth().currentUser.uid) {
-      document.getElementById("tournamentSignUpButton").innerHTML = "Start Tournament";
-      document.getElementById("tournamentSignUpButton").onclick = function() { startTournament(); };
+    if (doc.data().tournamentStarted == false) {
+      if (doc.data().creator === firebase.auth().currentUser.uid) {
+        document.getElementById("tournamentSignUpButton").innerHTML = "Start Tournament";
+        document.getElementById("tournamentSignUpButton").onclick = function() { startTournament(); };
+      }
+      else if ((!(doc.data().creator === firebase.auth().currentUser.uid)) && (!(doc.data().players).includes(firebase.auth().currentUser.uid))) {
+        document.getElementById("tournamentSignUpButton").innerHTML = "Sign Up";
+        document.getElementById("tournamentSignUpButton").onclick = function() { enroll(); };
+      }
+      else if ((doc.data().players).includes(firebase.auth().currentUser.uid)) {
+        document.getElementById("tournamentSignUpButton").className = 'tournamentCardButton tournamentCardButtonSigned';
+        document.getElementById("tournamentSignUpButton").innerHTML = "✓ Signed Up";
+        document.getElementById("tournamentSignUpButton").disabled = true;
+      }
     }
-    else if (!(doc.data().creator === firebase.auth().currentUser.uid)) {
-      document.getElementById("tournamentSignUpButton").innerHTML = "Sign Up";
-      document.getElementById("tournamentSignUpButton").onclick = function() { enroll(); };
-    }
-
-    if ((doc.data().players).includes(firebase.auth().currentUser.uid)) {
-      document.getElementById("tournamentSignUpButton").className = 'tournamentCardButtonSigned';
-      document.getElementById("tournamentSignUpButton").innerHTML = "✓ Signed Up";
+    else if (doc.data().tournamentStarted == true) {
+      document.getElementById("tournamentSignUpButton").className = 'tournamentCardButton tournamentCardButtonInProgress';
+      document.getElementById("tournamentSignUpButton").innerHTML = "Tournament In Progress";
       document.getElementById("tournamentSignUpButton").disabled = true;
-    }
 
-    if (doc.data().tournamentStarted == true) {
       document.getElementById("bracketNavbar").style.display = "inline-block";
       renderMatchCards();
     }
@@ -79,7 +83,7 @@ function enroll() {
   firebase.firestore().collection("tournaments").doc(tournamentId).update({
     players: firebase.firestore.FieldValue.arrayUnion(firebase.auth().currentUser.uid)
   }).then(function() {
-    document.getElementById("tournamentSignUpButton").className = 'tournamentCardButtonSigned';
+    document.getElementById("tournamentSignUpButton").className = 'tournamentCardButton tournamentCardButtonSigned';
     document.getElementById("tournamentSignUpButton").innerHTML = "✓ Signed Up";
     document.getElementById("tournamentSignUpButton").disabled = true;
     sendConfirmationEmail(tournamentId);

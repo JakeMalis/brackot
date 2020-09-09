@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="media/favicon.png"/>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    window.onload = function() {
       // TODO: Implement getParameterByName()
 
       // Get the action to complete.
@@ -43,14 +41,16 @@
         case 'verifyEmail':
           // Display email verification handler and UI.
           handleVerifyEmail(auth, actionCode, continueUrl, lang);
+          alert(1);
           break;
         default:
           // Error: invalid mode.
       }
-    }, false);
+    };
     </script>
     <script>
     function handleVerifyEmail(auth, actionCode, continueUrl, lang) {
+      alert(2)
       // Localize the UI to the selected language as determined by the lang
       // parameter.
       // Try to apply the email verification code.
@@ -63,10 +63,12 @@
         // TODO: If a continue URL is available, display a button which on
         // click redirects the user back to the app via continueUrl with
         // additional state determined from that URL's parameters.
-        document.location = continueUrl;
+        console.log("It worked")
+        alert("it worked")
       }).catch(function(error) {
         // Code is invalid or expired. Ask the user to verify their email address
         // again.
+        console.log(error);
       });
     }
     </script>
