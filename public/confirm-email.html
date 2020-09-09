@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="media/favicon.png"/>
 
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase.js"></script>
     <script>
     window.onload = function() {
@@ -41,16 +42,12 @@
         case 'verifyEmail':
           // Display email verification handler and UI.
           handleVerifyEmail(auth, actionCode, continueUrl, lang);
-          alert(1);
           break;
-        default:
-          // Error: invalid mode.
       }
     };
     </script>
     <script>
     function handleVerifyEmail(auth, actionCode, continueUrl, lang) {
-      alert(2)
       // Localize the UI to the selected language as determined by the lang
       // parameter.
       // Try to apply the email verification code.
