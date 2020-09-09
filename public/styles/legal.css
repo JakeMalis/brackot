@@ -14,37 +14,37 @@ body{
   background-color: var(--background) !important;
 }
 
-h1{
+.h1Legal{
   font-family: 'proxima-nova', sans-serif !important;
   color: #eeeeee !important;
   font-size: 40px !important;
 }
-h2{
+.h2Legal{
   font-family: 'proxima-nova', sans-serif !important;
   color: #aaaaaa !important;
   font-size: 26px !important;
   font-weight: 800 !important;
   text-transform: uppercase;
 }
-h3{
+.h3Legal{
   font-family: 'proxima-nova', sans-serif !important;
   color: #aaaaaa !important;
   font-size: 18px !important;
   text-decoration: underline;
 }
-p{
+.pLegal{
   font-family: 'proxima-nova', sans-serif !important;
   color: #aaaaaa !important;
   font-size: 18px;
 }
 
-ul{
+.ulLegal{
   font-family: 'proxima-nova', sans-serif !important;
   color: #aaaaaa !important;
   font-size: 18px;
 }
 
-li{
+.legalListItem{
   font-family: 'proxima-nova', sans-serif !important;
   color: #aaaaaa !important;
   font-size: 18px;

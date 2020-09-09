@@ -856,6 +856,13 @@ text-align: center;
   height: 100% !important;
 }
 
+.statCardContent{
+  margin-top: 58px;
+  margin-bottom: 58px;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
 .statContent{
   height: 100%;
   width: 100%;
@@ -909,8 +916,8 @@ text-align: center;
 }
 
 .smallCardContent{
-  margin-top: 58px;
-  margin-bottom: 58px;
+  margin-top: 18px;
+  margin-bottom: 18px;
   margin-left: 25px;
   margin-right: 25px;
 }

@@ -79,6 +79,10 @@
   border-bottom: 4px solid rgba(35,242,172,0.3);
 }
 
+.primaryTabLink{
+  color: #eeeeee;
+}
+
 .primaryTabLink:hover{
   text-decoration: none;
 }
@@ -107,6 +111,10 @@
 .primaryTabsListExpansion{
   padding: 0px;
   margin: 0px;
+}
+
+.primaryTabText{
+  color: #eeeeee;
 }
 
 .primaryTabTextExpansion{
