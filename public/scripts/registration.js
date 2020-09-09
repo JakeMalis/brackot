@@ -57,7 +57,7 @@ function createUser() {
           thirdparty: true
         }
     }).then(function() {
-      window.location = "index.html";
+      window.location = "dashboard.html";
     });
   }});
 }
