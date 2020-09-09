@@ -152,30 +152,36 @@
 }
 
 .profilePic{
+  z-index: 3;
   right: 25px;
   top: 15px;
   position: fixed;
   height: 40px;
   width: 40px;
+  border-radius: 50%;
   transition-duration: 0.15s;
 }
 
 .profilePic:hover{
-  opacity: 70%;
+  filter: brightness(70%);
   transition-duration: 0.15s;
 }
 
 #unlimitedIcon{
-  width: 22px;
-  height: 22px;
-  object-fit: cover;
-}
-
-.unlimitedIconContainer{
-  position: absolute;
-  right: 20px;
-  top: 40px;
+  z-index: 2;
+  position: fixed;
   visibility: hidden;
+  width: 46px;
+  height: 46px;
+  right: 22px;
+  top: 12px;
+  border-radius: 50%;
+  background: -webkit-linear-gradient(0deg, var(--aquamarine), var(--turquoise));
+  background-size: 300% 300%;
+  -webkit-animation: flow 2s ease infinite;
+  -moz-animation: flow 2s ease infinite;
+  -o-animation: flow 2s ease infinite;
+  animation: flow 2s ease infinite;
 }
 
 .navbarSearch{
@@ -254,7 +260,29 @@
     right: 30px;
   }
 
-  .unlimitedIconContainer{
-    right: 24px;
+  #unlimitedIcon{
+    right: 27px;
+    top: 12px;
   }
+}
+
+@-webkit-keyframes flow {
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+@-moz-keyframes flow {
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+@-o-keyframes flow {
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+@keyframes flow {
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
 }
