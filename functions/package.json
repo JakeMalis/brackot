@@ -19,7 +19,7 @@
     "firebase-functions": "^3.11.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "stripe": "^8.84.0"
+    "stripe": "^8.93.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
