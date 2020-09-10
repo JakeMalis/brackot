@@ -33,23 +33,23 @@ exports.sendWelcomeEmail = functions.region('us-east1').auth.user().onCreate(asy
       throw new Error('Email is invalid');
     }
 
-    const link: string = await admin.auth().generateEmailVerificationLink(email, { url: 'https://brackot.com/confirm-email' });
+    const link: string = await admin.auth().generateEmailVerificationLink(email, { url: 'https://brackot.com' });
 
-    await admin.firestore()
-      .collection('mail')
-      .add({
-        to: email,
-        template: {
-          name: 'welcome',
-          data: {
-            link,
-            email
-          }
+    await admin.firestore().collection('mail').add({
+      to: email,
+      template: {
+        name: 'welcome',
+        data: {
+          link,
+          email
         }
-      });
+      }
+    });
 
+    functions.logger.log(link);
     functions.logger.log('Sent mail document');
-  } catch (err) {
+  }
+  catch (err) {
     functions.logger.log(err);
   }
 });
