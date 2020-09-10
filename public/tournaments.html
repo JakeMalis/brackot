@@ -95,19 +95,14 @@
               <div class="filterAndSearchbar">
                 <!--
                 <input id="tournamentSearchbar" class="tournamentSearchbar" type="text" placeholder="Find tournaments..."></input>-->
-                <a id="gameFilterButton" onclick="toggleGamePopup()">
-                  <label id="gameButtonLabel" class="filterLabel">
-                    <p class="filterLabelText">Game</p>
-                    <p id="gameLabelField" class="filterLabelField">All</p>
-                  </label>
-                </a>
-                <a id="dateFilterButton" onclick="toggleDatePopup()">
-                  <label id="dateButtonLabel" class="filterLabel">
-                    <p class="filterLabelText">Date</p>
-                    <p id="dateLabelField" class="filterLabelField">All</p>
-                  </label>
-                </a>
-
+                <label id="gameFilterButton" class="filterLabel" onclick="toggleGamePopup()">
+                  <p class="filterLabelText">Game</p>
+                  <p id="gameLabelField" class="filterLabelField">All</p>
+                </label>
+                <label id="dateFilterButton" class="filterLabel" onclick="toggleDatePopup()">
+                  <p class="filterLabelText">Date</p>
+                  <p id="dateLabelField" class="filterLabelField">All</p>
+                </label>
 
                 <div id="gamePopup" class="filterPopup widePopup">
                   <div id="gameFilterColumn" class="filterRow">

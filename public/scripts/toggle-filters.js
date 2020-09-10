@@ -1,6 +1,6 @@
 function detoggleGame() {
   var gamePopup = document.getElementById("gamePopup");
-  var gameLabel = document.getElementById("gameButtonLabel");
+  var gameLabel = document.getElementById("gameFilterButton");
 
   $(gamePopup).removeClass("show");
   $(gameLabel).removeClass("filterButtonLabelActive");
@@ -8,7 +8,7 @@ function detoggleGame() {
 
 function detoggleDate() {
   var datePopup = document.getElementById("datePopup");
-  var dateLabel = document.getElementById("dateButtonLabel");
+  var dateLabel = document.getElementById("dateFilterButton");
 
   $(datePopup).removeClass("show");
   $(dateLabel).removeClass("filterButtonLabelActive");
@@ -19,7 +19,7 @@ function toggleGamePopup() {
   var popup = document.getElementById("gamePopup");
   popup.classList.toggle("show");
 
-  var label = document.getElementById("gameButtonLabel");
+  var label = document.getElementById("gameFilterButton");
   label.classList.toggle("filterButtonLabelActive");
 }
 
@@ -28,7 +28,7 @@ function toggleDatePopup() {
   var popup = document.getElementById("datePopup");
   popup.classList.toggle("show");
 
-  var label = document.getElementById("dateButtonLabel");
+  var label = document.getElementById("dateFilterButton");
   label.classList.toggle("filterButtonLabelActive");
 }
 

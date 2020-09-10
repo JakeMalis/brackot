@@ -51,7 +51,7 @@ async function filterData() {
     $('.gameFilterListItem').on('click', function() {
         $("#gameLabelField").html($(this).text());
         $("#gamePopup").removeClass("show");
-        $("#gameButtonLabel").removeClass("filterButtonLabelActive");
+        $("#gameFilterButton").removeClass("filterButtonLabelActive");
         if ($(this).text() === "All") { selectedGame = games; }
         else { selectedGame = [$(this).text()]; }
         query = tournamentsCollection.where("date", ">=", new Date()).where("date", dateOperator, filteredDate).where("game", "in", selectedGame);
@@ -61,7 +61,7 @@ async function filterData() {
     $('.dateFilterListItem').on('click', function() {
         $("#dateLabelField").html($(this).text());
         $("#datePopup").removeClass("show");
-        $("#dateButtonLabel").removeClass("filterButtonLabelActive");
+        $("#dateFilterButton").removeClass("filterButtonLabelActive");
         if ($(this).text() === "All") { dateOperator = ">="; filteredDate = new Date(); }
         else if ($(this).text() === "Today") { dateOperator = "<="; filteredDate = new Date(new Date().setDate(new Date().getDate() + 1)); }
         else if ($(this).text() === "This Week") { dateOperator = "<="; filteredDate = new Date(new Date().setDate(new Date().getDate() + 7)); }

@@ -9,7 +9,7 @@
   --tournamentCardColorHover: #454656;
   --sidebarWidth: 0px;
 
-  --filterLabelWidth: 130px;
+  --filterLabelWidth: 125px;
 }
 body{
   overflow-x: hidden;
@@ -600,8 +600,8 @@ text-align: center;
   padding-left: 16px;
   padding-right: 16px;
   margin: 10px;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 14px;
+  margin-right: 14px;
   width: 220px;
   background-color: var(--cardColor);
   border: 1px solid: var(--tournamentCardColor);
