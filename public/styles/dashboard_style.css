@@ -93,7 +93,7 @@ select option{
 }
 
 .main-page{
-  padding-top: 70px;
+  padding-top: 95px;
   width: 100%;
   margin-left: 0px;
 }
@@ -1683,7 +1683,7 @@ text-align: center;
 
   .main-page{
     width: 100vw;
-    margin-left: 0px;
+    padding-top: 120px;
   }
 
   .userInfobar{
