@@ -18,10 +18,6 @@ function personalizeElements() {
     wins = doc.data().stats.wins;
     bugsReported = doc.data().stats.bugsReported;
 
-
-
-
-
     //if (doc.data().teams.length === 0) { document.getElementById("team").placeholder = "None"; }
   }).then(function() {
     firebase.firestore().collection("tournaments").where("date", ">=", new Date()).where("players", "array-contains", firebase.auth().currentUser.uid).get().then(function(querySnapshot) {
