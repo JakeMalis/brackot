@@ -324,9 +324,12 @@ margin-top: 13px;
 #firstGreetingMessage{
   color: #eeeeee;
   display: normal;
-  font-size: 50px;
+  font-size: 40px;
   font-weight: 600;
   text-align: center;
+  padding-top: 30px;
+  padding-right: 20px;
+  padding-left: 20px;
 }
 
 #greetingMessage{
@@ -857,8 +860,8 @@ text-align: center;
 }
 
 .statCardContent{
-  margin-top: 58px;
-  margin-bottom: 58px;
+  margin-top: 30px;
+  margin-bottom: 30px;
   margin-left: 25px;
   margin-right: 25px;
 }
@@ -1655,6 +1658,10 @@ text-align: center;
 
 /* THE BELOW SECTION IS MEANT FOR MOBILE DEVICES ONLY */
 @media only screen and (min-width: 480px){
+  #firstGreetingMessage{
+    font-size: 50px;
+  }
+
   .row{
     margin-left: 50px !important;
     margin-right: 50px !important;
@@ -1843,6 +1850,10 @@ text-align: center;
 }
 
 #myTournaments{
+  display: none;
+}
+
+#myHostedTournaments{
   display: none;
 }
 
