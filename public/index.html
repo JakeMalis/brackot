@@ -35,6 +35,31 @@
         appId: "1:941824737400:web:739688aaff7fde7c8cad8d"
       };
       firebase.initializeApp(firebaseConfig);
+
+      window.onload = function() {
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) { loadHeader(); }
+        });
+      }
+
+      async function loadHeader() {
+        document.getElementById("avatar").src = firebase.auth().currentUser.photoURL;
+        document.getElementById("profilePicTab").style.display = "inline-block";
+        document.getElementById("loginTab").style.display = "none";
+
+        async function getCustomClaimRole() {
+          await firebase.auth().currentUser.getIdToken(true);
+          const decodedToken = await firebase.auth().currentUser.getIdTokenResult();
+          return decodedToken.claims.subscription;
+        }
+        getCustomClaimRole();
+
+        firebase.auth().currentUser.getIdTokenResult().then((idTokenResult) => {
+           if (idTokenResult.claims.subscription == "unlimited") {
+             document.getElementById("unlimitedIcon").style.visibility = "visible";
+           }
+        });
+      }
     </script>
 </head>
 
