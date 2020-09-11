@@ -94,8 +94,6 @@ function sendConfirmationEmail(tournamentId) {
   var game, date, name, tournamentImage;
 
   firebase.firestore().collection("tournaments").doc(tournamentId).get().then(function(doc) {
-    tournamentImage = "../media/game_wallpapers/" + doc.data().game + "-gameplay.jpg";
-
     game = doc.data().game;
 
     date = new Date(doc.data().date.toDate());
@@ -110,23 +108,26 @@ function sendConfirmationEmail(tournamentId) {
       meridiem = "P.M."
     }
 
-    date = date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear() + ' @ ' + hour + ':' + date.getMinutes() + ' ' + meridiem;
+    date = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' @ ' + hour + ':' + date.getMinutes() + ' ' + meridiem;
 
     name = doc.data().name;
-  }).then(function() {
-    firebase.firestore().collection("mail").add({
-      toUids: [firebase.auth().currentUser.uid],
-      template: {
-        name: 'tournament_confirmation',
-        data: {
-          game: game,
-          name: name,
-          date: date,
-          id: tournamentId,
-          tournamentImage: tournamentImage,
-          email: firebase.auth().currentUser.email
+
+    var gsReference = firebase.storage().refFromURL("gs://brackot/game-images/" + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + ".jpg");
+    gsReference.getDownloadURL().then(async function(url) {
+      firebase.firestore().collection("mail").add({
+        toUids: [firebase.auth().currentUser.uid],
+        template: {
+          name: 'tournament_confirmation',
+          data: {
+            game: game,
+            name: name,
+            date: date,
+            id: tournamentId,
+            tournamentImage: url,
+            email: firebase.auth().currentUser.email
+          }
         }
-      }
+      });
     });
   });
 }
