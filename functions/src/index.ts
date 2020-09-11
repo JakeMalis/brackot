@@ -27,14 +27,10 @@ exports.deleteOldMail = functions.region('us-east1').pubsub.schedule('every 1 ho
 
 exports.sendWelcomeEmail = functions.region('us-east1').auth.user().onCreate(async (user) => {
   try {
-    const { email } = user;
+    const email = user.email;
+    const link: string = await admin.auth().generateEmailVerificationLink(email, { url: 'https://brackot.com', });
 
-    if (!email) {
-      throw new Error('Email is invalid');
-    }
-
-    const link: string = await admin.auth().generateEmailVerificationLink(email, { url: 'https://brackot.com' });
-
+    /*
     await admin.firestore().collection('mail').add({
       to: email,
       template: {
@@ -45,11 +41,11 @@ exports.sendWelcomeEmail = functions.region('us-east1').auth.user().onCreate(asy
         }
       }
     });
-
+    */
     functions.logger.log(link);
-    functions.logger.log('Sent mail document');
+    //functions.logger.log('Sent mail document');
   }
-  catch (err) {
-    functions.logger.log(err);
+  catch (error) {
+    functions.logger.log(error);
   }
 });
