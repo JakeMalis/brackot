@@ -70,7 +70,7 @@ function loadRegisteredTournaments() {
         });
 
         document.getElementById("playerTournamentCard" + renderTournamentNumber).style.visibility = "visible";
-        document.getElementById("playerTournamentWallpaper" + renderTournamentNumber).src = "/media/game_wallpapers/" + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "-" + "cardWallpaper.webp";
+        document.getElementById("playerTournamentWallpaper" + renderTournamentNumber).src = "/media/game_wallpapers/" + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "-" + "cardWallpaper.jpg";
         document.getElementById("playerTournamentTitle" + renderTournamentNumber).innerHTML = doc.data().name;
 
         if (doc.data().game == "Counter-Strike Global Offensive") {
@@ -121,7 +121,7 @@ function loadRegisteredTournaments() {
         });
 
         document.getElementById("hostTournamentCard" + renderHostedTournamentNumber).style.visibility = "visible";
-        document.getElementById("hostTournamentWallpaper" + renderHostedTournamentNumber).src = "/media/game_wallpapers/" + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "-" + "cardWallpaper.webp";
+        document.getElementById("hostTournamentWallpaper" + renderHostedTournamentNumber).src = "/media/game_wallpapers/" + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "-" + "cardWallpaper.jpg";
         document.getElementById("hostTournamentTitle" + renderHostedTournamentNumber).innerHTML = doc.data().name;
 
         if (doc.data().game == "Counter-Strike Global Offensive") {

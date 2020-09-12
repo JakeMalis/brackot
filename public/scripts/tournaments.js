@@ -80,7 +80,7 @@ function renderTournamentCards() {
   var tournamentNumber = 1;
   query.get().then(function(querySnapshot) {
     querySnapshot.forEach(async function(doc) {
-        var wallpaper = "/media/game_wallpapers/" + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "-" + "cardWallpaper.webp";
+        var wallpaper = "/media/game_wallpapers/" + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "-" + "cardWallpaper.jpg";
         var title = doc.data().name;
         var creatorName = doc.data().creatorName;
         var participants = (doc.data().players.length) + " Participants";

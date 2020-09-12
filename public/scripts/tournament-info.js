@@ -112,7 +112,7 @@ function sendConfirmationEmail(tournamentId) {
 
     name = doc.data().name;
 
-    var gsReference = firebase.storage().refFromURL("gs://brackot/game-images/" + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + ".webp");
+    var gsReference = firebase.storage().refFromURL("gs://brackot/game-images/" + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + ".jpg");
     gsReference.getDownloadURL().then(async function(url) {
       firebase.firestore().collection("mail").add({
         toUids: [firebase.auth().currentUser.uid],
