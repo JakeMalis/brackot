@@ -16,8 +16,8 @@ class MatchCard extends React.Component {
   render() {
     return (
       <div className={"match " + "match" + this.props.roundNumber} id={"matchCardRound" + this.props.roundNumber + "Match" + this.props.matchNumber} onClick={() => { openMatchModal("matchCardRound" + this.props.roundNumber + "Match" + this.props.matchNumber)}}>
-        <UpperParticipant participantNumber={this.props.participants[0].uid} roundNumber={this.props.roundNumber} matchNumber={this.props.matchNumber} />
-        <LowerParticipant participantNumber={this.props.participants[1].uid} roundNumber={this.props.roundNumber} matchNumber={this.props.matchNumber} />
+        <UpperParticipant visibility={this.props.participants[0].visibility} participantNumber={this.props.participants[0].uid} roundNumber={this.props.roundNumber} matchNumber={this.props.matchNumber} />
+        <LowerParticipant visibility={this.props.participants[1].visibility} participantNumber={this.props.participants[1].uid} roundNumber={this.props.roundNumber} matchNumber={this.props.matchNumber} />
       </div>
     );
   }
@@ -26,7 +26,7 @@ class MatchCard extends React.Component {
 class UpperParticipant extends React.Component {
   render() {
     return(
-      <div className={"participant UpperHalf"}>
+      <div className={"participant UpperHalf " + this.props.visibility}>
         <img className="participantProfilePic" id={"upperParticipantProfilePicRound" + this.props.roundNumber + "Match" + this.props.matchNumber + "-" + this.props.participantNumber} src="media/BrackotLogo2.jpg"></img>
         <p className="teamName" id={"upperParticipantNameRound" + this.props.roundNumber + "Match" + this.props.matchNumber + "-" + this.props.participantNumber}></p>
         <p className="score whiteText" id={"upperParticipantScoreRound" + this.props.roundNumber + "Match" + this.props.matchNumber + "-" + this.props.participantNumber}></p>
@@ -38,7 +38,7 @@ class UpperParticipant extends React.Component {
 class LowerParticipant extends React.Component {
   render() {
     return(
-      <div className={"participant LowerHalf"}>
+      <div className={"participant LowerHalf " + this.props.visibility}>
         <img className="participantProfilePic" id={"lowerParticipantProfilePicRound" + this.props.roundNumber + "Match" + this.props.matchNumber + "-" + this.props.participantNumber} src="media/BrackotLogo2.jpg"></img>
         <p className="teamName" id={"lowerParticipantNameRound" + this.props.roundNumber + "Match" + this.props.matchNumber + "-" + this.props.participantNumber}></p>
         <p className="score whiteText" id={"lowerParticipantScoreRound" + this.props.roundNumber + "Match" + this.props.matchNumber + "-" + this.props.participantNumber}></p>
@@ -136,7 +136,17 @@ function renderMatchCards() {
         }
         else if ((entry.playerOne === null) && (entry.playerTwo === null)){
           MatchColumnCards.push(<EmptyMatchCard roundNumber={round} matchNumber={matchNumber} emptyRound=" emptySpace" />);
+        }/*
+        else if ((entry.playerOne === null) && (entry.playerTwo != null)){
+          upperParticipant = { uid: entry.playerOne, visibility: "hidden"};
+          participants.push(upperParticipant);
+          lowerParticipant = { uid: entry.playerTwo };
+          participants.push(lowerParticipant);
+          MatchColumnCards.push(<MatchCard roundNumber={round} matchNumber={matchNumber} empty="" participants={participants} />);
         }
+        else if ((entry.playerOne != null) && (entry.playerTwo === null)){
+
+        }*/
         else {
           upperParticipant = { uid: entry.playerOne };
           participants.push(upperParticipant);
@@ -274,18 +284,21 @@ function createInitialMatches(){
   return matches;
 }
 
+function refresh(){
+  renderMatchCards();
+}
 
-function assignWinner(matchUp){
-  if(matchUp.playerOneScore > matchUp.playerTwoScore){
-    return matchUp.playerOne;
+function assignWinner(matchup){
+  if(matchup.playerOneScore > matchup.playerTwoScore){
+    return matchup.playerOne;
   }
-  else if(matchUp.playerOneScore < matchUp.playerTwoScore){
-    return matchUp.plaayerTwoScore;
+  else if(matchup.playerOneScore < matchup.playerTwoScore){
+    return matchup.playerTwo;
   }
-  else if(matchUp.playerOneScore == null && matchUp.playerTwoScore == null){
+  else if(matchup.playerOneScore == null && matchup.playerTwoScore == null){
     return null;
   }
-  return matchUp.playerOne;
+  return matchup.playerOne;
 }
 
 
@@ -332,10 +345,6 @@ function nextRound(lastRound){
     return matches;
   }
   return assignWinner(lastRound[0]);
-}
-
-function assignScores(){
-
 }
 
 /* THIS IS THE ID OF A MATCH CARD         matchCardRound" + this.props.roundNumber + "Match" + this.props.matchNumber */
@@ -452,16 +461,19 @@ function startTournament() {
 function saveMatchScores() {
   firebase.firestore().collection("tournaments").doc(tournamentId).get().then(function(doc){
     var matches;
+    var nextMatches; //this will store the entire round of matches in the round following 'matches'
     var round = clickedRound;
+    var maxRound = getByesAndRounds()[1];
     var matchNum = clickedMatch;
-    if(round == 1){matches = doc.data().matchupsRound1;}
-    if(round == 2){matches = doc.data().matchupsRound2;}
-    if(round == 3){matches = doc.data().matchupsRound3;}
-    if(round == 4){matches = doc.data().matchupsRound4;}
-    if(round == 5){matches = doc.data().matchupsRound5;}
-    if(round == 6){matches = doc.data().matchupsRound6;}
-    if(round == 7){matches = doc.data().matchupsRound7;}
-    if(round == 8){matches = doc.data().matchupsRound8;}
+    var nextMatchNum = Math.floor(matchNum / 2);
+    if(round == 1){matches = doc.data().matchupsRound1; if(round < maxRound) {nextMatches = doc.data().matchupsRound2;}}
+    if(round == 2){matches = doc.data().matchupsRound2; if(round < maxRound) {nextMatches = doc.data().matchupsRound3;}}
+    if(round == 3){matches = doc.data().matchupsRound3; if(round < maxRound) {nextMatches = doc.data().matchupsRound4;}}
+    if(round == 4){matches = doc.data().matchupsRound4; if(round < maxRound) {nextMatches = doc.data().matchupsRound5;}}
+    if(round == 5){matches = doc.data().matchupsRound5; if(round < maxRound) {nextMatches = doc.data().matchupsRound6;}}
+    if(round == 6){matches = doc.data().matchupsRound6; if(round < maxRound) {nextMatches = doc.data().matchupsRound7;}}
+    if(round == 7){matches = doc.data().matchupsRound7; if(round < maxRound) {nextMatches = doc.data().matchupsRound8;}}
+    if(round == 8){matches = doc.data().matchupsRound8; if(round < maxRound) {nextMatches = doc.data().matchupsRound9;}}
     if(round == 9){matches = doc.data().matchupsRound9;}
     var newScore1 = document.getElementById('upperParticipantScoreInput').value;
     var newScore2 = document.getElementById('lowerParticipantScoreInput').value;
@@ -473,62 +485,118 @@ function saveMatchScores() {
     if(matches[matchNum].playerTwoScore != newScore2){
       matches[matchNum].playerTwoScore = newScore2;
     }
+
+    if(round < maxRound){
+      if (nextMatches != (null || undefined)){
+        if((matchNum % 2) == 0){
+          nextMatches[nextMatchNum].playerOne = assignWinner(matches[matchNum]);
+        }
+        else{
+          nextMatches[nextMatchNum].playerTwo = assignWinner(matches[matchNum]);
+        }
+      }
+    }
+
     if(round == 1){
       firebase.firestore().collection("tournaments").doc(tournamentId).update({
-        matchupsRound1: matches
+        matchupsRound1: matches,
       }).then(function() {
         console.log('Uploaded scores!')
+      });
+    }
+    if((round == 1) && (round < maxRound)){
+      firebase.firestore().collection("tournaments").doc(tournamentId).update({
+        matchupsRound2: nextMatches
+      }).then(function() {
       });
     }
     if(round == 2){
       firebase.firestore().collection("tournaments").doc(tournamentId).update({
         matchupsRound2: matches
       }).then(function() {
-        console.log('Uploaded scores!')
+      });
+    }
+    if((round == 2) && (round < maxRound)){
+      firebase.firestore().collection("tournaments").doc(tournamentId).update({
+        matchupsRound3: nextMatches
+      }).then(function() {
       });
     }
     if(round == 3){
       firebase.firestore().collection("tournaments").doc(tournamentId).update({
         matchupsRound3: matches
       }).then(function() {
-        console.log('Uploaded scores!')
+      });
+    }
+    if((round == 3) && (round < maxRound)){
+      firebase.firestore().collection("tournaments").doc(tournamentId).update({
+        matchupsRound4: nextMatches
+      }).then(function() {
       });
     }
     if(round == 4){
       firebase.firestore().collection("tournaments").doc(tournamentId).update({
         matchupsRound4: matches
       }).then(function() {
-        console.log('Uploaded scores!')
+      });
+    }
+    if((round == 4) && (round < maxRound)){
+      firebase.firestore().collection("tournaments").doc(tournamentId).update({
+        matchupsRound5: nextMatches
+      }).then(function() {
       });
     }
     if(round == 5){
       firebase.firestore().collection("tournaments").doc(tournamentId).update({
         matchupsRound5: matches
       }).then(function() {
-        console.log('Uploaded scores!')
+      });
+    }
+    if((round == 5) && (round < maxRound)){
+      firebase.firestore().collection("tournaments").doc(tournamentId).update({
+        matchupsRound6: nextMatches
+      }).then(function() {
       });
     }
     if(round == 6){
       firebase.firestore().collection("tournaments").doc(tournamentId).update({
         matchupsRound6: matches
       }).then(function() {
-        console.log('Uploaded scores!')
+      });
+    }
+    if((round == 6) && (round < maxRound)){
+      firebase.firestore().collection("tournaments").doc(tournamentId).update({
+        matchupsRound7: nextMatches
+      }).then(function() {
       });
     }
     if(round == 7){
       firebase.firestore().collection("tournaments").doc(tournamentId).update({
         matchupsRound7: matches
       }).then(function() {
-        console.log('Uploaded scores!')
+      });
+    }
+    if((round == 7) && (round < maxRound)){
+      firebase.firestore().collection("tournaments").doc(tournamentId).update({
+        matchupsRound8: nextMatches
+      }).then(function() {
       });
     }
     if(round == 8){
       firebase.firestore().collection("tournaments").doc(tournamentId).update({
-        matchupsRound8: matches
+        matchupsRound8: matches,
+        matchupsRound9: nextMatches
       }).then(function() {
-        console.log('Uploaded scores!')
       });
     }
+    if((round == 8) && (round < maxRound)){
+      firebase.firestore().collection("tournaments").doc(tournamentId).update({
+        matchupsRound9: nextMatches
+      }).then(function() {
+      });
+    }
+  }).then(function() {
+    refresh();
   });
 
 

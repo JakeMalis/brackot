@@ -314,6 +314,10 @@ p{
   visibility: visible !important;
 }
 
+.hidden{
+  visibility: hidden !important;
+}
+
 .connector{
   position: relative;
   padding-top: var(--participantHeight);
@@ -355,7 +359,7 @@ p{
   text-align: center;
   font-size: 16px;
   width: var(--participantHeight);
-  float: left;
+  float: right;
   margin: 0px;
   background-color: var(--tournamentCardColor);
 }
