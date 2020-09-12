@@ -14,7 +14,6 @@ function personalizeElements() {
 var games = ["Counter-Strike Global Offensive", "Fall Guys", "Fortnite", "League of Legends", "Minecraft", "Overwatch", "Rocket League", "Super Smash Bros. Ultimate", "Valorant"];
 var selectedGame = games;
 var tournamentsCollection = firebase.firestore().collection("tournaments");
-var date = new Date();
 var dateOperator = ">=";
 var dateOptions = ["Today", "This Week", "This Month"];
 var filteredDate = new Date();
@@ -80,8 +79,8 @@ function renderTournamentCards() {
   var TournamentCardArray = [];
   var tournamentNumber = 1;
   query.get().then(function(querySnapshot) {
-    querySnapshot.forEach(function(doc) {
-        var wallpaper = "/media/game_wallpapers/" + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "-" + "cardWallpaper.jpg";
+    querySnapshot.forEach(async function(doc) {
+        var wallpaper = "/media/game_wallpapers/" + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "-" + "cardWallpaper.webp";
         var title = doc.data().name;
         var creatorName = doc.data().creatorName;
         var participants = (doc.data().players.length) + " Participants";
@@ -93,15 +92,16 @@ function renderTournamentCards() {
           var game = doc.data().game;
         }
 
-        var tournamentCreator = doc.data().creator;
-        var tournamentHostPic;
-        var gsReference = firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + tournamentCreator + "/profile");
-        gsReference.getDownloadURL().then(function (url) {
-          tournamentHostPic = "https://firebasestorage.googleapis.com/v0/b/brackot-app.appspot.com/o/0Ey9PJX4QOeAwXjq7go7Z5kFR1J2%2Fprofile?alt=media&token=7350040b-e237-4ebe-a584-6eae0ddc3dcb";
-          console.log(url);
+        /*
+        //var tournamentHostPic = "https://firebasestorage.googleapis.com/v0/b/brackot-app.appspot.com/o/0Ey9PJX4QOeAwXjq7go7Z5kFR1J2%2Fprofile?alt=media&token=7350040b-e237-4ebe-a584-6eae0ddc3dcb"
+        firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + doc.data().creator + "/profile").getDownloadURL().then(function (url) {
+          var tournamentHostPic = String(url);
+          console.log(tournamentHostPic);
         }).catch(function(error) {
-          tournamentHostPic = "media/BrackotLogo2.jpg";
+          console.log(error);
+          var tournamentHostPic = "media/BrackotLogo2.jpg";
         });
+        */
 
         var date = new Date(doc.data().date.toDate());
         var hour, meridiem;
@@ -115,19 +115,8 @@ function renderTournamentCards() {
           meridiem = "P.M."
         }
         var tournamentDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' @ ' + hour + ':' + String(date.getMinutes()).padStart(2, "0") + ' ' + meridiem;
-        create();
-        function create(){
-          if(tournamentHostPic != null){
-            TournamentCardArray.push(<TournamentCard wallpaper={wallpaper} title={title} game={game} date={tournamentDate} participants={participants} tournamentHostPic={tournamentHostPic} tournamentID={doc.id} creatorName={creatorName} />);
-            clearInterval(myVar);
-            console.log("hi plz work");
-          }
-          else {
-            var myVar = setInterval(create, 100);
-          }
-        }
-        TournamentCardArray.push(<TournamentCard wallpaper={wallpaper} title={title} game={game} date={tournamentDate} participants={participants} tournamentHostPic={tournamentHostPic} tournamentID={doc.id} creatorName={creatorName} />);
 
+        TournamentCardArray.push(<TournamentCard wallpaper={wallpaper} title={title} game={game} date={tournamentDate} participants={participants} tournamentHostPic="media/BrackotLogo2.jpg" tournamentID={doc.id} creatorName={creatorName} />);
         tournamentNumber++;
     });
   }).then(function() {
