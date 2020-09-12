@@ -93,17 +93,15 @@ function renderTournamentCards() {
           var game = doc.data().game;
         }
 
-
         var tournamentCreator = doc.data().creator;
         var tournamentHostPic;
-        var gsReference = firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + tournamentCreator + "/profile")
+        var gsReference = firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + tournamentCreator + "/profile");
         gsReference.getDownloadURL().then(function (url) {
+          tournamentHostPic = "https://firebasestorage.googleapis.com/v0/b/brackot-app.appspot.com/o/0Ey9PJX4QOeAwXjq7go7Z5kFR1J2%2Fprofile?alt=media&token=7350040b-e237-4ebe-a584-6eae0ddc3dcb";
           console.log(url);
-          //tournamentHostPic = url;
         }).catch(function(error) {
           tournamentHostPic = "media/BrackotLogo2.jpg";
         });
-
 
         var date = new Date(doc.data().date.toDate());
         var hour, meridiem;
@@ -117,8 +115,19 @@ function renderTournamentCards() {
           meridiem = "P.M."
         }
         var tournamentDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' @ ' + hour + ':' + String(date.getMinutes()).padStart(2, "0") + ' ' + meridiem;
-
+        create();
+        function create(){
+          if(tournamentHostPic != null){
+            TournamentCardArray.push(<TournamentCard wallpaper={wallpaper} title={title} game={game} date={tournamentDate} participants={participants} tournamentHostPic={tournamentHostPic} tournamentID={doc.id} creatorName={creatorName} />);
+            clearInterval(myVar);
+            console.log("hi plz work");
+          }
+          else {
+            var myVar = setInterval(create, 100);
+          }
+        }
         TournamentCardArray.push(<TournamentCard wallpaper={wallpaper} title={title} game={game} date={tournamentDate} participants={participants} tournamentHostPic={tournamentHostPic} tournamentID={doc.id} creatorName={creatorName} />);
+
         tournamentNumber++;
     });
   }).then(function() {
