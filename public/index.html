@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="styles/topbar.css">
     <link rel="stylesheet" type="text/css" href="styles/footer.css">
 
+    <link rel="stylesheet" type="text/css" href="styles/font-awesome/css/all.css">
     <link rel="stylesheet" href="https://use.typekit.net/fyp1otf.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -19,6 +20,8 @@
     <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-auth.js"></script>
 
+    <script src="scripts/header.js"></script>
+    <script src="scripts/topbar.js"></script>
     <script src="scripts/gamesCarousel.js"></script>
 
     <script>
@@ -32,31 +35,6 @@
         appId: "1:941824737400:web:739688aaff7fde7c8cad8d"
       };
       firebase.initializeApp(firebaseConfig);
-
-      window.onload = function() {
-        firebase.auth().onAuthStateChanged(function(user) {
-          if (user) { loadHeader(); }
-        });
-      }
-
-      async function loadHeader() {
-        document.getElementById("avatar").src = firebase.auth().currentUser.photoURL;
-        document.getElementById("profilePicTab").style.display = "inline-block";
-        document.getElementById("loginTab").style.display = "none";
-
-        async function getCustomClaimRole() {
-          await firebase.auth().currentUser.getIdToken(true);
-          const decodedToken = await firebase.auth().currentUser.getIdTokenResult();
-          return decodedToken.claims.subscription;
-        }
-        getCustomClaimRole();
-
-        firebase.auth().currentUser.getIdTokenResult().then((idTokenResult) => {
-           if (idTokenResult.claims.subscription == "unlimited") {
-             document.getElementById("unlimitedIcon").style.visibility = "visible";
-           }
-        });
-      }
     </script>
 </head>
 

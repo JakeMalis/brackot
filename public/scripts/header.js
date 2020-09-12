@@ -2,10 +2,11 @@ window.onload = function() {
   firebase.auth().onAuthStateChanged(function(user) {
       var path = window.location.pathname;
       var page = path.split("/").pop();
-      if (user) { personalizeElements(); loadHeader(); }
-      else if (!(user) && (page === "tournaments")) { personalizeElements(); loadHeader(); }
-      else { window.location = "login.html"; }
 
+      if (user && (page === "")) { loadHeader(); }
+      else if (user && !(page === "")) { personalizeElements(); loadHeader(); }
+      else if (!(user) && (page === "tournaments")) { personalizeElements(); }
+      else if (!(user) && (!(page === "tournaments") && !(page === ""))) { window.location = "login.html"; }
   });
 }
 
