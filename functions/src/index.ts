@@ -26,26 +26,9 @@ exports.deleteOldMail = functions.region('us-east1').pubsub.schedule('every 1 ho
 
 
 exports.sendWelcomeEmail = functions.region('us-east1').auth.user().onCreate(async (user) => {
-  try {
-    const email = user.email;
-    const link: string = await admin.auth().generateEmailVerificationLink(email, { url: 'https://brackot.com', });
+  if (!user.email) throw new Error("User has no email address");
 
-    /*
-    await admin.firestore().collection('mail').add({
-      to: email,
-      template: {
-        name: 'welcome',
-        data: {
-          link,
-          email
-        }
-      }
-    });
-    */
-    functions.logger.log(link);
-    //functions.logger.log('Sent mail document');
-  }
-  catch (error) {
-    functions.logger.log(error);
-  }
+  const link = await admin.auth().generateEmailVerificationLink(user.email);
+
+  functions.logger.log(link);
 });
