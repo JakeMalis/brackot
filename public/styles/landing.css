@@ -166,7 +166,7 @@ select option{
 }
 
 #firstLanding{
-  background-image: url("../media/splash_art/zedsplashmobile.jpg");
+  background-image: url("../media/splash_art/zedsplashmobile.webp");
 }
 
 .shortIndex{
@@ -341,13 +341,13 @@ select option{
 }
 
 #thirdLandingTop{
-  background-image: url("../media/characters/fallguysart.png");
+  background-image: url("../media/game_images/fallguysart.webp");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: left;
 }
 #thirdLandingBottom{
-  background-image: url("../media/splash_art/baron.jpg");
+  background-image: url("../media/splash_art/baron.webp");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: right;
@@ -383,7 +383,7 @@ select option{
     display: inherit !important;
   }
   #firstLanding{
-    background-image: url("../media/splash_art/zedsplash.jpg");
+    background-image: url("../media/splash_art/zedsplash.webp");
   }
 
   #thirdLanding{

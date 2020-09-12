@@ -22,16 +22,16 @@ body {
 }
 
 .katSplash{
-  background-image: url("../media/splash_art/katsplashmobile.jpg");
+  background-image: url("../media/splash_art/katsplashmobile.webp");
 }
 
 .karmaSplash{
-  background-image: url("../media/splash_art/karmasplash.jpg");
+  background-image: url("../media/splash_art/karmasplash.webp");
   background-size: cover;
 }
 
 .akaliSplash{
-  background-image: url("../media/splash_art/akalisplash.jpg");
+  background-image: url("../media/splash_art/akalisplash.webp");
   background-size: cover;
 }
 
@@ -571,7 +571,7 @@ input[type="checkbox"]:checked + label{
 
 @media only screen and (min-width: 480px){
   .katSplash{
-    background-image: url("../media/splash_art/katsplash.jpg");
+    background-image: url("../media/splash_art/katsplash.webp");
     background-size: cover;
   }
 
