@@ -104,7 +104,7 @@ function loadRegisteredTournaments() {
             //console.log(error);
         });
 
-        document.getElementById("playerTournamentDate" + renderTournamentNumber).innerHTML = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' @ ' + hour + ':' + date.getMinutes() + ' ' + meridiem;
+        document.getElementById("playerTournamentDate" + renderTournamentNumber).innerHTML = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' @ ' + hour + ':' + String(date.getMinutes()).padStart(2, "0") + ' ' + meridiem;
         document.getElementById("playerTournamentParticipants" + renderTournamentNumber).innerHTML = (doc.data().players.length) + " Participants";
 
 
@@ -155,7 +155,7 @@ function loadRegisteredTournaments() {
             //console.log(error);
         });
 
-        document.getElementById("hostTournamentDate" + renderHostedTournamentNumber).innerHTML = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' @ ' + hour + ':' + date.getMinutes() + ' ' + meridiem;
+        document.getElementById("hostTournamentDate" + renderHostedTournamentNumber).innerHTML = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' @ ' + hour + ':' + String(date.getMinutes()).padStart(2, "0") + ' ' + meridiem;
         document.getElementById("hostTournamentParticipants" + renderHostedTournamentNumber).innerHTML = (doc.data().players.length) + " Participants";
 
 
