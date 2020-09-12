@@ -672,7 +672,6 @@ text-align: center;
   height: 370px;
   background: transparent;
   transition-duration: 0.2s;
-  visibility: hidden;
 }
 
 .tournamentCardBackground{

@@ -21,23 +21,26 @@ var filteredDate = new Date();
 var query = tournamentsCollection.where("date", ">=", new Date()).where("date", dateOperator, filteredDate).where("game", "in", games);
 
 class TournamentCard extends React.Component {
+  handleClick() {
+    window.location = "tournament-info?tournamentId=" + this.props.tournamentID;
+  }
   render() {
     return (
-        <div className="tournamentCard" id={"tournamentCard" + this.props.tournamentNumber}>
+        <div className="tournamentCard">
           <div className="tournamentCardBackground">
-            <div className="tournamentCardContent" id={"tournamentContent" + this.props.tournamentNumber}>
-              <img className="tournamentWallpaper" id={"tournamentWallpaper" + this.props.tournamentNumber}></img>
+            <div className="tournamentCardContent" onClick={() => this.handleClick()}>
+              <img className="tournamentWallpaper" src={this.props.wallpaper}></img>
               <div className="tournamentCardText">
-                  <h6 className="tournamentCardTitle" id={"tournamentTitle" + this.props.tournamentNumber}></h6>
+                  <h6 className="tournamentCardTitle">{this.props.title}</h6>
                   <ul className="tournamentCardDetails">
-                    <li className="tournamentDetailsList"><i className="fa fa-gamepad tournamentCardIcon" aria-hidden="true"></i><div className="tournamentCardDetail" id={"tournamentGame" + this.props.tournamentNumber}></div></li>
-                    <li className="tournamentDetailsList"><i className="fa fa-calendar tournamentCardIcon" aria-hidden="true"></i><div className="tournamentCardDetail" id={"tournamentDate" + this.props.tournamentNumber}></div></li>
-                    <li className="tournamentDetailsList"><i className="fa fa-user tournamentCardIcon" aria-hidden="true"></i><div className="tournamentCardDetail" id={"tournamentParticipants" + this.props.tournamentNumber}></div></li>
+                    <li className="tournamentDetailsList"><i className="fa fa-gamepad tournamentCardIcon" aria-hidden="true"></i><div className="tournamentCardDetail">{this.props.game}</div></li>
+                    <li className="tournamentDetailsList"><i className="fa fa-calendar tournamentCardIcon" aria-hidden="true"></i><div className="tournamentCardDetail">{this.props.date}</div></li>
+                    <li className="tournamentDetailsList"><i className="fa fa-user tournamentCardIcon" aria-hidden="true"></i><div className="tournamentCardDetail">{this.props.participants}</div></li>
                   </ul>
               </div>
               <div className="tournamentCardHostBar">
-                <img className="tournamentCardHostPic" id={"tournamentHostPic" + this.props.tournamentNumber} src="media/BrackotLogo2.jpg"></img>
-                <h6 className="tournamentCardHostName" id={"tournamentHostName" + this.props.tournamentNumber}></h6>
+                <img className="tournamentCardHostPic" src={this.props.tournamentHostPic}></img>
+                <h6 className="tournamentCardHostName">{this.props.creatorName}</h6>
               </div>
             </div>
           </div>
@@ -45,6 +48,7 @@ class TournamentCard extends React.Component {
     );
   }
 }
+
 
 async function filterData() {
   $(function(){
@@ -72,56 +76,37 @@ async function filterData() {
   });
 }
 
-async function renderTournamentCards() {
+function renderTournamentCards() {
   var TournamentCardArray = [];
   var tournamentNumber = 1;
   query.get().then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
-        TournamentCardArray.push(<TournamentCard tournamentNumber={tournamentNumber} />);
-        tournamentNumber++
-    });
-  }).then(function() {
-    ReactDOM.render(
-      TournamentCardArray,
-      document.getElementById("row")
-    );
-  }).then(function() {
-    addTournamentCardData();
-  });
-}
+        var wallpaper = "/media/game_wallpapers/" + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "-" + "cardWallpaper.jpg";
+        var title = doc.data().name;
+        var creatorName = doc.data().creatorName;
+        var participants = (doc.data().players.length) + " Participants";
 
-async function addTournamentCardData() {
-  var tournamentNumber = 1;
-  query.get().then(function(querySnapshot) {
-    querySnapshot.forEach(function(doc) {
-        $('#tournamentContent' + tournamentNumber).click(function(){
-          window.location = "tournament-info?tournamentId=" + doc.id;
-        });
-
-        document.getElementById("tournamentCard" + tournamentNumber).style.visibility = "visible";
-        document.getElementById("tournamentWallpaper" + tournamentNumber).src = "/media/game_wallpapers/" + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "-" + "cardWallpaper.jpg";
-        document.getElementById("tournamentTitle" + tournamentNumber).innerHTML = doc.data().name;
         if (doc.data().game == "Counter-Strike Global Offensive") {
-          document.getElementById("tournamentGame" + tournamentNumber).innerHTML = "Counter-Strike: Global Offensive";
+          var game = "Counter-Strike: Global Offensive";
         }
         else {
-          document.getElementById("tournamentGame" + tournamentNumber).innerHTML = doc.data().game;
+          var game = doc.data().game;
         }
-        document.getElementById("tournamentHostName" + tournamentNumber).innerHTML = doc.data().creatorName;
+
 
         var tournamentCreator = doc.data().creator;
-        var gsReference = firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + tournamentCreator + "/profile");
-        var nNumber = tournamentNumber;
+        var tournamentHostPic;
+        var gsReference = firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + tournamentCreator + "/profile")
         gsReference.getDownloadURL().then(function (url) {
-          document.getElementById("tournamentHostPic" + nNumber).src = url;
-        }).catch((error) => {
-            //console.log(error);
+          console.log(url);
+          //tournamentHostPic = url;
+        }).catch(function(error) {
+          tournamentHostPic = "media/BrackotLogo2.jpg";
         });
 
 
         var date = new Date(doc.data().date.toDate());
-        var hour;
-        var meridiem;
+        var hour, meridiem;
 
         if ((date.getHours() - 12) <= 0) {
           hour = date.getHours();
@@ -131,12 +116,15 @@ async function addTournamentCardData() {
           hour = date.getHours() - 12;
           meridiem = "P.M."
         }
+        var tournamentDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' @ ' + hour + ':' + String(date.getMinutes()).padStart(2, "0") + ' ' + meridiem;
 
-        document.getElementById("tournamentDate" + tournamentNumber).innerHTML = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' @ ' + hour + ':' + date.getMinutes() + ' ' + meridiem;
-        document.getElementById("tournamentParticipants" + tournamentNumber).innerHTML = (doc.data().players.length) + " Participants";
-
-
+        TournamentCardArray.push(<TournamentCard wallpaper={wallpaper} title={title} game={game} date={tournamentDate} participants={participants} tournamentHostPic={tournamentHostPic} tournamentID={doc.id} creatorName={creatorName} />);
         tournamentNumber++;
     });
+  }).then(function() {
+    ReactDOM.render(
+      TournamentCardArray,
+      document.getElementById("row")
+    );
   });
 }
