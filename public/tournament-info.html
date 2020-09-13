@@ -59,7 +59,7 @@
               <h2 id="tournamentTitle"></h2>
               <ul class="tournamentQuickDetails">
                 <li class="quickDetail"><i class="fa fa-user quickDetailIcon" aria-hidden="true"></i><p id="participantsQuick" class="quickDetailText"></p></li>
-                <li class="quickDetail"><i class="fa fa-trophy quickDetailIcon" aria-hidden="true"></i><p id="prizingQuick" class="quickDetailText"></p></li>
+                <li id="prizingQuickListItem" class="quickDetail"><i class="fa fa-trophy quickDetailIcon" aria-hidden="true"></i><p id="prizingQuick" class="quickDetailText"></p></li>
                 <li class="quickDetail"><i class="fa fa-gamepad quickDetailIcon" aria-hidden="true"></i><p id="gameQuick" class="quickDetailText"></p></li>
                 <li class="quickDetail"><i class="fa fa-calendar quickDetailIcon" aria-hidden="true"></i><p id="dateAndTimeQuick" class="quickDetailText"></p></li>
               </ul>
@@ -78,8 +78,8 @@
                 </div>
                 <div class="tournamentInfoRow noBottomPadding">
                   <div class="tournamentInfoColumn">
-                    <h6 class="tournamentInfoSubheader">Prizes</h6>
-                    <ul class="prizingList">
+                    <h6 id="tournamentInfoSubheaderPrizes" class="tournamentInfoSubheader">Prizes</h6>
+                    <ul id="prizingList" class="prizingList">
                       <li class="prizingListItem" id="firstPlace"><i class="fa fa-trophy tournamentInfoPrizingIcon goldColor" aria-hidden="true"></i><p id="tournamentInfoFirstPrizing" class="tournamentInfoDetail font18"></p></li>
                       <li class="prizingListItem" id="secondPlace"><i class="fa fa-trophy tournamentInfoPrizingIcon silverColor" aria-hidden="true"></i><p id="tournamentInfoSecondPrizing" class="tournamentInfoDetail font18"></p></li>
                       <li class="prizingListItem" id="thirdPlace"><i class="fa fa-trophy tournamentInfoPrizingIcon bronzeColor" aria-hidden="true"></i><p id="tournamentInfoThirdPrizing" class="tournamentInfoDetail font18"></p></li>

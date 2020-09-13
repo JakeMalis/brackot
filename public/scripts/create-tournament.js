@@ -49,11 +49,6 @@ function addTournament() {
   var firstEarnings = document.getElementById('firstEarnings').value;
   var secondEarnings = document.getElementById('secondEarnings').value;
   var thirdEarnings = document.getElementById('thirdEarnings').value;
-  if((firstEarnings === "") && (secondEarnings === "") && (thirdEarnings === "")){
-    firstEarnings = "0";
-    secondEarnings = "0";
-    thirdEarnings = "0";
-  }
 
   firebase.firestore().collection("tournaments").add({
       creator: firebase.auth().currentUser.uid,
@@ -71,9 +66,9 @@ function addTournament() {
           mobile: document.getElementById("mobile").checked
       },
       earnings: {
-          1: parseInt(firstEarnings),
-          2: parseInt(secondEarnings),
-          3: parseInt(thirdEarnings)
+          1: firstEarnings,
+          2: secondEarnings,
+          3: thirdEarnings
       },
       tournamentStarted: false,
       unlimited: document.getElementById("unlimited").checked,

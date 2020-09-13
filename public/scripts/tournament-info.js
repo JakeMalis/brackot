@@ -11,10 +11,37 @@ function personalizeElements() {
 
   firebase.firestore().collection("tournaments").doc(tournamentId).get().then(function(doc) {
     document.getElementById("tournamentTitle").innerHTML = doc.data().name;
-    document.getElementById("prizingQuick").innerHTML = ((doc.data().earnings[1]) + (doc.data().earnings[2]) + (doc.data().earnings[3])) + " Star Coins";
+    var firstPlacePrize = (doc.data().earnings[1]);
+    var secondPlacePrize = (doc.data().earnings[2]);
+    var thirdPlacePrize = (doc.data().earnings[3]);
+    if((firstPlacePrize == ("" || null || 0)) && (secondPlacePrize == ("" || null || 0)) && (thirdPlacePrize == ("" || null || 0))){
+      $('#prizingQuickListItem').remove();
+      $('#tournamentInfoSubheaderPrizes').remove();
+      $('#prizingList').remove();
+    }
+    else{
+      document.getElementById("prizingQuick").innerHTML = "Prizing Offered";
+      if (doc.data().earnings[1] != ("" || null || 0)) {
+        document.getElementById("tournamentInfoFirstPrizing").innerHTML = doc.data().earnings[1];
+      }
+      else{
+        $('#firstPlace').remove();
+      }
+      if (doc.data().earnings[2] != ("" || null || 0)) {
+        document.getElementById("tournamentInfoSecondPrizing").innerHTML = doc.data().earnings[2];
+      }
+      else{
+        $('#secondPlace').remove();
+      }
+      if (doc.data().earnings[3] != ("" || null || 0)) {
+        document.getElementById("tournamentInfoThirdPrizing").innerHTML = doc.data().earnings[3];
+      }
+      else{
+        $('#thirdPlace').remove();
+      }
+    }
     document.getElementById("participantsQuick").innerHTML = (doc.data().players.length) + " Participants";
     document.getElementById("tournamentInfoDescription").innerHTML = doc.data().description;
-    document.getElementById("tournamentInfoFirstPrizing").innerHTML = doc.data().earnings[1] + " Star Coins";
 
     if (doc.data().game == "Counter-Strike Global Offensive") {
       document.getElementById("gameQuick").innerHTML = "Counter-Strike: Global Offensive";
@@ -37,16 +64,7 @@ function personalizeElements() {
 
     document.getElementById("dateAndTimeQuick").innerHTML = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' @ ' + hour + ':' + String(date.getMinutes()).padStart(2, "0") + ' ' + meridiem;
 
-    if (doc.data().earnings[2] != 0) {
-      document.getElementById("tournamentInfoSecondPrizing").innerHTML = doc.data().earnings[2] + " Star Coins";
-    } else { $('#secondPlace').remove(); }
-
-    if (doc.data().earnings[3] != 0) {
-      document.getElementById("tournamentInfoThirdPrizing").innerHTML = doc.data().earnings[3] + " Star Coins";
-    } else { $('#thirdPlace').remove(); }
-
     document.getElementById("tournamentInfoWallpaper").className = "headerImage tournamentInfoWallpaper " + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "InfoWallpaper";
-
 
     if (doc.data().tournamentStarted == false) {
       if (doc.data().creator === firebase.auth().currentUser.uid) {
