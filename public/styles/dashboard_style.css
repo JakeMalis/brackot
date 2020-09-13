@@ -111,6 +111,10 @@ select option{
   background-image: var(--gradient);
 }
 
+#tournamentInfoDescription{
+  white-space: pre-wrap;
+}
+
 .tournamentInfoWallpaper{
   background-repeat: no-repeat;
   background-size: cover;
