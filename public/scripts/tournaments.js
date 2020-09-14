@@ -79,18 +79,10 @@ function renderTournamentCards() {
   var TournamentCardArray = [];
   var tournamentNumber = 1;
   query.get().then(function(querySnapshot) {
-    querySnapshot.forEach(async (doc) => {
+    querySnapshot.forEach(async function(doc) {
         var wallpaper = "/media/game_wallpapers/" + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "-" + "cardWallpaper.jpg";
         var title = doc.data().name;
-
-        var creatorName = await firebase.firestore().runTransaction(transaction => {
-          return transaction.get(firebase.firestore().collection("users").doc(doc.data().creator)).then(creatorDoc => {
-            return creatorDoc.data().name;
-          })
-        });
-        console.log(creatorName)
-
-        //var creatorName = (() => { return 3; }) ();
+        var creatorName = doc.data().creatorName;
         var participants = (doc.data().players.length) + " Participants";
 
         if (doc.data().game == "Counter-Strike Global Offensive") {
@@ -100,20 +92,28 @@ function renderTournamentCards() {
           var game = doc.data().game;
         }
 
+        /*
         //var tournamentHostPic = "https://firebasestorage.googleapis.com/v0/b/brackot-app.appspot.com/o/0Ey9PJX4QOeAwXjq7go7Z5kFR1J2%2Fprofile?alt=media&token=7350040b-e237-4ebe-a584-6eae0ddc3dcb"
-        var tournamentHostPic = await firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + doc.data().creator + "/profile").getDownloadURL().then(function (url) {
-          return String(url);
+        firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + doc.data().creator + "/profile").getDownloadURL().then(function (url) {
+          var tournamentHostPic = String(url);
+          console.log(tournamentHostPic);
+        }).catch(function(error) {
+          console.log(error);
+          var tournamentHostPic = "media/BrackotLogo2.jpg";
         });
-
-        console.log(tournamentHostPic)
-
+        */
 
         var date = new Date(doc.data().date.toDate());
         var hour, meridiem;
 
-        if ((date.getHours() - 12) <= 0) {
+
+        if ((date.getHours() - 12) < 0) {
           hour = date.getHours();
           meridiem = "A.M."
+        }
+        else if ((date.getHours() - 12) == 0) {
+          hour = date.getHours();
+          meridiem = "P.M."
         }
         else {
           hour = date.getHours() - 12;
@@ -125,7 +125,6 @@ function renderTournamentCards() {
         tournamentNumber++;
     });
   }).then(function() {
-    console.log("hi")
     ReactDOM.render(
       TournamentCardArray,
       document.getElementById("row")
