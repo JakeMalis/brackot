@@ -24,7 +24,7 @@
     <script>
       window.onload = function() {
         firebase.auth().signOut();
-        firebase.auth().onAuthStateChanged(function(user) { if (!user) { window.location = "login.html"; }});
+        firebase.auth().onAuthStateChanged(function(user) { if (!user) { window.location = "index.html"; }});
       }
     </script>
 
