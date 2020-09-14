@@ -2,12 +2,14 @@
   --gradient: linear-gradient(120deg,#23F2AC,#23D0F2);
   --aquamarine: #23F2AC;
   --turquoise: #23D0F2;
+  --topbarColor: #161722;
   --background: #202131;
   --cardColor: #2b2c3c;
   --tournamentCardColor: #3a3b4a;
   --tournamentCardColorHover: #454656;
   --participantHover: #555666;
   --white: #eeeeee;
+
 
   --participantWidth: 200px;
   --participantHeight: calc(0.15 * var(--participantWidth));
@@ -55,6 +57,7 @@ p{
 .bracket{
   overflow-x: auto;
   min-height: 1px;
+  padding-top: 50px;
 }
 
 .teamName{
@@ -80,7 +83,8 @@ p{
 .matchColumn{
   float: left;
   height: auto;
-  width: var(--participantWidth);
+  width: 100%;
+  display: none;
 }
 
 .connectorColumn{
@@ -302,6 +306,8 @@ p{
 }
 
 .match{
+  margin-left: auto;
+  margin-right: auto;
   height: calc(2 * var(--participantHeight) + var(--dividerHeight));
   width: var(--participantWidth);
   border-radius: 4px;
@@ -613,4 +619,72 @@ p{
   margin-right: auto;
   font-size: 16px;
   letter-spacing: 1.2px;
+}
+
+
+/*========================================== MOBILE EXCLUSIVE FEATURES ==============================================================*/
+#bracketRoundContainer{
+  top: -21px;
+  left: -28px;
+  position: absolute;
+  height: 50px;
+  width: calc(100% + 56px);
+  background-color: var(--tournamentCardColorHover);
+  border-bottom: 1px solid var(--cardColor);
+  color: #eeeeee;
+}
+
+#bracketRoundMobileText{
+  text-align: center;
+  font-size: 15px;
+  padding-top: 13px;
+  margin: 0px;
+  display: inline-block;
+  height: 50px;
+  width: calc(100% - 100px);
+}
+
+.bracketRoundButton{
+  background: none;
+  border: none;
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.bracketRoundButton:hover{
+  background-color: var(--participantHover);
+}
+
+.bracketRoundButtonIcon{
+  padding-top: 13px;
+  margin: 0px;
+  height: 50px;
+  width: 50px;
+}
+
+#nextBracketRound{
+  float: right;
+}
+
+#prevBracketRound{
+  float: left;
+}
+
+
+
+
+@media only screen and (min-width: 480px){
+  #bracketRoundContainer{
+    display: none;
+  }
+  .bracket{
+    padding-top: 0px;
+  }
+  .matchColumn{
+    width: var(--participantWidth);
+    display: inline-block !important;
+  }
 }

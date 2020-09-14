@@ -633,3 +633,24 @@ function renderConnectors(){
   }
 }
 */
+
+var currentMobileRound = 1;
+function changeRoundMobile(action){
+  firebase.firestore().collection("tournaments").doc(tournamentId).get().then(function(doc){
+    var maxRound = getByesAndRounds()[1];
+    document.getElementById("matchColumn" + currentMobileRound).style.display = "none";
+    if((action == "previous") && (currentMobileRound > 1)){
+      currentMobileRound -= 1;
+    }
+    if((action == "next") && (currentMobileRound < maxRound)){
+      currentMobileRound += 1;
+    }
+    document.getElementById("matchColumn" + currentMobileRound).style.display = "inline-block";
+    if(currentMobileRound != maxRound){
+      document.getElementById("bracketRoundMobileText").innerHTML = "Round " + currentMobileRound;
+    }
+    else{
+      document.getElementById("bracketRoundMobileText").innerHTML = "Final Round";
+    }
+  });
+}

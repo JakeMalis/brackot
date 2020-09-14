@@ -1010,7 +1010,16 @@ text-align: center;
 }
 
 .infoTab{
+  position: relative;
+  margin-top: 21px;
+  margin-bottom: 21px;
+  margin-left: 28px;
+  margin-right: 28px;
   display:none;
+}
+
+#tournamentInfoCardContent{
+  margin: 0px;
 }
 
 #boostsContainer{
@@ -1374,7 +1383,7 @@ text-align: center;
 
 /* TOURNAMENT INFO PAGE CODE */
 .tournamentInfoPageContainer{
-  margin-top: 70px;
+  margin-top: 20px;
 }
 
 #participantsNavbar{
@@ -1415,7 +1424,7 @@ text-align: center;
   display: inline-block;
   margin-left: 10px;
   margin-right: 10px;
-  height: auto;
+  height: 25px;
 }
 
 .quickDetailIcon{
@@ -1752,9 +1761,15 @@ text-align: center;
     margin-left: 56px;
     margin-right: 56px;
   }
+  .infoTab{
+    margin-top: 42px;
+    margin-bottom: 42px;
+    margin-left: 56px;
+    margin-right: 56px;
+  }
 
   .tournamentInfoPageContainer{
-    margin-top: 150px;
+    margin-top: 60px;
   }
 }
 

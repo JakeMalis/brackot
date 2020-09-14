@@ -69,7 +69,7 @@
                 <li id="bracketNavbar" class="quickNavbarItem"><a class="quickNavbarItemLink" onclick="setTab('bracket')"><p class="quickNavbarItemText">Bracket</p></a></li>
               </ul>
             </div>
-            <div class="wideCardContent">
+            <div id="tournamentInfoCardContent" class="wideCardContent">
 
 
               <div id="overviewTab" class="infoTab">
@@ -107,6 +107,11 @@
 
 
               <div id="bracketTab" class="infoTab">
+                <div id="bracketRoundContainer">
+                  <button id="prevBracketRound" class="bracketRoundButton" onclick="changeRoundMobile('previous')"><i class="fa fa-caret-left bracketRoundButtonIcon" aria-hidden="true"></i></button>
+                  <p id="bracketRoundMobileText">Round 1</p>
+                  <button id="nextBracketRound" class="bracketRoundButton" onclick="changeRoundMobile('next')"><i class="fa fa-caret-right bracketRoundButtonIcon" aria-hidden="true"></i></button>
+                </div>
                 <div id="bracket" class="bracket">
                   <div class="matchColumn" id="matchColumn1">
                   </div>
