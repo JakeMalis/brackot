@@ -7,6 +7,7 @@
   <link rel="icon" type="image/png" href="media/favicon.png"/>
   <link rel="stylesheet" type="text/css" href="styles/dashboard_style.css">
   <link rel="stylesheet" type="text/css" href="styles/bracket.css">
+  <link rel="stylesheet" type="text/css" href="styles/alert.css">
   <link rel="stylesheet" type="text/css" href="styles/topbar.css">
   <link rel="stylesheet" type="text/css" href="styles/footer.css">
   <link rel="stylesheet" type="text/css" href="styles/font-awesome/css/all.css">
@@ -46,6 +47,9 @@
   </script>
 </head>
 <body>
+  <div id="alert">
+    <script> $( "#alert" ).load( "ajax/alert.html" ); </script>
+  </div>
   <div id="topbar">
     <script> $( "#topbar" ).load( "ajax/topbar.html" ); </script>
   </div>

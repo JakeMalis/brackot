@@ -1,0 +1,49 @@
+.alertBox {
+  display: none;
+  font-size: 16px;
+  z-index: 200;
+  bottom: 0;
+  width: 100%;
+  position: fixed;
+  padding: 20px;
+  background-color: #2b2c3c;
+  border-top: 6px solid #23F2AC; /* Aquamarine */
+  transition-duration: 0.2s;
+}
+
+.alertText{
+  padding-right: 10px;
+  color: #eeeeee;
+  display: inline-block;
+}
+
+.errorAlert{
+  border-top: 6px solid #f44336; /* Red */
+}
+
+/* The close button */
+.alertClose {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+/* When moving the mouse over the close button */
+.alertClose:hover {
+  color: #aaaaaa;
+}
+
+.boldText{
+  font-weight: 600;
+}
+
+@media only screen and (min-width: 480px){
+  .alertBox{
+    padding-left: 40px;
+  }
+}

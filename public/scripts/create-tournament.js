@@ -51,7 +51,13 @@ function searchGameCreateTournament(searchbar) {
   });
 }
 
-function addTournament() {
+function addTournament() { try{
+  if((document.getElementById('tournamentName').value == "")
+   ||(document.getElementById('tournamentDescription').value == "")
+   ||(document.getElementById('input[name="newTournamentGame"]:checked').value == "" || null || undefined)
+   ||(document.getElementById('input[name="newTournamentParticipantType"]:checked').value == "" || null || undefined)
+ ) throw "Incomplete Form Error";
+
   var date = document.getElementById("date").value, time = document.getElementById("time").value;
 
   var firstEarnings = document.getElementById('firstEarnings').value;
@@ -86,4 +92,11 @@ function addTournament() {
   }).catch(function(error) {
           console.error("Error writing document: ", error);
   });
+  }
+  catch(error){
+    document.getElementById("alertBox").style.display = "block";
+    document.getElementById("alertBox").classList.add("errorAlert");
+    document.getElementById("alertTextBold").innerHTML = "Error: ";
+    document.getElementById("alertText").innerHTML = "Your tournament submission was incomplete. All of the required fields must be complete before submitting.";
+  }
 }
