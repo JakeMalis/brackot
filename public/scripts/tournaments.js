@@ -83,12 +83,14 @@ function renderTournamentCards() {
         var wallpaper = "/media/game_wallpapers/" + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "-" + "cardWallpaper.jpg";
         var title = doc.data().name;
 
+        var creatorName = "charlie";
+/*
         var creatorName = await firebase.firestore().runTransaction(transaction => {
           return transaction.get(firebase.firestore().collection("users").doc(doc.data().creator)).then(creatorDoc => {
             return creatorDoc.data().name;
           })
         });
-        console.log(creatorName);
+        console.log(creatorName);*/
 
         var participants = (doc.data().players.length) + " Participants";
 
@@ -98,7 +100,7 @@ function renderTournamentCards() {
         else {
           var game = doc.data().game;
         }
-
+/*
         var tournamentHostPic = await firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + doc.data().creator + "/profile").getDownloadURL().then(function (url) {
           return String(url);
         }).catch(() => {
@@ -106,7 +108,7 @@ function renderTournamentCards() {
         });
         console.log(tournamentHostPic);
 
-
+*/
         var date = new Date(doc.data().date.toDate());
         var hour, meridiem;
 

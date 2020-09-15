@@ -4,10 +4,15 @@ function personalizeElements() {
   var url = new URL(window.location.href);
   tournamentId = url.searchParams.get("tournamentId");
 
+// HEY JAKE - THE BELOW CODE KEEPS THROWING AN ERROR, AND I DON'T THINK IT'S BEING USED ANY LONGER - CAN YOU CHECK?
   $.getScript('brackets.js', function() {
     startTournament();
     renderMatchCards();
   });
+
+
+  renderParticipants();
+
 
   firebase.firestore().collection("tournaments").doc(tournamentId).get().then(function(doc) {
     document.getElementById("tournamentTitle").innerHTML = doc.data().name;
