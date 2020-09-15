@@ -83,7 +83,7 @@ function renderTournamentCards() {
         var wallpaper = "/media/game_wallpapers/" + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "-" + "cardWallpaper.jpg";
         var title = doc.data().name;
 
-        var creatorName = "charlie";
+        var creatorName = "All-Star eSports Staff";
 /*
         var creatorName = await firebase.firestore().runTransaction(transaction => {
           return transaction.get(firebase.firestore().collection("users").doc(doc.data().creator)).then(creatorDoc => {
