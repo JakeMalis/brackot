@@ -43,6 +43,14 @@ function animateParticipantType(selected){
   $(clicked).addClass('createTournamentLabelChecked');
 }
 
+function searchGameCreateTournament(searchbar) {
+    var value = $(searchbar).val().toLowerCase();
+    $("#createTournamentGameCarousel > label").each(function() {
+      if ($(this).attr("id").toLowerCase().replace('label', '').replace('createtournament', '').search(value) > -1) { $(this).show(); }
+      else { $(this).hide(); }
+  });
+}
+
 function addTournament() {
   var date = document.getElementById("date").value, time = document.getElementById("time").value;
 

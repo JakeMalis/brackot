@@ -69,7 +69,7 @@
                 <h6 class="inputTitle">Description</h6>
                 <textarea name="newTournamentDescription" class="createTournamentTextInput" id="tournamentDescription" max-length="1000"></textarea>
                 <h6 class="inputTitle">Game</h6>
-                <div class="createTournamentGameCarousel">
+                <div id="createTournamentGameCarousel" class="createTournamentGameCarousel">
                   <label id="createTournamentLeagueLabel" onclick="animateGameCarousel(this.id)" class="createTournamentGamesLabel"><input name="newTournamentGame" class="createTournamentGamesRadio" type="radio" id="league" value="League of Legends"></input><img class="createTournamentGamesImage" src="media/game_images/LeagueBig.jpg"></label>
                   <label id="createTournamentFortniteLabel" onclick="animateGameCarousel(this.id)" class="createTournamentGamesLabel"><input name="newTournamentGame" class="createTournamentGamesRadio" type="radio" id="fortnite" value="Fortnite"></input><img class="createTournamentGamesImage" src="media/game_images/FortniteBig.jpg"></label>
                   <label id="createTournamentFallGuysLabel" onclick="animateGameCarousel(this.id)" class="createTournamentGamesLabel"><input name="newTournamentGame" class="createTournamentGamesRadio" type="radio" id="fallguys" value="Fall Guys"></input><img class="createTournamentGamesImage" src="media/game_images/FallGuysBig.jpg"></label>
@@ -80,6 +80,8 @@
                   <label id="createTournamentCSGOLabel" onclick="animateGameCarousel(this.id)" class="createTournamentGamesLabel"><input name="newTournamentGame" class="createTournamentGamesRadio" type="radio" id="csgo" value="Counter-Strike Global Offensive"></input><img class="createTournamentGamesImage" src="media/game_images/CounterStrikeGlobalOffensiveBig.jpg"></label>
                   <label id="createTournamentSmashLabel" onclick="animateGameCarousel(this.id)" class="createTournamentGamesLabel"><input name="newTournamentGame" class="createTournamentGamesRadio" type="radio" id="smash" value="Super Smash Bros. Ultimate"></input><img class="createTournamentGamesImage" src="media/game_images/SuperSmashBrosUltimateBig.jpg"></label>
                 </div>
+                <input type="text" name="newTournamentGameSearchbar" class="createTournamentTextInput" id="createTournamentGameSearchbar" placeholder="Find a game..." onkeyup="searchGameCreateTournament(this)"></input>
+
                 <h6 class="inputTitle">Platform(s)</h6>
                 <div class="createTournamentPlatform"  id="platform">
                   <label id="pcLabel" class="createTournamentLabel"><input onclick="animatePlatform(this.id)" name="newTournamentPlatform"  class="createTournamentInput" type="checkbox" id="pc" value="pc"><i class="fas fa-laptop createTournamentIcon"></i>PC</input></label>
