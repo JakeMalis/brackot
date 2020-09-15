@@ -4,12 +4,14 @@ function personalizeElements() {
   var url = new URL(window.location.href);
   tournamentId = url.searchParams.get("tournamentId");
 
-// HEY JAKE - THE BELOW CODE KEEPS THROWING AN ERROR, AND I DON'T THINK IT'S BEING USED ANY LONGER - CAN YOU CHECK?
+// The point of this code is to delcare functions from other files.
   $.getScript('brackets.js', function() {
     startTournament();
     renderMatchCards();
   });
-
+  $.getScript('participantCards.js', function() {
+    renderParticipants();
+  });
 
   renderParticipants();
 
