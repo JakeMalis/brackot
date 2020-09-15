@@ -131,3 +131,13 @@ function renderTournamentCards() {
     );
   });
 }
+
+
+
+function searchGameFilter(searchbar) {
+    var value = $(searchbar).val().toLowerCase();
+    $("#gameList > li").each(function() {
+      if ($(this).text().toLowerCase().search(value) > -1) { $(this).show(); }
+      else { $(this).hide(); }
+  });
+}
