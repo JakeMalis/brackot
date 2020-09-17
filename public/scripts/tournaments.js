@@ -84,13 +84,13 @@ function renderTournamentCards() {
         var title = doc.data().name;
 
         var creatorName = "All-Star eSports Staff";
-/*
-        var creatorName = await firebase.firestore().runTransaction(transaction => {
-          return transaction.get(firebase.firestore().collection("users").doc(doc.data().creator)).then(creatorDoc => {
+
+        creatorName = await firebase.firestore().runTransaction( async(transaction) => {
+          return await transaction.get(firebase.firestore().collection("users").doc(doc.data().creator)).then(creatorDoc => {
             return creatorDoc.data().name;
           })
         });
-        console.log(creatorName);*/
+        console.log(creatorName);
 
         var participants = (doc.data().players.length) + " Participants";
 
@@ -100,7 +100,7 @@ function renderTournamentCards() {
         else {
           var game = doc.data().game;
         }
-/*
+      
         var tournamentHostPic = await firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + doc.data().creator + "/profile").getDownloadURL().then(function (url) {
           return String(url);
         }).catch(() => {
@@ -108,7 +108,6 @@ function renderTournamentCards() {
         });
         console.log(tournamentHostPic);
 
-*/
         var date = new Date(doc.data().date.toDate());
         var hour, meridiem;
 
