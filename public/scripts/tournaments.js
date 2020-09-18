@@ -79,12 +79,12 @@ function renderTournamentCards() {
   var TournamentCardArray = [];
   var tournamentNumber = 1;
   query.get().then(async function(querySnapshot) {
+    const collectionLength = querySnapshot.size;
     querySnapshot.forEach(async (doc) => {
         var wallpaper = "/media/game_wallpapers/" + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "-" + "cardWallpaper.jpg";
         var title = doc.data().name;
 
         var creatorName = "All-Star eSports Staff";
-
         creatorName = await firebase.firestore().runTransaction( async(transaction) => {
           return await transaction.get(firebase.firestore().collection("users").doc(doc.data().creator)).then(creatorDoc => {
             return creatorDoc.data().name;
@@ -101,7 +101,8 @@ function renderTournamentCards() {
           var game = doc.data().game;
         }
       
-        var tournamentHostPic = await firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + doc.data().creator + "/profile").getDownloadURL().then(function (url) {
+        var tournamentHostPic = "media/addPic.png"
+        tournamentHostPic = await firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + doc.data().creator + "/profile").getDownloadURL().then(function (url) {
           return String(url);
         }).catch(() => {
           return "media/BrackotLogo2.jpg";
@@ -126,14 +127,15 @@ function renderTournamentCards() {
         var tournamentDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' @ ' + hour + ':' + String(date.getMinutes()).padStart(2, "0") + ' ' + meridiem;
 
         TournamentCardArray.push(<TournamentCard wallpaper={wallpaper} title={title} game={game} date={tournamentDate} participants={participants} tournamentHostPic={tournamentHostPic} tournamentID={doc.id} creatorName={creatorName} />);
+        if(tournamentNumber == collectionLength) {
+          ReactDOM.render(
+            TournamentCardArray,
+            document.getElementById("row")
+          );
+        }
         tournamentNumber++;
     });
-  }).then(function() {
-    ReactDOM.render(
-      TournamentCardArray,
-      document.getElementById("row")
-    );
-  });
+  })
 }
 
 
