@@ -64,6 +64,8 @@ function addTournament() { try{
   var secondEarnings = document.getElementById('secondEarnings').value;
   var thirdEarnings = document.getElementById('thirdEarnings').value;
 
+  var entryFee = 0.00;
+
   firebase.firestore().collection("tournaments").add({
       creator: firebase.auth().currentUser.uid,
       creatorName: firebase.auth().currentUser.displayName,
@@ -86,7 +88,8 @@ function addTournament() { try{
       },
       tournamentStarted: false,
       unlimited: document.getElementById("unlimited").checked,
-      type: document.querySelector('input[name="newTournamentParticipantType"]:checked').value
+      type: document.querySelector('input[name="newTournamentParticipantType"]:checked').value,
+      entryFee: entryFee
   }).then(function() {
       alert("Added tournament!");
   }).catch(function(error) {

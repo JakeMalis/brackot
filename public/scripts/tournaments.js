@@ -129,7 +129,7 @@ function renderTournamentCards() {
         }
         var tournamentDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' @ ' + hour + ':' + String(date.getMinutes()).padStart(2, "0") + ' ' + meridiem;
 
-        TournamentCardArray.push(<TournamentCard wallpaper={wallpaper} title={title} game={game} date={tournamentDate} participants={participants} tournamentHostPic={tournamentHostPic} tournamentID={doc.id} creatorName={creatorName} />);
+        TournamentCardArray.push(<TournamentCard wallpaper={wallpaper} title={title} game={game} date={tournamentDate} participants={participants} tournamentHostPic={tournamentHostPic} tournamentID={doc.id} creatorName={creatorName} key={doc.id}/>);
         if(tournamentNumber == collectionLength) {
           ReactDOM.render(
             TournamentCardArray,

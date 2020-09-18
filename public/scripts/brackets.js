@@ -16,8 +16,8 @@ class MatchCard extends React.Component {
   render() {
     return (
       <div className={"match " + "match" + this.props.roundNumber} id={"matchCardRound" + this.props.roundNumber + "Match" + this.props.matchNumber} onClick={() => { openMatchModal("matchCardRound" + this.props.roundNumber + "Match" + this.props.matchNumber)}}>
-        <UpperParticipant visibility={this.props.participants[0].visibility} participantNumber={this.props.participants[0].uid} roundNumber={this.props.roundNumber} matchNumber={this.props.matchNumber} />
-        <LowerParticipant visibility={this.props.participants[1].visibility} participantNumber={this.props.participants[1].uid} roundNumber={this.props.roundNumber} matchNumber={this.props.matchNumber} />
+        <UpperParticipant visibility={this.props.participants[0].visibility} participantNumber={this.props.participants[0].uid} roundNumber={this.props.roundNumber} matchNumber={this.props.matchNumber} key={this.props.matchNumber + " " + this.props.participants[0].uid}/>
+        <LowerParticipant visibility={this.props.participants[1].visibility} participantNumber={this.props.participants[1].uid} roundNumber={this.props.roundNumber} matchNumber={this.props.matchNumber} key={this.props.matchNumber + " " + this.props.participants[1].uid}/>
       </div>
     );
   }

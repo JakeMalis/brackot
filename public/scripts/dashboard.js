@@ -32,7 +32,7 @@ function loadRegisteredTournaments() {
     var renderTournamentNumber = 1;
     firebase.firestore().collection("tournaments").where("players", "array-contains", firebase.auth().currentUser.uid).get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
-          TournamentCardArray.push(<TournamentCard role="player" tournamentNumber={renderTournamentNumber} />);
+          TournamentCardArray.push(<TournamentCard role="player" tournamentNumber={renderTournamentNumber} key={renderTournamentNumber}/>);
           renderTournamentNumber++
       });
     }).then(function() {
@@ -48,7 +48,7 @@ function loadRegisteredTournaments() {
     var renderHostedTournamentNumber = 1;
     firebase.firestore().collection("tournaments").where("creator", "==", firebase.auth().currentUser.uid).get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
-          HostedTournamentCardArray.push(<TournamentCard role="host" tournamentNumber={renderHostedTournamentNumber} />);
+          HostedTournamentCardArray.push(<TournamentCard role="host" tournamentNumber={renderHostedTournamentNumber} key={renderHostedTournamentNumber}/>);
           renderHostedTournamentNumber++
       });
     }).then(function() {
