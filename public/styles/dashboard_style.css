@@ -836,7 +836,18 @@ text-align: center;
 }
 
 .tournamentCardButtonSigned{
-  background-image: linear-gradient(70deg,#36bf70,#12fe7b);
+  background: #26bf60;
+}
+
+.tournamentCardButtonSigned:before{
+  content: "✓ Signed Up";
+}
+
+.tournamentCardButtonSigned:hover{
+  background: #d43226;
+}
+.tournamentCardButtonSigned:hover:before{
+  content: "Leave Tournament";
 }
 
 .tournamentCardButtonInProgress{

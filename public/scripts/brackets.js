@@ -132,10 +132,10 @@ function renderMatchCards() {
         var participants = [];
 
         if ((entry.playerOne === null) && (entry.playerTwo === null) && (round !=1)) {
-          MatchColumnCards.push(<EmptyMatchCard roundNumber={round} matchNumber={matchNumber} emptyRound=" empty" />);
+          MatchColumnCards.push(<EmptyMatchCard roundNumber={round} matchNumber={matchNumber} emptyRound=" empty" key={matchNumber}/>);
         }
         else if ((entry.playerOne === null) && (entry.playerTwo === null)){
-          MatchColumnCards.push(<EmptyMatchCard roundNumber={round} matchNumber={matchNumber} emptyRound=" emptySpace" />);
+          MatchColumnCards.push(<EmptyMatchCard roundNumber={round} matchNumber={matchNumber} emptyRound=" emptySpace" key={matchNumber}/>);
         }/*
         else if ((entry.playerOne === null) && (entry.playerTwo != null)){
           upperParticipant = { uid: entry.playerOne, visibility: "hidden"};
@@ -152,7 +152,7 @@ function renderMatchCards() {
           participants.push(upperParticipant);
           lowerParticipant = { uid: entry.playerTwo };
           participants.push(lowerParticipant);
-          MatchColumnCards.push(<MatchCard roundNumber={round} matchNumber={matchNumber} empty="" participants={participants} />);
+          MatchColumnCards.push(<MatchCard roundNumber={round} matchNumber={matchNumber} empty="" participants={participants} key={matchNumber}/>);
         }
         matchNumber++;
       });
