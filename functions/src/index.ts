@@ -3,8 +3,10 @@ import * as admin from 'firebase-admin';
 
 admin.initializeApp();
 
-exports.subscribeUserToUnlimited = functions.region('us-east1').auth.user().onCreate((user) => {
-  return admin.auth().setCustomUserClaims(user.uid, {subscription: "unlimited"});
+exports.makeUserAdmin = functions.region('us-east1').https.onCall(async (data, context) => {
+  if(!context.auth) throw new Error("User is not logged in");
+  const uid = context.auth.uid;
+  return admin.auth().setCustomUserClaims(uid, {stripeRole: "unlimited", admin: true});
 });
 
 exports.deleteOldMail = functions.region('us-east1').pubsub.schedule('every 1 hours').onRun(async (context) => {

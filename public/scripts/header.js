@@ -18,12 +18,12 @@ async function loadHeader() {
   async function getCustomClaimRole() {
     await firebase.auth().currentUser.getIdToken(true);
     const decodedToken = await firebase.auth().currentUser.getIdTokenResult();
-    return decodedToken.claims.subscription;
+    return decodedToken.claims.stripeRole;
   }
   getCustomClaimRole();
 
   firebase.auth().currentUser.getIdTokenResult().then((idTokenResult) => {
-     if (idTokenResult.claims.subscription == "unlimited") {
+     if (idTokenResult.claims.stripeRole == "unlimited") {
        document.getElementById("unlimitedIcon").style.visibility = "visible";
      }
   });

@@ -1,21 +1,16 @@
 function personalizeElements() {
-  $('#allStarUnlimited').click(function(){
-    startCheckout('price_1H9lSLCwIH03I9fOjH0MgLEh');
-  });
-  $('#coinBoost').click(function(){
-    startCheckout('price_1H9lRPCwIH03I9fOb51Xqvyo');
+  $('#brackotUnlimited').click(function(){
+    startCheckout('price_1HSqVcCwIH03I9fOAWygPFxU');
   });
   $('#billingInfoButton').click(function(){
     openPortal();
   });
 
   firebase.auth().currentUser.getIdTokenResult().then((idTokenResult) => {
-    if (idTokenResult.claims.subscription == "unlimited") {
+    if (idTokenResult.claims.stripeRole == "unlimited") {
       document.getElementById("boostsBorder").className = "gradientBorderAnimated";
     }
   });
-
-
 }
 
 async function openPortal() {
@@ -40,7 +35,7 @@ async function startCheckout(product) {
     if (sessionId) {
       // We have a session, let's redirect to Checkout
       // Init Stripe
-      const stripe = Stripe('pk_test_Q5Jva7sim6yZzEDARaqK8j5m00BSs2z9Ww');
+      const stripe = Stripe('pk_live_48p50wmjPpHken3hZmYJlCRf00NMqdQBlz');
       stripe.redirectToCheckout({ sessionId });
     }
   });
