@@ -46,7 +46,7 @@ async function participantInfoLoadingFunction(entry, participantNumber) {
     var gsReference = firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + entry + "/profile");
     gsReference.getDownloadURL().then(function (url) {
       document.getElementById("participantCardPic" + participantNumber).src = url;
-    }).catch(function(error) {
+    }).catch((error) => {
       document.getElementById("participantCardPic" + participantNumber).src = "media/BrackotLogo2.jpg";
     });
   });

@@ -66,6 +66,9 @@ function addTournament() { try{
 
   var entryFee = 0.00;
 
+  //Single Elimination, Double Elimination, Round Robin, Free-For-All
+  var bracketType = "Single Elimination"
+
   firebase.firestore().collection("tournaments").add({
       creator: firebase.auth().currentUser.uid,
       creatorName: firebase.auth().currentUser.displayName,
@@ -89,7 +92,8 @@ function addTournament() { try{
       tournamentStarted: false,
       unlimited: document.getElementById("unlimited").checked,
       type: document.querySelector('input[name="newTournamentParticipantType"]:checked').value,
-      entryFee: entryFee
+      entryFee: entryFee,
+      bracketType: bracketType
   }).then(function() {
       alert("Added tournament!");
   }).catch(function(error) {

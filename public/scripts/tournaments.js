@@ -62,7 +62,7 @@ async function filterData() {
         else { selectedGame = [$(this).text()]; }
         query = tournamentsCollection.where("date", ">=", new Date()).where("date", dateOperator, filteredDate).where("game", "in", selectedGame);
         renderTournamentCards();
-        addTournamentCardData();
+        //addTournamentCardData();
     });
     $('.dateFilterListItem').on('click', function() {
         $("#dateLabelField").html($(this).text());
@@ -104,10 +104,10 @@ function renderTournamentCards() {
           var game = doc.data().game;
         }
 
-        var tournamentHostPic = "media/addPic.png"
+        var tournamentHostPic;
         tournamentHostPic = await firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + doc.data().creator + "/profile").getDownloadURL().then(function (url) {
           return String(url);
-        }).catch(() => {
+        }).catch((error) => {
           return "media/BrackotLogo2.jpg";
         });
         console.log(tournamentHostPic);
