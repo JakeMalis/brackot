@@ -65,7 +65,7 @@ function loadRegisteredTournaments() {
     var renderTournamentNumber = 1;
     querySnapshot.forEach(function(doc) {
 
-        $('#tournamentContent' + renderTournamentNumber).click(function(){
+        $('#playerTournamentContent' + renderTournamentNumber).click(function(){
           window.location = "tournament-info?tournamentId=" + doc.id;
         });
 
@@ -116,7 +116,7 @@ function loadRegisteredTournaments() {
     var renderHostedTournamentNumber = 1;
     querySnapshot.forEach(function(doc) {
 
-        $('#tournamentContent' + renderHostedTournamentNumber).click(function(){
+        $('#hostTournamentContent' + renderHostedTournamentNumber).click(function(){
           window.location = "tournament-info?tournamentId=" + doc.id;
         });
 
