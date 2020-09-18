@@ -88,7 +88,7 @@ async function writeToDynamoDBOpen(params) {
   });
 }
 
-function getName(doc) {
+function getAllData(doc) {
   return new Promise(function (resolve, reject) {
     return firebase.firestore().runTransaction(transaction => {
       return transaction.get(firebase.firestore().collection("users").doc(doc.data().creator)).then(async creatorDoc => {
@@ -139,14 +139,12 @@ async function renderTournamentCards() {
 
   let data_to_itrate = await query.get();
   data_to_itrate.forEach(async (doc) => {
-    promises.push(getName(doc).then());
+    promises.push(getAllData(doc).then());
   });
 
   Promise.all(promises)
     .then((results) => {
-      console.log(results);
       results.forEach(async (data_to_show) => {
-        console.log(data_to_show.tournamentHostPic);
         TournamentCardArray.push(<TournamentCard wallpaper={data_to_show.wallpaper} title={data_to_show.title} game={data_to_show.game} date={data_to_show.tournamentDate} participants={data_to_show.participants} tournamentHostPic={data_to_show.tournamentHostPic} tournamentID={data_to_show.tournamentID} creatorName={data_to_show.creatorName} />);
       })
       ReactDOM.render(

@@ -16,8 +16,8 @@ class MatchCard extends React.Component {
   render() {
     return (
       <div className={"match " + "match" + this.props.roundNumber} id={"matchCardRound" + this.props.roundNumber + "Match" + this.props.matchNumber} onClick={() => { openMatchModal("matchCardRound" + this.props.roundNumber + "Match" + this.props.matchNumber)}}>
-        <UpperParticipant visibility={this.props.participants[0].visibility} participantNumber={this.props.participants[0].uid} roundNumber={this.props.roundNumber} matchNumber={this.props.matchNumber} />
-        <LowerParticipant visibility={this.props.participants[1].visibility} participantNumber={this.props.participants[1].uid} roundNumber={this.props.roundNumber} matchNumber={this.props.matchNumber} />
+        <UpperParticipant visibility={this.props.participants[0].visibility} participantNumber={this.props.participants[0].uid} roundNumber={this.props.roundNumber} matchNumber={this.props.matchNumber} key={this.props.matchNumber + " " + this.props.participants[0].uid}/>
+        <LowerParticipant visibility={this.props.participants[1].visibility} participantNumber={this.props.participants[1].uid} roundNumber={this.props.roundNumber} matchNumber={this.props.matchNumber} key={this.props.matchNumber + " " + this.props.participants[1].uid}/>
       </div>
     );
   }
@@ -132,10 +132,10 @@ function renderMatchCards() {
         var participants = [];
 
         if ((entry.playerOne === null) && (entry.playerTwo === null) && (round !=1)) {
-          MatchColumnCards.push(<EmptyMatchCard roundNumber={round} matchNumber={matchNumber} emptyRound=" empty" />);
+          MatchColumnCards.push(<EmptyMatchCard roundNumber={round} matchNumber={matchNumber} emptyRound=" empty" key={matchNumber}/>);
         }
         else if ((entry.playerOne === null) && (entry.playerTwo === null)){
-          MatchColumnCards.push(<EmptyMatchCard roundNumber={round} matchNumber={matchNumber} emptyRound=" emptySpace" />);
+          MatchColumnCards.push(<EmptyMatchCard roundNumber={round} matchNumber={matchNumber} emptyRound=" emptySpace" key={matchNumber}/>);
         }/*
         else if ((entry.playerOne === null) && (entry.playerTwo != null)){
           upperParticipant = { uid: entry.playerOne, visibility: "hidden"};
@@ -152,7 +152,7 @@ function renderMatchCards() {
           participants.push(upperParticipant);
           lowerParticipant = { uid: entry.playerTwo };
           participants.push(lowerParticipant);
-          MatchColumnCards.push(<MatchCard roundNumber={round} matchNumber={matchNumber} empty="" participants={participants} />);
+          MatchColumnCards.push(<MatchCard roundNumber={round} matchNumber={matchNumber} empty="" participants={participants} key={matchNumber}/>);
         }
         matchNumber++;
       });

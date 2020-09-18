@@ -4,15 +4,16 @@ function personalizeElements() {
   var url = new URL(window.location.href);
   tournamentId = url.searchParams.get("tournamentId");
 
-// The point of this code is to delcare functions from other files.
-  $.getScript('brackets.js', function() {
-    startTournament();
-    renderMatchCards();
-  });
-  $.getScript('participantCards.js', function() {
-    renderParticipants();
-  });
-
+// The point of this code is to declare functions from other files. NOTE FROM JORDAN: you don't need to.  in fact, it throws an error anyways.
+/*
+$.getScript('brackets.js', function() {
+  startTournament();
+  renderMatchCards();
+});
+$.getScript('participantCards.js', function() {
+  renderParticipants();
+});
+*/
   renderParticipants();
 
 
@@ -84,8 +85,8 @@ function personalizeElements() {
       }
       else if ((doc.data().players).includes(firebase.auth().currentUser.uid)) {
         document.getElementById("tournamentSignUpButton").className = 'tournamentCardButton tournamentCardButtonSigned';
-        document.getElementById("tournamentSignUpButton").innerHTML = "✓ Signed Up";
-        document.getElementById("tournamentSignUpButton").disabled = true;
+        document.getElementById("tournamentSignUpButton").innerHTML = "";
+        document.getElementById("tournamentSignUpButton").onclick = function() { unenroll(); };
       }
     }
     else if (doc.data().tournamentStarted == true) {
@@ -109,9 +110,17 @@ function enroll() {
     players: firebase.firestore.FieldValue.arrayUnion(firebase.auth().currentUser.uid)
   }).then(function() {
     document.getElementById("tournamentSignUpButton").className = 'tournamentCardButton tournamentCardButtonSigned';
-    document.getElementById("tournamentSignUpButton").innerHTML = "✓ Signed Up";
+    document.getElementById("tournamentSignUpButton").innerHTML = "";
     document.getElementById("tournamentSignUpButton").disabled = true;
     sendConfirmationEmail(tournamentId);
+  });
+}
+
+function unenroll(){
+  firebase.firestore().collection("tournaments").doc(tournamentId).update({
+    players: firebase.firestore.FieldValue.arrayRemove(firebase.auth().currentUser.uid)
+  }).then(function() {
+    document.location.reload(false);
   });
 }
 

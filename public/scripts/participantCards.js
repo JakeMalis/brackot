@@ -15,7 +15,7 @@ function renderParticipants(){
       var participantInfoNumber = 1;
 
       doc.data().players.forEach(function(participant) {
-        ParticipantCards.push(<ParticipantCard participantInfoNumber={participantInfoNumber}/>);
+        ParticipantCards.push(<ParticipantCard participantInfoNumber={participantInfoNumber} key={participantInfoNumber}/>);
         participantInfoNumber++;
       });
     }).then(function() {
@@ -42,11 +42,11 @@ function loadParticipantData(){
 async function participantInfoLoadingFunction(entry, participantNumber) {
   firebase.firestore().collection("users").doc(entry).get().then(function(userDoc) {
     document.getElementById("participantCardName" + participantNumber).innerHTML = userDoc.data().name;
-    
+
     var gsReference = firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + entry + "/profile");
     gsReference.getDownloadURL().then(function (url) {
       document.getElementById("participantCardPic" + participantNumber).src = url;
-    }).catch(function(error) {
+    }).catch((error) => {
       document.getElementById("participantCardPic" + participantNumber).src = "media/BrackotLogo2.jpg";
     });
   });
