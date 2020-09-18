@@ -28,7 +28,10 @@ class TournamentCard extends React.Component {
         <div className="tournamentCard">
           <div className="tournamentCardBackground">
             <div className="tournamentCardContent" onClick={() => this.handleClick()}>
-              <img className="tournamentWallpaper" src={this.props.wallpaper}></img>
+              <picture className="tournamentWallpaper">
+                <source srcSet={this.props.wallpaper + "webp"} type="image/webp"></source>
+                <img className="tournamentWallpaper" src={this.props.wallpaper + "jpg"}/>
+              </picture>
               <div className="tournamentCardText">
                   <h6 className="tournamentCardTitle">{this.props.title}</h6>
                   <ul className="tournamentCardDetails">
@@ -81,7 +84,7 @@ function renderTournamentCards() {
   query.get().then(async function(querySnapshot) {
     const collectionLength = querySnapshot.size;
     querySnapshot.forEach(async (doc) => {
-        var wallpaper = "/media/game_wallpapers/" + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "-" + "cardWallpaper.jpg";
+        var wallpaper = "/media/game_wallpapers/" + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "-" + "cardWallpaper.";
         var title = doc.data().name;
 
         var creatorName = "All-Star eSports Staff";
@@ -100,7 +103,7 @@ function renderTournamentCards() {
         else {
           var game = doc.data().game;
         }
-      
+
         var tournamentHostPic = "media/addPic.png"
         tournamentHostPic = await firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + doc.data().creator + "/profile").getDownloadURL().then(function (url) {
           return String(url);
