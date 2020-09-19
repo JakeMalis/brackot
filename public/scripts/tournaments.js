@@ -111,7 +111,11 @@ function renderTournamentCards() {
         var hour, meridiem;
 
 
-        if ((date.getHours() - 12) < 0) {
+        if ((date.getHours() == 0)){
+          hour = 12;
+          meridiem = "A.M."
+        }
+        else if ((date.getHours() - 12) < 0) {
           hour = date.getHours();
           meridiem = "A.M."
         }
