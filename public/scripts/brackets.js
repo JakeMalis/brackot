@@ -434,6 +434,11 @@ function startTournament() {
     var firstRound = createInitialMatches();
     var secondRound = [];
 
+
+    var roundMatches = [];
+
+
+
     firebase.firestore().collection("tournaments").doc(tournamentId).update({
       tournamentStarted: true,
       shuffledParticipants: shuffledParticipants,
@@ -451,6 +456,78 @@ function startTournament() {
         renderMatchCards();
       });
     }
+
+    if(rounds > 2){
+      roundMatches = nextRound();
+      firebase.firestore().collection("tournaments").doc(tournamentId).update({
+        matchupsRound3: roundMatches
+      }).then(function() {
+        console.log('Uploaded 3rd round')
+        renderMatchCards();
+      });
+    }
+    if(rounds > 3){
+      roundMatches = nextRound();
+      firebase.firestore().collection("tournaments").doc(tournamentId).update({
+        matchupsRound4: roundMatches
+      }).then(function() {
+        console.log('Uploaded 4th round')
+        renderMatchCards();
+      });
+    }
+    if(rounds > 4){
+      roundMatches = nextRound();
+      firebase.firestore().collection("tournaments").doc(tournamentId).update({
+        matchupsRound5: roundMatches
+      }).then(function() {
+        console.log('Uploaded 5th round')
+        renderMatchCards();
+      });
+    }
+    if(rounds > 5){
+      roundMatches = nextRound();
+      firebase.firestore().collection("tournaments").doc(tournamentId).update({
+        matchupsRound6: roundMatches
+      }).then(function() {
+        console.log('Uploaded 6th round')
+        renderMatchCards();
+      });
+    }
+    if(rounds > 6){
+      roundMatches = nextRound();
+      firebase.firestore().collection("tournaments").doc(tournamentId).update({
+        matchupsRound7: roundMatches
+      }).then(function() {
+        console.log('Uploaded 7th round')
+        renderMatchCards();
+      });
+    }
+    if(rounds > 7){
+      roundMatches = nextRound();
+      firebase.firestore().collection("tournaments").doc(tournamentId).update({
+        matchupsRound8: roundMatches
+      }).then(function() {
+        console.log('Uploaded 8th round')
+        renderMatchCards();
+      });
+    }
+    if(rounds > 8){
+      roundMatches = nextRound();
+      firebase.firestore().collection("tournaments").doc(tournamentId).update({
+        matchupsRound9: roundMatches
+      }).then(function() {
+        console.log('Uploaded 9th round')
+        renderMatchCards();
+      });
+    }
+
+
+
+
+
+
+
+
   });
   document.getElementById("bracketNavbar").style.display = "inline-block";
   document.getElementById("tournamentSignUpButton").className = 'tournamentCardButton tournamentCardButtonInProgress';
