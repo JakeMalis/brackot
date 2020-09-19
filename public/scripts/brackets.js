@@ -459,7 +459,7 @@ function startTournament() {
     }
 
     if(rounds > 2){
-      roundMatches = nextRound();
+      roundMatches = nextRound(secondRound);
       firebase.firestore().collection("tournaments").doc(tournamentId).update({
         matchupsRound3: roundMatches
       }).then(function() {
@@ -468,7 +468,7 @@ function startTournament() {
       });
     }
     if(rounds > 3){
-      roundMatches = nextRound();
+      roundMatches = nextRound(roundMatches);
       firebase.firestore().collection("tournaments").doc(tournamentId).update({
         matchupsRound4: roundMatches
       }).then(function() {
@@ -477,7 +477,7 @@ function startTournament() {
       });
     }
     if(rounds > 4){
-      roundMatches = nextRound();
+      roundMatches = nextRound(roundMatches);
       firebase.firestore().collection("tournaments").doc(tournamentId).update({
         matchupsRound5: roundMatches
       }).then(function() {
@@ -486,7 +486,7 @@ function startTournament() {
       });
     }
     if(rounds > 5){
-      roundMatches = nextRound();
+      roundMatches = nextRound(roundMatches);
       firebase.firestore().collection("tournaments").doc(tournamentId).update({
         matchupsRound6: roundMatches
       }).then(function() {
@@ -495,7 +495,7 @@ function startTournament() {
       });
     }
     if(rounds > 6){
-      roundMatches = nextRound();
+      roundMatches = nextRound(roundMatches);
       firebase.firestore().collection("tournaments").doc(tournamentId).update({
         matchupsRound7: roundMatches
       }).then(function() {
@@ -504,7 +504,7 @@ function startTournament() {
       });
     }
     if(rounds > 7){
-      roundMatches = nextRound();
+      roundMatches = nextRound(roundMatches);
       firebase.firestore().collection("tournaments").doc(tournamentId).update({
         matchupsRound8: roundMatches
       }).then(function() {
@@ -513,7 +513,7 @@ function startTournament() {
       });
     }
     if(rounds > 8){
-      roundMatches = nextRound();
+      roundMatches = nextRound(roundMatches);
       firebase.firestore().collection("tournaments").doc(tournamentId).update({
         matchupsRound9: roundMatches
       }).then(function() {
