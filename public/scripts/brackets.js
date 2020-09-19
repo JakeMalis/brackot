@@ -262,7 +262,7 @@ function createInitialMatches(){
       matches.push(Object.assign({}, new match(shuffledParticipants[x], shuffledParticipants[x+1])));
       matches.push(Object.assign({}, new match(null, null)));
     }
-    for(var y = 0; y < byes - initialNumRounds; y+=1){
+    for(var y = 0; y < byes - initialNumRounds; y+=2){
       matches.push(Object.assign({},new match(null, null)));
     }
   }
