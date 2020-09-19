@@ -54,8 +54,8 @@ function searchGameCreateTournament(searchbar) {
 function addTournament() { try{
   if((document.getElementById('tournamentName').value == "")
    ||(document.getElementById('tournamentDescription').value == "")
-   ||(document.getElementById('input[name="newTournamentGame"]:checked').value == "" || null || undefined)
-   ||(document.getElementById('input[name="newTournamentParticipantType"]:checked').value == "" || null || undefined)
+   ||(document.querySelector('input[name="newTournamentGame"]:checked').value == "" || null || undefined)
+   ||(document.querySelector('input[name="newTournamentParticipantType"]:checked').value == "" || null || undefined)
  ) throw "Incomplete Form Error";
 
   var date = document.getElementById("date").value, time = document.getElementById("time").value;
@@ -95,7 +95,10 @@ function addTournament() { try{
       entryFee: entryFee,
       bracketType: bracketType
   }).then(function() {
-      alert("Added tournament!");
+      document.getElementById("alertBox").style.display = "block";
+      if(document.getElementById("alertBox").classList.contains("errorAlert")){document.getElementById("alertBox").classList.remove("errorAlert");}
+      document.getElementById("alertTextBold").innerHTML = "Update: ";
+      document.getElementById("alertText").innerHTML = "Your tournament has been added!";
   }).catch(function(error) {
           console.error("Error writing document: ", error);
   });
@@ -105,5 +108,6 @@ function addTournament() { try{
     document.getElementById("alertBox").classList.add("errorAlert");
     document.getElementById("alertTextBold").innerHTML = "Error: ";
     document.getElementById("alertText").innerHTML = "Your tournament submission was incomplete. All of the required fields must be complete before submitting.";
+    alert(error);
   }
 }

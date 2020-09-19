@@ -64,9 +64,10 @@
               <h2 id="tournamentTitle"></h2>
               <ul class="tournamentQuickDetails">
                 <li class="quickDetail"><i class="fa fa-user quickDetailIcon" aria-hidden="true"></i><p id="participantsQuick" class="quickDetailText"></p></li>
-                <li id="prizingQuickListItem" class="quickDetail"><i class="fa fa-trophy quickDetailIcon" aria-hidden="true"></i><p id="prizingQuick" class="quickDetailText"></p></li>
                 <li class="quickDetail"><i class="fa fa-gamepad quickDetailIcon" aria-hidden="true"></i><p id="gameQuick" class="quickDetailText"></p></li>
                 <li class="quickDetail"><i class="fa fa-calendar quickDetailIcon" aria-hidden="true"></i><p id="dateAndTimeQuick" class="quickDetailText"></p></li>
+                <li id="prizingQuickListItem" class="quickDetail"><i class="fa fa-trophy quickDetailIcon" aria-hidden="true"></i><p id="prizingQuick" class="quickDetailText"></p></li>
+                <li id="entryFeeQuickListItem" class="quickDetail"><i class="fa fa-ticket-alt quickDetailIcon" aria-hidden="true"></i><p id="entryFeeQuick" class="quickDetailText"></p></li>
               </ul>
               <ul class="quickNavbar">
                 <li id="overviewNavbar" class="quickNavbarItem quickNavbarItemSelected"><a class="quickNavbarItemLink" onclick="setTab('overview')"><p class="quickNavbarItemText">Overview</p></a></li>
@@ -172,6 +173,7 @@
                       </div>
                     </div>
                   </div>
+
                 </div>
               </div>
 
@@ -180,6 +182,22 @@
             <button class="tournamentCardButton tournamentCardButtonGeneric" id="tournamentSignUpButton"></button>
           </div>
         </div>
+
+
+
+        <div id="entryFeeModal" class="matchModal">
+          <div class="matchModal-content">
+            <span id="closeEntryFeeModal" class="close" onclick="closeEntryFeeModal()">&times;</span>
+            <div class="modalTop">
+            </div>
+            <div class="modalBottom">
+              <button onclick="editMatchScores()" id="editScoresButton" class="grayButton submitResultsButton">Edit Scores</button>
+              <button onclick="saveMatchScores()" id="submitResultsButton" class="gradientButton submitResultsButton">Submit Results</button>
+            </div>
+          </div>
+        </div>
+
+
       </div>
     </div>
     <div id="footer">

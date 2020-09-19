@@ -4,21 +4,19 @@ function personalizeElements() {
   var url = new URL(window.location.href);
   tournamentId = url.searchParams.get("tournamentId");
 
-// The point of this code is to declare functions from other files. NOTE FROM JORDAN: you don't need to.  in fact, it throws an error anyways.
-/*
-$.getScript('brackets.js', function() {
-  startTournament();
-  renderMatchCards();
-});
-$.getScript('participantCards.js', function() {
-  renderParticipants();
-});
-*/
   renderParticipants();
 
 
   firebase.firestore().collection("tournaments").doc(tournamentId).get().then(function(doc) {
     document.getElementById("tournamentTitle").innerHTML = doc.data().name;
+
+    var entryFee = (doc.data().entryFee);
+    if(entryFee == 0){
+      $('#entryFeeQuickListItem').remove();
+    }
+    else{
+      document.getElementById("entryFeeQuick").innerHTML = "$" + entryFee + " Entry Fee";
+    }
     var firstPlacePrize = (doc.data().earnings[1]);
     var secondPlacePrize = (doc.data().earnings[2]);
     var thirdPlacePrize = (doc.data().earnings[3]);
@@ -30,19 +28,19 @@ $.getScript('participantCards.js', function() {
     else{
       document.getElementById("prizingQuick").innerHTML = "Prizing Offered";
       if (doc.data().earnings[1] != ("" || null || 0)) {
-        document.getElementById("tournamentInfoFirstPrizing").innerHTML = doc.data().earnings[1];
+        document.getElementById("tournamentInfoFirstPrizing").innerHTML = firstPlacePrize;
       }
       else{
         $('#firstPlace').remove();
       }
       if (doc.data().earnings[2] != ("" || null || 0)) {
-        document.getElementById("tournamentInfoSecondPrizing").innerHTML = doc.data().earnings[2];
+        document.getElementById("tournamentInfoSecondPrizing").innerHTML = secondPlacePrize;
       }
       else{
         $('#secondPlace').remove();
       }
       if (doc.data().earnings[3] != ("" || null || 0)) {
-        document.getElementById("tournamentInfoThirdPrizing").innerHTML = doc.data().earnings[3];
+        document.getElementById("tournamentInfoThirdPrizing").innerHTML = thirdPlacePrize;
       }
       else{
         $('#thirdPlace').remove();
@@ -51,19 +49,28 @@ $.getScript('participantCards.js', function() {
     document.getElementById("participantsQuick").innerHTML = (doc.data().players.length) + " Participants";
     document.getElementById("tournamentInfoDescription").innerHTML = doc.data().description;
 
-    if (doc.data().game == "Counter-Strike Global Offensive") {
+    var game = (doc.data().game);
+    if (game == "Counter-Strike Global Offensive") {
       document.getElementById("gameQuick").innerHTML = "Counter-Strike: Global Offensive";
     }
     else {
-      document.getElementById("gameQuick").innerHTML = doc.data().game;
+      document.getElementById("gameQuick").innerHTML = game;
     }
 
     var date = new Date(doc.data().date.toDate());
     var hour, meridiem;
 
-    if ((date.getHours() - 12) <= 0) {
+    if ((date.getHours() == 0)){
+      hour = 12;
+      meridiem = "A.M."
+    }
+    else if ((date.getHours() - 12) < 0) {
       hour = date.getHours();
       meridiem = "A.M."
+    }
+    else if ((date.getHours() - 12) == 0) {
+      hour = date.getHours();
+      meridiem = "P.M."
     }
     else {
       hour = date.getHours() - 12;
@@ -194,4 +201,21 @@ function setTab(tab) {
     document.getElementById("participantsNavbar").className = "quickNavbarItem";
     document.getElementById("bracketNavbar").className = "quickNavbarItem quickNavbarItemSelected";
   }
+}
+
+
+function openEntryFeeModal(match) {
+  var modal = document.getElementById("entryFeeModal");
+  modal.style.display = "block";
+
+  var tournamentEntryFee;
+  var tournamentTitle;
+  firebase.firestore().collection("tournaments").doc(tournamentId).get().then(function(doc){
+
+  });
+}
+
+function closeEntryFeeModal() {
+  var modal = document.getElementById("entryFeeModal");
+  modal.style.display = "none";
 }
