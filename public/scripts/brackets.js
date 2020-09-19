@@ -116,16 +116,17 @@ function renderMatchCards() {
       //var ConnectorColumnConnectors = [];
       var matchNumber = 1;
       //var connectorNumber = 1;
+      var matchups;
 
-      if (round == 1) { var matchups = doc.data().matchupsRound1; }
-      else if (round == 2) { var matchups = doc.data().matchupsRound2; }
-      else if (round == 3) { var matchups = doc.data().matchupsRound3; }
-      else if (round == 4) { var matchups = doc.data().matchupsRound4; }
-      else if (round == 5) { var matchups = doc.data().matchupsRound5; }
-      else if (round == 6) { var matchups = doc.data().matchupsRound6; }
-      else if (round == 7) { var matchups = doc.data().matchupsRound7; }
-      else if (round == 8) { var matchups = doc.data().matchupsRound8; }
-      else if (round == 9) { var matchups = doc.data().matchupsRound9; }
+      if (round == 1) { matchups = doc.data().matchupsRound1; }
+      else if (round == 2) { matchups = doc.data().matchupsRound2; }
+      else if (round == 3) { matchups = doc.data().matchupsRound3; }
+      else if (round == 4) { matchups = doc.data().matchupsRound4; }
+      else if (round == 5) { matchups = doc.data().matchupsRound5; }
+      else if (round == 6) { matchups = doc.data().matchupsRound6; }
+      else if (round == 7) { matchups = doc.data().matchupsRound7; }
+      else if (round == 8) { matchups = doc.data().matchupsRound8; }
+      else if (round == 9) { matchups = doc.data().matchupsRound9; }
 
       matchups.forEach(function(entry) {
         var upperParticipant, lowerParticipant;
@@ -261,7 +262,7 @@ function createInitialMatches(){
       matches.push(Object.assign({}, new match(shuffledParticipants[x], shuffledParticipants[x+1])));
       matches.push(Object.assign({}, new match(null, null)));
     }
-    for(var y = 0; y < byes - initialNumRounds; y+=2){
+    for(var y = 0; y < byes - initialNumRounds; y+=1){
       matches.push(Object.assign({},new match(null, null)));
     }
   }
