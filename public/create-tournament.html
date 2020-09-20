@@ -3,20 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Create Tournament | Brackot</title>
 
+  <title>Create Tournament | Brackot</title>
   <link rel="icon" type="image/png" href="media/favicon.png"/>
+
   <link rel="stylesheet" type="text/css" href="styles/dashboard_style.css">
+  <link rel="stylesheet" type="text/css" href="styles/selectPlayers.css">
   <link rel="stylesheet" type="text/css" href="styles/alert.css">
   <link rel="stylesheet" type="text/css" href="styles/topbar.css">
   <link rel="stylesheet" type="text/css" href="styles/footer.css">
   <link rel="stylesheet" type="text/css" href="styles/font-awesome/css/all.css">
-  <script src="scripts/create-tournament.js"></script>
-  <script src="scripts/header.js"></script>
-  <script src="scripts/topbar.js"></script>
-
-
   <link rel="stylesheet" href="https://use.typekit.net/fyp1otf.css">
+
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -27,19 +28,13 @@
   <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-functions.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-storage.js"></script>
+  <script src="scripts/firebaseConfig.js"></script>
 
-  <script>
-    var firebaseConfig = {
-      apiKey: "AIzaSyDZov-3KVt_ytrSQBWZ_fz2e4PaoOhZIt8",
-      authDomain: "brackot-app.firebaseapp.com",
-      databaseURL: "https://brackot-app.firebaseio.com",
-      projectId: "brackot-app",
-      storageBucket: "brackot-app.appspot.com",
-      messagingSenderId: "941824737400",
-      appId: "1:941824737400:web:739688aaff7fde7c8cad8d"
-    };
-    firebase.initializeApp(firebaseConfig);
-  </script>
+  <script src="scripts/games.js"></script>
+  <script src="scripts/create-tournament.js"></script>
+
+  <script src="scripts/header.js"></script>
+  <script src="scripts/topbar.js"></script>
 </head>
 <body>
   <div id="alert">

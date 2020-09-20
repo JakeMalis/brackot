@@ -1,45 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Registration | Brackot</title>
 
+  <title>Register | Brackot</title>
   <link rel="icon" type="image/png" href="media/favicon.png"/>
+
   <link rel="stylesheet" type="text/css" href="styles/login_style.css">
   <link rel="stylesheet" type="text/css" href="styles/alert.css">
+  <link rel="stylesheet" href="https://use.typekit.net/fyp1otf.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
-  <link rel="stylesheet" href="https://use.typekit.net/fyp1otf.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
   <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-storage.js"></script>
-
-  <script src="scripts/registration.js"></script>
+  <script src="scripts/firebaseConfig.js"></script>
 
   <script>
-    var firebaseConfig = {
-      apiKey: "AIzaSyDZov-3KVt_ytrSQBWZ_fz2e4PaoOhZIt8",
-      authDomain: "brackot-app.firebaseapp.com",
-      databaseURL: "https://brackot-app.firebaseio.com",
-      projectId: "brackot-app",
-      storageBucket: "brackot-app.appspot.com",
-      messagingSenderId: "941824737400",
-      appId: "1:941824737400:web:739688aaff7fde7c8cad8d"
-    };
-    firebase.initializeApp(firebaseConfig);
-
     $(document).on("keypress", "input", function(e){
       if(e.which == 13){
-          next();
+        passwordSignIn();
       }
     });
   </script>
+
+  <script src="scripts/registration.js"></script>
 </head>
 <body>
   <div id="alert">

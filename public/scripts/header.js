@@ -6,7 +6,7 @@ window.onload = function() {
       if (user && (page === "")) { loadHeader(); }
       else if (user && !(page === "")) { personalizeElements(); loadHeader(); }
       else if (!(user) && (page === "tournaments")) { personalizeElements(); }
-      else if (!(user) && (!(page === "tournaments") && !(page === ""))) { window.location = "login.html"; }
+      else if (!(user) && (!(page === "") && !(page === "tournaments") && !(page === "privacy-policy") && !(page === "terms-of-service"))) { window.location = "login.html"; }
   });
 }
 

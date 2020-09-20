@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tournaments | Brackot</title>
 
+  <title>Tournaments | Brackot</title>
   <link rel="icon" type="image/png" href="media/favicon.png"/>
+
   <link rel="stylesheet" type="text/css" href="styles/dashboard_style.css">
   <link rel="stylesheet" type="text/css" href="styles/selectPlayers.css">
   <link rel="stylesheet" type="text/css" href="styles/alert.css">
   <link rel="stylesheet" type="text/css" href="styles/topbar.css">
   <link rel="stylesheet" type="text/css" href="styles/footer.css">
   <link rel="stylesheet" type="text/css" href="styles/font-awesome/css/all.css">
-
   <link rel="stylesheet" href="https://use.typekit.net/fyp1otf.css">
 
   <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
@@ -28,24 +28,14 @@
   <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-functions.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-storage.js"></script>
+  <script src="scripts/firebaseConfig.js"></script>
 
+  <script src="scripts/games.js"></script>
+  <script src="scripts/toggle-filters.js"></script>
   <script type="text/babel" src="scripts/tournaments.js"></script>
+
   <script src="scripts/header.js"></script>
   <script src="scripts/topbar.js"></script>
-  <script src="scripts/toggle-filters.js"></script>
-
-  <script>
-    var firebaseConfig = {
-      apiKey: "AIzaSyDZov-3KVt_ytrSQBWZ_fz2e4PaoOhZIt8",
-      authDomain: "brackot-app.firebaseapp.com",
-      databaseURL: "https://brackot-app.firebaseio.com",
-      projectId: "brackot-app",
-      storageBucket: "brackot-app.appspot.com",
-      messagingSenderId: "941824737400",
-      appId: "1:941824737400:web:739688aaff7fde7c8cad8d"
-    };
-    firebase.initializeApp(firebaseConfig);
-  </script>
 
   <div class="modal fade" id="chooseTeamModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -78,7 +68,6 @@
         </div>
       </div>
     </div>
-
 
 </head>
 <body>
