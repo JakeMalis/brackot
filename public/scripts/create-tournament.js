@@ -12,6 +12,12 @@ function personalizeElements() {
 
   today = yyyy+'-'+mm+'-'+dd;
   document.getElementById("date").setAttribute("min", today);
+
+  games.forEach((game) => {
+    gameFileName = (game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","");
+    $("#createTournamentGameCarousel").append('<label id="create' + gameFileName + 'TournamentLabel" onclick="animateGameCarousel(this.id)" class="createTournamentGamesLabel"><input name="newTournamentGame" class="createTournamentGamesRadio" type="radio" value="' + game + '""></input><picture><source srcset="../media/game_images/' + gameFileName + '.webp" type="image/webp"><img class="createTournamentGamesImage" src="../media/game_images/' + gameFileName + '.jpg"></picture></label>');
+  });
+
 }
 
 function animateGameCarousel(selected){

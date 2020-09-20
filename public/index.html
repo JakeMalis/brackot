@@ -23,10 +23,13 @@
     <script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-auth.js"></script>
     <script src="scripts/firebaseConfig.js"></script>
 
+    <script src="scripts/games.js"></script>
     <script src="scripts/gamesCarousel.js"></script>
 
     <script src="scripts/header.js"></script>
     <script src="scripts/topbar.js"></script>
+
+
 </head>
 
 <body>
@@ -60,17 +63,7 @@
         </div>
         <i id="leftArrow" class="fas fa-caret-square-left carouselArrow" onclick="scrollCarouselLeft()"></i>
         <i id="rightArrow" class="fas fa-caret-square-right carouselArrow" onclick="scrollCarouselRight()"></i>
-        <div id="browseGamesCarousel" class="browseGamesCarousel">
-          <label onclick="location.href='tournaments.html';" class="browseGamesLabel"><picture><source srcset="media/game_images/LeagueBig.webp" type="image/webp"><img id="browseGamesLeagueImage" class="browseGamesImage" src="media/game_images/LeagueBig.jpg"></picture></label>
-          <label onclick="location.href='tournaments.html';" class="browseGamesLabel"><picture><source srcset="media/game_images/FortniteBig.webp" type="image/webp"><img id="browseGamesFortniteImage" class="browseGamesImage" src="media/game_images/FortniteBig.jpg"></picture></label>
-          <label onclick="location.href='tournaments.html';" class="browseGamesLabel"><picture><source srcset="media/game_images/FallGuysBig.webp" type="image/webp"><img id="browseGamesFallGuysImage" class="browseGamesImage" src="media/game_images/FallGuysBig.jpg"></picture></label>
-          <label onclick="location.href='tournaments.html';" class="browseGamesLabel"><picture><source srcset="media/game_images/ValorantBig.webp" type="image/webp"><img id="browseGamesValorantImage" class="browseGamesImage" src="media/game_images/ValorantBig.jpg"></picture></label>
-          <label onclick="location.href='tournaments.html';" class="browseGamesLabel"><picture><source srcset="media/game_images/RocketLeagueBig.webp" type="image/webp"><img id="browseGamesRocketLeagueImage" class="browseGamesImage" src="media/game_images/RocketLeagueBig.jpg"></picture></label>
-          <label onclick="location.href='tournaments.html';" class="browseGamesLabel"><picture><source srcset="media/game_images/MinecraftBig.webp" type="image/webp"><img id="browseGamesMinecraftImage" class="browseGamesImage" src="media/game_images/MinecraftBig.jpg"></picture></label>
-          <label onclick="location.href='tournaments.html';" class="browseGamesLabel"><picture><source srcset="media/game_images/OverwatchBig.webp" type="image/webp"><img id="browseGamesOverwatchImage" class="browseGamesImage" src="media/game_images/OverwatchBig.jpg"></picture></label>
-          <label onclick="location.href='tournaments.html';" class="browseGamesLabel"><picture><source srcset="media/game_images/CounterStrikeGlobalOffensiveBig.webp" type="image/webp"><img id="browseGamesCounterStrikeImage" class="browseGamesImage" src="media/game_images/CounterStrikeGlobalOffensiveBig.jpg"></picture></label>
-          <label onclick="location.href='tournaments.html';" class="browseGamesLabel"><picture><source srcset="media/game_images/SuperSmashBrosUltimateBig.webp" type="image/webp"><img id="browseGamesSmashImage" class="browseGamesImage" src="media/game_images/SuperSmashBrosUltimateBig.jpg"></picture></label>
-        </div>
+        <div id="browseGamesCarousel" class="browseGamesCarousel"></div>
         <a id="browseGamesParagraph" class="landingSubheader">See all games...</a>
       </div>
     </div>
@@ -104,4 +97,12 @@
     <script> $( "#footer" ).load( "ajax/footer.html" ); </script>
   </div>
 </body>
+<footer>
+  <script>
+  games.forEach((game) => {
+    gameFileName = (game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","");
+    $("#browseGamesCarousel").append('<label onclick="location.href= &quot; tournaments &quot; ;" class="browseGamesLabel"><picture><source srcset="../media/game_images/' + gameFileName + '.webp" type="image/webp"><img id="browseGamesLeagueImage" class="browseGamesImage" src="../media/game_images/' + gameFileName + '.jpg"></picture></label>');
+  });
+  </script>
+</footer>
 </html>
