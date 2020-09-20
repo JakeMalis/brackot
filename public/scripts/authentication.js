@@ -1,13 +1,9 @@
 function handleSignIn() {
   if (document.getElementById("rememberMe").checked) {
-    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(function() {
-      authenticateUser();
-    });
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(function() { authenticateUser(); });
   }
   else {
-    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then(function() {
-      authenticateUser();
-    });
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then(function() { authenticateUser(); });
   }
 }
 
