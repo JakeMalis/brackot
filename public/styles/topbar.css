@@ -66,6 +66,7 @@
 }
 
 .primaryTab{
+  font-size: 14px;
   height: 70px;
   display: none;
   padding-top: 27px;
@@ -105,6 +106,7 @@
 }
 
 .secondaryTab{
+  font-size: 14px;
   cursor: pointer;
 }
 
@@ -125,6 +127,7 @@
 }
 
 .primaryTabExpansion{
+  font-size: 14px;
   height: 52px;
   padding-left: 40px;
   border-bottom: 1px solid var(--tournamentCardColor);
