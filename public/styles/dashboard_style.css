@@ -1225,6 +1225,7 @@ text-align: center;
 
 /* ================================================= CREATE-TOURNAMENT =================================================================== */
 .inputTitle{
+  font-size: 13px;
   margin: 0px;
 }
 
@@ -1485,6 +1486,12 @@ text-align: center;
 
 .quickNavbarItemLink:hover{
   text-decoration: none;
+}
+
+.quickNavbarItemText{
+  font-size: 14px;
+  height: 20px;
+  margin-bottom: 10px;
 }
 
 

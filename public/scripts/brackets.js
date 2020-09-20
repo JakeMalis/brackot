@@ -51,7 +51,7 @@ class LowerParticipant extends React.Component {
 class UpperConnector extends React.Component {
   render() {
     return (
-      <div className="topConnector" id={"connector" + this.props.connectorNumber}>
+      <div className="topConnector" id={"upperconnector" + this.props.connectorNumber}>
         <div className={"connectorUpperLeft " + this.props.visibility} id={"connectorUpperLeft" + this.props.connectorNumber}></div>
         <div className={"connectorUpperRight " + this.props.visibility} id={"connectorUpperRight" + this.props.connectorNumber}></div>
       </div>
@@ -63,7 +63,7 @@ class UpperConnector extends React.Component {
 class LowerConnector extends React.Component {
   render() {
     return (
-      <div className="bottomConnector" id={"connector" + this.props.connectorNumber}>
+      <div className="bottomConnector" id={"lowerconnector" + this.props.connectorNumber}>
         <div className={"connectorLowerLeft " + this.props.visibility} id={"connectorLowerLeft" + this.props.connectorNumber}></div>
         <div className={"connectorLowerRight " + this.props.visibility} id={"connectorLowerRight" + this.props.connectorNumber}></div>
       </div>
@@ -113,9 +113,9 @@ function renderMatchCards() {
   firebase.firestore().collection("tournaments").doc(tournamentId).get().then(async function(doc) {
     for (var round = 1; round <= getByesAndRounds()[1]; round++){
       var MatchColumnCards = [];
-      //var ConnectorColumnConnectors = [];
+      var ConnectorColumnConnectors = [];
       var matchNumber = 1;
-      //var connectorNumber = 1;
+      var connectorNumber = 1;
       var matchups;
 
       if (round == 1) { matchups = doc.data().matchupsRound1; }
@@ -134,9 +134,12 @@ function renderMatchCards() {
 
         if ((entry.playerOne === null) && (entry.playerTwo === null) && (round !=1)) {
           MatchColumnCards.push(<EmptyMatchCard roundNumber={round} matchNumber={matchNumber} emptyRound=" empty" key={matchNumber}/>);
+          if((matchNumber % 2 != 0) && (round != getByesAndRounds()[1])){ ConnectorColumnConnectors.push(<Connector roundNumber={round} connectorNumber={connectorNumber} visibility={"visible"} key={connectorNumber}/>); }
         }
         else if ((entry.playerOne === null) && (entry.playerTwo === null)){
           MatchColumnCards.push(<EmptyMatchCard roundNumber={round} matchNumber={matchNumber} emptyRound=" emptySpace" key={matchNumber}/>);
+          if(matchNumber % 2 != 0){ ConnectorColumnConnectors.push(<UpperConnector roundNumber={round} connectorNumber={connectorNumber} visibility={"hidden"} key={connectorNumber}/>); }
+          else{ ConnectorColumnConnectors.push(<LowerConnector roundNumber={round} connectorNumber={connectorNumber} visibility={"hidden"} key={connectorNumber}/>); }
         }/*
         else if ((entry.playerOne === null) && (entry.playerTwo != null)){
           upperParticipant = { uid: entry.playerOne, visibility: "hidden"};
@@ -154,16 +157,27 @@ function renderMatchCards() {
           lowerParticipant = { uid: entry.playerTwo };
           participants.push(lowerParticipant);
           MatchColumnCards.push(<MatchCard roundNumber={round} matchNumber={matchNumber} empty="" participants={participants} key={matchNumber}/>);
+          if((matchNumber % 2 != 0) && (round == 1)){
+            ConnectorColumnConnectors.push(<UpperConnector roundNumber={round} connectorNumber={connectorNumber} visibility={"visible"} key={connectorNumber}/>);
+          }
+          else if(round == 1){
+            ConnectorColumnConnectors.push(<LowerConnector roundNumber={round} connectorNumber={connectorNumber} visibility={"visible"} key={connectorNumber}/>);
+          }
+          else if((matchNumber % 2 != 0) && (round != getByesAndRounds()[1])){
+            ConnectorColumnConnectors.push(<Connector roundNumber={round} connectorNumber={connectorNumber} visibility={"visible"} key={connectorNumber}/>);
+          }
         }
         matchNumber++;
+        connectorNumber++;
       });
       ReactDOM.render(
         MatchColumnCards,
         document.getElementById("matchColumn" + round)
       );
-      /*ReactDOM.render(
+      ReactDOM.render(
+        ConnectorColumnConnectors,
         document.getElementById("connectorColumn" + round)
-      );*/
+      );
     }
   }).then(function() {
     loadMatchData();
