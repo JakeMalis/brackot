@@ -9,7 +9,7 @@ exports.makeUserAdmin = functions.region('us-east1').https.onCall(async (data, c
   return admin.auth().setCustomUserClaims(uid, {stripeRole: "unlimited", admin: true});
 });
 
-exports.deleteOldMail = functions.region('us-east1').pubsub.schedule('every 1 hours').onRun(async (context) => {
+exports.deleteOldMail = functions.region('us-east1').pubsub.schedule('0 0 * * *').onRun(async (context) => {
   const currentDate: Date = new Date();
   currentDate.setHours(currentDate.getHours() - 1);
 
