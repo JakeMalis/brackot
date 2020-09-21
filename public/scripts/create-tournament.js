@@ -106,7 +106,7 @@ function addTournament() { try{
       document.getElementById("alertTextBold").innerHTML = "Update: ";
       document.getElementById("alertText").innerHTML = "Your tournament has been added!";
   }).catch(function(error) {
-          console.error("Error writing document: ", error);
+      console.error("Error writing document: ", error);
   });
   }
   catch(error){

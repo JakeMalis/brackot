@@ -65,7 +65,7 @@ h6{
 }
 
 p{
-  font-family: 'proxima-nova', sans-serif;
+  font-family: 'proxima-nova', sans-serif !important;
   color: #eeeeee;
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
@@ -528,8 +528,8 @@ text-align: center;
 
 .filterLabel{
   margin-right: 1px;
-  border-top: 9px solid var(--tournamentCardColor);
-  border-bottom: 9px solid var(--tournamentCardColor);
+  border-top: 7px solid var(--tournamentCardColor);
+  border-bottom: 11px solid var(--tournamentCardColor);
   border-right: 15px solid var(--tournamentCardColor);
   border-left: 15px solid var(--tournamentCardColor);
   background-color: var(--tournamentCardColor);
@@ -562,6 +562,7 @@ text-align: center;
 }
 
 .filterLabelText{
+  line-height: 13px;
   font-size: 13px;
   margin-bottom: 2px;
   text-transform: uppercase;
@@ -610,6 +611,7 @@ text-align: center;
 }
 
 .filterSearchbar{
+  font-size: 13px;
   border-radius: 2px;
   padding: 8px;
   padding-left: 16px;
@@ -657,6 +659,8 @@ text-align: center;
 }
 
 .filterRow{
+  max-height: 287px; /* 10px margin top, 10px margin bottom, 29px * 8 slots*/
+  overflow: hidden;
   width: 100%;
   display: inline-block;
 }
@@ -733,6 +737,7 @@ text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 21px;
+  line-height: 21px;
   font-weight: 700;
   color: #eeeeee !important;
   text-align: center;
@@ -1618,7 +1623,7 @@ text-align: center;
   padding-left: 15px;
   padding-right: 15px;
   font-size: 16px;
-  color: #aaaaaa;
+  color: #eeeeee;
 }
 /*
 .infoParticipant{
