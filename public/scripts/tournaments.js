@@ -15,8 +15,9 @@ var selectedGame = games;
 var tournamentsCollection = firebase.firestore().collection("tournaments");
 var dateOperator = ">=";
 var dateOptions = ["Today", "This Week", "This Month"];
-var filteredDate = new Date();
-var query = tournamentsCollection.where("date", ">=", new Date()).where("date", dateOperator, filteredDate).where("game", "in", games);
+var currentDate = new Date();
+var filteredDate = currentDate;
+var query = tournamentsCollection.where("date", ">=", new Date());
 
 class TournamentCard extends React.Component {
   handleClick() {
@@ -50,7 +51,6 @@ class TournamentCard extends React.Component {
   }
 }
 
-
 async function filterData() {
   $(function(){
     $('.gameFilterListItem').on('click', function() {
@@ -59,7 +59,24 @@ async function filterData() {
         $("#gameFilterButton").removeClass("filterButtonLabelActive");
         if ($(this).text() === "All") { selectedGame = games; }
         else { selectedGame = [$(this).text()]; }
-        query = tournamentsCollection.where("date", ">=", new Date()).where("date", dateOperator, filteredDate).where("game", "in", selectedGame);
+
+        if (filteredDate === currentDate) {
+          if ($(this).text() === "All") {
+            query = tournamentsCollection.where("date", ">=", new Date());
+          }
+          else {
+            query = tournamentsCollection.where("date", ">=", new Date()).where("game", "in", selectedGame);
+          }
+        }
+        else {
+          if ($(this).text() === "All") {
+            query = tournamentsCollection.where("date", ">=", new Date()).where("date", dateOperator, filteredDate);
+          }
+          else {
+            query = tournamentsCollection.where("date", ">=", new Date()).where("date", dateOperator, filteredDate).where("game", "in", games);
+          }
+        }
+
         renderTournamentCards();
     });
     $('.dateFilterListItem').on('click', function() {
@@ -70,17 +87,49 @@ async function filterData() {
         else if ($(this).text() === "Today") { dateOperator = "<="; filteredDate = new Date(new Date().setDate(new Date().getDate() + 1)); }
         else if ($(this).text() === "This Week") { dateOperator = "<="; filteredDate = new Date(new Date().setDate(new Date().getDate() + 7)); }
         else if ($(this).text() === "This Month") { dateOperator = "<="; filteredDate = new Date(new Date().setMonth(new Date().getMonth() + 1)); }
-        query = tournamentsCollection.where("date", ">=", new Date()).where("date", dateOperator, filteredDate).where("game", "in", selectedGame);
+
+        if (selectedGame === games) {
+          query = tournamentsCollection.where("date", ">=", new Date()).where("date", dateOperator, filteredDate);
+        }
+        else {
+          query = tournamentsCollection.where("date", ">=", new Date()).where("date", dateOperator, filteredDate).where("game", "in", selectedGame);
+        }
+
+        if (selectedGame === games) {
+          if ($(this).text() === "All") {
+            query = tournamentsCollection.where("date", ">=", new Date());
+          }
+          else {
+            query = tournamentsCollection.where("date", ">=", new Date()).where("date", dateOperator, filteredDate);
+          }
+        }
+        else {
+          if ($(this).text() === "All") {
+            query = tournamentsCollection.where("date", ">=", new Date()).where("game", "in", games);
+          }
+          else {
+            query = tournamentsCollection.where("date", ">=", new Date()).where("date", dateOperator, filteredDate).where("game", "in", games);
+          }
+        }
         renderTournamentCards();
     });
   });
 }
 
-function renderTournamentCards() {
+async function renderTournamentCards() {
   var TournamentCardArray = [];
   var tournamentNumber = 1;
   query.get().then(async function(querySnapshot) {
     const collectionLength = querySnapshot.size;
+
+    if (collectionLength == 0) {
+      ReactDOM.render(
+        TournamentCardArray,
+        document.getElementById("row")
+      );
+      console.log("No tournaments match critera given.");
+    }
+
     querySnapshot.forEach(async (doc) => {
         var wallpaper = "/media/game_wallpapers/" + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "-" + "cardWallpaper.";
         var title = doc.data().name;
@@ -137,10 +186,8 @@ function renderTournamentCards() {
         }
         tournamentNumber++;
     });
-  })
+  });
 }
-
-
 
 function searchGameFilter(searchbar) {
     var value = $(searchbar).val().toLowerCase();
