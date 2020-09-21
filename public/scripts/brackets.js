@@ -84,6 +84,26 @@ class Connector extends React.Component {
   }
 }
 
+
+
+/* ====================================================WORK IN PROGRESS COMPONENT BELOW====================================
+***************************************************************************************************************************
+***************************************************************************************************************************
+***************************************************************************************************************************
+***************************************************************************************************************************
+*/
+class LeaderboardCard extends React.Component {
+  render() {
+    return (
+      <div className={"leaderboardCard " + this.props.specialPlacement} id={"leaderboardCard" + this.props.participantNumber}>
+        <img className="participantProfilePic" id={"upperParticipantProfilePicRound" + this.props.roundNumber + "Match" + this.props.matchNumber + "-" + this.props.participantNumber} src="media/BrackotLogo2.jpg"></img>
+        <p className="teamName" id={"upperParticipantNameRound" + this.props.roundNumber + "Match" + this.props.matchNumber + "-" + this.props.participantNumber}></p>
+        <p className="score whiteText" id={"upperParticipantScoreRound" + this.props.roundNumber + "Match" + this.props.matchNumber + "-" + this.props.participantNumber}></p>
+      </div>
+    );
+  }
+}
+
 /*
 variable names: roundNumber, matchNumber, participantNumber, half, empty
 
