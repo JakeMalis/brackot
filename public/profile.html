@@ -49,17 +49,9 @@
 
     <div class="row">
       <div class="cardColumn">
-        <div id="profileStatsCard" class="longYCard">
-          <div class="longYCardBackground">
-            <div class="longYCardContent">
-              <h2 style="margin-bottom: 30px;">Player Stats</h2>
-            </div>
-          </div>
-        </div>
         <div id="profileInfoCard" class="longYCard profileCard">
           <div class="longYCardBackground">
             <div class="longYCardContent">
-
               <label style="width: 100%;" for="avatarUploader">
                 <div id="profilePicContainer"><img id="profileProfilePic"></div>
                 <input type="file" name="avatarUploader" id="avatarUploader" style="display:none" accept="image/jpg, image/jpeg, image/png, image/img, image/gif">
@@ -98,6 +90,7 @@
         </div>
 
       </div>
+
       <div id="profileStats" class="cardColumn">
         <div id="stat1Card" class="statCard">
           <div class="smallCardBackground statCardBackground">
@@ -177,11 +170,102 @@
             </div>
           </div>
         </div>
-        <!--
-        <div id="seeProfileStatsContainer" class="seeProfileStatsContainer">
-          <button id="seeStatsButton" class="buttonlessButton">See all profile stats...</button>
-        </div>-->
       </div>
+
+
+<!--===================================================================SECOND ROW============================================================================-->
+      <div id="team1Stats" class="cardColumn">
+        <div id="teamStat1Card" class="statCard">
+          <div class="smallCardBackground statCardBackground">
+            <div class="statCardContent">
+              <div class="statContent">
+                <div class="iconAndNum">
+                  <i class="fas fa-swords statIcon"></i>
+                  <h2 id="tournamentsJoinedStat" class="statNum"></h2>
+                </div>
+                <p class="statDescription">Tournaments Joined</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="stat2Card" class="statCard secondaryStatCard">
+          <div class="smallCardBackground statCardBackground">
+            <div class="statCardContent">
+              <div class="statContent">
+                <div class="iconAndNum">
+                  <i class="fas fa-files-medical statIcon"></i>
+                  <h2 id="tournamentsCreatedStat" class="statNum"></h2>
+                </div>
+                <p class="statDescription">Tournaments Created</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="stat3Card" class="statCard">
+          <div class="smallCardBackground statCardBackground">
+            <div class="statCardContent">
+              <div class="statContent">
+                <div class="iconAndNum">
+                  <i class="fas fa-boxing-glove statIcon"></i>
+                  <h2 id="matchesPlayedStat" class="statNum"></h2>
+                </div>
+                <p class="statDescription">Matches Played</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="stat4Card" class="statCard">
+          <div class="smallCardBackground statCardBackground">
+            <div class="statCardContent">
+              <div class="statContent">
+                <div class="iconAndNum">
+                  <i class="fas fa-award statIcon"></i>
+                  <h2 id="teamVictoryRoyalesStat" class="statNum"></h2>
+                </div>
+                <p class="statDescription">Victory Royales</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cardColumn">
+        <div id="team1InfoCard" class="longYCard profileCard">
+          <div class="longYCardBackground">
+            <div class="longYCardContent">
+              <label style="width: 100%;" for="avatarUploader">
+                <div id="profilePicContainer"><img id="team1ProfilePic"></div>
+              </label>
+              <div style="margin: 0px !important;" class="row">
+                <div class="singleColumn">
+                  <h2 id="team1Name">Stanford University</h2>
+                  <h5 id="team1Members">23 Members</h5>
+                  <h5 id="team1Members">Private</h5>
+                  <button class="profileButton gradientButton" id="team1DetailsButton">View Details</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="modal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header" data-keyboard="false" data-backdrop="static">
+                <h1 class="modal-title" id="modalTitle">Confirm Password</h1>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <form class="modal-form">
+                    <input class="pwInput" placeholder="Password..." id="passwordConfirmation" type="password">
+                    <input type="submit" class="gradientButton modalButton" id="confirmPassword" onsubmit="updateEmail();" value="Confirm"></input>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
     </div>
   </div>
   <div id="footer">
