@@ -1,3 +1,19 @@
+function personalizeElements() {
+}
+
+function animateSocialMedia(selected){
+  var clicked = "#" + selected + "Icon";
+  $(clicked).toggleClass(selected + 'Icon');
+  $("#" + selected + "Title").toggleClass('noDisplay');
+  $("#" + selected + "Link").toggleClass('noDisplay');
+}
+
+function animateTeamPrivacy(selected){
+  var clicked = "#" + selected + "TeamLabel";
+  $('.teamPrivacyLabel').removeClass('createTournamentLabelChecked');
+  $(clicked).addClass('createTournamentLabelChecked');
+}
+
 function addTeam() { try{
   var teamName = document.getElementById('teamName').value;
   if(teamName == "") throw "Incomplete Form Error";
@@ -5,13 +21,13 @@ function addTeam() { try{
   var privacy = "public";
   var teamDescription = document.getElementById('teamDescription').value;
 
-  var discordLink = "";
-  var facebookLink = "";
-  var twitterLink = "";
-  var instagramLink = "";
-  var redditLink = "";
-  var youtubeLink = "";
-  var twitchLink = "";
+  var facebookLink = document.getElementById('facebookLink').value;
+  var twitterLink = document.getElementById('twitterLink').value;
+  var instagramLink = document.getElementById('instagramLink').value;
+  var youtubeLink = document.getElementById('youtubeLink').value;
+  var redditLink = document.getElementById('redditLink').value;
+  var twitchLink = document.getElementById('twitchLink').value;
+  var discordLink = document.getElementById('discordLink').value;
 
   if((teamDescription == "")){
     teamDescription = "No description offered";
@@ -27,9 +43,9 @@ function addTeam() { try{
       privacy: privacy,
       stats: {
         upcomingTournaments: 0,
+        tournamentsJoined: 0,
         tournamentsCreated: 0,
-        wins: 0,
-        playersHosted: 0
+        wins: 0
       },
       social: {
         discord: discordLink,

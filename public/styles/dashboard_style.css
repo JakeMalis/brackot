@@ -1371,6 +1371,7 @@ text-align: center;
   cursor: pointer;
   transition-duration: 0.2s;
   border: 3px solid var(--tournamentCardColor);
+  font-family: 'proxima-nova', sans-serif;
 }
 
 .createTournamentLabel:hover{
@@ -1439,12 +1440,49 @@ text-align: center;
   filter: opacity(70%);
 }
 
+#teamDescription{
+  height: 120px;
+}
+
+.createTeamSocialMedia{
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+.noDisplay{
+  display: none;
+}
+
+.createTeamIcon{
+  font-size: 28px;
+  margin-right: 5px;
+  color: #888888;
+  transition-duration: 0.1s;
+  cursor: pointer;
+}
+
+.createTeamIcon:hover{
+  color: #eeeeee;
+}
+
 .facebookIcon{ color: #1778f2 !important; }
 .twitterIcon{ color: #08a0e9 !important; }
 .instagramIcon{ color: #e1306c !important; }
 .youtubeIcon{ color: #ff0000 !important; }
+.redditIcon{ color: #ff5700 !important; }
 .twitchIcon{ color: #9146ff !important; }
 .discordIcon{ color: #7289da !important; }
+
+.teamPicUploadText{
+  color: #888888;
+}
+
+/*
+.teamPicUploadText::after{
+  content: "Saved";
+}
+*/
+
 
 
 /* TOURNAMENT INFO PAGE CODE */
