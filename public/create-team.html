@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Create Tournament | Brackot</title>
+  <link rel="icon" type="image/png" href="media/favicon.png"/>
+
+  <link rel="stylesheet" type="text/css" href="styles/dashboard_style.css">
+  <link rel="stylesheet" type="text/css" href="styles/selectPlayers.css">
+  <link rel="stylesheet" type="text/css" href="styles/alert.css">
+  <link rel="stylesheet" type="text/css" href="styles/topbar.css">
+  <link rel="stylesheet" type="text/css" href="styles/footer.css">
+  <link rel="stylesheet" type="text/css" href="styles/font-awesome/css/all.css">
+  <link rel="stylesheet" href="https://use.typekit.net/fyp1otf.css">
+
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-functions.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-storage.js"></script>
+  <script src="scripts/firebaseConfig.js"></script>
+
+  <script src="scripts/games.js"></script>
+  <script src="scripts/create-tournament.js"></script>
+
+  <script src="scripts/header.js"></script>
+  <script src="scripts/topbar.js"></script>
+</head>
+<body>
+  <div id="alert">
+    <script> $( "#alert" ).load( "ajax/alert.html" ); </script>
+  </div>
+  <div id="topbar">
+    <script> $( "#topbar" ).load( "ajax/topbar.html" ); </script>
+  </div>
+
+  <div class="main-page">
+    <div class="headerImage"></div>
+
+      <div class="row">
+        <div class="wideCard" style="margin-bottom: 40px;">
+          <div class="wideCardBackground">
+            <div class="wideCardContent">
+              <h2 style="margin-bottom: 30px;">Create a Team</h2>
+              <form id="createTeamForm">
+                <h6 class="inputTitle">Team Name</h6>
+                <input type="text" name="newTeamName" class="createTournamentTextInput" id="teamName"></input>
+
+                <h6 class="inputTitle">Description</h6>
+                <textarea name="newTeamDescription" class="createTournamentTextInput" id="tournamentDescription" max-length="1000"></textarea>
+
+                <h6 class="inputTitle">Participant Type</h6>
+                <div class="createTournamentParticipantType"  id="participantType">
+                  <label id="individualLabel" class="createTournamentLabel participantLabel"><input onclick="animateParticipantType(this.id)" name="newTournamentParticipantType" class="createTournamentInput" type="radio" id="individual" value="individual"><i class="fas fa-user createTournamentIcon"></i>Players</input></label>
+                  <label id="teamLabel" style="display: none;" class="createTournamentLabel participantLabel"><input onclick="animateParticipantType(this.id)" name="newTournamentParticipantType" class="createTournamentInput" type="radio" id="team" value="team"><i class="fas fa-users createTournamentIcon"></i>Teams</input></label>
+                </div>
+                <br>
+                <br>
+              </form>
+              <button class="gradientButton createTournamentSubmitButton" onclick="addTournament();">Add Tournament</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="footer">
+      <script> $( "#footer" ).load( "ajax/footer.html" ); </script>
+    </div>
+</body>
+</html>

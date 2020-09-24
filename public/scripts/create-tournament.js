@@ -71,6 +71,8 @@ function addTournament() { try{
   var thirdEarnings = document.getElementById('thirdEarnings').value;
 
   var entryFee = 0.00;
+  var teamSize = 1;
+  var privacy = "public";
 
   //Single Elimination, Double Elimination, Round Robin, Free-For-All
   var bracketType = "Single Elimination"
@@ -99,6 +101,8 @@ function addTournament() { try{
       unlimited: document.getElementById("unlimited").checked,
       type: document.querySelector('input[name="newTournamentParticipantType"]:checked').value,
       entryFee: entryFee,
+      teamSize: teamSize,
+      privacy: privacy,
       bracketType: bracketType
   }).then(function() {
       document.getElementById("alertBox").style.display = "block";
