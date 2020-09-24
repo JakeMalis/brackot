@@ -160,25 +160,6 @@ function joinTeam() {
   });
 }
 
-function uploadAvatar(avatar) {
-  var storageReference = firebase.storage().ref(firebase.auth().currentUser.uid);
-  var avatarReference = storageReference.child("profile");
-  var image = avatar.target.files[0];
-  document.getElementById("submitRegistrationButton").disabled = true;
-  document.getElementById("submitRegistrationButton").value = "Uploading Avatar...";
-
-  avatarReference.put(image).then(function(snapshot) {
-    console.log('Uploaded profile image!');
-    snapshot.ref.getDownloadURL().then(function(url){
-        firebase.auth().currentUser.updateProfile({
-            photoURL: url
-        });
-        document.getElementById("addProfilePic").src = url;
-        document.getElementById("submitRegistrationButton").disabled = false;
-    });
-  });
-}
-
 function loadExistingTeams() {
   firebase.firestore().collection("teams").get().then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
