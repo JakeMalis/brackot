@@ -26,7 +26,7 @@ function addTeam() { try{
       teamAdmins: [],
       privacy: privacy,
       stats: {
-        tournamentsJoined: 0,
+        upcomingTournaments: 0,
         tournamentsCreated: 0,
         wins: 0,
         playersHosted: 0

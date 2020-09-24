@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>My Teams | Brackot</title>
+  <link rel="icon" type="image/png" href="media/favicon.png"/>
+
+  <link rel="stylesheet" type="text/css" href="styles/dashboard_style.css">
+  <link rel="stylesheet" type="text/css" href="styles/alert.css">
+  <link rel="stylesheet" type="text/css" href="styles/topbar.css">
+  <link rel="stylesheet" type="text/css" href="styles/footer.css">
+  <link rel="stylesheet" type="text/css" href="styles/modal.css">
+  <link rel="stylesheet" type="text/css" href="styles/font-awesome/css/all.css">
+  <link rel="stylesheet" href="https://use.typekit.net/fyp1otf.css">
+
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-functions.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-storage.js"></script>
+  <script src="scripts/firebaseConfig.js"></script>
+
+  <script src="scripts/games.js"></script>
+  <script src="scripts/profile.js"></script>
+
+  <script src="scripts/header.js"></script>
+  <script src="scripts/topbar.js"></script>
+</head>
+<body>
+  <div id="alert">
+    <script> $( "#alert" ).load( "ajax/alert.html" ); </script>
+  </div>
+  <div id="topbar">
+    <script> $( "#topbar" ).load( "ajax/topbar.html" ); </script>
+  </div>
+
+  <div class="main-page">
+    <div class="headerImage"></div>
+    <div id="team1Container" class="row">
+      <div class="cardColumn">
+        <div id="team1InfoCard" class="longYCard profileCard">
+          <div class="longYCardBackground">
+            <div class="longYCardContent">
+              <label style="width: 100%;" for="avatarUploader">
+                <div id="profilePicContainer"><img id="team1ProfilePic"></div>
+              </label>
+              <div style="margin: 0px !important;" class="row">
+                <div class="singleColumn">
+                  <h2 class="teamName" id="team1Name">Stanford University</h2>
+                  <div class="teamSocials" id="team1Socials">
+                    <a class="teamSocial facebookIcon" id="team1Facebook"><i class="fab fa-facebook-square" aria-hidden="true"></i></a>
+                    <a class="teamSocial twitterIcon" id="team1Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                    <a class="teamSocial instagramIcon" id="team1Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                    <a class="teamSocial youtubeIcon" id="team1Youtube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+                    <a class="teamSocial twitchIcon" id="team1Twitch"><i class="fab fa-twitch" aria-hidden="true"></i></a>
+                    <a class="teamSocial discordIcon" id="team1Discord"><i class="fab fa-discord" aria-hidden="true"></i></a>
+                  </div>
+                  <h5 class="teamDetails" id="team1Members">1738 Members</h5>
+                  <h5 class="teamDetails" id="team1Members">Public</h5>
+                  <button class="profileButton gradientButton" id="team1DetailsButton">View Details</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="team1Stats" class="cardColumn">
+        <div id="team1Stat1Card" class="statCard">
+          <div class="smallCardBackground statCardBackground">
+            <div class="statCardContent">
+              <div class="statContent">
+                <div class="iconAndNum">
+                  <i class="fas fa-swords statIcon"></i>
+                  <h2 id="teamTournamentsJoinedStat" class="statNum"></h2>
+                </div>
+                <p class="statDescription">Tournaments Joined</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="team1Stat2Card" class="statCard secondaryStatCard">
+          <div class="smallCardBackground statCardBackground">
+            <div class="statCardContent">
+              <div class="statContent">
+                <div class="iconAndNum">
+                  <i class="fas fa-files-medical statIcon"></i>
+                  <h2 id="teamTournamentsCreatedStat" class="statNum"></h2>
+                </div>
+                <p class="statDescription">Tournaments Created</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="team1Stat3Card" class="statCard">
+          <div class="smallCardBackground statCardBackground">
+            <div class="statCardContent">
+              <div class="statContent">
+                <div class="iconAndNum">
+                  <i class="fas fa-boxing-glove statIcon"></i>
+                  <h2 id="teamUpcomingTournamentsStat" class="statNum"></h2>
+                </div>
+                <p class="statDescription">Upcoming Tournaments</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="team1Stat4Card" class="statCard">
+          <div class="smallCardBackground statCardBackground">
+            <div class="statCardContent">
+              <div class="statContent">
+                <div class="iconAndNum">
+                  <i class="fas fa-award statIcon"></i>
+                  <h2 id="teamVictoryRoyalesStat" class="statNum"></h2>
+                </div>
+                <p class="statDescription">Victory Royales</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="team2Container" class="row">
+      <div id="team2Stats" class="cardColumn">
+        <div id="team2Stat1Card" class="statCard">
+          <div class="smallCardBackground statCardBackground">
+            <div class="statCardContent">
+              <div class="statContent">
+                <div class="iconAndNum">
+                  <i class="fas fa-swords statIcon"></i>
+                  <h2 id="teamTournamentsJoinedStat" class="statNum"></h2>
+                </div>
+                <p class="statDescription">Tournaments Joined</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="team2Stat2Card" class="statCard secondaryStatCard">
+          <div class="smallCardBackground statCardBackground">
+            <div class="statCardContent">
+              <div class="statContent">
+                <div class="iconAndNum">
+                  <i class="fas fa-files-medical statIcon"></i>
+                  <h2 id="teamTournamentsCreatedStat" class="statNum"></h2>
+                </div>
+                <p class="statDescription">Tournaments Created</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="team2Stat3Card" class="statCard">
+          <div class="smallCardBackground statCardBackground">
+            <div class="statCardContent">
+              <div class="statContent">
+                <div class="iconAndNum">
+                  <i class="fas fa-boxing-glove statIcon"></i>
+                  <h2 id="teamUpcomingTournamentsStat" class="statNum"></h2>
+                </div>
+                <p class="statDescription">Upcoming Tournaments</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="team2Stat4Card" class="statCard">
+          <div class="smallCardBackground statCardBackground">
+            <div class="statCardContent">
+              <div class="statContent">
+                <div class="iconAndNum">
+                  <i class="fas fa-award statIcon"></i>
+                  <h2 id="teamVictoryRoyalesStat" class="statNum"></h2>
+                </div>
+                <p class="statDescription">Victory Royales</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cardColumn">
+        <div id="team2InfoCard" class="longYCard profileCard">
+          <div class="longYCardBackground">
+            <div class="longYCardContent">
+              <label style="width: 100%;" for="avatarUploader">
+                <div id="profilePicContainer"><img id="team1ProfilePic"></div>
+              </label>
+              <div style="margin: 0px !important;" class="row">
+                <div class="singleColumn">
+                  <h2 class="teamName" id="team2Name">All-Star eSports</h2>
+                  <div class="teamSocials" id="team2Socials">
+                    <a class="teamSocial facebookIcon" id="team2Facebook"><i class="fab fa-facebook-square" aria-hidden="true"></i></a>
+                    <a class="teamSocial twitterIcon" id="team2Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                    <a class="teamSocial instagramIcon" id="team2Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                    <a class="teamSocial youtubeIcon" id="team2Youtube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+                    <a class="teamSocial twitchIcon" id="team2Twitch"><i class="fab fa-twitch" aria-hidden="true"></i></a>
+                    <a class="teamSocial discordIcon" id="team2Discord"><i class="fab fa-discord" aria-hidden="true"></i></a>
+                  </div>
+                  <h5 class="teamDetails" id="team2Members">17 Members</h5>
+                  <h5 class="teamDetails" id="team2Members">Private</h5>
+                  <button class="profileButton gradientButton" id="team2DetailsButton">View Details</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

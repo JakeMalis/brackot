@@ -3,7 +3,7 @@
 function scrollCarouselRight(){
   $('#leftArrow').removeClass("hiddenArrow");
   var carousel = document.getElementById("browseGamesCarousel");
-  carousel.scrollLeft += 387;
+  carousel.scrollLeft += 576;
   var maxScrollLeft = carousel.scrollWidth - carousel.clientWidth;
 
   if(carousel.scrollLeft == maxScrollLeft){
@@ -14,7 +14,7 @@ function scrollCarouselRight(){
 function scrollCarouselLeft(){
   $('#rightArrow').removeClass("hiddenArrow");
   var carousel = document.getElementById("browseGamesCarousel");
-  carousel.scrollLeft -= 387;
+  carousel.scrollLeft -= 576;
 
   var temp = carousel.scrollLeft;
 

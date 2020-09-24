@@ -1411,6 +1411,42 @@ text-align: center;
 /* END EMAIL PREFERENCES PAGE CODE */
 
 
+
+/*================================================================TEAMS CODE========================================================================*/
+.teamName{
+  font-size: 32px;
+  margin-bottom: 5px;
+}
+
+.teamDetails{
+  color: #888888 !important;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.teamSocials{
+  margin-bottom: 10px;
+}
+
+.teamSocial{
+  margin-right: 5px;
+  font-size: 26px;
+  cursor: pointer;
+  transition-duration: 0.1s;
+}
+
+.teamSocial:hover{
+  filter: opacity(70%);
+}
+
+.facebookIcon{ color: #1778f2 !important; }
+.twitterIcon{ color: #08a0e9 !important; }
+.instagramIcon{ color: #e1306c !important; }
+.youtubeIcon{ color: #ff0000 !important; }
+.twitchIcon{ color: #9146ff !important; }
+.discordIcon{ color: #7289da !important; }
+
+
 /* TOURNAMENT INFO PAGE CODE */
 .tournamentInfoPageContainer{
   margin-top: 20px;
