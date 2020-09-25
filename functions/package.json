@@ -22,7 +22,7 @@
     "pngquant-bin": "^6.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "stripe": "^8.98.0"
+    "stripe": "^8.100.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
