@@ -34,6 +34,7 @@ function addTeam() { try{
   }
 
   firebase.firestore().collection("teams").add({
+      verified: false,
       creator: firebase.auth().currentUser.uid,
       creatorName: firebase.auth().currentUser.displayName,
       description: teamDescription,

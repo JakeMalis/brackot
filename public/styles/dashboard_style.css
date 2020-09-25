@@ -300,7 +300,7 @@ select option{
 
 .tournamentsHeader{
   font-size: 40px;
-  margin-bottom: 20px !important;
+  margin-bottom: 10px;
 }
 
 .myTournamentsHeader{
@@ -690,6 +690,10 @@ text-align: center;
   transition-duration: 0.2s;
 }
 
+.teamCard{
+  height: 350px;
+}
+
 .tournamentCardBackground{
   transition-duration: 0.2s;
   margin-top: 20px;
@@ -790,6 +794,10 @@ text-align: center;
   width: 100%;
 }
 
+.teamCardHostBar{
+  border-top: none;
+}
+
 .tournamentCardHostPic{
   vertical-align: top;
   margin-left: 10px;
@@ -814,6 +822,28 @@ text-align: center;
   max-width: 100%;
   margin: 0px;
   color: #aaaaaa !important;
+}
+
+.teamCardButton{
+  font-family: 'proxima-nova', sans-serif;
+  height: 100%;
+  border: 0px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  color: #aaaaaa;
+  width: 100%;
+  font-size: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: var(--tournamentCardColorHover);
+  transition-duration: 0.1s;
+}
+
+.teamCardButton:hover{
+  background: #505060;
+  color: #eeeeee;
 }
 
 .tournamentCardButton{
@@ -1933,6 +1963,11 @@ text-align: center;
     width: 200px;
     position: absolute;
   }
+
+  .tournamentCard{
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
 }
 
 @media only screen and (min-width: 900px){
@@ -1957,8 +1992,8 @@ text-align: center;
     margin-left: 3%;
   }
   .tournamentCard{
-    flex: 0 0 50%;
-    max-width: 50%;
+    flex: 0 0 33%;
+    max-width: 33%;
   }
   .smallCard{
     flex: 0 0 50%;
@@ -1989,11 +2024,10 @@ text-align: center;
   }
 }
 
-@media only screen and (min-width: 1200px){
+@media only screen and (min-width: 1300px){
   .secondaryStatCard{
     display: block;
   }
-
   .tournamentCard{
     flex: 0 0 25%;
     max-width: 25%;
@@ -2008,6 +2042,13 @@ text-align: center;
   }
   .carouselCardBackground{
     width: 97.3%;
+  }
+}
+
+@media only screen and (min-width: 1600px){
+  .tournamentCard{
+    flex: 0 0 20%;
+    max-width: 20%;
   }
 }
 
