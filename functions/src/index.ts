@@ -1,5 +1,6 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
+// @ts-ignore
 import * as compress_images from 'compress-images';
 
 admin.initializeApp();
@@ -37,37 +38,42 @@ exports.sendWelcomeEmail = functions.region('us-east1').auth.user().onCreate(asy
 
   const link = await admin.auth().generateEmailVerificationLink(user.email);
 
+  functions.logger.log(user.email);
   functions.logger.log(link);
 });
 
 exports.compressProfilePicture = functions.region('us-east1').storage.object().onFinalize(async (object) => {
-  const fileType = object.contentType;
   const filePath: string = object.name!;
   const fileBucket = object.bucket;
   const fileName = path.basename(filePath);
 
   const bucket = admin.storage().bucket(fileBucket);
-  const tempFilePath = path.join(os.tmpdir(), fileName);
+  const localFilePath = path.join(os.tmpdir(), fileName);
 
-  await bucket.file(filePath).download({destination: tempFilePath});
-  //functions.logger.log("Image downloaded locally to, ", tempFilePath);
-
-  if (fileType === "image/jpg") {
-    compress_images(
-      tempFilePath,
-      process.cwd(),
-      { compress_force: false, statistic: true, autoupdate: true },
-      false,
-      { jpg: { engine: "mozjpeg", command: ["-quality", "60"] }},
-      function (error, completed) {
-        if (completed === true) {
-          functions.logger.log("Compressed jpg file")
-        }
+  await bucket.file(filePath).download({destination: localFilePath}).then(async () => {
+    await compress_images(localFilePath, '/tmp/', { compress_force: false, statistic: true , autoupdate: false }, false,
+        { jpg: { engine: "mozjpeg", command: ["-quality", "60"] } },
+        { png: { engine: "pngquant", command: ["--quality=20-50", "-o"] } },
+        { svg: { engine: "svgo", command: "--multipass" } },
+        { gif: { engine: "gifsicle", command: ["--colors", "64", "--use-col=web"] } },
+      function (error, completed, statistic) {
+        functions.logger.log("-------------");
+        functions.logger.log(error);
+        functions.logger.log(completed);
+        functions.logger.log(statistic);
+        functions.logger.log("-------------");
       }
     );
-  }
 
-  return fs.unlinkSync(tempFilePath);
+    const newFilePath = path.join(path.dirname(filePath), fileName);
+    functions.logger.log(newFilePath);
+
+    await bucket.upload(localFilePath, {
+      destination: 'compressedImage/compressed.png'
+    });
+  });
+
+  return fs.unlinkSync(localFilePath);
 });
 
 /*
