@@ -1,0 +1,112 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Team Info | Brackot</title>
+  <link rel="icon" type="image/png" href="media/favicon.png"/>
+
+  <link rel="stylesheet" type="text/css" href="styles/dashboard_style.css">
+  <link rel="stylesheet" type="text/css" href="styles/bracket.css">
+  <link rel="stylesheet" type="text/css" href="styles/alert.css">
+  <link rel="stylesheet" type="text/css" href="styles/topbar.css">
+  <link rel="stylesheet" type="text/css" href="styles/footer.css">
+  <link rel="stylesheet" type="text/css" href="styles/font-awesome/css/all.css">
+  <link rel="stylesheet" href="https://use.typekit.net/fyp1otf.css">
+
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-functions.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-storage.js"></script>
+  <script src="scripts/firebaseConfig.js"></script>
+
+  <script src="scripts/team-info.js"></script>
+
+  <script src="scripts/header.js"></script>
+  <script src="scripts/topbar.js"></script>
+</head>
+<body>
+  <div id="alert">
+    <script> $( "#alert" ).load( "ajax/alert.html" ); </script>
+  </div>
+  <div id="topbar">
+    <script> $( "#topbar" ).load( "ajax/topbar.html" ); </script>
+  </div>
+  <div id="tournamentInfoWallpaper" class="tournamentInfoWallpaper"></div>
+
+  <div class="main-page">
+      <div class="teamInfoPageContainer">
+        <div class="teamInfoQuickCard">
+          <div class="wideCardBackground tournamentInfoCardBackground">
+            <div class="singleColumn">
+              <img id="teamInfoProfilePic" class="teamInfoProfilePic" src="media/BrackotLogo2.jpg"/>
+              <div class="teamInfoQuickContent">
+                <h2 class="teamInfoName" id="teamInfoName">Stanford University</h2>
+                <div class="teamSocials" id="teamInfoSocials">
+                  <a class="teamSocial facebookIcon noDisplay" id="teamInfoFacebook"><i class="fab fa-facebook-square" aria-hidden="true"></i></a>
+                  <a class="teamSocial twitterIcon noDisplay" id="teamInfoTwitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                  <a class="teamSocial instagramIcon noDisplay" id="teamInfoInstagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                  <a class="teamSocial youtubeIcon noDisplay" id="teamInfoYoutube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+                  <a class="teamSocial redditIcon noDisplay" id="teamInfoReddit"><i class="fab fa-reddit-alien" aria-hidden="true"></i></a>
+                  <a class="teamSocial twitchIcon noDisplay" id="teamInfoTwitch"><i class="fab fa-twitch" aria-hidden="true"></i></a>
+                  <a class="teamSocial discordIcon noDisplay" id="teamInfoDiscord"><i class="fab fa-discord" aria-hidden="true"></i></a>
+                </div>
+                <div class="teamInfoDetails">
+                  <div class="iconAndNum teamInfoIconAndNum">
+                    <i class="fas fa-user teamInfoIcon"></i>
+                    <h2 id="teamInfoMembers" class="teamInfoStat">2036</h2>
+                  </div>
+                  <p class="statDescription">Members</p>
+                </div>
+                <div class="teamInfoDetails">
+                  <div class="iconAndNum teamInfoIconAndNum">
+                    <i id="teamInfoPublicIcon" class="fas fa-users teamInfoIcon noDisplay"></i>
+                    <i id="teamInfoPrivateIcon" class="fas fa-lock teamInfoIcon noDisplay"></i>
+                    <h2 id="teamInfoPrivacy" class="teamInfoStat">Private</h2>
+                  </div>
+                  <p class="statDescription">Privacy</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="teamInfoCard">
+          <div class="wideCardBackground tournamentInfoCardBackground">
+            <div id="tournamentInfoCardContent" class="wideCardContent">
+            </div>
+            <button class="tournamentCardButton tournamentCardButtonGeneric" id="tournamentSignUpButton"></button>
+          </div>
+        </div>
+
+
+
+        <div id="entryFeeModal" class="matchModal">
+          <div class="matchModal-content">
+            <span id="closeEntryFeeModal" class="close" onclick="closeEntryFeeModal()">&times;</span>
+            <div class="modalTop">
+            </div>
+            <div class="modalBottom">
+              <button onclick="editMatchScores()" id="editScoresButton" class="grayButton submitResultsButton">Edit Scores</button>
+              <button onclick="saveMatchScores()" id="submitResultsButton" class="gradientButton submitResultsButton">Submit Results</button>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+    <div id="footer">
+      <script> $( "#footer" ).load( "ajax/footer.html" ); </script>
+    </div>
+</body>
+</html>
