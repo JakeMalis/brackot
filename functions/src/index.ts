@@ -2,6 +2,7 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 // @ts-ignore
 import * as compress_images from 'compress-images';
+import { v4 as uuidv4 } from 'uuid';
 
 admin.initializeApp();
 
@@ -32,8 +33,8 @@ exports.deleteOldMail = functions.region('us-east1').pubsub.schedule('0 0 * * *'
   });
 });
 
-
-exports.sendWelcomeEmail = functions.region('us-east1').auth.user().onCreate(async (user) => {
+exports.sendWelcomeEmail = functions.region('us-east1').firestore.document('users/{userId}').onCreate(async (snap, context) => {
+  const user = snap.data();
   if (!user.email) throw new Error("User has no email address");
 
   const link = await admin.auth().generateEmailVerificationLink(user.email);
@@ -76,8 +77,68 @@ exports.compressProfilePicture = functions.region('us-east1').storage.object().o
   return fs.unlinkSync(localFilePath);
 });
 
-/*
-exports.setUserProfilePicture = functions.region('us-east1').storage.object().onMetadataUpdate(async (object) => {
+exports.createUserDocument = functions.region('us-east1').auth.user().onCreate(async (user) => {
+  if (user.displayName === null) {
+    const randomUUID = "newUser-" + uuidv4();
+    await admin.auth().updateUser(user.uid, {
+      displayName: randomUUID
+    });
+  }
 
+  await admin.auth().updateUser(user.uid, {
+    photoURL: "https://firebasestorage.googleapis.com/v0/b/brackot/o/BrackotLogo2.jpg?alt=media&token=7bdf6862-64ec-4db7-9666-3e2865d2cdbe"
+  });
+
+  await admin.firestore().collection('users').doc(user.uid).set({
+    name: user.displayName,
+    email: user.email,
+    stats: {
+      tournamentsJoined: 0,
+      tournamentsCreated: 0,
+      matchesPlayed: 0,
+      playersHosted: 0,
+      bugsReported: 0,
+      coins: 0,
+      notifications: 0,
+      wins: 0
+    },
+    email_preferences: {
+      announcements: true,
+      newsletter: true,
+      thirdparty: true
+    }
+  });
 });
-*/
+
+exports.fixUsersWithoutDocument = functions.region('us-east1').auth.user().onCreate(async (user) => {
+  let temp: number = 0;
+  await admin.auth().listUsers(1000).then((listUsersResult) => {
+    const allUsers = listUsersResult.users.length;
+    listUsersResult.users.forEach(async (userRecord) => {
+      await admin.firestore().collection('users').doc(userRecord.toJSON()["uid"]).get().then(async (doc) => {
+        if (!(doc.exists) && (userRecord.toJSON()["uid"] === 'MqZVkAgNJ2e6U4aC1TCfAQmvZac2')) {
+          await admin.firestore().collection('users').doc(userRecord.toJSON()["uid"]).set({
+            name: userRecord.toJSON()["displayName"],
+            email: userRecord.toJSON()["email"],
+            stats: {
+              tournamentsJoined: 0,
+              tournamentsCreated: 0,
+              matchesPlayed: 0,
+              playersHosted: 0,
+              bugsReported: 0,
+              coins: 0,
+              notifications: 0,
+              wins: 0
+            },
+            email_preferences: {
+              announcements: true,
+              newsletter: true,
+              thirdparty: true
+            }
+          });
+        }
+      });
+    });
+  });
+  console.log(temp);
+});
