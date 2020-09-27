@@ -33,8 +33,55 @@ function personalizeElements() {
     if(twitch != ""){ $('#teamInfoTwitch').removeClass("noDisplay"); $("#teamInfoTwitch").attr("href", twitch); }
     if(discord != ""){ $('#teamInfoDiscord').removeClass("noDisplay"); $("#teamInfoDiscord").attr("href", discord); }
 
+    if (doc.data().games != undefined){
+      $('#teamInfoGamesRow').removeClass("noDisplay");
+      doc.data().games.forEach((game) => {
+        gameFileName = (game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","").replace("'","");
+        $("#teamInfoGameCarousel").append('<label id="teamInfo' + gameFileName + 'Label" class="createTournamentGamesLabel"><picture><source srcset="../media/game_images/' + gameFileName + '.webp" type="image/webp"><img class="createTournamentGamesImage" src="../media/game_images/' + gameFileName + '.jpg"></picture></label>');
+      });
+    }
+
+
+
+    if (doc.data().creator === firebase.auth().currentUser.uid) {
+      document.getElementById("teamSignUpButton").innerHTML = "Edit Team";
+      document.getElementById("teamSignUpButton").onclick = function() { editTeam(); };
+    }
+    else if ((!(doc.data().teamMembers).includes(firebase.auth().currentUser.uid)) && ((doc.data().privacy) == "public")) {
+      document.getElementById("teamSignUpButton").innerHTML = "Join Team";
+      document.getElementById("teamSignUpButton").onclick = function() { joinPublicTeam(); };
+    }
+    else if ((!(doc.data().teamMembers).includes(firebase.auth().currentUser.uid)) && ((doc.data().privacy) == "private")) {
+      document.getElementById("teamSignUpButton").innerHTML = "Join Team";
+      document.getElementById("teamSignUpButton").onclick = function() { joinPrivateTeam(); };
+    }
+    else if ((doc.data().teamMembers).includes(firebase.auth().currentUser.uid)) {
+      document.getElementById("teamSignUpButton").className = 'tournamentCardButton teamCardButtonJoined';
+      document.getElementById("teamSignUpButton").innerHTML = "";
+      document.getElementById("teamSignUpButton").onclick = function() { leaveTeam(); };
+    }
+
+
     //document.getElementById("tournamentInfoWallpaper").className = "headerImage tournamentInfoWallpaper " + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "InfoWallpaper";
   });
 
 
+}
+
+function joinPublicTeam() {
+  firebase.firestore().collection("teams").doc(teamId).update({
+    teamMembers: firebase.firestore.FieldValue.arrayUnion(firebase.auth().currentUser.uid)
+  }).then(function() {
+    document.getElementById("teamSignUpButton").className = 'tournamentCardButton teamCardButtonJoined';
+    document.getElementById("teamSignUpButton").innerHTML = "";
+    document.getElementById("teamSignUpButton").disabled = true;
+  });
+}
+
+function leaveTeam(){
+  firebase.firestore().collection("teams").doc(teamId).update({
+    teamMembers: firebase.firestore.FieldValue.arrayRemove(firebase.auth().currentUser.uid)
+  }).then(function() {
+    document.location.reload(false);
+  });
 }

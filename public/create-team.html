@@ -59,23 +59,21 @@
                 <h6 class="inputTitle">Description</h6>
                 <textarea name="newTeamDescription" class="createTournamentTextInput" id="teamDescription" max-length="1000"></textarea>
 
-                <h6 class="inputTitle">Privacy</h6>
-                <div class="createTeamPrivacy"  id="teamPrivacy">
-                  <label id="publicTeamLabel" class="createTournamentLabel teamPrivacyLabel"><input onclick="animateTeamPrivacy(this.id)" name="newTeamPrivacy" class="createTournamentInput" type="radio" id="public" value="public"><i class="fas fa-users createTournamentIcon"></i>Public</input></label>
-                  <label id="privateTeamLabel" class="createTournamentLabel teamPrivacyLabel"><input onclick="animateTeamPrivacy(this.id)" name="newTeamPrivacy" class="createTournamentInput" type="radio" id="private" value="private"><i class="fas fa-lock createTournamentIcon"></i>Private</input></label>
-                </div>
+                <h6 class="inputTitle">Game(s)</h6>
+                <div id="createTeamGameCarousel" class="createTournamentGameCarousel"></div>
+                <input type="text" name="newTeamGameSearchbar" class="createTournamentTextInput" id="createTeamGameSearchbar" placeholder="Find a game..." onkeyup="searchGameCreateTeam(this)"></input>
 
                 <br>
 
                 <h6 class="inputTitle">Social Media</h6>
                 <div class="createTeamSocialMedia"  id="socialMedia">
-                  <label id="facebookLabel"><input onclick="animateSocialMedia(this.id)" name="newTournamentPlatform"  class="createTournamentInput" type="checkbox" id="facebook" value="facebook"><i id="facebookIcon" class="fab fa-facebook-square createTeamIcon" aria-hidden="true"></i></label>
-                  <label id="twitterLabel"><input onclick="animateSocialMedia(this.id)" name="newTournamentPlatform"  class="createTournamentInput" type="checkbox" id="twitter" value="twitter"><i id="twitterIcon" class="fab fa-twitter createTeamIcon"></i></input></label>
-                  <label id="instagramLabel"><input onclick="animateSocialMedia(this.id)" name="newTournamentPlatform"  class="createTournamentInput" type="checkbox" id="instagram" value="instagram"><i id="instagramIcon" class="fab fa-instagram createTeamIcon"></i></input></label>
-                  <label id="youtubeLabel"><input onclick="animateSocialMedia(this.id)" name="newTournamentPlatform"  class="createTournamentInput" type="checkbox" id="youtube" value="youtube"><i id="youtubeIcon" class="fab fa-youtube createTeamIcon"></i></input></label>
-                  <label id="redditLabel"><input onclick="animateSocialMedia(this.id)" name="newTournamentPlatform"  class="createTournamentInput" type="checkbox" id="reddit" value="reddit"><i id="redditIcon" class="fab fa-reddit-alien createTeamIcon"></i></input></label>
-                  <label id="twitchLabel"><input onclick="animateSocialMedia(this.id)" name="newTournamentPlatform"  class="createTournamentInput" type="checkbox" id="twitch" value="twitch"><i id="twitchIcon" class="fab fa-twitch createTeamIcon"></i></input></label>
-                  <label id="discordLabel"><input onclick="animateSocialMedia(this.id)" name="newTournamentPlatform"  class="createTournamentInput" type="checkbox" id="discord" value="discord"><i id="discordIcon" class="fab fa-discord createTeamIcon"></i></input></label>
+                  <label id="facebookLabel"><input onclick="animateSocialMedia(this.id)" class="createTournamentInput" type="checkbox" id="facebook" value="facebook"><i id="facebookIcon" class="fab fa-facebook-square createTeamIcon" aria-hidden="true"></i></label>
+                  <label id="twitterLabel"><input onclick="animateSocialMedia(this.id)" class="createTournamentInput" type="checkbox" id="twitter" value="twitter"><i id="twitterIcon" class="fab fa-twitter createTeamIcon"></i></input></label>
+                  <label id="instagramLabel"><input onclick="animateSocialMedia(this.id)" class="createTournamentInput" type="checkbox" id="instagram" value="instagram"><i id="instagramIcon" class="fab fa-instagram createTeamIcon"></i></input></label>
+                  <label id="youtubeLabel"><input onclick="animateSocialMedia(this.id)" class="createTournamentInput" type="checkbox" id="youtube" value="youtube"><i id="youtubeIcon" class="fab fa-youtube createTeamIcon"></i></input></label>
+                  <label id="redditLabel"><input onclick="animateSocialMedia(this.id)" class="createTournamentInput" type="checkbox" id="reddit" value="reddit"><i id="redditIcon" class="fab fa-reddit-alien createTeamIcon"></i></input></label>
+                  <label id="twitchLabel"><input onclick="animateSocialMedia(this.id)" class="createTournamentInput" type="checkbox" id="twitch" value="twitch"><i id="twitchIcon" class="fab fa-twitch createTeamIcon"></i></input></label>
+                  <label id="discordLabel"><input onclick="animateSocialMedia(this.id)" class="createTournamentInput" type="checkbox" id="discord" value="discord"><i id="discordIcon" class="fab fa-discord createTeamIcon"></i></input></label>
                 </div>
 
                 <h6 class="inputTitle noDisplay" id="facebookTitle">Facebook Link</h6>
@@ -99,6 +97,12 @@
                   <div id="teamProfilePicContainer"><img id="teamProfilePic"></div>
                   <input type="file" name="teamAvatarUploader" id="teamAvatarUploader" style="display:none" accept="image/jpg, image/jpeg, image/png, image/img, image/gif">
                 </label>
+
+                <h6 class="inputTitle">Privacy</h6>
+                <div class="createTeamPrivacy"  id="teamPrivacy">
+                  <label id="publicTeamLabel" class="createTournamentLabel teamPrivacyLabel"><input onclick="animateTeamPrivacy(this.id)" name="newTeamPrivacy" class="createTournamentInput" type="radio" id="public" value="public"><i class="fas fa-users createTournamentIcon"></i>Public</input></label>
+                  <label id="privateTeamLabel" class="createTournamentLabel teamPrivacyLabel"><input onclick="animateTeamPrivacy(this.id)" name="newTeamPrivacy" class="createTournamentInput" type="radio" id="private" value="private"><i class="fas fa-lock createTournamentIcon"></i>Private</input></label>
+                </div>
 
                 <br>
                 <br>

@@ -29,6 +29,7 @@
   <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-storage.js"></script>
   <script src="scripts/firebaseConfig.js"></script>
 
+  <script src="scripts/games.js"></script>
   <script src="scripts/team-info.js"></script>
 
   <script src="scripts/header.js"></script>
@@ -45,12 +46,13 @@
 
   <div class="main-page">
       <div class="teamInfoPageContainer">
-        <div class="teamInfoQuickCard">
+
+        <div id="teamInfoQuickCard" class="teamInfoQuickCard">
           <div class="wideCardBackground tournamentInfoCardBackground">
             <div class="singleColumn">
               <img id="teamInfoProfilePic" class="teamInfoProfilePic" src="media/BrackotLogo2.jpg"/>
               <div class="teamInfoQuickContent">
-                <h2 class="teamInfoName" id="teamInfoName">Stanford University</h2>
+                <h2 class="teamInfoName" id="teamInfoName"></h2>
                 <div class="teamSocials" id="teamInfoSocials">
                   <a class="teamSocial facebookIcon noDisplay" id="teamInfoFacebook"><i class="fab fa-facebook-square" aria-hidden="true"></i></a>
                   <a class="teamSocial twitterIcon noDisplay" id="teamInfoTwitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
@@ -63,7 +65,7 @@
                 <div class="teamInfoDetails">
                   <div class="iconAndNum teamInfoIconAndNum">
                     <i class="fas fa-user teamInfoIcon"></i>
-                    <h2 id="teamInfoMembers" class="teamInfoStat">2036</h2>
+                    <h2 id="teamInfoMembers" class="teamInfoStat"></h2>
                   </div>
                   <p class="statDescription">Members</p>
                 </div>
@@ -71,7 +73,7 @@
                   <div class="iconAndNum teamInfoIconAndNum">
                     <i id="teamInfoPublicIcon" class="fas fa-users teamInfoIcon noDisplay"></i>
                     <i id="teamInfoPrivateIcon" class="fas fa-lock teamInfoIcon noDisplay"></i>
-                    <h2 id="teamInfoPrivacy" class="teamInfoStat">Private</h2>
+                    <h2 id="teamInfoPrivacy" class="teamInfoStat"></h2>
                   </div>
                   <p class="statDescription">Privacy</p>
                 </div>
@@ -80,13 +82,30 @@
           </div>
         </div>
 
-        <div class="teamInfoCard">
+        <div id="teamInfoCard" class="teamInfoCard">
           <div class="wideCardBackground tournamentInfoCardBackground">
-            <div id="tournamentInfoCardContent" class="wideCardContent">
+            <div id="teamInfoCardContent" class="wideCardContent">
+              <div class="tournamentInfoRow">
+                <h6 class="tournamentInfoSubheader">Description</h6><p id="teamInfoDescription" class="tournamentInfoDetail font15"></p>
+              </div>
+              <div id="teamInfoGamesRow" class="tournamentInfoRow noDisplay">
+                <h6 class="tournamentInfoSubheader">Games</h6><p id="teamInfoGames" class="tournamentInfoDetail font15"></p>
+                <div id="teamInfoGameCarousel" class="createTournamentGameCarousel"></div>
+              </div>
+              <!--
+              <div class="tournamentInfoRow">
+                <h6 class="tournamentInfoSubheader">Requirements</h6><p id="teamInfoRequirements" class="tournamentInfoDetail font15"></p>
+              </div>
+              <div class="tournamentInfoRow noBottomPadding">
+              </div>-->
             </div>
-            <button class="tournamentCardButton tournamentCardButtonGeneric" id="tournamentSignUpButton"></button>
+            <button class="tournamentCardButton tournamentCardButtonGeneric" id="teamSignUpButton"></button>
           </div>
         </div>
+
+
+
+      </div>
 
 
 
