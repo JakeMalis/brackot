@@ -110,35 +110,55 @@ exports.createUserDocument = functions.region('us-east1').auth.user().onCreate(a
   });
 });
 
-exports.fixUsersWithoutDocument = functions.region('us-east1').auth.user().onCreate(async (user) => {
-  let temp: number = 0;
-  await admin.auth().listUsers(1000).then((listUsersResult) => {
-    const allUsers = listUsersResult.users.length;
-    listUsersResult.users.forEach(async (userRecord) => {
-      await admin.firestore().collection('users').doc(userRecord.toJSON()["uid"]).get().then(async (doc) => {
-        if (!(doc.exists) && (userRecord.toJSON()["uid"] === 'MqZVkAgNJ2e6U4aC1TCfAQmvZac2')) {
-          await admin.firestore().collection('users').doc(userRecord.toJSON()["uid"]).set({
-            name: userRecord.toJSON()["displayName"],
-            email: userRecord.toJSON()["email"],
-            stats: {
-              tournamentsJoined: 0,
-              tournamentsCreated: 0,
-              matchesPlayed: 0,
-              playersHosted: 0,
-              bugsReported: 0,
-              coins: 0,
-              notifications: 0,
-              wins: 0
-            },
-            email_preferences: {
-              announcements: true,
-              newsletter: true,
-              thirdparty: true
-            }
+exports.fixUsersWithoutDocument = functions.region('us-east1').pubsub.schedule('0 * * * *').onRun(async (context) => {
+  await admin.auth().listUsers(1000).then(async (listUsersResult) => {
+    for(let x: number = 0; x < listUsersResult.users.length; x++) {
+      const ret = await new Promise(async (resolve, reject) => {
+        const userRecord = listUsersResult.users[x];
+        try {
+          await admin.firestore().collection('users').doc(userRecord.toJSON()["uid"]).get().then(async (doc) => {
+              if (!(doc.exists) && (userRecord.toJSON()["uid"] === 'JpeQPHEhkBYfMqYAi68cYYc9ahm1')) {
+                function getRandomInt(max) {
+                  return Math.floor(Math.random() * Math.floor(max));
+                }
+
+                const displayName: string = "newUser-" + getRandomInt(10).toString() + getRandomInt(10).toString() + getRandomInt(10).toString() + getRandomInt(10).toString() + getRandomInt(10).toString() + getRandomInt(10).toString() + getRandomInt(10).toString() + getRandomInt(10).toString();
+
+                await admin.firestore().collection('users').doc(userRecord.toJSON()["uid"]).set({
+                  name: displayName,
+                  email: userRecord.toJSON()["email"],
+                  stats: {
+                    tournamentsJoined: 0,
+                    tournamentsCreated: 0,
+                    matchesPlayed: 0,
+                    playersHosted: 0,
+                    bugsReported: 0,
+                    coins: 0,
+                    notifications: 0,
+                    wins: 0
+                  },
+                  email_preferences: {
+                    announcements: true,
+                    newsletter: true,
+                    thirdparty: true
+                  }
+                });
+
+                await admin.auth().updateUser(userRecord.toJSON()["uid"], {
+                  displayName: displayName
+                });
+                resolve(true);
+              }
+              else {
+                resolve(false);
+              }
           });
         }
+        catch(e) {
+          console.log('Error: ', e);
+          resolve(false);
+        }
       });
-    });
+    }
   });
-  console.log(temp);
 });
