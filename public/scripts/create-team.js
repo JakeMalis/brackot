@@ -1,4 +1,22 @@
 function personalizeElements() {
+
+  games.forEach((game) => {
+    gameFileName = (game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","").replace("'","");
+    $("#createTeamGameCarousel").append('<label id="create' + gameFileName + 'TeamLabel" class="createTournamentGamesLabel uncheckedGamesLabel"><input onclick="animateGameCarousel(this.id)" id="create' + gameFileName + 'TeamInput" name="newTeamGame" class="createTournamentGamesRadio" type="checkbox" value="' + game + '"></input><picture><source srcset="../media/game_images/' + gameFileName + '.webp" type="image/webp"><img class="createTournamentGamesImage" src="../media/game_images/' + gameFileName + '.jpg"></picture></label>');
+  });
+}
+
+function animateGameCarousel(selected){
+  var clicked = "#" + selected;
+  var clickedLabel = clicked.replace("Input", "Label")
+  if($(clicked).is(":checked")){
+      $(clickedLabel).removeClass('uncheckedGamesLabel');
+      console.log("Checked");
+  }
+  else{
+    $(clickedLabel).addClass('uncheckedGamesLabel');
+    console.log("No longer checked");
+  }
 }
 
 function animateSocialMedia(selected){
@@ -12,6 +30,14 @@ function animateTeamPrivacy(selected){
   var clicked = "#" + selected + "TeamLabel";
   $('.teamPrivacyLabel').removeClass('createTournamentLabelChecked');
   $(clicked).addClass('createTournamentLabelChecked');
+}
+
+function searchGameCreateTeam(searchbar) {
+    var value = $(searchbar).val().toLowerCase();
+    $("#createTeamGameCarousel > label").each(function() {
+      if ($(this).attr("id").toLowerCase().replace('label', '').replace('createteam', '').search(value) > -1) { $(this).show(); }
+      else { $(this).hide(); }
+  });
 }
 
 function addTeam() { try{
@@ -29,6 +55,11 @@ function addTeam() { try{
   var twitchLink = document.getElementById('twitchLink').value;
   var discordLink = document.getElementById('discordLink').value;
 
+  var teamGames = $("#createTeamGameCarousel input:checkbox:checked").map(function(){
+    return $(this).val();
+  }).get();
+  console.log(teamGames);
+
   if((teamDescription == "")){
     teamDescription = "No description offered";
   }
@@ -39,8 +70,9 @@ function addTeam() { try{
       creatorName: firebase.auth().currentUser.displayName,
       description: teamDescription,
       name: teamName,
-      teamMembers: [],
-      teamAdmins: [],
+      teamMembers: [firebase.auth().currentUser.uid],
+      teamAdmins: [firebase.auth().currentUser.uid],
+      games: teamGames,
       privacy: privacy,
       stats: {
         upcomingTournaments: 0,

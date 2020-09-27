@@ -874,6 +874,22 @@ text-align: center;
   background: #26bf60;
 }
 
+.teamCardButtonJoined:before{
+  background: #26bf60;
+}
+
+.teamCardButtonJoined:before{
+  content: "✓ Joined Team";
+}
+
+.teamCardButtonJoined:hover{
+  background: #d43226;
+}
+
+.teamCardButtonJoined:hover:before{
+  content: "Quit Team";
+}
+
 .tournamentCardButtonSigned:before{
   content: "✓ Signed Up";
 }
@@ -1081,6 +1097,7 @@ text-align: center;
 .teamInfoQuickCard{
   flex: 0 0 100%;
   max-width: 100%;
+  min-width: 100%;
   height: auto;
   margin-bottom: 40px;
   display: inline-block;
@@ -1143,6 +1160,10 @@ text-align: center;
   margin-left: 28px;
   margin-right: 28px;
   display:none;
+}
+
+#teamInfoCardContent{
+  margin-top: 0px;
 }
 
 #tournamentInfoCardContent{
@@ -2022,11 +2043,13 @@ text-align: center;
   .teamInfoQuickCard{
     flex: 0 0 44%;
     max-width: 44%;
+    min-width: 44%;
   }
 
   .teamInfoCard{
     flex: 0 0 54%;
     max-width: 54%;
+    min-width: 54%;
   }
 
   #profilePic{
@@ -2055,11 +2078,13 @@ text-align: center;
   .teamInfoQuickCard{
     flex: 0 0 33%;
     max-width: 33%;
+    min-width: 33%;
   }
 
   .teamInfoCard{
     flex: 0 0 66%;
     max-width: 66%;
+    min-width: 66%;
   }
 
   .secondaryStatCard{
