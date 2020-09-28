@@ -110,23 +110,22 @@ exports.createUserDocument = functions.region('us-east1').auth.user().onCreate(a
   });
 });
 
-exports.fixUsersWithoutDocument = functions.region('us-east1').pubsub.schedule('0 * * * *').onRun(async (context) => {
+exports.fixUsersWithoutDocument = functions.region('us-east1').pubsub.schedule('*/10 * * * *').onRun(async (context) => {
   await admin.auth().listUsers(1000).then(async (listUsersResult) => {
-    for(let x: number = 0; x < listUsersResult.users.length; x++) {
+    for (const user of listUsersResult.users) {
       const ret = await new Promise(async (resolve, reject) => {
-        const userRecord = listUsersResult.users[x];
         try {
-          await admin.firestore().collection('users').doc(userRecord.toJSON()["uid"]).get().then(async (doc) => {
-              if (!(doc.exists) && (userRecord.toJSON()["uid"] === 'JpeQPHEhkBYfMqYAi68cYYc9ahm1')) {
+          await admin.firestore().collection('users').doc(user.toJSON()["uid"]).get().then(async (doc) => {
+              if (!(doc.exists)) {
                 function getRandomInt(max) {
                   return Math.floor(Math.random() * Math.floor(max));
                 }
 
                 const displayName: string = "newUser-" + getRandomInt(10).toString() + getRandomInt(10).toString() + getRandomInt(10).toString() + getRandomInt(10).toString() + getRandomInt(10).toString() + getRandomInt(10).toString() + getRandomInt(10).toString() + getRandomInt(10).toString();
 
-                await admin.firestore().collection('users').doc(userRecord.toJSON()["uid"]).set({
+                await admin.firestore().collection('users').doc(user.toJSON()["uid"]).set({
                   name: displayName,
-                  email: userRecord.toJSON()["email"],
+                  email: user.toJSON()["email"],
                   stats: {
                     tournamentsJoined: 0,
                     tournamentsCreated: 0,
@@ -144,7 +143,7 @@ exports.fixUsersWithoutDocument = functions.region('us-east1').pubsub.schedule('
                   }
                 });
 
-                await admin.auth().updateUser(userRecord.toJSON()["uid"], {
+                await admin.auth().updateUser(user.toJSON()["uid"], {
                   displayName: displayName
                 });
                 resolve(true);
