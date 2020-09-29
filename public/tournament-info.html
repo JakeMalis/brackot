@@ -1,10 +1,12 @@
 <html lang="en">
+<script src="https://unpkg.com/redux@latest/dist/redux.min.js"></script>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Tournaments | Brackot</title>
   <link rel="icon" type="image/png" href="media/favicon.png"/>
+  <script>var exports = {};</script>
 
   <link rel="stylesheet" type="text/css" href="styles/dashboard_style.css">
   <link rel="stylesheet" type="text/css" href="styles/bracket.css">
@@ -21,6 +23,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/redux@4.0.5/dist/redux.js"></script> 
 
   <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-auth.js"></script>
@@ -31,6 +34,8 @@
 
   <script type="text/babel" src="scripts/brackets.js"></script>
   <script type="text/babel" src="scripts/participantCards.js"></script>
+  <script type="text/babel" src="scripts/user.actions.js"></script>
+  <script type='text/babel' src='scripts/chat.js'></script>
   <script src="scripts/tournament-info.js"></script>
 
   <script src="scripts/header.js"></script>
@@ -61,7 +66,9 @@
               <ul class="quickNavbar">
                 <li id="overviewNavbar" class="quickNavbarItem quickNavbarItemSelected"><a class="quickNavbarItemLink" onclick="setTab('overview')"><p class="quickNavbarItemText">Overview</p></a></li>
                 <li id="participantsNavbar" class="quickNavbarItem"><a class="quickNavbarItemLink" onclick="setTab('participants')"><p class="quickNavbarItemText">Participants</p></a></li>
+                <li id="chatNavbar" class="quickNavbarItem"><a class="quickNavbarItemLink" onclick="setTab('chat')"><p class="quickNavbarItemText">Chat</p></a></li>
                 <li id="bracketNavbar" class="quickNavbarItem"><a class="quickNavbarItemLink" onclick="setTab('bracket')"><p class="quickNavbarItemText">Bracket</p></a></li>
+                
               </ul>
             </div>
             <div id="tournamentInfoCardContent" class="wideCardContent">
@@ -162,12 +169,27 @@
                       </div>
                     </div>
                   </div>
-
-                </div>
+                </div>            
               </div>
+            
+              <div id="chatTab" class="infoTab">
+                <div class="chatArea">
+                  <div class="chatHeader"></div>        
+                  <div class="messageSections" id = 'messageSections'></div>
+                  <div class="chatControls">
+                    <textarea id= 'textHolder' placeholder="Write Message" class = 'createTournamentTextInput'></textarea>
+                    
+              
 
 
+                    <button onClick="submitMessage()" class='grayButton'>Send</button>
+                  </div>     
+                </div>
+  
+              </div>
+  
             </div>
+            
             <button class="tournamentCardButton tournamentCardButtonGeneric" id="tournamentSignUpButton"></button>
           </div>
         </div>
