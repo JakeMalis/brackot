@@ -1,4 +1,9 @@
-const user = []
+const userConstants = {
+    GET_REALTIME_USERS: 'GET_REALTIME_USERS',
+    GET_REALTIME_MESSAGES: 'GET_REALTIME_MESSAGES'
+}
+const user = [
+]
 async function updateMessage(msgObj) {
     const db = firebase.firestore();
     db.collection('tournaments').doc(tournamentId).collection('chat')
@@ -12,20 +17,16 @@ async function updateMessage(msgObj) {
     console.log('complete') 
 }
 async function getRealtimeConversations(user) {
-    
-
         const db = firebase.firestore();
-        db.collection('conversations').doc(tournamentId).collection('chat')
+        db.collection('tournaments').doc(tournamentId).collection('chat')
         .orderBy('createdAt', 'asc')
         .onSnapshot((querySnapshot) => {
-
-            const convos = [];
-
             querySnapshot.forEach(doc => {
-                convos.push(doc.data())
+                if(!user.includes(doc)) {
+                    user.push(doc)
+                }
             });
-            user.conversations = convos;
-            console.log(conversations);
+            
         })
     
 }
