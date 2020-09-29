@@ -1090,6 +1090,7 @@ text-align: center;
 }
 
 .teamInfoName{
+  margin-bottom: 25px;
   font-size: 34px;
   width: 100%;
 }
@@ -1164,6 +1165,7 @@ text-align: center;
 
 #teamInfoCardContent{
   margin-top: 0px;
+  padding-top: 42px;
 }
 
 #tournamentInfoCardContent{
@@ -1420,6 +1422,17 @@ text-align: center;
   margin-right: -10px;
 }
 
+.teamInfoGameCarousel{
+  position: relative;
+  white-space: wrap;
+  overflow: hidden;
+  display: inline-block;
+  width: 100%;
+  height: auto;
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
 .createTournamentGamesLabel{
   display: inline-block;
   margin: 10px;
@@ -1436,6 +1449,15 @@ text-align: center;
   box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.45);
 }
 
+.teamInfoGamesLabel{
+  display: inline-block;
+  margin: 10px;
+  width: 103px;
+  height: 150px;
+  transition-duration: 0.2s;
+  filter: none;
+}
+
 .uncheckedGamesLabel{
   filter: grayscale(97%);
 }
@@ -1447,6 +1469,13 @@ text-align: center;
 .createTournamentGamesImage{
   width: 172px;
   height: 250px;
+  border-radius: 4px;
+  box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.35);
+}
+
+.teamInfoGamesImage{
+  width: 103px;
+  height: 150px;
   border-radius: 4px;
   box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.35);
 }
@@ -1711,6 +1740,13 @@ text-align: center;
   width: 30%;
   float: left;
   display: block;
+}
+
+.teamInfoSubheader{
+  font-weight: 700;
+  font-size: 15px;
+  max-width: 150px;
+  margin-bottom: 0px;
 }
 
 .tournamentInfoSubheader{

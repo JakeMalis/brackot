@@ -52,7 +52,6 @@
             <div class="singleColumn">
               <img id="teamInfoProfilePic" class="teamInfoProfilePic" src="media/BrackotLogo2.jpg"/>
               <div class="teamInfoQuickContent">
-                <h2 class="teamInfoName" id="teamInfoName"></h2>
                 <div class="teamSocials" id="teamInfoSocials">
                   <a class="teamSocial facebookIcon noDisplay" id="teamInfoFacebook"><i class="fab fa-facebook-square" aria-hidden="true"></i></a>
                   <a class="teamSocial twitterIcon noDisplay" id="teamInfoTwitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
@@ -85,12 +84,14 @@
         <div id="teamInfoCard" class="teamInfoCard">
           <div class="wideCardBackground tournamentInfoCardBackground">
             <div id="teamInfoCardContent" class="wideCardContent">
+              <h6 class="teamInfoSubheader">Team</h6>
+              <h2 class="teamInfoName" id="teamInfoName"></h2>
               <div class="tournamentInfoRow">
-                <h6 class="tournamentInfoSubheader">Description</h6><p id="teamInfoDescription" class="tournamentInfoDetail font15"></p>
+                <h6 class="teamInfoSubheader">Description</h6><p id="teamInfoDescription" class="tournamentInfoDetail font15"></p>
               </div>
               <div id="teamInfoGamesRow" class="tournamentInfoRow noDisplay">
-                <h6 class="tournamentInfoSubheader">Games</h6><p id="teamInfoGames" class="tournamentInfoDetail font15"></p>
-                <div id="teamInfoGameCarousel" class="createTournamentGameCarousel"></div>
+                <h6 class="teamInfoSubheader">Games</h6><p id="teamInfoGames" class="tournamentInfoDetail font15"></p>
+                <div id="teamInfoGameCarousel" class="teamInfoGameCarousel"></div>
               </div>
               <!--
               <div class="tournamentInfoRow">

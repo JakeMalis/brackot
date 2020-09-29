@@ -37,7 +37,7 @@ function personalizeElements() {
       $('#teamInfoGamesRow').removeClass("noDisplay");
       doc.data().games.forEach((game) => {
         gameFileName = (game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","").replace("'","");
-        $("#teamInfoGameCarousel").append('<label id="teamInfo' + gameFileName + 'Label" class="createTournamentGamesLabel"><picture><source srcset="../media/game_images/' + gameFileName + '.webp" type="image/webp"><img class="createTournamentGamesImage" src="../media/game_images/' + gameFileName + '.jpg"></picture></label>');
+        $("#teamInfoGameCarousel").append('<label id="teamInfo' + gameFileName + 'Label" class="teamInfoGamesLabel"><picture><source srcset="../media/game_images/' + gameFileName + '.webp" type="image/webp"><img class="teamInfoGamesImage" src="../media/game_images/' + gameFileName + '.jpg"></picture></label>');
       });
     }
 
