@@ -4,7 +4,7 @@ function personalizeElements() {
   var url = new URL(window.location.href);
   teamId = url.searchParams.get("teamId");
 
-  firebase.firestore().collection("teams").doc(teamId).get().then(function(doc) {
+  firebase.firestore().collection("teams").doc(teamId).get().then(async function(doc) {
     document.getElementById("teamInfoName").innerHTML = doc.data().name;
     document.getElementById("teamInfoMembers").innerHTML = (doc.data().teamMembers.length);
 
@@ -17,6 +17,13 @@ function personalizeElements() {
       document.getElementById("teamInfoPrivacy").innerHTML = "Private";
       $("#teamInfoPrivateIcon").removeClass("noDisplay");
     }
+
+    document.getElementById('teamInfoProfilePic').src = await firebase.storage().refFromURL("gs://brackot-teams-storage/" + doc.id + "/profile").getDownloadURL().then(function (url) {
+      return String(url);
+    }).catch((error) => {
+      return "../media/BrackotLogo2.jpg";
+    });
+
 
     var facebook = doc.data().social.facebook;
     var twitter = doc.data().social.twitter;
