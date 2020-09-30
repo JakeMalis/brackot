@@ -50,7 +50,6 @@ exports.sendWelcomeEmail = functions.region('us-east1').firestore.document('user
       }
     }
   });
-
 });
 
 exports.createUserDocument = functions.region('us-east1').auth.user().onCreate(async (user) => {
