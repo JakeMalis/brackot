@@ -39,42 +39,18 @@ exports.sendWelcomeEmail = functions.region('us-east1').firestore.document('user
 
   const link = await admin.auth().generateEmailVerificationLink(user.email);
 
-  functions.logger.log(user.email);
-  functions.logger.log(link);
-});
-
-exports.compressProfilePicture = functions.region('us-east1').storage.object().onFinalize(async (object) => {
-  const filePath: string = object.name!;
-  const fileBucket = object.bucket;
-  const fileName = path.basename(filePath);
-
-  const bucket = admin.storage().bucket(fileBucket);
-  const localFilePath = path.join(os.tmpdir(), fileName);
-
-  await bucket.file(filePath).download({destination: localFilePath}).then(async () => {
-    await compress_images(localFilePath, '/tmp/', { compress_force: false, statistic: true , autoupdate: false }, false,
-        { jpg: { engine: "mozjpeg", command: ["-quality", "60"] } },
-        { png: { engine: "pngquant", command: ["--quality=20-50", "-o"] } },
-        { svg: { engine: "svgo", command: "--multipass" } },
-        { gif: { engine: "gifsicle", command: ["--colors", "64", "--use-col=web"] } },
-      function (error, completed, statistic) {
-        functions.logger.log("-------------");
-        functions.logger.log(error);
-        functions.logger.log(completed);
-        functions.logger.log(statistic);
-        functions.logger.log("-------------");
+  await admin.firestore().collection('mail').add({
+    to: user.email,
+    template: {
+      name: 'welcome',
+      data: {
+        name: user.name,
+        link: link,
+        email: user.email
       }
-    );
-
-    const newFilePath = path.join(path.dirname(filePath), fileName);
-    functions.logger.log(newFilePath);
-
-    await bucket.upload(localFilePath, {
-      destination: 'compressedImage/compressed.png'
-    });
+    }
   });
 
-  return fs.unlinkSync(localFilePath);
 });
 
 exports.createUserDocument = functions.region('us-east1').auth.user().onCreate(async (user) => {
@@ -160,4 +136,38 @@ exports.fixUsersWithoutDocument = functions.region('us-east1').pubsub.schedule('
       });
     }
   });
+});
+
+exports.compressProfilePicture = functions.region('us-east1').storage.object().onFinalize(async (object) => {
+  const filePath: string = object.name!;
+  const fileBucket = object.bucket;
+  const fileName = path.basename(filePath);
+
+  const bucket = admin.storage().bucket(fileBucket);
+  const localFilePath = path.join(os.tmpdir(), fileName);
+
+  await bucket.file(filePath).download({destination: localFilePath}).then(async () => {
+    await compress_images(localFilePath, '/tmp/', { compress_force: false, statistic: true , autoupdate: false }, false,
+        { jpg: { engine: "mozjpeg", command: ["-quality", "60"] } },
+        { png: { engine: "pngquant", command: ["--quality=20-50", "-o"] } },
+        { svg: { engine: "svgo", command: "--multipass" } },
+        { gif: { engine: "gifsicle", command: ["--colors", "64", "--use-col=web"] } },
+      function (error, completed, statistic) {
+        functions.logger.log("-------------");
+        functions.logger.log(error);
+        functions.logger.log(completed);
+        functions.logger.log(statistic);
+        functions.logger.log("-------------");
+      }
+    );
+
+    const newFilePath = path.join(path.dirname(filePath), fileName);
+    functions.logger.log(newFilePath);
+
+    await bucket.upload(localFilePath, {
+      destination: 'compressedImage/compressed.png'
+    });
+  });
+
+  return fs.unlinkSync(localFilePath);
 });
