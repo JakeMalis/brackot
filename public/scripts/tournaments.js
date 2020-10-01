@@ -1,12 +1,14 @@
 function personalizeElements() {
   $("#gameList").append('<li class="filterListItem gameFilterListItem"><label class="filterOption"><input class="filterInput" type="radio"><p class="filterText">All</p></input></label></li>');
   $("#dateList").append('<li class="filterListItem dateFilterListItem"><label class="filterOption"><input class="filterInput" type="radio"><p class="filterText">All</p></input></label></li>');
+
   games.forEach((entry) => {
     $("#gameList").append('<li class="filterListItem gameFilterListItem"><label class="filterOption"><input class="filterInput" type="radio"><p class="filterText">' + entry + '</p></input></label></li>');
   });
   dateOptions.forEach((entry) => {
     $("#dateList").append('<li class="filterListItem dateFilterListItem"><label class="filterOption"><input class="filterInput" type="radio"><p class="filterText">' + entry + '</p></input></label></li>');
   });
+
   filterData();
   renderTournamentCards();
 }
@@ -120,21 +122,14 @@ async function renderTournamentCards() {
   var TournamentCardArray = [];
   var tournamentNumber = 1;
   query.get().then(async function(querySnapshot) {
-    const collectionLength = querySnapshot.size;
-
-    if (collectionLength == 0) {
-      ReactDOM.render(
-        TournamentCardArray,
-        document.getElementById("row")
-      );
-      console.log("No tournaments match critera given.");
-    }
+    if (querySnapshot.size == 0) { console.log("No tournaments match the given criteria"); /* We need to add some code that makes it more clear that nothing meets the criteria */ }
 
     querySnapshot.forEach(async (doc) => {
+      const tournamentQueryPromise = await new Promise(async (resolve, reject) => {
         var wallpaper = "/media/game_wallpapers/" + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "-" + "cardWallpaper.";
         var title = doc.data().name;
 
-        var creatorName = await firebase.firestore().runTransaction( async(transaction) => {
+        var creatorName = await firebase.firestore().runTransaction(async (transaction) => {
           return await transaction.get(firebase.firestore().collection("users").doc(doc.data().creator)).then(creatorDoc => {
             return creatorDoc.data().name;
           })
@@ -178,13 +173,15 @@ async function renderTournamentCards() {
         var tournamentDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' @ ' + hour + ':' + String(date.getMinutes()).padStart(2, "0") + ' ' + meridiem;
 
         TournamentCardArray.push(<TournamentCard wallpaper={wallpaper} title={title} game={game} date={tournamentDate} participants={participants} tournamentHostPic={tournamentHostPic} tournamentID={doc.id} creatorName={creatorName} key={doc.id} />);
-        if(tournamentNumber == collectionLength) {
-          ReactDOM.render(
-            TournamentCardArray,
-            document.getElementById("row")
-          );
-        }
+
+        resolve(true);
         tournamentNumber++;
+      }).then(() => {
+        ReactDOM.render(
+          TournamentCardArray,
+          document.getElementById("row")
+        );
+      });
     });
   });
 }
