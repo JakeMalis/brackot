@@ -1,9 +1,6 @@
-const userConstants = {
-    GET_REALTIME_USERS: 'GET_REALTIME_USERS',
-    GET_REALTIME_MESSAGES: 'GET_REALTIME_MESSAGES'
-}
-const user = [
-];
+const user = {
+    conversations : []
+};
 
 const db = firebase.firestore()
 async function updateMessage(msgObj) {
@@ -38,28 +35,31 @@ function submitMessage() {
 }
 function renderChat() {
     ReactDOM.render(
-        <Message/>,
+        <Messages/>,
         document.getElementById("messageSections")
 
     );
 }
-class Message extends React.Component {
+function getRealTimeMessages() {
+    user.conversations = [] 
+    console.log(user.conversations);
+    db.collection('tournaments').doc(tournamentId).collection('chat')
+                    .orderBy('createdAt', 'asc')
+                    .onSnapshot((querySnapshot) => {
+                        querySnapshot.forEach(doc => {
+                            
+                            user.conversations.push(doc.data())
+                            
+                        });
+                        console.log(user.conversations);
+                    })
+}
+class Messages extends React.Component {
     render(){
         return (
             <div>
                 {
-                    db.collection('tournaments').doc(tournamentId).collection('chat')
-                    .orderBy('createdAt', 'asc')
-                    .onSnapshot((querySnapshot) => {
-                        querySnapshot.forEach(doc => {
-                            if(!user.conversations.includes)
-                            {
-                                user.conversations.push(doc.data())
-                            }
-                            
-                        });
-                        console.log(conversations);
-                    })
+                    getRealTimeMessages()
                 }
                 {
                     user.conversations.map(con =>
