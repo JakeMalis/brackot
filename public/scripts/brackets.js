@@ -1,3 +1,7 @@
+/*
+  only has functions pertaining to brackets
+*/
+
 var shuffledParticipants = [];
 var numParticipants = 0;
 var tempMatch = new match(null, null);

@@ -3,7 +3,7 @@ const user = {
 };
 
 const db = firebase.firestore()
-async function updateMessage(msgObj) {
+async function updateTeamMessage(msgObj) {
     db.collection('tournaments').doc(tournamentId).collection('chat')
         .add({
             ...msgObj,
@@ -14,11 +14,11 @@ async function updateMessage(msgObj) {
         });
     console.log('complete') 
 }
-function initChat() {
+function initTeamChat() {
     console.log("into init chat")
     renderChat()
 }
-function submitMessage() {
+function submitTeamMessage() {
     console.log('hello')
     var message = document.getElementById("textHolder").value;
     console.log(message)
@@ -33,28 +33,27 @@ function submitMessage() {
     };
     console.log("out of if")
 }
-function renderChat() {
+function renderTeamChat() {
     ReactDOM.render(
         <Messages/>,
         document.getElementById("messageSections")
 
     );
 }
-function getRealTimeMessages() {
-    user.conversations = [] 
-    console.log(user.conversations);
-    db.collection('tournaments').doc(tournamentId).collection('chat')
+function getRealTimeTeamMessages() {
+    user.teamConversations = [] 
+    db.collection('teams').doc(teamId).collection('chat')
                     .orderBy('createdAt', 'asc')
                     .onSnapshot((querySnapshot) => {
                         querySnapshot.forEach(doc => {
                             
-                            user.conversations.push(doc.data())
+                            user.teamConversations.push(doc.data())
                             
                         });
-                        console.log(user.conversations);
+                        console.log(user.teamConversations);
                     })
 }
-class Messages extends React.Component {
+class TeamMessages extends React.Component {
     render(){
         return (
             <div>
@@ -62,7 +61,7 @@ class Messages extends React.Component {
                     getRealTimeMessages()
                 }
                 {
-                    user.conversations.map(con =>
+                    user.teamConversations.map(con =>
                         <div style={{ textAlign: con.userSent == firebase.auth().currentUser.uid
                             ? 'right' : 'left' }}>
                         <p className="messageStyle" >{con.message}</p>

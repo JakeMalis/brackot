@@ -109,7 +109,11 @@ function addTournament() { try{
       if(document.getElementById("alertBox").classList.contains("errorAlert")){document.getElementById("alertBox").classList.remove("errorAlert");}
       document.getElementById("alertTextBold").innerHTML = "Update: ";
       document.getElementById("alertText").innerHTML = "Your tournament has been added!";
-  }).catch(function(error) {
+  }).then(() => {
+        
+  })
+  
+  .catch(function(error) {
       console.error("Error writing document: ", error);
   });
   }
