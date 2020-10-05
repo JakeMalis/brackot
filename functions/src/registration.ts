@@ -10,13 +10,6 @@ import * as os from 'os';
 import * as fs from 'fs';
 
 exports.createUserDocument = functions.region('us-east1').auth.user().onCreate(async (user) => {
-  if (user.displayName === null) {
-    const randomUUID = "newUser-" + uuidv4();
-    await admin.auth().updateUser(user.uid, {
-      displayName: randomUUID
-    });
-  }
-
   await admin.auth().updateUser(user.uid, {
     photoURL: "https://firebasestorage.googleapis.com/v0/b/brackot/o/BrackotLogo2.jpg?alt=media&token=7bdf6862-64ec-4db7-9666-3e2865d2cdbe"
   });
