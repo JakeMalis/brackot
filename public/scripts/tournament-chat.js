@@ -99,7 +99,7 @@ class Message extends React.Component {
                     //puts the message on the right if not it puts it on the left
                     }
                             <p className="messageBlurb">{con.message}</p>
-                            <p className = 'nameBlurb'>{db.collection('user').doc(tournamentId).data('user')}</p>
+                            
                             </div>
                         )    
                 }
