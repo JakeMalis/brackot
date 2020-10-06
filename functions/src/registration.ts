@@ -10,10 +10,6 @@ import * as os from 'os';
 import * as fs from 'fs';
 
 exports.createUserDocument = functions.region('us-east1').auth.user().onCreate(async (user) => {
-  await admin.auth().updateUser(user.uid, {
-    photoURL: "https://firebasestorage.googleapis.com/v0/b/brackot/o/BrackotLogo2.jpg?alt=media&token=7bdf6862-64ec-4db7-9666-3e2865d2cdbe"
-  });
-
   await admin.firestore().collection('users').doc(user.uid).set({
     name: user.displayName,
     email: user.email,
@@ -35,19 +31,47 @@ exports.createUserDocument = functions.region('us-east1').auth.user().onCreate(a
   });
 });
 
+exports.saveDisplayName = functions.region('us-east1').firestore.document('users/{userId}').onCreate(async (snap, context) => {
+  const displayName = await admin.auth().getUser(snap.id).then((userRecord) => {
+    return userRecord.toJSON()["displayName"];
+  });
+
+  if (displayName == null) {
+    const randomUUID = "newUser-" + uuidv4();
+
+    await admin.auth().updateUser(snap.id, {
+      displayName: randomUUID
+    });
+
+    await admin.firestore().collection('users').doc(snap.id).update({
+      name: randomUUID
+    });
+  }
+});
+
 exports.sendWelcomeEmail = functions.region('us-east1').firestore.document('users/{userId}').onCreate(async (snap, context) => {
   const user = snap.data();
-  if (!user.email) throw new Error("User has no email address");
+  let name;
 
-  const link = await admin.auth().generateEmailVerificationLink(user.email);
+  try {
+    if (user.name == null) {
+      throw new Error("User doesn't have a display name")
+    }
+    else {
+      name = user.name;
+    }
+  }
+  catch(error) {
+    name = "player";
+  }
 
   await admin.firestore().collection('mail').add({
     to: user.email,
     template: {
       name: 'welcome',
       data: {
-        name: user.name,
-        link: link,
+        name: name,
+        link: await admin.auth().generateEmailVerificationLink(user.email),
         email: user.email
       }
     }
