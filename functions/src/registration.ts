@@ -9,6 +9,17 @@ import * as path from 'path';
 import * as os from 'os';
 import * as fs from 'fs';
 
+exports.createUserAccount = functions.region('us-east1').runWith({ memory: '128MB' }).https.onCall(async (data, context) => {
+  await admin.auth().createUser({
+    email: data.email,
+    password: data.password,
+    displayName: data.displayName,
+    photoURL: "https://firebasestorage.googleapis.com/v0/b/brackot/o/BrackotLogo2.jpg?alt=media&token=7bdf6862-64ec-4db7-9666-3e2865d2cdbe"
+  }).catch((error) => {
+    throw new functions.https.HttpsError("invalid-argument", error.code, error.message);
+  });
+});
+
 exports.createUserDocument = functions.region('us-east1').auth.user().onCreate(async (user) => {
   await admin.firestore().collection('users').doc(user.uid).set({
     name: user.displayName,
@@ -31,46 +42,15 @@ exports.createUserDocument = functions.region('us-east1').auth.user().onCreate(a
   });
 });
 
-exports.saveDisplayName = functions.region('us-east1').firestore.document('users/{userId}').onCreate(async (snap, context) => {
-  const displayName = await admin.auth().getUser(snap.id).then((userRecord) => {
-    return userRecord.toJSON()["displayName"];
-  });
-
-  if (displayName == null) {
-    const randomUUID = "newUser-" + uuidv4();
-
-    await admin.auth().updateUser(snap.id, {
-      displayName: randomUUID
-    });
-
-    await admin.firestore().collection('users').doc(snap.id).update({
-      name: randomUUID
-    });
-  }
-});
-
 exports.sendWelcomeEmail = functions.region('us-east1').firestore.document('users/{userId}').onCreate(async (snap, context) => {
   const user = snap.data();
-  let name;
-
-  try {
-    if (user.name == null) {
-      throw new Error("User doesn't have a display name")
-    }
-    else {
-      name = user.name;
-    }
-  }
-  catch(error) {
-    name = "player";
-  }
 
   await admin.firestore().collection('mail').add({
     to: user.email,
     template: {
       name: 'welcome',
       data: {
-        name: name,
+        name: user.name,
         link: await admin.auth().generateEmailVerificationLink(user.email),
         email: user.email
       }
