@@ -51,7 +51,7 @@ function animateParticipantType(selected){
 
 function searchGameCreateTournament(searchbar) {
     var value = $(searchbar).val().toLowerCase();
-    $("#createTournamentGameCarousel > label").each(function() {
+    $("#createTeamGameCarousel > label").each(function() {
       if ($(this).attr("id").toLowerCase().replace('label', '').replace('createtournament', '').search(value) > -1) { $(this).show(); }
       else { $(this).hide(); }
   });
