@@ -95,7 +95,8 @@ class Message extends React.Component {
                         user.tournamentConversations.map(con =>
                             <div className = {con.sentUID == firebase.auth().currentUser.uid
                             ? 'userBubble' : 'foreignBubble'}>
-                    {//if the sentUID of the message is the same as the UID of the user who is currently logged in it 
+                    {
+                    //if the sentUID of the message is the same as the UID of the user who is currently logged in it 
                     //puts the message on the right if not it puts it on the left
                     }
                                 <p className="messageBlurb">{con.message}</p>
