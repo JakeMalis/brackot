@@ -9,18 +9,25 @@ const userConstants = {
     GET_REALTIME_MESSAGES: 'GET_REALTIME_MESSAGES'
 }
 //object that contains all of the messages to be rendered across all chat files
+user = {
+    'teamConversations' : []
+};
 
 
-        
 
 const db = firebase.firestore();
 //just to save time
-function initChat() {
+
+
+
+function initTeamChat() {
     //calls the event listener function and passes the current UID
-    getRealtimeConversations(firebase.auth().currentUser.uid);
+    getRealtimeTeamConversations(firebase.auth().currentUser.uid);
     
 }
-function submitMessage() {
+
+
+function submitTeamMessage() {
     var message = document.getElementById("textHolder").value;
     //gets the message from the text box
     document.getElementById("textHolder").value = '';
@@ -33,13 +40,15 @@ function submitMessage() {
     //msgObj is not contained in user.conversations
     if(message !== ""){
     //checks if message is blank
-        updateMessage(msgObj)
+        updateTeamMessage(msgObj)
         //passes the msgObj to the updateMessage function
     };
     
 }
+
+
 //updateMessage is the function that actually sends the message to firebase
-function updateMessage(msgObj) {
+function updateTeamMessage(msgObj) {
     db.collection('tournaments')
         .doc(tournamentId)
         .collection('chat')
@@ -53,7 +62,9 @@ function updateMessage(msgObj) {
             //for testing purposes only
         )
 }
-function renderChat() {
+
+
+function renderTeamChat() {
     ReactDOM.render(
         <Message/>,
         document.getElementById("messageSections")
@@ -61,10 +72,12 @@ function renderChat() {
     );
     //displays the Message component
 }
-function getRealtimeConversations() {
+
+
+function getRealtimeTeamConversations() {
     //this function sets the event listener 
 
-    db.collection('tournaments').doc(tournamentId).collection('chat')
+    db.collection('teams').doc(teamId).collection('chat')
     .orderBy('createdAt', 'asc')
     .onSnapshot((querySnapshot) => {
         user.teamConversations = []
@@ -75,12 +88,15 @@ function getRealtimeConversations() {
             user.teamConversations.push(doc.data())  
             //adds each firebase documment in chat collection to conversations object
         });
-        renderChat()
+        renderTeamChat()
         //rerendering the Message component when the data changes
         
     })
 }
-class Message extends React.Component {
+
+
+
+class TeamMessage extends React.Component {
     render(){
         return (
             <div>
@@ -89,9 +105,10 @@ class Message extends React.Component {
                         maps through the conversations object putting each message in a div
                     */
                         user.teamConversations.map(con =>
-                            <div style={{ textAlign: con.sentUID == firebase.auth().currentUser.uid
-                            ? 'right' : 'left' }}>
-                    {//if the sentUID of the message is the same as the UID of the user who is currently logged in it 
+                            <div className = {con.sentUID == firebase.auth().currentUser.uid
+                                ? 'userBubble' : 'foreignBubble'}>
+                    {
+                    //if the sentUID of the message is the same as the UID of the user who is currently logged in it 
                     //puts the message on the right if not it puts it on the left
                     }
                             <p className="messageBlurb">{con.message}</p>

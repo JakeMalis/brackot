@@ -24,7 +24,7 @@ function initChat() {
     getRealtimeConversations(firebase.auth().currentUser.uid);
     
 }
-function submitMessage() {
+function submitTeamMessage() {
     var message = document.getElementById("textHolder").value;
     //gets the message from the text box
     document.getElementById("textHolder").value = '';
