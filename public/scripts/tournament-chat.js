@@ -40,7 +40,7 @@ function submitMessage() {
         updateMessage(msgObj)
         //passes the msgObj to the updateMessage function
     };
-    console.log("out of if")
+    
 }
 //updateMessage is the function that actually sends the message to firebase
 function updateMessage(msgObj) {
@@ -93,12 +93,12 @@ class Message extends React.Component {
                         maps through the conversations object putting each message in a div
                     */
                         user.tournamentConversations.map(con =>
-                            <div style={{ textAlign: con.sentUID == firebase.auth().currentUser.uid
-                            ? 'right' : 'left' }}>
+                            <div className = {con.sentUID == firebase.auth().currentUser.uid
+                            ? 'userBubble' : 'foreignBubble'}>
                     {//if the sentUID of the message is the same as the UID of the user who is currently logged in it 
                     //puts the message on the right if not it puts it on the left
                     }
-                            <p className="messageBlurb">{con.message}</p>
+                                <p className="messageBlurb">{con.message}</p>
                             
                             </div>
                         )    
