@@ -9,18 +9,18 @@ import * as path from 'path';
 import * as os from 'os';
 import * as fs from 'fs';
 
-exports.createUserDocument = functions.region('us-east1').auth.user().onCreate(async (user) => {
-  if (user.displayName === null) {
-    const randomUUID = "newUser-" + uuidv4();
-    await admin.auth().updateUser(user.uid, {
-      displayName: randomUUID
-    });
-  }
-
-  await admin.auth().updateUser(user.uid, {
+exports.createUserAccount = functions.region('us-east1').runWith({ memory: '128MB' }).https.onCall(async (data, context) => {
+  await admin.auth().createUser({
+    email: data.email,
+    password: data.password,
+    displayName: data.displayName,
     photoURL: "https://firebasestorage.googleapis.com/v0/b/brackot/o/BrackotLogo2.jpg?alt=media&token=7bdf6862-64ec-4db7-9666-3e2865d2cdbe"
+  }).catch((error) => {
+    throw new functions.https.HttpsError("invalid-argument", error.code, error.message);
   });
+});
 
+exports.createUserDocument = functions.region('us-east1').auth.user().onCreate(async (user) => {
   await admin.firestore().collection('users').doc(user.uid).set({
     name: user.displayName,
     email: user.email,
@@ -44,9 +44,6 @@ exports.createUserDocument = functions.region('us-east1').auth.user().onCreate(a
 
 exports.sendWelcomeEmail = functions.region('us-east1').firestore.document('users/{userId}').onCreate(async (snap, context) => {
   const user = snap.data();
-  if (!user.email) throw new Error("User has no email address");
-
-  const link = await admin.auth().generateEmailVerificationLink(user.email);
 
   await admin.firestore().collection('mail').add({
     to: user.email,
@@ -54,7 +51,7 @@ exports.sendWelcomeEmail = functions.region('us-east1').firestore.document('user
       name: 'welcome',
       data: {
         name: user.name,
-        link: link,
+        link: await admin.auth().generateEmailVerificationLink(user.email),
         email: user.email
       }
     }
