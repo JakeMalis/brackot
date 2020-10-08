@@ -19,15 +19,7 @@ service cloud.firestore {
     match /tournaments/{document=**} {
       allow read: if true;
       allow create: if subscribedToUnlimited();
-      allow update: if isTournamentCreator()
-      || (resource.data.creator == request.resource.data.creator
-      && resource.data.date == request.resource.data.date
-      && resource.data.earnings == request.resource.data.earnings
-      && resource.data.game == request.resource.data.game
-      && resource.data.name == request.resource.data.name
-      && resource.data.platform == request.resource.data.platform
-      && resource.data.type == request.resource.data.type
-      && resource.data.unlimited == request.resource.data.unlimited);
+      allow update: if isTournamentCreator() || request.auth.uid in request.resource.data.players || request.resource.data.diff(resource.data).changedKeys().hasOnly(["players"]);
     }
     match /mail/{document=**} {
       allow create: if request.auth != null;

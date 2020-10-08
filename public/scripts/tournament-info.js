@@ -1,8 +1,20 @@
 var tournamentId;
+var disputeId;
 
 function personalizeElements() {
   var url = new URL(window.location.href);
   tournamentId = url.searchParams.get("tournamentId");
+
+  // The point of this code is to delcare functions from other files.
+  $.getScript('brackets.js', function() {
+    startTournament();
+    renderMatchCards();
+    openMatchModal();
+    makePlayerWinner();
+  });
+  $.getScript('participantCards.js', function() {
+    renderParticipants();
+  });
 
   renderParticipants();
 
@@ -103,6 +115,120 @@ function personalizeElements() {
 
       document.getElementById("bracketNavbar").style.display = "inline-block";
       renderMatchCards();
+    }
+
+    let findUserMatch = [];
+    let round = "";
+    let matchNumber = 0;
+    for (let i = 9; i >= 1; i--) {
+      let indexName = `matchupsRound${i}`;
+      if(findUserMatch && findUserMatch.length >= 1) break;
+      if(typeof doc.data()[indexName] === 'undefined') continue;
+      doc.data()[indexName].map( (matchData, index) => {
+        if( (matchData.playerOne == firebase.auth().currentUser.uid
+          || matchData.playerTwo == firebase.auth().currentUser.uid)
+          && matchData.timeToUpdateScore != null) {
+          round = i;
+          matchNumber = index;
+          findUserMatch.push(matchData)
+        }
+      })
+    }
+
+    if(findUserMatch.length > 0) {
+      for (let i = 0; i < findUserMatch.length; i++) {
+        if(findUserMatch[i].disputeId) {
+          disputeId = findUserMatch[i].disputeId;
+          firebase.firestore().collection("matchDisputes").doc(disputeId).get().then(dispute => {
+            if( (dispute.data().playerOne == firebase.auth().currentUser.uid && dispute.data().playerOneProof == null)
+              || (dispute.data().playerTwo == firebase.auth().currentUser.uid && dispute.data().playerTwoProof == null) ) {
+              const currentDate = new Date();
+              const diffTime = Math.abs(currentDate - new Date(dispute.data().proofUpdateTime.seconds*1000));
+              const diffInMins = 10 - Math.ceil(diffTime / (1000 * 60));
+              if(diffInMins >= 0 && diffInMins <= 10) {
+                document.getElementById("alertBox").style.display = "block";
+                document.getElementById("alertBox").classList.add("errorAlert");
+                document.getElementById("alertTextBold").innerHTML = "Alert: ";
+                document.getElementById("alertText").innerHTML = `Current match has dispute between you and your opponent. Please update a picture/screenshot of your actual game score for verification. <button style="background-color: inherit; border: none; font-size: inherit; color: rgba(35,242,172,1);" onclick="openUploadDisputeProofModal(${round}, ${matchNumber})"> Update Proof </button>`;
+              } else {
+                if(dispute.data().playerOneProof != null) makePlayerWinner(dispute.data().playerOne)
+                else if(dispute.data().playerTwoProof != null) makePlayerWinner(dispute.data().playerTwo)
+              }
+            }
+          })
+        } else {
+          if((findUserMatch[i].playerTwo == firebase.auth().currentUser.uid || findUserMatch[i].playerOne == firebase.auth().currentUser.uid) && findUserMatch[i].playerUpdateScore != firebase.auth().currentUser.uid) {
+            const currentDate = new Date();
+            const diffTime = Math.abs(currentDate - new Date(findUserMatch[i].timeToUpdateScore.seconds*1000));
+            const diffInMins = 10 - Math.ceil(diffTime / (1000 * 60));
+            if(diffInMins >= 0 && diffInMins <= 10) {
+              document.getElementById("alertBox").style.display = "block";
+              document.getElementById("alertBox").classList.add("errorAlert");
+              document.getElementById("alertTextBold").innerHTML = "Alert: ";
+              document.getElementById("alertText").innerHTML = `Your opponent has updated the scores, and you have ${diffInMins} minutes left to update the score. <button style="background-color: inherit; border: none; font-size: inherit; color: rgba(35,242,172,1);" onclick='openMatchModal("matchCardRound${round}Match${matchNumber+1}")'> Upload Score </button>`;
+            }
+          } else {
+            if(doc.data()[`matchupsRound${round+1}`]) {
+              let data = [];
+              doc.data()[`matchupsRound${round+1}`].map(nextRoundData => {
+                if(nextRoundData.playerOne == firebase.auth().currentUser.uid || nextRoundData.playerTwo == firebase.auth().currentUser.uid) {
+                  data.push(nextRoundData)
+                }
+              })
+              if(data && data.length <= 0) {
+                let nextRoundData = doc.data()[`matchupsRound${round + 1}`];
+                let moveWinnerToNextRoundMatch = Math.ceil(matchNumber/2);
+                if( (matchNumber % 2) == 0) nextRoundData[moveWinnerToNextRoundMatch].playerOne = assignWinner(findUserMatch[i]);
+                else nextRoundData[moveWinnerToNextRoundMatch].playerTwo = assignWinner(findUserMatch[i]);
+                let indexName = `matchupsRound${round + 1}`;
+                firebase.firestore().collection("tournaments").doc(tournamentId).update({
+                  [indexName]: nextRoundData
+                }).then(function() {
+                  console.log("Updated scores")
+                });
+              }
+            } else {
+              let nextRound = round + 1;
+              let totalMatches = doc.data()[`matchupsRound${round}`].length;
+              let nextRoundMatches = Math.ceil(totalMatches / 2);
+              let nextRoundData = [];
+              for (let i = 0; i < nextRoundMatches; i++) {
+                nextRoundData.push(Object.assign({}, new match(null, null)))
+              }
+              let moveWinnerToNextRoundMatch = Math.ceil(matchNumber/2);
+              if( (matchNumber % 2) == 0) nextRoundData[moveWinnerToNextRoundMatch].playerOne = assignWinner(findUserMatch[i]);
+              else nextRoundData[moveWinnerToNextRoundMatch].playerTwo = assignWinner(findUserMatch[i]);
+              let indexName = `matchupsRound${nextRound}`;
+              firebase.firestore().collection("tournaments").doc(tournamentId).update({
+                [indexName]: nextRoundData
+              }).then(function() {
+                console.log("Updated scores")
+              });
+            }
+          }
+        }
+      }
+
+    }
+
+    if(firebase.auth().currentUser.uid == doc.data().creator) {
+      console.log("here");
+      for (let i = 9; i >= 1; i--) {
+        let indexName = `matchupsRound${i}`;
+        if(typeof doc.data()[indexName] === 'undefined') continue;
+        doc.data()[indexName].map( (matchData, index) => {
+          if(matchData.disputeId != null) {
+            firebase.firestore().collection("matchDisputes").doc(matchData.disputeId).get().then(data => {
+              if(data.data().playerOneProof != null && data.data().playerTwoProof != null) {
+                document.getElementById("alertBox").style.display = "block";
+                document.getElementById("alertBox").classList.add("errorAlert");
+                document.getElementById("alertTextBold").innerHTML = "Alert: ";
+                document.getElementById("alertText").innerHTML = `There is a dispute raised by players in round no ${i}. Please click on resolve it. <button style="background-color: inherit; border: none; font-size: inherit; color: rgba(35,242,172,1);" onclick="openModalToResolveDispute('${matchData.disputeId}')"> Details </button>`;
+              }
+            })
+          }
+        })
+      }
     }
 
     shuffledParticipants = doc.data().players;
@@ -217,5 +343,62 @@ function openEntryFeeModal(match) {
 
 function closeEntryFeeModal() {
   var modal = document.getElementById("entryFeeModal");
+  modal.style.display = "none";
+}
+function openUploadDisputeProofModal() {
+  var modal = document.getElementById("screenshotModal");
+  firebase.firestore().collection("matchDisputes").doc(disputeId).get().then(doc => {
+    if(doc.data().playerOne == firebase.auth().currentUser.uid && doc.data().playerOneProof != null) {
+      document.getElementById("screenshotDisplay").src = doc.data().playerOneProof;
+    } else if(doc.data().playerTwo == firebase.auth().currentUser.uid && doc.data().playerTwoProof != null) {
+      document.getElementById("screenshotDisplay").src = doc.data().playerTwoProof;
+    }
+  })
+  modal.style.display = "block";
+}
+
+function closeUploadDisputeProofModal() {
+  var modal = document.getElementById("screenshotModal");
+  modal.style.display = "none";
+}
+
+function uploadDisputeScreenshot() {
+  let storageRef = firebase.app().storage("gs://brackot-match-disputes").ref(disputeId);
+  let screenshotRef = storageRef.child(firebase.auth().currentUser.uid);
+  let image = document.getElementById('proofUploader').files[0];
+  screenshotRef.put(image).then(function(snapshot) {
+    console.log('Uploaded profile image!');
+    snapshot.ref.getDownloadURL().then(function(url){
+      firebase.firestore().collection("matchDisputes").doc(disputeId).get().then(doc => {
+        if(doc.data().playerOne == firebase.auth().currentUser.uid) {
+          firebase.firestore().collection("matchDisputes").doc(disputeId).update({
+            playerOneProof: url,
+            proofUpdateTime: new Date()
+          });
+        } else {
+          firebase.firestore().collection("matchDisputes").doc(disputeId).update({
+            playerTwoProof: url,
+            proofUpdateTime: new Date()
+          });
+        }
+      })
+      document.getElementById("screenshotDisplay").src = url;
+    });
+  })
+}
+
+function openModalToResolveDispute(disputeData) {
+  firebase.firestore().collection("matchDisputes").doc(disputeData).get().then(doc => {
+    var modal = document.getElementById("disputeResolveModal");
+    document.getElementById("screenshotDisplayPlayerOne").src = doc.data().playerOneProof;
+    document.getElementById("screenshotDisplayPlayerTwo").src = doc.data().playerTwoProof;
+    document.getElementById("screenshotDisplayPlayerOneBtn").onclick = () => makePlayerWinner(doc.data().playerOne);
+    document.getElementById("screenshotDisplayPlayerTwoBtn").onclick = () => makePlayerWinner(doc.data().playerTwo);
+    modal.style.display = "block";
+  })
+}
+
+function closeResolveDisputeModal() {
+  var modal = document.getElementById("disputeResolveModal");
   modal.style.display = "none";
 }

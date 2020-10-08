@@ -315,6 +315,10 @@ p{
   transition-duration: 0.15s;
   background-color: var(--background);
 }
+.match.isDisabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
 
 .visible{
   visibility: visible !important;

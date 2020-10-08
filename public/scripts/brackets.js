@@ -15,9 +15,9 @@ class EmptyMatchCard extends React.Component {
 class MatchCard extends React.Component {
   render() {
     return (
-      <div className={"match " + "match" + this.props.roundNumber} id={"matchCardRound" + this.props.roundNumber + "Match" + this.props.matchNumber} onClick={() => { openMatchModal("matchCardRound" + this.props.roundNumber + "Match" + this.props.matchNumber)}}>
-        <UpperParticipant visibility={this.props.participants[0].visibility} participantNumber={this.props.participants[0].uid} roundNumber={this.props.roundNumber} matchNumber={this.props.matchNumber} key={this.props.matchNumber + " " + this.props.participants[0].uid}/>
-        <LowerParticipant visibility={this.props.participants[1].visibility} participantNumber={this.props.participants[1].uid} roundNumber={this.props.roundNumber} matchNumber={this.props.matchNumber} key={this.props.matchNumber + " " + this.props.participants[1].uid}/>
+      <div className={"match " + "match" + this.props.roundNumber + `${this.props.isDisputed ? " isDisabled" : ""}`} id={"matchCardRound" + this.props.roundNumber + "Match" + this.props.matchNumber} onClick={() => { openMatchModal("matchCardRound" + this.props.roundNumber + "Match" + this.props.matchNumber)}}>
+        <UpperParticipant visibility={this.props.participants[0].visibility} participantNumber={this.props.participants[0].uid} roundNumber={this.props.roundNumber} matchNumber={this.props.matchNumber} />
+        <LowerParticipant visibility={this.props.participants[1].visibility} participantNumber={this.props.participants[1].uid} roundNumber={this.props.roundNumber} matchNumber={this.props.matchNumber} />
       </div>
     );
   }
@@ -148,6 +148,7 @@ function renderMatchCards() {
       else if (round == 8) { matchups = doc.data().matchupsRound8; }
       else if (round == 9) { matchups = doc.data().matchupsRound9; }
 
+      if(!matchups) break;
       matchups.forEach(function(entry) {
         var upperParticipant, lowerParticipant;
         var participants = [];
@@ -251,11 +252,14 @@ async function tempCode(entry, matchNumber, round) {
   });
 }
 
-function match(p1, p2) {
+function match(p1, p2, updatedPlayer = null) {
   this.playerOne = p1;
   this.playerTwo = p2;
   this.playerOneScore = null;
   this.playerTwoScore = null;
+  this.playerUpdateScore = updatedPlayer;
+  this.timeToUpdateScore = null;
+  this.disputeId = null;
 }
 
 
@@ -413,31 +417,37 @@ function openMatchModal(match) {
       document.getElementById("upperParticipantScoreModal").innerHTML = player1Score;
       document.getElementById("lowerParticipantScoreModal").innerHTML = player2Score;
 
-
-      firebase.firestore().collection("users").doc(player1ID).get().then(function(userDoc){
-        document.getElementById("upperParticipantNameModal").innerHTML = userDoc.data().name;
-      });
-      firebase.firestore().collection("users").doc(player2ID).get().then(function(userDoc){
-        document.getElementById("lowerParticipantNameModal").innerHTML = userDoc.data().name;
-      });
+      if(player1ID) {
+        firebase.firestore().collection("users").doc(player1ID).get().then(function(userDoc){
+          document.getElementById("upperParticipantNameModal").innerHTML = userDoc.data().name;
+        });
+      }
+      if(player2ID) {
+        firebase.firestore().collection("users").doc(player2ID).get().then(function(userDoc){
+          document.getElementById("lowerParticipantNameModal").innerHTML = userDoc.data().name;
+        });
+      }
 
 
       /*====================================GRAB USER PROFILE PICTURE========================================================== */
-      var upperReference = firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + player1ID + "/profile");
-      upperReference.getDownloadURL().then(function (url) {
-        document.getElementById("upperParticipantPicModal").src = url;
-      }).catch(
-        e => {
-          console.log(e);
-        })
-
-      var lowerReference = firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + player2ID + "/profile");
-      lowerReference.getDownloadURL().then(function (url) {
-        document.getElementById("lowerParticipantPicModal").src = url;
-      }).catch(
-        e => {
-          console.log(e);
-        })
+      if(player1ID) {
+        var upperReference = firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + player1ID + "/profile");
+        upperReference.getDownloadURL().then(function (url) {
+          document.getElementById("upperParticipantPicModal").src = url;
+        }).catch(
+          e => {
+            console.log(e);
+          })
+      }
+      if(player2ID) {
+        var lowerReference = firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + player2ID + "/profile");
+        lowerReference.getDownloadURL().then(function (url) {
+          document.getElementById("lowerParticipantPicModal").src = url;
+        }).catch(
+          e => {
+            console.log(e);
+          })
+      }
 
 
     });
@@ -572,6 +582,142 @@ function startTournament() {
 
 function saveMatchScores() {
   firebase.firestore().collection("tournaments").doc(tournamentId).get().then(function(doc){
+    if((doc.data().creator) == (firebase.auth().currentUser.uid)) saveMatchScoresAsOwner(doc)
+    else saveMatchScoresAsPlayer(doc)
+  }).then(function() {
+    refresh();
+  });
+
+  document.getElementById("editScoresButton").style.display = "block";
+  document.getElementById("submitResultsButton").style.display = "none";
+  document.getElementById("upperParticipantScoreInput").style.display = "none";
+  document.getElementById("lowerParticipantScoreInput").style.display = "none";
+  document.getElementById("upperParticipantScoreModal").style.display = "inline-block";
+  document.getElementById("lowerParticipantScoreModal").style.display = "inline-block";
+}
+
+async function saveMatchScoresAsPlayer(doc) {
+  var matches;
+  var nextMatches; //this will store the entire round of matches in the round following 'matches'
+  var round = clickedRound;
+  var maxRound = getByesAndRounds()[1];
+  var matchNum = clickedMatch;
+  var nextMatchNum = Math.floor(matchNum / 2);
+  if(round == 1){matches = doc.data().matchupsRound1; if(round < maxRound) {nextMatches = doc.data().matchupsRound2;}}
+  if(round == 2){matches = doc.data().matchupsRound2; if(round < maxRound) {nextMatches = doc.data().matchupsRound3;}}
+  if(round == 3){matches = doc.data().matchupsRound3; if(round < maxRound) {nextMatches = doc.data().matchupsRound4;}}
+  if(round == 4){matches = doc.data().matchupsRound4; if(round < maxRound) {nextMatches = doc.data().matchupsRound5;}}
+  if(round == 5){matches = doc.data().matchupsRound5; if(round < maxRound) {nextMatches = doc.data().matchupsRound6;}}
+  if(round == 6){matches = doc.data().matchupsRound6; if(round < maxRound) {nextMatches = doc.data().matchupsRound7;}}
+  if(round == 7){matches = doc.data().matchupsRound7; if(round < maxRound) {nextMatches = doc.data().matchupsRound8;}}
+  if(round == 8){matches = doc.data().matchupsRound8; if(round < maxRound) {nextMatches = doc.data().matchupsRound9;}}
+  if(round == 9){matches = doc.data().matchupsRound9;}
+  var newScore1 = document.getElementById('upperParticipantScoreInput').value;
+  var newScore2 = document.getElementById('lowerParticipantScoreInput').value;
+  document.getElementById("upperParticipantScoreModal").innerHTML = newScore1;
+  document.getElementById("lowerParticipantScoreModal").innerHTML = newScore2;
+  if(matches[matchNum].playerOne == firebase.auth().currentUser.uid || matches[matchNum].playerTwo == firebase.auth().currentUser.uid) {
+    if(matches[matchNum].timeToUpdateScore == null) {
+      if(matches[matchNum].playerOneScore != newScore1){
+        matches[matchNum].playerOneScore = newScore1;
+      }
+      if(matches[matchNum].playerTwoScore != newScore2){
+        matches[matchNum].playerTwoScore = newScore2;
+      }
+    } else {
+      let newMatchObj = {...matches[matchNum]};
+      newMatchObj.playerOneScore = newScore1;
+      newMatchObj.playerTwoScore = newScore2;
+      if(matches[matchNum].playerOneScore == newScore1 && matches[matchNum].playerTwoScore == newScore2) {
+        if(round < maxRound){
+          if (nextMatches != (null || undefined)){
+            if((matchNum % 2) == 0){
+              nextMatches[nextMatchNum].playerOne = assignWinner(matches[matchNum]);
+            }
+            else{
+              nextMatches[nextMatchNum].playerTwo = assignWinner(matches[matchNum]);
+            }
+          }
+        }
+      } else if(assignWinner(matches[matchNum]) == assignWinner(newMatchObj)) {
+        if(round < maxRound){
+          if (nextMatches != (null || undefined)){
+            if((matchNum % 2) == 0){
+              nextMatches[nextMatchNum].playerOne = assignWinner(matches[matchNum]);
+            }
+            else{
+              nextMatches[nextMatchNum].playerTwo = assignWinner(matches[matchNum]);
+            }
+          }
+        }
+      } else {
+        let id = await raiseDispute(matches[matchNum]).finally(data => data)
+        console.log(id);
+        matches[matchNum].disputeId = id;
+      }
+    }
+    matches[matchNum].timeToUpdateScore = new Date();
+    matches[matchNum].playerUpdateScore = firebase.auth().currentUser.uid;
+  }
+
+  if(round == 1){
+    firebase.firestore().collection("tournaments").doc(tournamentId).update({
+      matchupsRound1: matches,
+    }).then(function() {
+      console.log('Uploaded scores!')
+    });
+  }
+  if(round == 2){
+    firebase.firestore().collection("tournaments").doc(tournamentId).update({
+      matchupsRound2: matches
+    }).then(function() {
+    });
+  }
+  if(round == 3){
+    firebase.firestore().collection("tournaments").doc(tournamentId).update({
+      matchupsRound3: matches
+    }).then(function() {
+    });
+  }
+  if(round == 4){
+    firebase.firestore().collection("tournaments").doc(tournamentId).update({
+      matchupsRound4: matches
+    }).then(function() {
+    });
+  }
+  if(round == 5){
+    firebase.firestore().collection("tournaments").doc(tournamentId).update({
+      matchupsRound5: matches
+    }).then(function() {
+    });
+  }
+  if(round == 6){
+    firebase.firestore().collection("tournaments").doc(tournamentId).update({
+      matchupsRound6: matches
+    }).then(function() {
+    });
+  }
+  if(round == 7){
+    firebase.firestore().collection("tournaments").doc(tournamentId).update({
+      matchupsRound7: matches
+    }).then(function() {
+    });
+  }
+  if(round == 8){
+    firebase.firestore().collection("tournaments").doc(tournamentId).update({
+      matchupsRound8: matches
+    }).then(function() {
+    });
+  }
+  if((round == 8) && (round < maxRound)){
+    firebase.firestore().collection("tournaments").doc(tournamentId).update({
+      matchupsRound9: nextMatches
+    }).then(function() {
+    });
+  }
+}
+
+function saveMatchScoresAsOwner(doc) {
     var matches;
     var nextMatches; //this will store the entire round of matches in the round following 'matches'
     var round = clickedRound;
@@ -707,17 +853,17 @@ function saveMatchScores() {
       }).then(function() {
       });
     }
-  }).then(function() {
-    refresh();
-  });
+  // }).then(function() {
+  //   refresh();
+  // });
 
 
-  document.getElementById("editScoresButton").style.display = "block";
-  document.getElementById("submitResultsButton").style.display = "none";
-  document.getElementById("upperParticipantScoreInput").style.display = "none";
-  document.getElementById("lowerParticipantScoreInput").style.display = "none";
-  document.getElementById("upperParticipantScoreModal").style.display = "inline-block";
-  document.getElementById("lowerParticipantScoreModal").style.display = "inline-block";
+  // document.getElementById("editScoresButton").style.display = "block";
+  // document.getElementById("submitResultsButton").style.display = "none";
+  // document.getElementById("upperParticipantScoreInput").style.display = "none";
+  // document.getElementById("lowerParticipantScoreInput").style.display = "none";
+  // document.getElementById("upperParticipantScoreModal").style.display = "inline-block";
+  // document.getElementById("lowerParticipantScoreModal").style.display = "inline-block";
 }
 
 
@@ -765,4 +911,61 @@ function changeRoundMobile(action){
       document.getElementById("bracketRoundMobileText").innerHTML = "Final Round";
     }
   });
+}
+
+async function raiseDispute(match) {
+  let disputeData = await firebase.firestore().collection("matchDisputes").add({
+    playerOne: match.playerOne,
+    playerOneProof: null,
+    playerTwo: match.playerTwo,
+    playerTwoProof: null,
+    proofUpdateTime: null
+  })
+  return disputeData.id
+}
+
+function makePlayerWinner(playerId) {
+  firebase.firestore().collection("tournaments").doc(tournamentId).get().then(doc => {
+    let data = [];
+    let round = 0;
+    let matchNum = 0;
+    let indexName = "";
+    let matchLength = 0;
+    let nextMatchNum = 0;
+    for (let i = 9; i >= 1; i--) {
+      indexName = `matchupsRound${i}`;
+      if(typeof doc.data()[indexName] === 'undefined') continue;
+      if(data && data.length >= 1) break;
+      doc.data()[indexName].map( (matchData, index) => {
+        if(matchData.disputeId != null && (matchData.playerOne == playerId || matchData.playerTwo == playerId)) {
+          data.push(matchData)
+          round = i+1;
+          matchNum = index;
+          nextMatchNum = Math.floor(matchNum/2);
+          matchLength = doc.data()[indexName].length;
+        }
+      })
+    }
+    let nextRoundIndex = `matchupsRound${round}`;
+    let totalMatchesInNextRound = Math.ceil(matchLength / 2);
+    let nextRound = [];
+    for (let i = 0; i < totalMatchesInNextRound; i++) {
+      nextRound.push(Object.assign({}, new match(null, null)));
+    }
+    if((matchNum % 2) == 0) {
+      nextRound[nextMatchNum].playerOne = playerId;
+    } else {
+      nextRound[nextMatchNum].playerTwo = playerId
+    }
+    data[0].disputeId = null;
+    let finalData = {
+      [indexName]: data[0],
+      [nextRoundIndex]: nextRound
+    }
+    console.log(finalData)
+    // firebase.firestore().collection("tournaments").doc(tournamentId).update(finalData).then(function() {
+    //   console.log("dispute resolved")
+    // });
+
+  })
 }

@@ -137,6 +137,7 @@
                   <div class="connectorColumn" id="connectorColumn8">
                   </div>
 
+<<<<<<< Updated upstream
                   <div id="matchModal" class="matchModal">
                     <div class="matchModal-content">
                       <span id="closeModal" class="close" onclick="closeMatchModal()">&times;</span>
@@ -163,9 +164,10 @@
                     </div>
                   </div>
 
+=======
+>>>>>>> Stashed changes
                 </div>
               </div>
-
 
             </div>
             <button class="tournamentCardButton tournamentCardButtonGeneric" id="tournamentSignUpButton"></button>
@@ -189,6 +191,75 @@
 
       </div>
     </div>
+
+    <div id="matchModal" class="matchModal">
+      <div class="matchModal-content">
+        <span id="closeModal" class="close" onclick="closeMatchModal()">&times;</span>
+        <div class="modalTop">
+          <div id="upperParticipantModal" class="participantInfobox topBox">
+            <img id="upperParticipantPicModal" class="infoboxPic" src="media/BrackotLogo2.jpg">
+            <h1 id="upperParticipantNameModal" class="infoboxName"></h1>
+            <input type="number" id="upperParticipantScoreInput" class="scoreInputModal"></input>
+            <h2 id="upperParticipantScoreModal" class="infoboxScore">-</h2>
+            <h2 id="upperParticipantWinnerModal" class="infoboxWinner">Winner</h2>
+          </div>
+          <div id="lowerParticipantModal" class="participantInfobox bottomBox">
+            <img id="lowerParticipantPicModal" class="infoboxPic" src="media/BrackotLogo2.jpg">
+            <h1 id="lowerParticipantNameModal" class="infoboxName"></h1>
+            <input type="number" id="lowerParticipantScoreInput" class="scoreInputModal"></input>
+            <h2 id="lowerParticipantScoreModal" class="infoboxScore">-</h2>
+            <h2 id="lowerParticipantWinnerModal" class="infoboxWinner">Winner</h2>
+          </div>
+        </div>
+        <div class="modalBottom">
+          <button onclick="editMatchScores()" id="editScoresButton" class="grayButton submitResultsButton">Edit Scores</button>
+          <button onclick="saveMatchScores()" id="submitResultsButton" class="gradientButton submitResultsButton">Submit Results</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="screenshotModal" class="matchModal">
+      <div class="matchModal-content">
+        <span id="closeModal" class="close" onclick="closeUploadDisputeProofModal()">&times;</span>
+        <div class="modalTop">
+          <h4 style="text-align: center; margin: 20px 0;"> Upload picture/screenshot of the score screen </h4>
+          <label style="cursor: pointer; display: contents;" for="proofUploader">
+            <div id="profilePicContainer" style="height: 80%; width: 50%; margin: 0 auto;"><img style="max-height: 100%; max-width: 100%;" src="media/addpic.png" id="screenshotDisplay"></div>
+            <input type="file" name="proofUploader" id="proofUploader" style="display:none" onchange="uploadDisputeScreenshot()" accept="image/jpg, image/jpeg, image/png, image/img, image/gif">
+          </label>
+        </div>
+        <div class="modalBottom" style="text-align: center;">
+          <button onclick="closeUploadDisputeProofModal()" class="gradientButton submitResultsButton">Upload Proof</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="disputeResolveModal" class="matchModal">
+      <div class="matchModal-content">
+        <span id="closeModal" class="close" onclick="closeResolveDisputeModal()">&times;</span>
+        <div class="modalTop">
+          <h4 style="text-align: center; margin: 20px 0;"> Resolve the dispute </h4>
+
+          <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+            <div style="flex: 1 1 50%; flex: 0 1 50%;">
+              <div style="height: 80%; width: 50%; margin: 0 auto;">
+                <img style="height: 130px; max-width: 100%;" src="media/addpic.png" id="screenshotDisplayPlayerOne">
+              </div>
+              <button id="screenshotDisplayPlayerOneBtn" class="grayButton submitResultsButton"> Make him winner </button>
+            </div>
+
+            <div style="flex: 1 1 50%; flex: 0 1 50%;">
+              <div style="height: 80%; width: 50%; margin: 0 auto;">
+                <img style="height: 130px; max-width: 100%;" src="media/addpic.png" id="screenshotDisplayPlayerTwo">
+              </div>
+              <button id="screenshotDisplayPlayerTwoBtn" class="grayButton submitResultsButton"> Make him winner </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+   
     <div id="footer">
       <script> $( "#footer" ).load( "ajax/footer.html" ); </script>
     </div>
