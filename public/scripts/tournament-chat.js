@@ -1,6 +1,6 @@
 /*
     This file is only functions that render the tournament chat
-    it also has the declaration of the user object which is used 
+    it also has the declaration of the user object which is used
     in all chat files
 */
 //user constants unneccesary for now but with redux will improve run speed
@@ -15,14 +15,14 @@ const user = {
 //object that contains all of the messages to be rendered across all chat files
 
 
-        
+
 
 const db = firebase.firestore();
 //just to save time
 function initChat() {
     //calls the event listener function and passes the current UID
     getRealtimeConversations(firebase.auth().currentUser.uid);
-    
+
 }
 function submitMessage() {
     var message = document.getElementById("textHolder").value;
@@ -40,7 +40,7 @@ function submitMessage() {
         updateMessage(msgObj)
         //passes the msgObj to the updateMessage function
     };
-    
+
 }
 //updateMessage is the function that actually sends the message to firebase
 function updateMessage(msgObj) {
@@ -51,7 +51,7 @@ function updateMessage(msgObj) {
             ...msgObj,
             createdAt: new Date(),
         })
-        //uses the msgObj along with the date for ordering messages 
+        //uses the msgObj along with the date for ordering messages
         .then (
             console.log(msgObj)
             //for testing purposes only
@@ -61,12 +61,12 @@ function renderChat() {
     ReactDOM.render(
         <Message/>,
         document.getElementById("messageSections")
-        
+
     );
     //displays the Message component
 }
 function getRealtimeConversations() {
-    //this function sets the event listener 
+    //this function sets the event listener
 
     db.collection('tournaments').doc(tournamentId).collection('chat')
     .orderBy('createdAt', 'asc')
@@ -76,32 +76,32 @@ function getRealtimeConversations() {
 
 
         querySnapshot.forEach(doc => {
-            user.tournamentConversations.push(doc.data())  
+            user.tournamentConversations.push(doc.data())
             //adds each firebase documment in chat collection to conversations object
         });
         renderChat()
         //rerendering the Message component when the data changes
-        
+
     })
 }
 class Message extends React.Component {
     render(){
         return (
             <div>
-                {   
+                {
                     /*
                         maps through the conversations object putting each message in a div
                     */
                         user.tournamentConversations.map(con =>
                             <div className = {con.sentUID == firebase.auth().currentUser.uid
-                            ? 'userBubble' : 'foreignBubble'}>
-                    {//if the sentUID of the message is the same as the UID of the user who is currently logged in it 
+                            ? 'bubble userBubble' : 'bubble foreignBubble'}>
+                    {//if the sentUID of the message is the same as the UID of the user who is currently logged in it
                     //puts the message on the right if not it puts it on the left
                     }
                                 <p className="messageBlurb">{con.message}</p>
-                            
+
                             </div>
-                        )    
+                        )
                 }
             </div>
         );
