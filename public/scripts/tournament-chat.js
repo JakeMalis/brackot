@@ -15,6 +15,16 @@ const user = {
 //object that contains all of the messages to be rendered across all chat files
 
 
+//Code designed to make a message submit upon hitting the enter button
+$("#textHolder").keyup(function(event) {
+    if (event.keyCode === 13) {
+        $("#sendChatIcon").click();
+    }
+});
+
+$("#sendChatIcon").click(function() {
+    submitTournamentMessage();
+});
 
 
 const db = firebase.firestore();
@@ -24,7 +34,7 @@ function initChat() {
     getRealtimeConversations(firebase.auth().currentUser.uid);
 
 }
-function submitTeamMessage() {
+function submitTournamentMessage() {
     var message = document.getElementById("textHolder").value;
     //gets the message from the text box
     document.getElementById("textHolder").value = '';
