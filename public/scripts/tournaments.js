@@ -1,12 +1,14 @@
 function personalizeElements() {
   $("#gameList").append('<li class="filterListItem gameFilterListItem"><label class="filterOption"><input class="filterInput" type="radio"><p class="filterText">All</p></input></label></li>');
   $("#dateList").append('<li class="filterListItem dateFilterListItem"><label class="filterOption"><input class="filterInput" type="radio"><p class="filterText">All</p></input></label></li>');
+
   games.forEach((entry) => {
     $("#gameList").append('<li class="filterListItem gameFilterListItem"><label class="filterOption"><input class="filterInput" type="radio"><p class="filterText">' + entry + '</p></input></label></li>');
   });
   dateOptions.forEach((entry) => {
     $("#dateList").append('<li class="filterListItem dateFilterListItem"><label class="filterOption"><input class="filterInput" type="radio"><p class="filterText">' + entry + '</p></input></label></li>');
   });
+
   filterData();
   renderTournamentCards();
 }
@@ -120,71 +122,63 @@ async function renderTournamentCards() {
   var TournamentCardArray = [];
   var tournamentNumber = 1;
   query.get().then(async function(querySnapshot) {
-    const collectionLength = querySnapshot.size;
+    if (querySnapshot.size == 0) { console.log("No tournaments match the given criteria"); /* We need to add some code that makes it more clear that nothing meets the criteria */ }
 
-    if (collectionLength == 0) {
+    await Promise.all(querySnapshot.docs.map(async (doc) => {
+      var wallpaper = "/media/game_wallpapers/" + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "-" + "cardWallpaper.";
+      var title = doc.data().name;
+
+      var creatorName = await firebase.firestore().runTransaction(async (transaction) => {
+        return await transaction.get(firebase.firestore().collection("users").doc(doc.data().creator)).then(creatorDoc => {
+          return creatorDoc.data().name;
+        })
+      });
+
+      var participants = (doc.data().players.length) + " Participants";
+
+      if (doc.data().game == "Counter-Strike Global Offensive") {
+        var game = "Counter-Strike: Global Offensive";
+      }
+      else {
+        var game = doc.data().game;
+      }
+
+      var tournamentHostPic = await firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + doc.data().creator + "/profile").getDownloadURL().then(function (url) {
+        return String(url);
+      }).catch((error) => {
+        return "media/BrackotLogo2.jpg";
+      });
+
+      var date = new Date(doc.data().date.toDate());
+      var hour, meridiem;
+
+
+      if ((date.getHours() == 0)){
+        hour = 12;
+        meridiem = "A.M."
+      }
+      else if ((date.getHours() - 12) < 0) {
+        hour = date.getHours();
+        meridiem = "A.M."
+      }
+      else if ((date.getHours() - 12) == 0) {
+        hour = date.getHours();
+        meridiem = "P.M."
+      }
+      else {
+        hour = date.getHours() - 12;
+        meridiem = "P.M."
+      }
+      var tournamentDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' @ ' + hour + ':' + String(date.getMinutes()).padStart(2, "0") + ' ' + meridiem;
+
+      TournamentCardArray.push(<TournamentCard wallpaper={wallpaper} title={title} game={game} date={tournamentDate} participants={participants} tournamentHostPic={tournamentHostPic} tournamentID={doc.id} creatorName={creatorName} key={doc.id} />);
+
+      tournamentNumber++;
+    })).then(() => {
       ReactDOM.render(
         TournamentCardArray,
         document.getElementById("row")
       );
-      console.log("No tournaments match critera given.");
-    }
-
-    querySnapshot.forEach(async (doc) => {
-        var wallpaper = "/media/game_wallpapers/" + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "-" + "cardWallpaper.";
-        var title = doc.data().name;
-
-        var creatorName = await firebase.firestore().runTransaction( async(transaction) => {
-          return await transaction.get(firebase.firestore().collection("users").doc(doc.data().creator)).then(creatorDoc => {
-            return creatorDoc.data().name;
-          })
-        });
-
-        var participants = (doc.data().players.length) + " Participants";
-
-        if (doc.data().game == "Counter-Strike Global Offensive") {
-          var game = "Counter-Strike: Global Offensive";
-        }
-        else {
-          var game = doc.data().game;
-        }
-
-        var tournamentHostPic = await firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + doc.data().creator + "/profile").getDownloadURL().then(function (url) {
-          return String(url);
-        }).catch((error) => {
-          return "media/BrackotLogo2.jpg";
-        });
-
-        var date = new Date(doc.data().date.toDate());
-        var hour, meridiem;
-
-
-        if ((date.getHours() == 0)){
-          hour = 12;
-          meridiem = "A.M."
-        }
-        else if ((date.getHours() - 12) < 0) {
-          hour = date.getHours();
-          meridiem = "A.M."
-        }
-        else if ((date.getHours() - 12) == 0) {
-          hour = date.getHours();
-          meridiem = "P.M."
-        }
-        else {
-          hour = date.getHours() - 12;
-          meridiem = "P.M."
-        }
-        var tournamentDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' @ ' + hour + ':' + String(date.getMinutes()).padStart(2, "0") + ' ' + meridiem;
-
-        TournamentCardArray.push(<TournamentCard wallpaper={wallpaper} title={title} game={game} date={tournamentDate} participants={participants} tournamentHostPic={tournamentHostPic} tournamentID={doc.id} creatorName={creatorName} key={doc.id} />);
-        if(tournamentNumber == collectionLength) {
-          ReactDOM.render(
-            TournamentCardArray,
-            document.getElementById("row")
-          );
-        }
-        tournamentNumber++;
     });
   });
 }

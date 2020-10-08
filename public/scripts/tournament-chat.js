@@ -24,7 +24,7 @@ function initChat() {
     getRealtimeConversations(firebase.auth().currentUser.uid);
 
 }
-function submitMessage() {
+function submitTeamMessage() {
     var message = document.getElementById("textHolder").value;
     //gets the message from the text box
     document.getElementById("textHolder").value = '';
@@ -94,8 +94,14 @@ class Message extends React.Component {
                     */
                         user.tournamentConversations.map(con =>
                             <div className = {con.sentUID == firebase.auth().currentUser.uid
+<<<<<<< HEAD
                             ? 'bubble userBubble' : 'bubble foreignBubble'}>
                     {//if the sentUID of the message is the same as the UID of the user who is currently logged in it
+=======
+                            ? 'userBubble' : 'foreignBubble'}>
+                    {
+                    //if the sentUID of the message is the same as the UID of the user who is currently logged in it 
+>>>>>>> b5456d69dba1ac49ba099fce13d22f8119ec7041
                     //puts the message on the right if not it puts it on the left
                     }
                                 <p className="messageBlurb">{con.message}</p>

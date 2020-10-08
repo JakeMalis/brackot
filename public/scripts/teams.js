@@ -12,8 +12,7 @@ class TeamCard extends React.Component {
         <div className="tournamentCardBackground">
           <div className="tournamentCardContent" onClick={() => this.handleClick()}>
             <picture className="tournamentWallpaper">
-              <source srcSet={this.props.teamProfilePic + "webp"} type="image/webp"></source>
-              <img className="tournamentWallpaper" src={this.props.teamProfilePic + "jpg"}/>
+              <img className="tournamentWallpaper" src={this.props.teamProfilePic}/>
             </picture>
             <div className="tournamentCardText">
                 <h6 className="tournamentCardTitle">{this.props.name}</h6>
@@ -62,13 +61,14 @@ async function renderTeamCards() {
           var privacyIcon = "fa-lock";
         }
 
-        var teamProfilePic = await firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + doc.data().creator + "/profile").getDownloadURL().then(function (url) {
+        var teamProfilePic = await firebase.storage().refFromURL("gs://brackot-teams-storage/" + doc.id + "/profile").getDownloadURL().then(function (url) {
           return String(url);
         }).catch((error) => {
-          return "media/BrackotLogo2.jpg";
+          return "../media/BrackotLogo2.jpg";
         });
 
-        TeamCardArray.push(<TeamCard name={name} teamMembers={teamMembers} teamProfilePic={"/media/game_wallpapers/amongus-cardWallpaper."} teamID={doc.id} privacy={privacy} privacyIcon={privacyIcon} key={doc.id} />);
+        //"/media/game_wallpapers/amongus-cardWallpaper."
+        TeamCardArray.push(<TeamCard name={name} teamMembers={teamMembers} teamProfilePic={teamProfilePic} teamID={doc.id} privacy={privacy} privacyIcon={privacyIcon} key={doc.id} />);
         if(teamNumber == collectionLength) {
           ReactDOM.render(
             TeamCardArray,
