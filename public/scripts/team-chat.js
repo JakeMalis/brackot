@@ -1,76 +1,122 @@
-const user = {
-    conversations : []
+/*
+    This file is only functions that render the tournament chat
+    it also has the declaration of the user object which is used 
+    in all chat files
+*/
+//user constants unneccesary for now but with redux will improve run speed
+const userConstants = {
+    GET_REALTIME_USERS: 'GET_REALTIME_USERS',
+    GET_REALTIME_MESSAGES: 'GET_REALTIME_MESSAGES'
+}
+//object that contains all of the messages to be rendered across all chat files
+user = {
+    'teamConversations' : []
 };
 
-const db = firebase.firestore()
-async function updateMessage(msgObj) {
-    db.collection('tournaments').doc(tournamentId).collection('chat')
-        .add({
-            ...msgObj,
-            createdAt: new Date(),
-        })
-        .catch(error => {
-            console.log('error')
-        });
-    console.log('complete') 
+
+
+const db = firebase.firestore();
+//just to save time
+
+
+
+function initTeamChat() {
+    //calls the event listener function and passes the current UID
+    getRealtimeTeamConversations(firebase.auth().currentUser.uid);
+    
 }
-function initChat() {
-    console.log("into init chat")
-    renderChat()
-}
-function submitMessage() {
-    console.log('hello')
+
+
+function submitTeamMessage() {
     var message = document.getElementById("textHolder").value;
-    console.log(message)
+    //gets the message from the text box
+    document.getElementById("textHolder").value = '';
+    //clears the text box
     const msgObj = {
         sentUID: firebase.auth().currentUser.uid,
         message
     }
+    //msg object is just passed between the submitMessage and updateMessage function
+    //msgObj is not contained in user.conversations
     if(message !== ""){
-        console.log("into if statement")
-        updateMessage(msgObj)
-        
+    //checks if message is blank
+        updateTeamMessage(msgObj)
+        //passes the msgObj to the updateMessage function
     };
-    console.log("out of if")
+    
 }
-function renderChat() {
-    ReactDOM.render(
-        <Messages/>,
-        document.getElementById("messageSections")
 
+
+//updateMessage is the function that actually sends the message to firebase
+function updateTeamMessage(msgObj) {
+    db.collection('tournaments')
+        .doc(tournamentId)
+        .collection('chat')
+        .add({
+            ...msgObj,
+            createdAt: new Date(),
+        })
+        //uses the msgObj along with the date for ordering messages 
+        .then (
+            console.log(msgObj)
+            //for testing purposes only
+        )
+}
+
+
+function renderTeamChat() {
+    ReactDOM.render(
+        <Message/>,
+        document.getElementById("messageSections")
+        
     );
+    //displays the Message component
 }
-function getRealTimeMessages() {
-    user.conversations = [] 
-    console.log(user.conversations);
-    db.collection('tournaments').doc(tournamentId).collection('chat')
-                    .orderBy('createdAt', 'asc')
-                    .onSnapshot((querySnapshot) => {
-                        querySnapshot.forEach(doc => {
-                            
-                            user.conversations.push(doc.data())
-                            
-                        });
-                        console.log(user.conversations);
-                    })
+
+
+function getRealtimeTeamConversations() {
+    //this function sets the event listener 
+
+    db.collection('teams').doc(teamId).collection('chat')
+    .orderBy('createdAt', 'asc')
+    .onSnapshot((querySnapshot) => {
+        user.teamConversations = []
+        //resets the conversations object so that you dont get duplicate messages
+
+
+        querySnapshot.forEach(doc => {
+            user.teamConversations.push(doc.data())  
+            //adds each firebase documment in chat collection to conversations object
+        });
+        renderTeamChat()
+        //rerendering the Message component when the data changes
+        
+    })
 }
-class Messages extends React.Component {
+
+
+
+class TeamMessage extends React.Component {
     render(){
         return (
             <div>
-                {
-                    getRealTimeMessages()
-                }
-                {
-                    user.conversations.map(con =>
-                        <div style={{ textAlign: con.userSent == firebase.auth().currentUser.uid
-                            ? 'right' : 'left' }}>
-                        <p className="messageStyle" >{con.message}</p>
-                        <p className='messageSentBy'>{con.sentUID}</p>
-                        </div>)    
+                {   
+                    /*
+                        maps through the conversations object putting each message in a div
+                    */
+                        user.teamConversations.map(con =>
+                            <div className = {con.sentUID == firebase.auth().currentUser.uid
+                                ? 'userBubble' : 'foreignBubble'}>
+                    {
+                    //if the sentUID of the message is the same as the UID of the user who is currently logged in it 
+                    //puts the message on the right if not it puts it on the left
+                    }
+                            <p className="messageBlurb">{con.message}</p>
+                            
+                            </div>
+                        )    
                 }
             </div>
-            
         );
     }
 }
