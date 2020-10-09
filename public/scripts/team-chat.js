@@ -96,27 +96,3 @@ function getRealtimeTeamConversations() {
 
 
 
-class TeamMessage extends React.Component {
-    render(){
-        return (
-            <div>
-                {   
-                    /*
-                        maps through the conversations object putting each message in a div
-                    */
-                        user.teamConversations.map(con =>
-                            <div className = {con.sentUID == firebase.auth().currentUser.uid
-                                ? 'userBubble' : 'foreignBubble'}>
-                    {
-                    //if the sentUID of the message is the same as the UID of the user who is currently logged in it 
-                    //puts the message on the right if not it puts it on the left
-                    }
-                            <p className="messageBlurb">{con.message}</p>
-                            
-                            </div>
-                        )    
-                }
-            </div>
-        );
-    }
-}
