@@ -22,7 +22,7 @@
     "pngquant-bin": "^6.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "stripe": "^8.108.0",
+    "stripe": "^8.109.0",
     "uuid": "^8.3.1"
   },
   "devDependencies": {
