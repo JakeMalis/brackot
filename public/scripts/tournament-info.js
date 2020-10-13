@@ -114,121 +114,131 @@ function personalizeElements() {
       document.getElementById("tournamentSignUpButton").disabled = true;
 
       document.getElementById("bracketNavbar").style.display = "inline-block";
-      renderMatchCards();
-    }
 
-    let findUserMatch = [];
-    let round = "";
-    let matchNumber = 0;
-    for (let i = 9; i >= 1; i--) {
-      let indexName = `matchupsRound${i}`;
-      if(findUserMatch && findUserMatch.length >= 1) break;
-      if(typeof doc.data()[indexName] === 'undefined') continue;
-      doc.data()[indexName].map( (matchData, index) => {
-        if( (matchData.playerOne == firebase.auth().currentUser.uid
-          || matchData.playerTwo == firebase.auth().currentUser.uid)
-          && matchData.timeToUpdateScore != null) {
-          round = i;
-          matchNumber = index;
-          findUserMatch.push(matchData)
-        }
-      })
-    }
-
-    if(findUserMatch.length > 0) {
-      for (let i = 0; i < findUserMatch.length; i++) {
-        if(findUserMatch[i].disputeId) {
-          disputeId = findUserMatch[i].disputeId;
-          firebase.firestore().collection("matchDisputes").doc(disputeId).get().then(dispute => {
-            if( (dispute.data().playerOne == firebase.auth().currentUser.uid && dispute.data().playerOneProof == null)
-              || (dispute.data().playerTwo == firebase.auth().currentUser.uid && dispute.data().playerTwoProof == null) ) {
+      let findUserMatch = [];
+      let round = "";
+      let matchNumber = 0;
+      for (let i = 9; i >= 1; i--) {
+        let indexName = `matchupsRound${i}`;
+        if(findUserMatch && findUserMatch.length >= 1) break;
+        if(typeof doc.data()[indexName] === 'undefined') continue;
+        doc.data()[indexName].map( (matchData, index) => {
+          if( (matchData.playerOne == firebase.auth().currentUser.uid
+            || matchData.playerTwo == firebase.auth().currentUser.uid)
+            && matchData.timeToUpdateScore != null) {
+            round = i;
+            matchNumber = index;
+            findUserMatch.push(matchData)
+          }
+        })
+      }
+  
+      if(findUserMatch.length > 0) {
+        for (let i = 0; i < findUserMatch.length; i++) {
+          if(findUserMatch[i].disputeId) {
+            disputeId = findUserMatch[i].disputeId;
+            firebase.firestore().collection("matchDisputes").doc(disputeId).get().then(dispute => {
+              if( (dispute.data().playerOne == firebase.auth().currentUser.uid && dispute.data().playerOneProof == null)
+                || (dispute.data().playerTwo == firebase.auth().currentUser.uid && dispute.data().playerTwoProof == null) ) {
+                if(!dispute.data().isResolved) {
+                  if(dispute.data().proofUpdateTime) {
+                    const currentDate = new Date();
+                    const diffTime = Math.abs(currentDate - new Date(dispute.data().proofUpdateTime.seconds*1000));
+                    const diffInMins = 10 - Math.ceil(diffTime / (1000 * 60));
+                    if(diffInMins >= 0 && diffInMins <= 10) {
+                      document.getElementById("alertBox").style.display = "block";
+                      document.getElementById("alertBox").classList.add("errorAlert");
+                      document.getElementById("alertTextBold").innerHTML = "Alert: ";
+                      document.getElementById("alertText").innerHTML = `Current match has dispute between you and your opponent. Please update a picture/screenshot of your actual game score for verification. <button style="background-color: inherit; border: none; font-size: inherit; color: rgba(35,242,172,1);" onclick="openUploadDisputeProofModal(${round}, ${matchNumber})"> Update Proof </button>`;
+                    } else {
+                      if(dispute.data().playerOneProof != null) makePlayerWinner(dispute.data().playerOne)
+                      else if(dispute.data().playerTwoProof != null) makePlayerWinner(dispute.data().playerTwo)
+                    }
+                  } else {
+                    document.getElementById("alertBox").style.display = "block";
+                    document.getElementById("alertBox").classList.add("errorAlert");
+                    document.getElementById("alertTextBold").innerHTML = "Alert: ";
+                    document.getElementById("alertText").innerHTML = `Current match has dispute between you and your opponent. Please update a picture/screenshot of your actual game score for verification. <button style="background-color: inherit; border: none; font-size: inherit; color: rgba(35,242,172,1);" onclick="openUploadDisputeProofModal(${round}, ${matchNumber})"> Update Proof </button>`;
+                  }
+                }
+              }
+            })
+          } else {
+            if((findUserMatch[i].playerTwo == firebase.auth().currentUser.uid || findUserMatch[i].playerOne == firebase.auth().currentUser.uid) && findUserMatch[i].playerUpdateScore != firebase.auth().currentUser.uid) {
               const currentDate = new Date();
-              const diffTime = Math.abs(currentDate - new Date(dispute.data().proofUpdateTime.seconds*1000));
+              const diffTime = Math.abs(currentDate - new Date(findUserMatch[i].timeToUpdateScore.seconds*1000));
               const diffInMins = 10 - Math.ceil(diffTime / (1000 * 60));
               if(diffInMins >= 0 && diffInMins <= 10) {
                 document.getElementById("alertBox").style.display = "block";
                 document.getElementById("alertBox").classList.add("errorAlert");
                 document.getElementById("alertTextBold").innerHTML = "Alert: ";
-                document.getElementById("alertText").innerHTML = `Current match has dispute between you and your opponent. Please update a picture/screenshot of your actual game score for verification. <button style="background-color: inherit; border: none; font-size: inherit; color: rgba(35,242,172,1);" onclick="openUploadDisputeProofModal(${round}, ${matchNumber})"> Update Proof </button>`;
-              } else {
-                if(dispute.data().playerOneProof != null) makePlayerWinner(dispute.data().playerOne)
-                else if(dispute.data().playerTwoProof != null) makePlayerWinner(dispute.data().playerTwo)
+                document.getElementById("alertText").innerHTML = `Your opponent has updated the scores, and you have ${diffInMins} minutes left to update the score. <button style="background-color: inherit; border: none; font-size: inherit; color: rgba(35,242,172,1);" onclick='openMatchModal("matchCardRound${round}Match${matchNumber+1}")'> Upload Score </button>`;
               }
-            }
-          })
-        } else {
-          if((findUserMatch[i].playerTwo == firebase.auth().currentUser.uid || findUserMatch[i].playerOne == firebase.auth().currentUser.uid) && findUserMatch[i].playerUpdateScore != firebase.auth().currentUser.uid) {
-            const currentDate = new Date();
-            const diffTime = Math.abs(currentDate - new Date(findUserMatch[i].timeToUpdateScore.seconds*1000));
-            const diffInMins = 10 - Math.ceil(diffTime / (1000 * 60));
-            if(diffInMins >= 0 && diffInMins <= 10) {
-              document.getElementById("alertBox").style.display = "block";
-              document.getElementById("alertBox").classList.add("errorAlert");
-              document.getElementById("alertTextBold").innerHTML = "Alert: ";
-              document.getElementById("alertText").innerHTML = `Your opponent has updated the scores, and you have ${diffInMins} minutes left to update the score. <button style="background-color: inherit; border: none; font-size: inherit; color: rgba(35,242,172,1);" onclick='openMatchModal("matchCardRound${round}Match${matchNumber+1}")'> Upload Score </button>`;
-            }
-          } else {
-            if(doc.data()[`matchupsRound${round+1}`]) {
-              let data = [];
-              doc.data()[`matchupsRound${round+1}`].map(nextRoundData => {
-                if(nextRoundData.playerOne == firebase.auth().currentUser.uid || nextRoundData.playerTwo == firebase.auth().currentUser.uid) {
-                  data.push(nextRoundData)
+            } else {
+              if(doc.data()[`matchupsRound${round+1}`]) {
+                let data = [];
+                doc.data()[`matchupsRound${round+1}`].map(nextRoundData => {
+                  if(nextRoundData.playerOne == firebase.auth().currentUser.uid || nextRoundData.playerTwo == firebase.auth().currentUser.uid) {
+                    data.push(nextRoundData)
+                  }
+                })
+                if(data && data.length <= 0) {
+                  let nextRoundData = doc.data()[`matchupsRound${round + 1}`];
+                  let moveWinnerToNextRoundMatch = Math.ceil(matchNumber/2);
+                  if( (matchNumber % 2) == 0) nextRoundData[moveWinnerToNextRoundMatch].playerOne = assignWinner(findUserMatch[i]);
+                  else nextRoundData[moveWinnerToNextRoundMatch].playerTwo = assignWinner(findUserMatch[i]);
+                  let indexName = `matchupsRound${round + 1}`;
+                  firebase.firestore().collection("tournaments").doc(tournamentId).update({
+                    [indexName]: nextRoundData
+                  }).then(function() {
+                    console.log("Updated scores")
+                  });
                 }
-              })
-              if(data && data.length <= 0) {
-                let nextRoundData = doc.data()[`matchupsRound${round + 1}`];
+              } else {
+                let nextRound = round + 1;
+                let totalMatches = doc.data()[`matchupsRound${round}`].length;
+                let nextRoundMatches = Math.ceil(totalMatches / 2);
+                let nextRoundData = [];
+                for (let i = 0; i < nextRoundMatches; i++) {
+                  nextRoundData.push(Object.assign({}, new match(null, null)))
+                }
                 let moveWinnerToNextRoundMatch = Math.ceil(matchNumber/2);
                 if( (matchNumber % 2) == 0) nextRoundData[moveWinnerToNextRoundMatch].playerOne = assignWinner(findUserMatch[i]);
                 else nextRoundData[moveWinnerToNextRoundMatch].playerTwo = assignWinner(findUserMatch[i]);
-                let indexName = `matchupsRound${round + 1}`;
+                let indexName = `matchupsRound${nextRound}`;
                 firebase.firestore().collection("tournaments").doc(tournamentId).update({
                   [indexName]: nextRoundData
                 }).then(function() {
                   console.log("Updated scores")
                 });
               }
-            } else {
-              let nextRound = round + 1;
-              let totalMatches = doc.data()[`matchupsRound${round}`].length;
-              let nextRoundMatches = Math.ceil(totalMatches / 2);
-              let nextRoundData = [];
-              for (let i = 0; i < nextRoundMatches; i++) {
-                nextRoundData.push(Object.assign({}, new match(null, null)))
-              }
-              let moveWinnerToNextRoundMatch = Math.ceil(matchNumber/2);
-              if( (matchNumber % 2) == 0) nextRoundData[moveWinnerToNextRoundMatch].playerOne = assignWinner(findUserMatch[i]);
-              else nextRoundData[moveWinnerToNextRoundMatch].playerTwo = assignWinner(findUserMatch[i]);
-              let indexName = `matchupsRound${nextRound}`;
-              firebase.firestore().collection("tournaments").doc(tournamentId).update({
-                [indexName]: nextRoundData
-              }).then(function() {
-                console.log("Updated scores")
-              });
             }
           }
         }
+  
+      }
+  
+      if(firebase.auth().currentUser.uid == doc.data().creator) {
+        console.log("here");
+        for (let i = 9; i >= 1; i--) {
+          let indexName = `matchupsRound${i}`;
+          if(typeof doc.data()[indexName] === 'undefined') continue;
+          doc.data()[indexName].map( (matchData, index) => {
+            if(matchData.disputeId != null) {
+              firebase.firestore().collection("matchDisputes").doc(matchData.disputeId).get().then(data => {
+                if(data.data().playerOneProof != null && data.data().playerTwoProof != null) {
+                  document.getElementById("alertBox").style.display = "block";
+                  document.getElementById("alertBox").classList.add("errorAlert");
+                  document.getElementById("alertTextBold").innerHTML = "Alert: ";
+                  document.getElementById("alertText").innerHTML = `There is a dispute raised by players in round no ${i}. Please click on resolve it. <button style="background-color: inherit; border: none; font-size: inherit; color: rgba(35,242,172,1);" onclick="openModalToResolveDispute('${matchData.disputeId}')"> Details </button>`;
+                }
+              })
+            }
+          })
+        }
       }
 
-    }
-
-    if(firebase.auth().currentUser.uid == doc.data().creator) {
-      console.log("here");
-      for (let i = 9; i >= 1; i--) {
-        let indexName = `matchupsRound${i}`;
-        if(typeof doc.data()[indexName] === 'undefined') continue;
-        doc.data()[indexName].map( (matchData, index) => {
-          if(matchData.disputeId != null) {
-            firebase.firestore().collection("matchDisputes").doc(matchData.disputeId).get().then(data => {
-              if(data.data().playerOneProof != null && data.data().playerTwoProof != null) {
-                document.getElementById("alertBox").style.display = "block";
-                document.getElementById("alertBox").classList.add("errorAlert");
-                document.getElementById("alertTextBold").innerHTML = "Alert: ";
-                document.getElementById("alertText").innerHTML = `There is a dispute raised by players in round no ${i}. Please click on resolve it. <button style="background-color: inherit; border: none; font-size: inherit; color: rgba(35,242,172,1);" onclick="openModalToResolveDispute('${matchData.disputeId}')"> Details </button>`;
-              }
-            })
-          }
-        })
-      }
+      renderMatchCards();
     }
 
     shuffledParticipants = doc.data().players;

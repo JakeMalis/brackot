@@ -919,7 +919,8 @@ async function raiseDispute(match) {
     playerOneProof: null,
     playerTwo: match.playerTwo,
     playerTwoProof: null,
-    proofUpdateTime: null
+    proofUpdateTime: null,
+    isResolved: false
   })
   return disputeData.id
 }
@@ -947,25 +948,43 @@ function makePlayerWinner(playerId) {
       })
     }
     let nextRoundIndex = `matchupsRound${round}`;
-    let totalMatchesInNextRound = Math.ceil(matchLength / 2);
+    let finalData = {};
     let nextRound = [];
-    for (let i = 0; i < totalMatchesInNextRound; i++) {
-      nextRound.push(Object.assign({}, new match(null, null)));
-    }
-    if((matchNum % 2) == 0) {
-      nextRound[nextMatchNum].playerOne = playerId;
+    if(doc.data()[nextRoundIndex] == null) {
+      let totalMatchesInNextRound = Math.ceil(matchLength / 2);
+      for (let i = 0; i < totalMatchesInNextRound; i++) {
+        nextRound.push(Object.assign({}, new match(null, null)));
+      }
+      if((matchNum % 2) == 0) {
+        nextRound[nextMatchNum].playerOne = playerId;
+      } else {
+        nextRound[nextMatchNum].playerTwo = playerId
+      }
+      finalData = {
+        [nextRoundIndex]: nextRound
+      }
     } else {
-      nextRound[nextMatchNum].playerTwo = playerId
+      nextRound = JSON.parse(JSON.stringify(doc.data()[nextRoundIndex]))
+      if((matchNum % 2) == 0) {
+        nextRound[nextMatchNum].playerOne = playerId;
+      } else {
+        nextRound[nextMatchNum].playerTwo = playerId
+      }
+      finalData = {
+        [nextRoundIndex]: nextRound
+      }
     }
-    data[0].disputeId = null;
-    let finalData = {
-      [indexName]: data[0],
-      [nextRoundIndex]: nextRound
-    }
-    console.log(finalData)
-    // firebase.firestore().collection("tournaments").doc(tournamentId).update(finalData).then(function() {
-    //   console.log("dispute resolved")
-    // });
+    firebase.firestore().collection("tournaments").doc(tournamentId).update(finalData).then(function() {
+      console.log("dispute resolved")
+    });
+    firebase.firestore().collection("matchDisputes").doc(data[0].disputeId).get().then(function(dispute) {
+      let disputeData = JSON.parse(JSON.stringify(dispute.data()))
+      disputeData.isResolved = true;
+      console.log(disputeData)
+      firebase.firestore().collection("matchDisputes").doc(data[0].disputeId).update(disputeData).then(function() {
+        console.log("match dispute table updated")
+      })
+    })
 
   })
 }
