@@ -82,11 +82,12 @@ function getRealtimeTeamConversations() {
     .onSnapshot((querySnapshot) => {
         user.teamConversations = []
         //resets the conversations object so that you dont get duplicate messages
-
+        
 
         querySnapshot.forEach(doc => {
             user.teamConversations.push(doc.data())  
             //adds each firebase documment in chat collection to conversations object
+            console.log(doc)
         });
         renderTeamChat()
         //rerendering the Message component when the data changes

@@ -88,7 +88,10 @@ function getRealtimeConversations() {
         querySnapshot.forEach(doc => {
             user.tournamentConversations.push(doc.data())
             //adds each firebase documment in chat collection to conversations object
+            console.log('eh')
+            
         });
+        
         renderChat()
         //rerendering the Message component when the data changes
 
