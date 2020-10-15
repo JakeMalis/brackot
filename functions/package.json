@@ -20,7 +20,7 @@
     "firebase-functions": "^3.11.0",
     "gifsicle": "^5.1.0",
     "pngquant-bin": "^6.0.0",
-    "react": "^16.13.1",
+    "react": "^16.14.0",
     "react-dom": "^16.13.1",
     "stripe": "^8.111.0",
     "uuid": "^8.3.1"
