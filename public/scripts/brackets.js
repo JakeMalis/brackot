@@ -1,6 +1,5 @@
 var shuffledParticipants = [];
 var numParticipants = 0;
-var tempMatch = new match(null, null);
 var clickedRound = 0;
 var clickedMatch = 0;
 
@@ -84,8 +83,6 @@ class Connector extends React.Component {
   }
 }
 
-
-
 /* ====================================================WORK IN PROGRESS COMPONENT BELOW====================================
 ***************************************************************************************************************************
 ***************************************************************************************************************************
@@ -104,6 +101,7 @@ class LeaderboardCard extends React.Component {
   }
 }
 
+//Local functions used to render the bracket and other client-side functions
 function renderMatchCards() {
   firebase.firestore().collection("tournaments").doc(tournamentId).get().then(async (doc) => {
     const bracket = Object.keys(doc.data().bracket).map(round => {
@@ -207,42 +205,80 @@ function renderMatchCards() {
   });
 }
 
-function match(p1, p2) {
-  this.playerOne = p1;
-  this.playerTwo = p2;
-  this.playerOneScore = null;
-  this.playerTwoScore = null;
+function openMatchModal(match) {
+  var modal = document.getElementById("matchModal");
+  modal.style.display = "block";
+
+  var round = parseInt(match.substring(14,15));
+  var matchNum = parseInt(match.substring(20)) - 1;
+  clickedRound = round;
+  clickedMatch = matchNum + 1;
+
+  console.log(clickedMatch);
+
+  firebase.firestore().collection("tournaments").doc(tournamentId).get().then(function(doc){
+    const bracket = Object.keys(doc.data().bracket).map(round => {
+      return doc.data().bracket[round];
+    });
+    const rounds = bracket.map(function(rounds) {
+      return Object.keys(rounds).sort().map(function(round) {
+        return rounds[round];
+      });
+    });
+    const matchup = rounds[clickedRound][clickedMatch];
+
+    var player1ID = matchup.playerOne;
+    var player2ID = matchup.playerTwo;
+    var player1Score = matchup.playerOneScore;
+    var player2Score = matchup.playerTwoScore;
+
+    document.getElementById("upperParticipantScoreModal").innerHTML = player1Score;
+    document.getElementById("lowerParticipantScoreModal").innerHTML = player2Score;
+
+
+    firebase.firestore().collection("users").doc(player1ID).get().then(function(userDoc){
+      document.getElementById("upperParticipantNameModal").innerHTML = userDoc.data().name;
+    });
+    firebase.firestore().collection("users").doc(player2ID).get().then(function(userDoc){
+      document.getElementById("lowerParticipantNameModal").innerHTML = userDoc.data().name;
+    });
+
+
+    /*====================================GRAB USER PROFILE PICTURE========================================================== */
+    var upperReference = firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + player1ID + "/profile");
+    upperReference.getDownloadURL().then(function (url) {
+      document.getElementById("upperParticipantPicModal").src = url;
+    }).catch(
+      e => {
+        console.log(e);
+      })
+
+    var lowerReference = firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + player2ID + "/profile");
+    lowerReference.getDownloadURL().then(function (url) {
+      document.getElementById("lowerParticipantPicModal").src = url;
+    }).catch(
+      e => {
+        console.log(e);
+      })
+  });
+}
+
+function closeMatchModal() {
+  var modal = document.getElementById("matchModal");
+  modal.style.display = "none";
+}
+
+function editMatchScores() {
+  document.getElementById("editScoresButton").style.display = "none";
+  document.getElementById("submitResultsButton").style.display = "block";
+  document.getElementById("upperParticipantScoreInput").style.display = "inline-block";
+  document.getElementById("lowerParticipantScoreInput").style.display = "inline-block";
+  document.getElementById("upperParticipantScoreModal").style.display = "none";
+  document.getElementById("lowerParticipantScoreModal").style.display = "none";
 }
 
 
-function shuffleParticipants(){
-  for(var i = numParticipants - 1; i > 0; i--){
-    const j = Math.floor(Math.random() * i);
-    const temp = shuffledParticipants[i];
-    shuffledParticipants[i] = shuffledParticipants[j];
-    shuffledParticipants[j] = temp;
-  }
-}
-
-
-function getByesAndRounds(){
-  var byes = 0;
-  var rounds = 0;
-  var test = true;
-  while (test) {
-    if (Math.pow(2, rounds) < numParticipants){
-      rounds++;
-    }
-    else{
-      byes = Math.pow(2, rounds) - numParticipants;
-      test = false;
-    }
-  }
-  return [byes, rounds];
-  /* rounds returns number of rounds in the tournament */
-  /* byes returns number of players that need byes in the first round */
-}
-
+//Functions used (in order) to generate the initial tournament bracket
 function createInitialMatches(){
   var matches = [];
   var byes = getByesAndRounds()[0];
@@ -275,8 +311,38 @@ function createInitialMatches(){
   return matches;
 }
 
-function refresh(){
-  renderMatchCards();
+function match(p1, p2) {
+  this.playerOne = p1;
+  this.playerTwo = p2;
+  this.playerOneScore = null;
+  this.playerTwoScore = null;
+}
+
+function shuffleParticipants(){
+  for(var i = numParticipants - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * i);
+    const temp = shuffledParticipants[i];
+    shuffledParticipants[i] = shuffledParticipants[j];
+    shuffledParticipants[j] = temp;
+  }
+}
+
+function getByesAndRounds(){
+  var byes = 0;
+  var rounds = 0;
+  var test = true;
+  while (test) {
+    if (Math.pow(2, rounds) < numParticipants){
+      rounds++;
+    }
+    else{
+      byes = Math.pow(2, rounds) - numParticipants;
+      test = false;
+    }
+  }
+  return [byes, rounds];
+  /* rounds returns number of rounds in the tournament */
+  /* byes returns number of players that need byes in the first round */
 }
 
 function assignWinner(matchup){
@@ -292,8 +358,7 @@ function assignWinner(matchup){
   return null;
 }
 
-
-function implementByes(){    /* creates second round of matches */
+function implementByes(){ /* creates second round of matches */
   var matches = [];
   var initialMatches = createInitialMatches();
   var byes = getByesAndRounds()[0];
@@ -326,7 +391,6 @@ function implementByes(){    /* creates second round of matches */
   return matches;
 }
 
-
 function nextRound(lastRound){
   var matches = [];
   if(lastRound.length > 1){
@@ -338,81 +402,8 @@ function nextRound(lastRound){
   return assignWinner(lastRound[0]);
 }
 
-/* THIS IS THE ID OF A MATCH CARD         matchCardRound" + this.props.roundNumber + "Match" + this.props.matchNumber */
-function openMatchModal(match) {
-  var modal = document.getElementById("matchModal");
-  modal.style.display = "block";
 
-  var round = parseInt(match.substring(14,15));
-  var matchNum = parseInt(match.substring(20)) - 1;
-  clickedRound = round;
-  clickedMatch = matchNum;
-
-  firebase.firestore().collection("tournaments").doc(tournamentId).get().then(function(doc){
-      var matchInfo;
-      if(round == 1){matchInfo = doc.data().matchupsRound1}
-      if(round == 2){matchInfo = doc.data().matchupsRound2}
-      if(round == 3){matchInfo = doc.data().matchupsRound3}
-      if(round == 4){matchInfo = doc.data().matchupsRound4}
-      if(round == 5){matchInfo = doc.data().matchupsRound5}
-      if(round == 6){matchInfo = doc.data().matchupsRound6}
-      if(round == 7){matchInfo = doc.data().matchupsRound7}
-      if(round == 8){matchInfo = doc.data().matchupsRound8}
-      if(round == 9){matchInfo = doc.data().matchupsRound9}
-
-
-      var player1ID = matchInfo[matchNum].playerOne;
-      var player2ID = matchInfo[matchNum].playerTwo;
-      var player1Score = matchInfo[matchNum].playerOneScore;
-      var player2Score = matchInfo[matchNum].playerTwoScore;
-
-      document.getElementById("upperParticipantScoreModal").innerHTML = player1Score;
-      document.getElementById("lowerParticipantScoreModal").innerHTML = player2Score;
-
-
-      firebase.firestore().collection("users").doc(player1ID).get().then(function(userDoc){
-        document.getElementById("upperParticipantNameModal").innerHTML = userDoc.data().name;
-      });
-      firebase.firestore().collection("users").doc(player2ID).get().then(function(userDoc){
-        document.getElementById("lowerParticipantNameModal").innerHTML = userDoc.data().name;
-      });
-
-
-      /*====================================GRAB USER PROFILE PICTURE========================================================== */
-      var upperReference = firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + player1ID + "/profile");
-      upperReference.getDownloadURL().then(function (url) {
-        document.getElementById("upperParticipantPicModal").src = url;
-      }).catch(
-        e => {
-          console.log(e);
-        })
-
-      var lowerReference = firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + player2ID + "/profile");
-      lowerReference.getDownloadURL().then(function (url) {
-        document.getElementById("lowerParticipantPicModal").src = url;
-      }).catch(
-        e => {
-          console.log(e);
-        })
-
-
-    });
-}
-
-function closeMatchModal() {
-  var modal = document.getElementById("matchModal");
-  modal.style.display = "none";
-}
-
-function editMatchScores() {
-  document.getElementById("editScoresButton").style.display = "none";
-  document.getElementById("submitResultsButton").style.display = "block";
-  document.getElementById("upperParticipantScoreInput").style.display = "inline-block";
-  document.getElementById("lowerParticipantScoreInput").style.display = "inline-block";
-  document.getElementById("upperParticipantScoreModal").style.display = "none";
-  document.getElementById("lowerParticipantScoreModal").style.display = "none";
-}
-
+//Functions done locally reagrding updating data that need to be moved to a cloud function
 function startTournament() {
   firebase.firestore().collection("tournaments").doc(tournamentId).get().then(function(doc){
     shuffledParticipants = doc.data().players;
@@ -511,14 +502,6 @@ function startTournament() {
         renderMatchCards();
       });
     }
-
-
-
-
-
-
-
-
   });
   document.getElementById("bracketNavbar").style.display = "inline-block";
   document.getElementById("tournamentSignUpButton").className = 'tournamentCardButton tournamentCardButtonInProgress';
@@ -664,7 +647,7 @@ function saveMatchScores() {
       });
     }
   }).then(function() {
-    refresh();
+    renderMatchCards();
   });
 
 
