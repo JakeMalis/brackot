@@ -30,8 +30,7 @@
   <script src="scripts/firebaseConfig.js"></script>
 
   <script src="scripts/games.js"></script>
-  <script src="scripts/team-info.js"></script>
-
+  <script type= "text/babel" src="scripts/team-info.js"></script>
   <script src="scripts/header.js"></script>
   <script src="scripts/topbar.js"></script>
 </head>
@@ -81,27 +80,16 @@
           </div>
         </div>
 
-        <div id="teamInfoCard" class="teamInfoCard">
-          <div class="wideCardBackground tournamentInfoCardBackground">
-            <div id="teamInfoCardContent" class="wideCardContent">
-              <h6 class="teamInfoSubheader">Team</h6>
-              <h2 class="teamInfoName" id="teamInfoName"></h2>
-              <div class="tournamentInfoRow">
-                <h6 class="teamInfoSubheader">Description</h6><p id="teamInfoDescription" class="tournamentInfoDetail font15"></p>
-              </div>
-              <div id="teamInfoGamesRow" class="tournamentInfoRow noDisplay">
-                <h6 class="teamInfoSubheader">Games</h6><p id="teamInfoGames" class="tournamentInfoDetail font15"></p>
-                <div id="teamInfoGameCarousel" class="teamInfoGameCarousel"></div>
-              </div>
-              <!--
-              <div class="tournamentInfoRow">
-                <h6 class="tournamentInfoSubheader">Requirements</h6><p id="teamInfoRequirements" class="tournamentInfoDetail font15"></p>
-              </div>
-              <div class="tournamentInfoRow noBottomPadding">
-              </div>-->
-            </div>
-            <button class="tournamentCardButton tournamentCardButtonGeneric" id="teamSignUpButton"></button>
-          </div>
+        <div class="teamInfoCard">
+          <ul class="quickNavbar">
+              <li id="teamOverviewNavbar" class="quickNavbarItem quickNavbarItemSelected"><a class="quickNavbarItemLink" onclick= setTeamTab("overview")><p class="quickNavbarItemText">Overview</p></a></li>
+              <li id="teamChatNavbar" class="quickNavbarItem"><a class="quickNavbarItemLink" onclick= setTeamTab("teamChat")><p class="quickNavbarItemText">Chat</p></a></li>
+              <li id="teamTournamentsNavbar" class="quickNavbarItem"><a class="quickNavbarItemLink" onclick= setTeamTab("teamTournaments")><p class="quickNavbarItemText">Tournaments</p></a></li>
+          </ul>
+          <div id="teamOverviewTab"></div>
+          
+          <div id='teamChatTab'></div>
+          <div id='teamTournamentsTab'></div>
         </div>
 
 

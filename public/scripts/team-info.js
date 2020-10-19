@@ -6,15 +6,18 @@ const team = {
       'upcoming' : [],
       'current' : [],
       'complete' : []
-    }
+    },
+    'conversations' : []
 };
 
 function personalizeElements() {
-  updateMembers();
-  updateTeamTournaments();
   var url = new URL(window.location.href);
   teamId = url.searchParams.get("teamId");
-
+  
+  initTeamCard();
+  updateTeamTournaments();
+  initTeamChat();
+  /*
   firebase.firestore().collection("teams").doc(teamId).get().then(async function(doc) {
     document.getElementById("teamInfoName").innerHTML = doc.data().name;
     document.getElementById("teamInfoMembers").innerHTML = (doc.data().teamMembers.length);
@@ -83,7 +86,7 @@ function personalizeElements() {
     //document.getElementById("tournamentInfoWallpaper").className = "headerImage tournamentInfoWallpaper " + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "InfoWallpaper";
   });
 
-
+*/
 }
 
 function joinPublicTeam() {
@@ -104,7 +107,20 @@ function leaveTeam(){
   });
 }
 
-
+const initTeamCard = () => {
+  ReactDOM.render(
+      <TeamOverviewTab/>,
+      document.getElementById('teamOverviewTab')
+  )
+  ReactDOM.render(
+    <TeamChatTab/>,
+    document.getElementById('teamChatTab')
+  )
+  ReactDOM.render(
+    <TeamTournamentTab/>,
+    document.getElementById('teamTournamentsTab')
+  )
+}
 const setTeamTab = (tab) => {
   //takes and input and makes various components visible base on the input
   if(tab === "overview") {
@@ -114,10 +130,10 @@ const setTeamTab = (tab) => {
     document.getElementById("teamTournamentsTab").style.display = "none";
     //displays the team overview tab and makes all the other tabs invisible
 
-    document.getElementById("teamOverviewTab").className = "quickNavbarItem quickNavbarItemSelected";
+    document.getElementById("teamOverviewNavbar").className = "quickNavbarItem quickNavbarItemSelected";
     //document.getElementById("teamMembersTab").className = "quickNavbarItem";
-    document.getElementById("teamChatTab").className = "quickNavbarItem";
-    document.getElementById("teamTournamentsTab").className = "quickNavbarItem";
+    document.getElementById("teamChatNavbar").className = "quickNavbarItem";
+    document.getElementById("teamTournamentsNavbar").className = "quickNavbarItem";
     //displays the team overview NavbarItem as highlighted 
   }
   else if(tab === "teamMembers") {
@@ -128,10 +144,10 @@ const setTeamTab = (tab) => {
     document.getElementById("teamTournamentsTab").style.display = "none";
     //displays the team members tab and makes all the other tabs invisible
 
-    document.getElementById("teamOverviewTab").className = "quickNavbarItem";
+    document.getElementById("teamOverviewNavbar").className = "quickNavbarItem";
     //document.getElementById("teamMembersTab").className = "quickNavbarItem  quickNavbarItemSelected";
-    document.getElementById("teamChatTab").className = "quickNavbarItem";
-    document.getElementById("teamTournamentsTab").className = "quickNavbarItem";
+    document.getElementById("teamChatNavbar").className = "quickNavbarItem";
+    document.getElementById("teamTournamentsNavbar").className = "quickNavbarItem";
     //displays the team members NavbarItem as highlighted
   }
   else if(tab === "teamChat") {
@@ -142,10 +158,10 @@ const setTeamTab = (tab) => {
     document.getElementById("teamTournamentsTab").style.display = "none";
     //displays the team chat tab and makes all the other tabs invisible
 
-    document.getElementById("teamOverviewTab").className = "quickNavbarItem";
+    document.getElementById("teamOverviewNavbar").className = "quickNavbarItem";
     //document.getElementById("teamMembersTab").className = "quickNavbarItem";
-    document.getElementById("teamChatTab").className = "quickNavbarItem quickNavbarItemSelected";
-    document.getElementById("teamTournamentsTab").className = "quickNavbarItem";
+    document.getElementById("teamChatNavbar").className = "quickNavbarItem quickNavbarItemSelected";
+    document.getElementById("teamTournamentsNavbar").className = "quickNavbarItem";
     //displays the team chat NavbarItem as highlighted
   }
   else if(tab === "teamTournaments") {
@@ -156,10 +172,10 @@ const setTeamTab = (tab) => {
     document.getElementById("teamTournamentsTab").style.display = "block";
     //displays the team tournaments tab and makes all the other tabs invisible
 
-    document.getElementById("teamOverviewTab").className = "quickNavbarItem";
+    document.getElementById("teamOverviewNavbar").className = "quickNavbarItem";
     //document.getElementById("teamMembersTab").className = "quickNavbarItem";
-    document.getElementById("teamChatTab").className = "quickNavbarItem";
-    document.getElementById("teamTournamentsTab").className = "quickNavbarItem quickNavbarItemSelected";
+    document.getElementById("teamChatNavbar").className = "quickNavbarItem";
+    document.getElementById("teamTournamentsNavbar").className = "quickNavbarItem quickNavbarItemSelected";
     //displays the team tournaments NavbarItem as highlighted
   }
 }
@@ -179,23 +195,109 @@ const updateMembers = () => {
     })
 }
 */
+function initTeamChat() {
+  //calls the event listener function and passes the current UID
+  getRealtimeTeamConversations(firebase.auth().currentUser.uid);
+  
+}
+
+
+function submitTeamMessage() {
+  var message = document.getElementById("textHolder").value;
+  //gets the message from the text box
+  document.getElementById("textHolder").value = '';
+  //clears the text box
+  const msgObj = {
+      sentUID: firebase.auth().currentUser.uid,
+      message
+  }
+  //msg object is just passed between the submitMessage and updateMessage function
+  //msgObj is not contained in user.conversations
+  if(message !== ""){
+  //checks if message is blank
+      updateTeamMessage(msgObj)
+      //passes the msgObj to the updateMessage function
+  };
+  
+}
+
+
+//updateMessage is the function that actually sends the message to firebase
+function updateTeamMessage(msgObj) {
+  db.collection('tournaments')
+      .doc(tournamentId)
+      .collection('chat')
+      .add({
+          ...msgObj,
+          createdAt: new Date(),
+      })
+      //uses the msgObj along with the date for ordering messages 
+      .then (
+          console.log(msgObj)
+          //for testing purposes only
+      )
+}
+
+
+function getRealtimeTeamConversations() {
+  //this function sets the event listener 
+
+  db.collection('teams').doc(teamId).collection('chat')
+  .orderBy('createdAt', 'asc')
+  .onSnapshot((querySnapshot) => {
+      team.conversations = []
+      //resets the conversations object so that you dont get duplicate messages
+      
+
+      querySnapshot.forEach(doc => {
+          team.conversations.push(doc.data())  
+          //adds each firebase documment in chat collection to conversations object
+          console.log(doc)
+      });
+      renderTeamChat()
+      //rerendering the Message component when the data changes
+      
+  })
+}
 
 const updateTeamTournaments = () => {
   //sets up an event listener for the tournaments a team is in 
-  firebase.firestore().collection("tournaments")
-  .where(teamId, "in", "participants")
+  db.collection("tournaments")
+  .where("players", "array-contains", teamId)
+  .orderBy('createdAt', 'asc')
   .onSnapshot((querySnapshot) => {
       //when the team tournemnt list changes it 
-      team.tournaments = []
+      console.log(querySnapshot)
+      console.log('hello')
+      team.tournaments.complete = [];
+      team.tournaments.current = [];
+      team.tournaments.upcoming = [];
       querySnapshot.forEach((doc) => {
-          team.tournaments.push(doc)
-          //for each document with the teams ID in its participants field it adds the tournament info to the team.tournaments object
+        console.log(doc)
+          team.tournaments.upcoming.push(doc.data())
       })
       ReactDOM.render(
         <TeamTournamentTab/>,
         document.getElementById('teamTournamentsTab')
       //once the team.tournaments object is updated the function renders it
       )
+      console.log(team)
+      console.log(teamId)
+  })
+}
+function renderTeamChat() {
+  ReactDOM.render(
+      <TeamMessage/>,
+      document.getElementById("teamChatTab")
+      
+  );
+  //displays the Message component
+}
+async function getProfilePic(player) {
+  await firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + player + "/profile").getDownloadURL().then(function (url) {
+    return String(url);
+  }).catch((error) => {
+    return "../media/BrackotLogo2.jpg";
   })
 }
 /***************************************************
@@ -218,34 +320,25 @@ class PlayerPopUp extends React.Component {
 */
 class TeamMessage extends React.Component {
   render(){
-      return (
-          <div>
-              {   
-                  /*
-                      maps through the conversations object putting each message in a div
-                  */
-                      user.teamConversations.map(con =>
-                          <div className = {con.sentUID == firebase.auth().currentUser.uid
-                              ? 'userBubble' : 'foreignBubble'}>
-                  {
-                  //if the sentUID of the message is the same as the UID of the user who is currently logged in it 
-                  //puts the message on the right if not it puts it on the left
-                  }
-                          <p className="messageBlurb">{con.message}</p>
-                          
-                          </div>
-                      )    
-              }
-          </div>
-      );
+    return (
+      <div>
+        {   
+          team.conversations.map(con =>
+            <div className = {con.sentUID == firebase.auth().currentUser.uid ? 'userBubble' : 'foreignBubble'}>
+              <p className="messageBlurb">{con.message}</p>                          
+            </div>
+          )    
+        }
+      </div>
+    );
   }
 }
 
-class TeamOverviewTab extends React.component {
+class TeamOverviewTab extends React.Component {
     render() {
       return(
         <div>
-          
+          hi
         </div>
       )
     }
@@ -280,7 +373,7 @@ class TeamMembersTab extends React.component {
   }
 }
 */
-class TeamChatTab extends React.component {
+class TeamChatTab extends React.Component {
   //renders the team messages in the team chat tab
   render() {
     return(
@@ -295,7 +388,7 @@ class TeamChatTab extends React.component {
     )
   }
 }
-class TeamTournamentsList extends React.component {
+class TeamTournamentsList extends React.Component {
   handleClick = (doc) => { 
       window.location = "tournament-info?tournamentId=" + doc.id;   //have to revisit when I figure out object structure
   }
@@ -303,15 +396,16 @@ class TeamTournamentsList extends React.component {
     return(
       <div>
         {
-          team.tournaments.map((doc) => {
+          this.props.tournaments.map(async (doc) => {
               (
+                  
                 <div className="tournamentCard">
                   {/*how the tournament card is structured comes from tournaments.js*/}
                   <div className="tournamentCardBackground">
                     <div className="tournamentCardContent" onClick={() => this.handleClick(doc)}>
                         <picture className="tournamentWallpaper">
-                          <source srcSet={this.props.wallpaper + "webp"} type="image/webp"></source>
-                          <img className="tournamentWallpaper" src={this.props.wallpaper + "jpg"}/>
+                          <source srcSet={'../media/game_wallpapers/' + doc.game + '-cardWallpaper.webp'} type="image/webp"></source>
+                          <img className="tournamentWallpaper" src={'../media/game_wallpapers/' + doc.game + '-cardWallpaper.jpg'}/>
                         </picture>
                         <div className="tournamentCardText">
                           <h6 className="tournamentCardTitle">{doc.name}</h6>
@@ -331,8 +425,8 @@ class TeamTournamentsList extends React.component {
                           </ul>
                         </div>
                         <div className="tournamentCardHostBar">
-                          <img className="tournamentCardHostPic" src={/*jake needs to help here*/}></img>
-                          <h6 className="tournamentCardHostName">{doc.creatorName}</h6>
+                          <img className="tournamentCardHostPic" src={getProfilePic(doc.creator)}></img>
+                          <h6 className="tournamentCardHostName">{doc.creator}</h6>
                         </div>
                     </div>
                   </div>
@@ -345,40 +439,24 @@ class TeamTournamentsList extends React.component {
     )
   }
 }
-class TeamTournamentTab extends React.component {
+
+class TeamTournamentTab extends React.Component {
     render() {
       return(
         <div>
           <div>
-            Your Team is Currently Enrolled in:
+            Tournaments in Progress:
           </div>
-          <TeamTournamentsList/>
-        </div>
-
-      )
-    }
-}
-class YourTeamCard extends React.component {
-  //high level component with a lot of smaller components rendered within it
-    render() {
-      return (
+          <TeamTournamentsList tournaments = {team.tournaments.current}/>
           <div>
-            <ul class="quickNavbar">
-                <li id="teamOverviewNavbar" class="quickNavbarItem quickNavbarItemSelected"><a class="quickNavbarItemLink" onclick={setTeamTab('overview')}><p class="quickNavbarItemText">Overview</p></a></li>
-                {/*<li id="teamMembersNavbar" class="quickNavbarItem"><a class="quickNavbarItemLink" onclick={setTeamTab('teamMembers')}><p class="quickNavbarItemText">Members</p></a></li>*/}
-                <li id="teamChatNavbar" class="quickNavbarItem"><a class="quickNavbarItemLink" onclick={setTeamTab('teamChat')}><p class="quickNavbarItemText">Chat</p></a></li>
-                <li id="teamTournamentsNavbar" class="quickNavbarItem"><a class="quickNavbarItemLink" onclick={setTeamTab('teamTournaments')}><p class="quickNavbarItemText">Tournaments</p></a></li>
-            </ul>
-            <div id="teamOverviewTab"></div>
-            {/*<div id="teamMembersTab"></div>*/}
-            <div id='teamChatTab'></div>
-            <div id='teamTournamentsTab'></div>
+            Upcoming Tournaments:
           </div>
+          <TeamTournamentsList tournaments = {team.tournaments.upcoming}/>
+          <div>
+            Completed tournaments:
+          </div>
+          <TeamTournamentsList tournaments = {team.tournaments.complete}/>
+        </div>
       )
     }
 }
-
-
-
-
-//645
