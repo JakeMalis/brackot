@@ -277,8 +277,11 @@ function editMatchScores() {
   document.getElementById("lowerParticipantScoreModal").style.display = "none";
 }
 
-
-//Functions used (in order) to generate the initial tournament bracket
+/* *** CREATE INITIAL MATCHES FUNCTION ***
+  - creates first/initial round of matches
+  - only run once
+  - creates matches with null players in order to have room for byes
+*/
 function createInitialMatches(){
   var matches = [];
   var byes = getByesAndRounds()[0];
@@ -318,6 +321,10 @@ function match(p1, p2) {
   this.playerTwoScore = null;
 }
 
+/* *** SHUFFLE PARTICIPANTS FUNCTION ***
+  - shuffles participants in tournaments
+  - only run once
+*/
 function shuffleParticipants(){
   for(var i = numParticipants - 1; i > 0; i--){
     const j = Math.floor(Math.random() * i);
@@ -327,6 +334,11 @@ function shuffleParticipants(){
   }
 }
 
+/* *** GET BYES AND ROUNDS FUNCTION ***
+  - return byes and rounds as an array of the two values
+  - byes: number of players who skip first round and automatically qualify to second rounds
+  - rounds: number of round the tournament will have (including the final round w/ 2 players)
+*/
 function getByesAndRounds(){
   var byes = 0;
   var rounds = 0;
@@ -341,10 +353,13 @@ function getByesAndRounds(){
     }
   }
   return [byes, rounds];
-  /* rounds returns number of rounds in the tournament */
-  /* byes returns number of players that need byes in the first round */
 }
 
+/* *** ASSIGN WINNER FUNCTION ***
+  - looks at one match within a round and returns the winner (player with highest score)
+  - if either player is missing a score or if both players are missing a score it will return null
+  - this function is used in creation of every round (except first)
+*/
 function assignWinner(matchup){
   if(matchup.playerOneScore > matchup.playerTwoScore){
     return matchup.playerOne;
@@ -358,7 +373,12 @@ function assignWinner(matchup){
   return null;
 }
 
-function implementByes(){ /* creates second round of matches */
+/* *** IMPLEMENT BYES FUNCTION ***
+  - creates the second round and onlyt the second round
+  - in tournaments with an "imperfect" number of participants there will be byes (people who automatically advance to second round)
+  - this function creates a round of matches with winners from first round and the byes
+*/
+function implementByes(){
   var matches = [];
   var initialMatches = createInitialMatches();
   var byes = getByesAndRounds()[0];
@@ -391,6 +411,11 @@ function implementByes(){ /* creates second round of matches */
   return matches;
 }
 
+/* ***NEXT ROUND FUNCTION ***
+  - returns the next round in tournament given the previous round as a parameter
+  - uses the assignWinner method for each match within the round
+  - (person with higher score in each match continues)
+*/
 function nextRound(lastRound){
   var matches = [];
   if(lastRound.length > 1){
@@ -509,6 +534,10 @@ function startTournament() {
   document.getElementById("tournamentSignUpButton").disabled = true;
 }
 
+/* *** SAVE MATCH SCORES functions ***
+   - uploads scores edited in match modal to firebase
+   - changes scores in match object (allows the assign winner function to work)
+*/
 function saveMatchScores() {
   firebase.firestore().collection("tournaments").doc(tournamentId).get().then(function(doc){
     var matches;
