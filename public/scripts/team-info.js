@@ -14,8 +14,9 @@ function personalizeElements() {
   var url = new URL(window.location.href);
   teamId = url.searchParams.get("teamId");
   
-  initTeamCard();
   updateTeamTournaments();
+  
+  initTeamCard();
   initTeamChat();
   /*
   firebase.firestore().collection("teams").doc(teamId).get().then(async function(doc) {
@@ -107,7 +108,7 @@ function leaveTeam(){
   });
 }
 
-const initTeamCard = () => {
+function initTeamCard() {
   ReactDOM.render(
       <TeamOverviewTab/>,
       document.getElementById('teamOverviewTab')
@@ -115,10 +116,6 @@ const initTeamCard = () => {
   ReactDOM.render(
     <TeamChatTab/>,
     document.getElementById('teamChatTab')
-  )
-  ReactDOM.render(
-    <TeamTournamentTab/>,
-    document.getElementById('teamTournamentsTab')
   )
 }
 const setTeamTab = (tab) => {
@@ -200,8 +197,6 @@ function initTeamChat() {
   getRealtimeTeamConversations(firebase.auth().currentUser.uid);
   
 }
-
-
 function submitTeamMessage() {
   var message = document.getElementById("textHolder").value;
   //gets the message from the text box
@@ -219,10 +214,7 @@ function submitTeamMessage() {
       //passes the msgObj to the updateMessage function
   };
   
-}
-
-
-//updateMessage is the function that actually sends the message to firebase
+}//updateMessage is the function that actually sends the message to firebase
 function updateTeamMessage(msgObj) {
   db.collection('tournaments')
       .doc(tournamentId)
@@ -237,8 +229,6 @@ function updateTeamMessage(msgObj) {
           //for testing purposes only
       )
 }
-
-
 function getRealtimeTeamConversations() {
   //this function sets the event listener 
 
@@ -247,24 +237,19 @@ function getRealtimeTeamConversations() {
   .onSnapshot((querySnapshot) => {
       team.conversations = []
       //resets the conversations object so that you dont get duplicate messages
-      
-
       querySnapshot.forEach(doc => {
           team.conversations.push(doc.data())  
           //adds each firebase documment in chat collection to conversations object
-          console.log(doc)
       });
       renderTeamChat()
       //rerendering the Message component when the data changes
       
   })
 }
-
 const updateTeamTournaments = () => {
   //sets up an event listener for the tournaments a team is in 
   db.collection("tournaments")
   .where("players", "array-contains", teamId)
-  .orderBy('createdAt', 'asc')
   .onSnapshot((querySnapshot) => {
       //when the team tournemnt list changes it 
       console.log(querySnapshot)
@@ -274,17 +259,19 @@ const updateTeamTournaments = () => {
       team.tournaments.upcoming = [];
       querySnapshot.forEach((doc) => {
         console.log(doc)
-          team.tournaments.upcoming.push(doc.data())
+        team.tournaments.upcoming.push(doc.data())
       })
+      
+      console.log(team)
+      console.log(teamId)
       ReactDOM.render(
         <TeamTournamentTab/>,
         document.getElementById('teamTournamentsTab')
       //once the team.tournaments object is updated the function renders it
       )
-      console.log(team)
-      console.log(teamId)
   })
 }
+
 function renderTeamChat() {
   ReactDOM.render(
       <TeamMessage/>,
@@ -293,8 +280,8 @@ function renderTeamChat() {
   );
   //displays the Message component
 }
-async function getProfilePic(player) {
-  await firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + player + "/profile").getDownloadURL().then(function (url) {
+function getProfilePic(player) {
+  firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + player + "/profile").getDownloadURL().then(function (url) {
     return String(url);
   }).catch((error) => {
     return "../media/BrackotLogo2.jpg";
@@ -388,55 +375,51 @@ class TeamChatTab extends React.Component {
     )
   }
 }
-class TeamTournamentsList extends React.Component {
+
+class TeamTournamentsList extends React.Component{
+  
   handleClick = (doc) => { 
-      window.location = "tournament-info?tournamentId=" + doc.id;   //have to revisit when I figure out object structure
+    window.location = "tournament-info?tournamentId=" + doc.id;   //have to revisit when I figure out object structure
   }
   render() {
     return(
       <div>
-        {
-          this.props.tournaments.map(async (doc) => {
-              (
-                  
-                <div className="tournamentCard">
-                  {/*how the tournament card is structured comes from tournaments.js*/}
-                  <div className="tournamentCardBackground">
-                    <div className="tournamentCardContent" onClick={() => this.handleClick(doc)}>
-                        <picture className="tournamentWallpaper">
-                          <source srcSet={'../media/game_wallpapers/' + doc.game + '-cardWallpaper.webp'} type="image/webp"></source>
-                          <img className="tournamentWallpaper" src={'../media/game_wallpapers/' + doc.game + '-cardWallpaper.jpg'}/>
-                        </picture>
-                        <div className="tournamentCardText">
-                          <h6 className="tournamentCardTitle">{doc.name}</h6>
-                          <ul className="tournamentCardDetails">
-                            <li className="tournamentDetailsList">
-                              <i className="fa fa-gamepad tournamentCardIcon" aria-hidden="true"></i>
-                              <div className="tournamentCardDetail">{doc.game}</div>
-                            </li>
-                            <li className="tournamentDetailsList">
-                              <i className="fa fa-calendar tournamentCardIcon" aria-hidden="true"></i>
-                              <div className="tournamentCardDetail">{doc.date}</div>
-                            </li>
-                            <li className="tournamentDetailsList">
-                              <i className="fa fa-user tournamentCardIcon" aria-hidden="true"></i>
-                              <div className="tournamentCardDetail">{doc.players.length}</div>
-                            </li>
-                          </ul>
-                        </div>
-                        <div className="tournamentCardHostBar">
-                          <img className="tournamentCardHostPic" src={getProfilePic(doc.creator)}></img>
-                          <h6 className="tournamentCardHostName">{doc.creator}</h6>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-              )
-          })
-        }
-    
-      </div>
-    )
+        {team.tournaments.upcoming.map((doc) => (
+        <div className="tournamentCard">
+        {/*how the tournament card is structured comes from tournaments.js*/}
+        <div className="tournamentCardBackground">
+          <div className="tournamentCardContent">
+              <picture className="tournamentWallpaper">
+                <source srcSet={'../media/game_wallpapers/' + doc.game + '-cardWallpaper.webp'} type="image/webp"></source>
+                <img className="tournamentWallpaper" src={'../media/game_wallpapers/' + doc.game + '-cardWallpaper.jpg'}/>
+              </picture>
+              <div className="tournamentCardText">
+                <h6 className="tournamentCardTitle">{doc.name}</h6>
+                <ul className="tournamentCardDetails">
+                  <li className="tournamentDetailsList">
+                    <i className="fa fa-gamepad tournamentCardIcon" aria-hidden="true"></i>
+                    <div className="tournamentCardDetail">{doc.game}</div>
+                  </li>
+                  <li className="tournamentDetailsList">
+                    <i className="fa fa-calendar tournamentCardIcon" aria-hidden="true"></i>
+                    <div className="tournamentCardDetail">{doc.date}</div>
+                  </li>
+                  <li className="tournamentDetailsList">
+                    <i className="fa fa-user tournamentCardIcon" aria-hidden="true"></i>
+                    <div className="tournamentCardDetail">{doc.players.length}</div>
+                  </li>
+                </ul>
+              </div>
+              <div className="tournamentCardHostBar">
+                <img className="tournamentCardHostPic" src={getProfilePic(doc.creator)}></img>
+                <h6 className="tournamentCardHostName">{doc.creator}</h6>
+              </div>
+            </div>
+          </div>
+          </div>
+          ))}
+        </div>    
+      )    
   }
 }
 
