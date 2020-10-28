@@ -13,7 +13,7 @@
   <link rel="stylesheet" type="text/css" href="styles/footer.css">
   <link rel="stylesheet" type="text/css" href="styles/font-awesome/css/all.css">
   <link rel="stylesheet" href="https://use.typekit.net/fyp1otf.css">
-
+  <link rel="stylesheet" type="text/css" href="styles/team-info.css">
   <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
@@ -85,10 +85,26 @@
               <li id="teamOverviewNavbar" class="quickNavbarItem quickNavbarItemSelected"><a class="quickNavbarItemLink" onclick= setTeamTab("overview")><p class="quickNavbarItemText">Overview</p></a></li>
               <li id="teamChatNavbar" class="quickNavbarItem"><a class="quickNavbarItemLink" onclick= setTeamTab("teamChat")><p class="quickNavbarItemText">Chat</p></a></li>
               <li id="teamTournamentsNavbar" class="quickNavbarItem"><a class="quickNavbarItemLink" onclick= setTeamTab("teamTournaments")><p class="quickNavbarItemText">Tournaments</p></a></li>
+              <li id="teamPendingNavbar" class="quickNavbarItem"><a class="quickNavbarItemLink" onclick= setTeamTab("teamPending")><p class="quickNavbarItemText">Pending Requests</p></a></li>
           </ul>
-          <div id="teamOverviewTab"></div>
-          <div id='teamChatTab'></div>
-          <div id='teamTournamentsTab'></div>
+          <div id="teamOverviewTab" class = "teamOverviewTab wideCardBackground">
+            <button id = 'teamSignupButton'></button>
+          </div>
+          <div id='teamChatTab' class = "teamChatTab wideCardBackground">
+              <div class="chatArea">
+                <div class="chatHeader"></div>
+                <div class="messageSections" id = 'teamMessageSections'></div>
+                <br>
+                <div class="chatControls ">
+                  <input id= 'teamTextHolder' placeholder="Write Message" class = 'chatInput'></input>
+                  <i id="sendChatIcon" class="fas fa-paper-plane sendChatIcon" onClick= submitTeamMessage() ></i>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div id='teamTournamentsTab' class = "teamTournamentsTab wideCardBackground"></div>
+          <div id='teamPendingTab' class = "teamTournamentsTab wideCardBackground"></div>
         </div>
 
 

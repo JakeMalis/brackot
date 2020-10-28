@@ -1,0 +1,19 @@
+.teamChatTab {
+    display: none;
+    flex: 0 0 33%;
+    max-width: 33%;
+    min-width: 33%;
+}
+.teamTournamentsTab {
+    display: none;
+    flex: 0 0 33%;
+    max-width: 33%;
+    min-width: 33%;
+    margin: 0;
+}
+.teamOverviewTab {
+    display: block;
+    flex: 0 0 33%;
+    max-width: 33%;
+    min-width: 33%;
+}
