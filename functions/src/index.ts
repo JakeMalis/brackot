@@ -6,6 +6,7 @@ admin.initializeApp();
 import { v4 as uuidv4 } from 'uuid';
 
 exports.registration = require('./registration');
+exports.brackets = require('./brackets');
 
 exports.makeUserAdmin = functions.region('us-east1').https.onCall(async (data, context) => {
   if(!context.auth) throw new Error("User is not logged in");

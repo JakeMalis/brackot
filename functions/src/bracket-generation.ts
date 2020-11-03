@@ -1,4 +1,16 @@
-function createInitialMatches(){
+export function match(p1, p2) {
+  this.playerOne = p1;
+  this.playerTwo = p2;
+  this.playerOneScore = null;
+  this.playerTwoScore = null;
+}
+
+/* *** CREATE INITIAL MATCHES FUNCTION ***
+  - creates first/initial round of matches
+  - only run once
+  - creates matches with null players in order to have room for byes
+*/
+export function createInitialMatches(){
   var matches = [];
   var byes = getByesAndRounds()[0];
   var initialNumRounds = (numParticipants - byes)/2;
@@ -30,8 +42,30 @@ function createInitialMatches(){
   return matches;
 }
 
-//Funciton needed for creating initial matches
-function getByesAndRounds(){
+/* *** SHUFFLE PARTICIPANTS FUNCTION ***
+  - shuffles participants in tournaments
+  - only run once
+*/
+export function shuffleParticipants(const participants){
+  numParticipants = participants.length;
+  let shuffledParticipants;
+
+  for(var i = numParticipants - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * i);
+    const temp = shuffledParticipants[i];
+    shuffledParticipants[i] = shuffledParticipants[j];
+    shuffledParticipants[j] = temp;
+  }
+
+  return shuffledParticipants;
+}
+
+/* *** GET BYES AND ROUNDS FUNCTION ***
+  - return byes and rounds as an array of the two values
+  - byes: number of players who skip first round and automatically qualify to second rounds
+  - rounds: number of round the tournament will have (including the final round w/ 2 players)
+*/
+export function getByesAndRounds(){
   var byes = 0;
   var rounds = 0;
   var test = true;
@@ -45,27 +79,14 @@ function getByesAndRounds(){
     }
   }
   return [byes, rounds];
-  /* rounds returns number of rounds in the tournament */
-  /* byes returns number of players that need byes in the first round */
 }
 
-function match(p1, p2) {
-  this.playerOne = p1;
-  this.playerTwo = p2;
-  this.playerOneScore = null;
-  this.playerTwoScore = null;
-}
-
-function shuffleParticipants(){
-  for(var i = numParticipants - 1; i > 0; i--){
-    const j = Math.floor(Math.random() * i);
-    const temp = shuffledParticipants[i];
-    shuffledParticipants[i] = shuffledParticipants[j];
-    shuffledParticipants[j] = temp;
-  }
-}
-
-function assignWinner(matchup){
+/* *** ASSIGN WINNER FUNCTION ***
+  - looks at one match within a round and returns the winner (player with highest score)
+  - if either player is missing a score or if both players are missing a score it will return null
+  - this function is used in creation of every round (except first)
+*/
+export function assignWinner(matchup){
   if(matchup.playerOneScore > matchup.playerTwoScore){
     return matchup.playerOne;
   }
@@ -78,7 +99,12 @@ function assignWinner(matchup){
   return null;
 }
 
-function implementByes(){ /* creates second round of matches */
+/* *** IMPLEMENT BYES FUNCTION ***
+  - creates the second round and onlyt the second round
+  - in tournaments with an "imperfect" number of participants there will be byes (people who automatically advance to second round)
+  - this function creates a round of matches with winners from first round and the byes
+*/
+export function implementByes(){
   var matches = [];
   var initialMatches = createInitialMatches();
   var byes = getByesAndRounds()[0];
@@ -111,7 +137,12 @@ function implementByes(){ /* creates second round of matches */
   return matches;
 }
 
-function nextRound(lastRound){
+/* ***NEXT ROUND FUNCTION ***
+  - returns the next round in tournament given the previous round as a parameter
+  - uses the assignWinner method for each match within the round
+  - (person with higher score in each match continues)
+*/
+export function nextRound(lastRound){
   var matches = [];
   if(lastRound.length > 1){
     for(var z = 0; z < lastRound.length; z+=2){
