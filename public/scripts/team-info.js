@@ -22,7 +22,7 @@ function personalizeElements() {
       }
       //incorrectly passing props 
     else {
-      document.getElementById('TeamOverviewTab').inTeam = false;
+      document.getElementById('TeamOvervie   wTab').inTeam = false;
     }
   }
   })
@@ -89,8 +89,8 @@ function personalizeElements() {
         document.getElementById("teamSignUpButton").innerHTML = "Edit Team";
         document.getElementById("teamSignUpButton").onclick = editTeam();
       }*/
-      if ((!(doc.data().teamAdmins).includes(firebase.auth().currentUser.uid))) {
-        document.getElementById('teamPendingNavbar').style.display = 'none';
+      if (((doc.data().teamAdmins).includes(firebase.auth().currentUser.uid))) {
+        document.getElementById('teamPendingNavbar').style.display = 'block';
       }
       //if you arent a team admin you dont get to accept people into the team 
       if ((!(doc.data().teamMembers).includes(firebase.auth().currentUser.uid)) && ((doc.data().privacy) == "public")) {
@@ -130,7 +130,7 @@ const leaveTeamButtonClicked = () => {
     teamMembers: firebase.firestore.FieldValue.arrayRemove(firebase.auth().currentUser.uid)
 })};
 
-function leaveTeam(){
+const leaveTeam = () => {
   firebase.firestore().collection("teams").doc(teamId).update({
     teamMembers: firebase.firestore.FieldValue.arrayRemove(firebase.auth().currentUser.uid)
   }).then(function() {
@@ -139,7 +139,7 @@ function leaveTeam(){
   });
 }
 
-function initTeamCard() {
+const initTeamCard = () => {
   //going to split the function to increase the dynamic rendering of the page 
   ReactDOM.render(
     <TeamMessage/>,
@@ -200,7 +200,7 @@ const setTeamTab = (tab) => {
     document.getElementById("teamOverviewTab").style.display = "none";
     //document.getElementById("teamMembersTab").style.display = "none";
     document.getElementById("teamChatTab").style.display = "none";
-    document.getElementById("teamTournamentsTab").style.display = "block";
+    document.getElementById("teamTournamentsTab").style.display = "flex";
     document.getElementById("teamPendingTab").style.display = "none";
     //displays the team tournaments tab and makes all the other tabs invisible
 
@@ -211,7 +211,7 @@ const setTeamTab = (tab) => {
     document.getElementById("teamPendingNavbar").className = "quickNavbarItem";
     //displays the team tournaments NavbarItem as highlighted
   }
-  else if(tab === "teamPending") {
+  else if(tab === "teamPending") { 
     
     document.getElementById("teamOverviewTab").style.display = "none";
     //document.getElementById("teamMembersTab").style.display = "none";
@@ -248,12 +248,12 @@ const updateMembers = () => {
     })
 }
 
-function initTeamChat() {
+const initTeamChat = () => {
   //calls the event listener function and passes the current UID
   getRealtimeTeamConversations(firebase.auth().currentUser.uid);
   
 }
-function submitTeamMessage() {
+const submitTeamMessage = () => {
   var message = document.getElementById("teamTextHolder").value;
   //gets the message from the text box
   document.getElementById("teamTextHolder").value = '';
@@ -279,7 +279,7 @@ const getPendingTeamMembers = () => {
     team.pendingMembers = doc.data().pendingMembers
   })
 }
-function updateTeamMessage(msgObj) {
+const updateTeamMessage = () => {
   db.collection('teams')
       .doc(teamId)
       .collection('chat')
@@ -293,7 +293,7 @@ function updateTeamMessage(msgObj) {
           //for testing purposes only
       )
 }
-function getRealtimeTeamConversations() {
+const getRealtimeTeamConversations = () => {
   //this function sets the event listener 
 
   db.collection('teams').doc(teamId).collection('chat')
@@ -337,7 +337,7 @@ const updateTeamTournaments = () => {
   })
 }
 
-function renderTeamChat() {
+const renderTeamChat = () => {
   //keep these seperate for dynamic rendering
   ReactDOM.render(
       <TeamMessage/>,
@@ -463,8 +463,8 @@ class TeamTournamentsList extends React.Component{
   }
   render() {
     return(
-      <div>
-        {team.tournaments.upcoming.map((doc) => (
+      <div className = "tournamentRows">
+        {this.props.tournaments.map((doc) => (
       <div className="tournamentCard">
         {/*how the tournament card is structured comes from tournaments.js*/}
         <div className="tournamentCardBackground">
@@ -506,16 +506,16 @@ class TeamTournamentsList extends React.Component{
 class TeamTournamentTab extends React.Component {
     render() {
       return(
-        <div>
-          <div>
+        <div className = "teamTournamentsList">
+          <div className = "teamTournamentsHeader">
             Tournaments in Progress:
           </div>
           <TeamTournamentsList tournaments = {team.tournaments.current}/>
-          <div>
+          <div className = "teamTournamentsHeader">
             Upcoming Tournaments:
           </div>
           <TeamTournamentsList tournaments = {team.tournaments.upcoming}/>
-          <div>
+          <div className = "teamTournamentsHeader">
             Completed tournaments:
           </div>
           <TeamTournamentsList tournaments = {team.tournaments.complete}/>

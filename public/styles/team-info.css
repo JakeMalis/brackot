@@ -1,19 +1,53 @@
-.teamChatTab {
-    display: none;
-    flex: 0 0 33%;
-    max-width: 33%;
-    min-width: 33%;
+.teamInfoPageContainer {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
-.teamTournamentsTab {
-    display: none;
-    flex: 0 0 33%;
-    max-width: 33%;
-    min-width: 33%;
-    margin: 0;
+
+.teamOverviewTab, .teamChatTab, .teamPendingTab, .teamTournamentsTab {
+  background-color: #2b2c3c;
 }
+
 .teamOverviewTab {
-    display: block;
-    flex: 0 0 33%;
-    max-width: 33%;
-    min-width: 33%;
+  display: block;
 }
+
+.teamChatTab {
+  display: none;
+}
+
+.teamPendingTab {
+  display: none;
+}
+
+.teamTournamentsTab {
+  display: none;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.teamTournamentsTab .teamTournamentsList .teamTournamentsHeader {
+  color: white;
+  text-align: center;
+  font-size: large;
+}
+
+.teamTournamentsTab .teamTournamentsList .teamTournamentRow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+/*# sourceMappingURL=team-info.css.map */

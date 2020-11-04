@@ -1,0 +1,43 @@
+$cardBackGroundColor : #2b2c3c;
+
+.teamInfoPageContainer{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+}
+%teamInfoTab {
+    background-color: $cardBackGroundColor;
+}
+.teamOverviewTab {
+    @extend %teamInfoTab;
+    display: block;
+}
+.teamChatTab {
+    @extend %teamInfoTab;
+    display: none;
+}
+.teamPendingTab {
+    @extend %teamInfoTab;
+    display: none;
+}
+.teamTournamentsTab {
+    @extend %teamInfoTab;
+    display: none;
+    flex-direction: row;
+    .teamTournamentsList {
+        .teamTournamentsHeader {
+            color: white;
+            text-align: center;
+            font-size: large;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+        .teamTournamentRow {
+            display: flex;
+            flex-direction: row;
+        }
+    }
+}
+
