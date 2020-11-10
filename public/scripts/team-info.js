@@ -15,17 +15,6 @@ const teamsRef = db.collection("teams");
 function personalizeElements() {
   var url = new URL(window.location.href);
   teamId = url.searchParams.get("teamId");
-  teamsRef.doc(teamId).get().then((doc) => {
-    if(doc.exists) {
-      if(doc.data().teamMembers.includes(firebase.auth().currentUser.uid)) {
-        document.getElementById('TeamOverviewTab').inTeam = true;
-      }
-      //incorrectly passing props 
-    else {
-      document.getElementById('TeamOvervie   wTab').inTeam = false;
-    }
-  }
-  })
   updateTeamTournaments();
   updateMembers();
   initTeamCard();
@@ -34,7 +23,9 @@ function personalizeElements() {
   teamsRef.doc(teamId).get().then((doc) => {
     if(doc.exists) {
       document.getElementById('teamInfoMembers').innerHTML = doc.data().teamMembers.length;
-      //document.getElementById('teamInfoName').innerHTML = doc.data().name;
+      document.getElementById('teamNameOverview').innerHTML = doc.data().name
+      document.getElementById('teamNameQuickCard').innerHTML = doc.data().name
+      document.getElementById('teamDescription').innerHTML = doc.data().description
     }
     }
   )
@@ -83,27 +74,31 @@ function personalizeElements() {
 
 
     */
+    console.log(firebase.auth().currentUser.uid)
     teamsRef.doc(teamId).get().then((doc) => {
       /*
       if (doc.data().creator === firebase.auth().currentUser.uid) {
         document.getElementById("teamSignUpButton").innerHTML = "Edit Team";
-        document.getElementById("teamSignUpButton").onclick = editTeam();
+        document.getElementById"teamSignUpButton").onclick = editTeam();
       }*/
+      
       if (((doc.data().teamAdmins).includes(firebase.auth().currentUser.uid))) {
         document.getElementById('teamPendingNavbar').style.display = 'block';
       }
       //if you arent a team admin you dont get to accept people into the team 
-      if ((!(doc.data().teamMembers).includes(firebase.auth().currentUser.uid)) && ((doc.data().privacy) == "public")) {
-        document.getElementById("teamSignUpButton").innerHTML = "Join Team";
-        document.getElementById("teamSignUpButton").onclick = joinPublicTeam(); ;
+      if (((doc.data().teamMembers).includes(firebase.auth().currentUser.uid)) && ((doc.data().privacy) == "public")) {
+        document.getElementById("teamSignUpButton").className = 'joinTeamButton';
+        document.getElementById("teamSignUpButton").innerHTML = "Join peo Team";
+        document.getElementById("teamSignUpButton").onclick = joinPublicTeam();
+        console.log(doc.data().teamMembers)
       }
       else if ((!(doc.data().teamMembers).includes(firebase.auth().currentUser.uid)) && ((doc.data().privacy) == "private")) {
         document.getElementById("teamSignUpButton").innerHTML = "Join Team";
         document.getElementById("teamSignUpButton").onclick = joinPrivateTeam();
       }
       else if ((doc.data().teamMembers).includes(firebase.auth().currentUser.uid)) {
-        document.getElementById("teamSignUpButton").className = 'tournamentCardButton teamCardButtonJoined';
-        document.getElementById("teamSignUpButton").innerHTML = "";
+        document.getElementById("teamSignUpButton").className = 'leaveTeamButton';
+        document.getElementById("teamSignUpButton").innerHTML = "Leave Team";
         document.getElementById("teamSignUpButton").onclick = leaveTeam();
       }
 
@@ -149,7 +144,7 @@ const initTeamCard = () => {
 const setTeamTab = (tab) => {
   //takes and input and makes various components visible base on the input
   if(tab === "overview") {
-    document.getElementById("teamOverviewTab").style.display = "block";
+    document.getElementById("teamOverviewTab").style.display = "flex";
     //document.getElementById("teamMembersTab").style.display = "none";
     document.getElementById("teamChatTab").style.display = "none";
     document.getElementById("teamTournamentsTab").style.display = "none";
@@ -492,7 +487,13 @@ class TeamTournamentsList extends React.Component{
               </div>
               <div className="tournamentCardHostBar">
                 <img className="tournamentCardHostPic" src={String(getProfilePic(doc.creator))}></img>
-                <h6 className="tournamentCardHostName">{String(doc.creator)}</h6>
+                <h6 className="tournamentCardHostName">
+                  {String(db.collection("users").doc(doc.creator).get().then((doc) => {
+                    if(doc.exists) {
+                      return String(doc.data().name)
+                    }
+                  }))}
+                </h6>
               </div>
             </div>
           </div>

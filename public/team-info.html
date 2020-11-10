@@ -50,6 +50,7 @@
           <div class="wideCardBackground tournamentInfoCardBackground">
             <div class="singleColumn">
               <img id="teamInfoProfilePic" class="teamInfoProfilePic" />
+              <div id = "teamNameQuickCard" class = "teamNameQuickCard"></div>
               <div class="teamInfoQuickContent">
                 <div class="teamSocials" id="teamInfoSocials">
                   <a class="teamSocial facebookIcon noDisplay" id="teamInfoFacebook"><i class="fab fa-facebook-square" aria-hidden="true"></i></a>
@@ -88,6 +89,8 @@
               <li id="teamPendingNavbar" class="quickNavbarItem" style = "display: none;"><a class="quickNavbarItemLink" onclick= setTeamTab("teamPending")><p class="quickNavbarItemText">Pending Requests</p></a></li>
           </ul>
           <div id="teamOverviewTab" class = "teamOverviewTab">
+            <div id = 'teamNameOverview' class = "teamName"></div>
+            <div id = 'teamDescription' class = "teamDescription"></div>
             <button id = 'teamSignUpButton'></button>
           </div>
           <div id='teamChatTab' class = "teamChatTab">

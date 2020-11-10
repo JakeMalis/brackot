@@ -10,9 +10,35 @@ $cardBackGroundColor : #2b2c3c;
 %teamInfoTab {
     background-color: $cardBackGroundColor;
 }
+.teamNameQuickCard {
+    color: white;
+    text-align: center;
+    font-size: large;
+}
 .teamOverviewTab {
     @extend %teamInfoTab;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    .teamName { 
+        text-align: center;
+        color: white;
+        font-size: larger;
+        width: 100%;
+    }
+    .teamDescription {
+        text-align: center;
+        color: lightgray;
+        font-size: large;
+        width: 100%
+    }
+    .leaveTeamButton {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    .joinTeamButton {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
 }
 .teamChatTab {
     @extend %teamInfoTab;
