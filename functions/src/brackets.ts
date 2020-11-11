@@ -27,7 +27,7 @@ exports.startTournament = functions.region('us-east1').https.onCall(async (data,
 
   let bracket;
 
-  for (round = 1; round <= participants.length; round++) {
+  for (round = 1; round <= /*However many rounds there are*/; round++) {
     bracket["round" + round] = null;
     for (matchup = 1; matchup <= /*Amount of matchups in specific round*/; matchup++) {
       const obj = {};
