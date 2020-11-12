@@ -75,39 +75,14 @@
                     <h2 id="teamInfoPrivacy" class="teamInfoStat"></h2>
                   </div>
                   <p class="statDescription">Privacy</p>
+                  
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="teamInfoCard">
-          <ul class="quickNavbar">
-              <li id="teamOverviewNavbar" class="quickNavbarItem quickNavbarItemSelected"><a class="quickNavbarItemLink" onclick= setTeamTab("overview")><p class="quickNavbarItemText">Overview</p></a></li>
-              <li id="teamChatNavbar" class="quickNavbarItem"><a class="quickNavbarItemLink" onclick= setTeamTab("teamChat")><p class="quickNavbarItemText">Chat</p></a></li>
-              <li id="teamTournamentsNavbar" class="quickNavbarItem"><a class="quickNavbarItemLink" onclick= setTeamTab("teamTournaments")><p class="quickNavbarItemText">Tournaments</p></a></li>
-              <li id="teamPendingNavbar" class="quickNavbarItem" style = "display: none;"><a class="quickNavbarItemLink" onclick= setTeamTab("teamPending")><p class="quickNavbarItemText">Pending Requests</p></a></li>
-          </ul>
-          <div id="teamOverviewTab" class = "teamOverviewTab">
-            <div id = 'teamNameOverview' class = "teamName"></div>
-            <div id = 'teamDescription' class = "teamDescription"></div>
-            <button id = 'teamSignUpButton'></button>
-          </div>
-          <div id='teamChatTab' class = "teamChatTab">
-              <div class="chatArea">
-                <div class="chatHeader"></div>
-                <div class="messageSections" id = 'teamMessageSections'></div>
-                <br>
-                <div class="chatControls ">
-                  <input id= 'teamTextHolder' placeholder="Write Message" class = 'chatInput'></input>
-                  <i id="sendChatIcon" class="fas fa-paper-plane sendChatIcon" onClick= submitTeamMessage() ></i>
-                </div>
-              </div>
-
-            </div>
-            <div id='teamTournamentsTab' class = "teamTournamentsTab"></div>
-            <div id='teamPendingTab' class = "teamTournamentsTab"></div>
-          </div>
+        <div class="teamInfoCard" id = 'teamInfoCard'></div>
           
         </div>
 

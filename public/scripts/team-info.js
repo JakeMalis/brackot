@@ -12,23 +12,18 @@ const team = {
     'socials' : []
 };
 const teamsRef = db.collection("teams");
+
 function personalizeElements() {
+  
   var url = new URL(window.location.href);
   teamId = url.searchParams.get("teamId");
-  updateTeamTournaments();
-  updateMembers();
-  initTeamCard();
-  initTeamChat();
-  getPendingTeamMembers();
-  teamsRef.doc(teamId).get().then((doc) => {
-    if(doc.exists) {
-      document.getElementById('teamInfoMembers').innerHTML = doc.data().teamMembers.length;
-      document.getElementById('teamNameOverview').innerHTML = doc.data().name
-      document.getElementById('teamNameQuickCard').innerHTML = doc.data().name
-      document.getElementById('teamDescription').innerHTML = doc.data().description
-    }
-    }
+  ReactDOM.render(
+    <TeamInfoPage/>,
+    document.getElementById('teamInfoCard')
   )
+  
+  
+  
   
   /*
     var privacy = doc.data().privacy;
@@ -74,156 +69,9 @@ function personalizeElements() {
 
 
     */
-    console.log(firebase.auth().currentUser.uid)
-    teamsRef.doc(teamId).get().then((doc) => {
-      /*
-      if (doc.data().creator === firebase.auth().currentUser.uid) {
-        document.getElementById("teamSignUpButton").innerHTML = "Edit Team";
-        document.getElementById"teamSignUpButton").onclick = editTeam();
-      }*/
-      
-      if (((doc.data().teamAdmins).includes(firebase.auth().currentUser.uid))) {
-        document.getElementById('teamPendingNavbar').style.display = 'block';
-      }
-      //if you arent a team admin you dont get to accept people into the team 
-      if (((doc.data().teamMembers).includes(firebase.auth().currentUser.uid)) && ((doc.data().privacy) == "public")) {
-        document.getElementById("teamSignUpButton").className = 'joinTeamButton';
-        document.getElementById("teamSignUpButton").innerHTML = "Join peo Team";
-        document.getElementById("teamSignUpButton").onclick = joinPublicTeam();
-        console.log(doc.data().teamMembers)
-      }
-      else if ((!(doc.data().teamMembers).includes(firebase.auth().currentUser.uid)) && ((doc.data().privacy) == "private")) {
-        document.getElementById("teamSignUpButton").innerHTML = "Join Team";
-        document.getElementById("teamSignUpButton").onclick = joinPrivateTeam();
-      }
-      else if ((doc.data().teamMembers).includes(firebase.auth().currentUser.uid)) {
-        document.getElementById("teamSignUpButton").className = 'leaveTeamButton';
-        document.getElementById("teamSignUpButton").innerHTML = "Leave Team";
-        document.getElementById("teamSignUpButton").onclick = leaveTeam();
-      }
-
-    })
+    
+    }
     //document.getElementById("tournamentInfoWallpaper").className = "headerImage tournamentInfoWallpaper " + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "InfoWallpaper";
-
-
-
-}
-const joinPublicTeam = () => {
-  //adds you to the members list 
-  teamsRef.doc(teamId).update({
-    teamMembers: firebase.firestore.FieldValue.arrayUnion(firebase.auth().currentUser.uid)
-});
-}
-const joinPrivateTeam = () => {
-  //adds you to the pending list instead of the members list 
-  teamsRef.doc(teamId).update({
-    pendingMembers: firebase.firestore.FieldValue.arrayUnion(firebase.auth().currentUser.uid)
-});
-}
-const leaveTeamButtonClicked = () => {
-  teamsRef.doc(teamId).update({
-    teamMembers: firebase.firestore.FieldValue.arrayRemove(firebase.auth().currentUser.uid)
-})};
-
-const leaveTeam = () => {
-  firebase.firestore().collection("teams").doc(teamId).update({
-    teamMembers: firebase.firestore.FieldValue.arrayRemove(firebase.auth().currentUser.uid)
-  }).then(function() {
-    document.location.reload(false);
-    //removing person from the team
-  });
-}
-
-const initTeamCard = () => {
-  //going to split the function to increase the dynamic rendering of the page 
-  ReactDOM.render(
-    <TeamMessage/>,
-    document.getElementById('teamMessageSections')
-  )
-}
-const setTeamTab = (tab) => {
-  //takes and input and makes various components visible base on the input
-  if(tab === "overview") {
-    document.getElementById("teamOverviewTab").style.display = "flex";
-    //document.getElementById("teamMembersTab").style.display = "none";
-    document.getElementById("teamChatTab").style.display = "none";
-    document.getElementById("teamTournamentsTab").style.display = "none";
-    document.getElementById("teamPendingTab").style.display = "none";
-    //displays the team overview tab and makes all the other tabs invisible
-
-    document.getElementById("teamOverviewNavbar").className = "quickNavbarItem quickNavbarItemSelected";
-    //document.getElementById("teamMembersTab").className = "quickNavbarItem";
-    document.getElementById("teamChatNavbar").className = "quickNavbarItem";
-    document.getElementById("teamTournamentsNavbar").className = "quickNavbarItem";
-    document.getElementById("teamPendingNavbar").className = "quickNavbarItem";
-    //displays the team overview NavbarItem as highlighted 
-  }
-  else if(tab === "teamMembers") {
-    
-    document.getElementById("teamOverviewTab").style.display = "none";
-    //document.getElementById("teamMembersTab").style.display = "block";
-    document.getElementById("teamChatTab").style.display = "none";
-    document.getElementById("teamTournamentsTab").style.display = "none";
-    document.getElementById("teamPendingTab").style.display = "none";
-    //displays the team members tab and makes all the other tabs invisible
-
-    document.getElementById("teamOverviewNavbar").className = "quickNavbarItem";
-    //document.getElementById("teamMembersTab").className = "quickNavbarItem  quickNavbarItemSelected";
-    document.getElementById("teamChatNavbar").className = "quickNavbarItem";
-    document.getElementById("teamTournamentsNavbar").className = "quickNavbarItem";
-    document.getElementById("teamPendingNavbar").className = "quickNavbarItem";
-    //displays the team members NavbarItem as highlighted
-  }
-  else if(tab === "teamChat") {
-    
-    document.getElementById("teamOverviewTab").style.display = "none";
-    //document.getElementById("teamMembersTab").style.display = "none";
-    document.getElementById("teamChatTab").style.display = "block";
-    document.getElementById("teamTournamentsTab").style.display = "none";
-    document.getElementById("teamPendingTab").style.display = "none";
-    //displays the team chat tab and makes all the other tabs invisible
-
-    document.getElementById("teamOverviewNavbar").className = "quickNavbarItem";
-    //document.getElementById("teamMembersTab").className = "quickNavbarItem";
-    document.getElementById("teamChatNavbar").className = "quickNavbarItem quickNavbarItemSelected";
-    document.getElementById("teamTournamentsNavbar").className = "quickNavbarItem";
-    document.getElementById("teamPendingNavbar").className = "quickNavbarItem";
-    //displays the team chat NavbarItem as highlighted
-  }
-  else if(tab === "teamTournaments") {
-    
-    document.getElementById("teamOverviewTab").style.display = "none";
-    //document.getElementById("teamMembersTab").style.display = "none";
-    document.getElementById("teamChatTab").style.display = "none";
-    document.getElementById("teamTournamentsTab").style.display = "flex";
-    document.getElementById("teamPendingTab").style.display = "none";
-    //displays the team tournaments tab and makes all the other tabs invisible
-
-    document.getElementById("teamOverviewNavbar").className = "quickNavbarItem";
-    //document.getElementById("teamMembersTab").className = "quickNavbarItem";
-    document.getElementById("teamChatNavbar").className = "quickNavbarItem";
-    document.getElementById("teamTournamentsNavbar").className = "quickNavbarItem quickNavbarItemSelected";
-    document.getElementById("teamPendingNavbar").className = "quickNavbarItem";
-    //displays the team tournaments NavbarItem as highlighted
-  }
-  else if(tab === "teamPending") { 
-    
-    document.getElementById("teamOverviewTab").style.display = "none";
-    //document.getElementById("teamMembersTab").style.display = "none";
-    document.getElementById("teamChatTab").style.display = "none";
-    document.getElementById("teamTournamentsTab").style.display = "none";
-    document.getElementById("teamPendingTab").style.display = "block";
-    //displays the team tournaments tab and makes all the other tabs invisible
-
-    document.getElementById("teamOverviewNavbar").className = "quickNavbarItem";
-    //document.getElementById("teamMembersTab").className = "quickNavbarItem";
-    document.getElementById("teamChatNavbar").className = "quickNavbarItem";
-    document.getElementById("teamTournamentsNavbar").className = "quickNavbarItem";
-    document.getElementById("teamPendingNavbar").className = "quickNavbarItem quickNavbarItemSelected";
-    //displays the team tournaments NavbarItem as highlighted
-  }
-}
-
 const updateMembers = () => {
     //sets up an event listener
     
@@ -248,24 +96,7 @@ const initTeamChat = () => {
   getRealtimeTeamConversations(firebase.auth().currentUser.uid);
   
 }
-const submitTeamMessage = () => {
-  var message = document.getElementById("teamTextHolder").value;
-  //gets the message from the text box
-  document.getElementById("teamTextHolder").value = '';
-  //clears the text box
-  const msgObj = {
-      sentUID: firebase.auth().currentUser.uid,
-      message
-  }
-  //msg object is just passed between the submitMessage and updateMessage function
-  //msgObj is not contained in user.conversations
-  if(message !== ""){
-  //checks if message is blank
-      updateTeamMessage(msgObj)
-      //passes the msgObj to the updateMessage function
-  };
-  
-}//updateMessage is the function that actually sends the message to firebase
+//updateMessage is the function that actually sends the message to firebase
 const getPendingTeamMembers = () => {
   team.pendingMembers = [] 
   db.collection('teams').doc(teamId)
@@ -274,63 +105,8 @@ const getPendingTeamMembers = () => {
     team.pendingMembers = doc.data().pendingMembers
   })
 }
-const updateTeamMessage = () => {
-  db.collection('teams')
-      .doc(teamId)
-      .collection('chat')
-      .add({
-          ...msgObj,
-          createdAt: new Date(),
-      })
-      //uses the msgObj along with the date for ordering messages 
-      .then (
-          console.log(msgObj)
-          //for testing purposes only
-      )
-}
-const getRealtimeTeamConversations = () => {
-  //this function sets the event listener 
 
-  db.collection('teams').doc(teamId).collection('chat')
-  .orderBy('createdAt', 'asc')
-  .onSnapshot((querySnapshot) => {
-      team.conversations = []
-      //resets the conversations object so that you dont get duplicate messages
-      querySnapshot.forEach(doc => {
-          team.conversations.push(doc.data())  
-          //adds each firebase documment in chat collection to conversations object
-      });
-      renderTeamChat()
-      //rerendering the Message component when the data changes
-      
-  })
-}
-const updateTeamTournaments = () => {
-  //sets up an event listener for the tournaments a team is in 
-  db.collection("tournaments")
-  .where("players", "array-contains", teamId)
-  .onSnapshot((querySnapshot) => {
-      //when the team tournemnt list changes it 
-      console.log(querySnapshot)
-      console.log('hello')
-      team.tournaments.complete = [];
-      team.tournaments.current = [];
-      team.tournaments.upcoming = [];
-      //resets the team
-      querySnapshot.forEach((doc) => {
-        console.log(doc)
-        team.tournaments.upcoming.push(doc.data())
-      })
-      
-      console.log(team)
-      console.log(teamId)
-      ReactDOM.render(
-        <TeamTournamentTab/>,
-        document.getElementById('teamTournamentsTab')
-      //once the team.tournaments object is updated the function renders it
-      )
-  })
-}
+
 
 const renderTeamChat = () => {
   //keep these seperate for dynamic rendering
@@ -368,38 +144,105 @@ class PlayerPopUp extends React.Component {
   }
 }
 */
-class TeamMessage extends React.Component {
-  render(){
+class TeamMessages extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      'messages' : []
+    };
+    this.getRealtimeTeamConversations();
+  }
+  getRealtimeTeamConversations = () => {
+    //this function sets the event listener 
+  
+    db.collection('teams').doc(teamId).collection('chat')
+    .orderBy('createdAt', 'asc')
+    .onSnapshot((querySnapshot) => {
+        querySnapshot.forEach(doc => {
+          if(!this.state.messages.includes(doc.data()))
+            this.setState({messages : [...this.state.messages, doc.data()] })
+        });     
+    })
+  }
+  render() {
     return (
-      <div>
-        {   
-          team.conversations.map(con =>
-            <div className = {con.sentUID == firebase.auth().currentUser.uid ? 'userBubble' : 'foreignBubble'}>
-              <p className="messageBlurb">{con.message}</p>                          
-            </div>
-          )    
-        }
-      </div>
+        <div>
+          {   
+            this.state.messages.map(con =>
+              <div className = {con.sentUID == firebase.auth().currentUser.uid ? 'userBubble' : 'foreignBubble'}>
+                <p className="messageBlurb">{con.message}</p>                          
+              </div>
+            )    
+          }
+        </div>
     );
   }
-  
+}
+
+class TeamMessageTab extends React.Component {
+  updateTeamMessage = () => {
+    db.collection('teams')
+        .doc(teamId)
+        .collection('chat')
+        .add({
+            ...msgObj,
+            createdAt: new Date(),
+        })
+        //uses the msgObj along with the date for ordering messages 
+        .then (
+            console.log(msgObj)
+            //for testing purposes only
+        )
+  }
+
+  submitTeamMessage = () => {
+    const msgObj = {
+        sentUID: firebase.auth().currentUser.uid,
+        message
+    }
+    if(message !== ""){
+        updateTeamMessage(msgObj).then(this.setState({'message' : ''}))
+    }
+  }
+  constructor(props) {
+    super(props)
+    this.state = {
+      'message' : ''
+    }
+  }
+  render(){
+    return(
+      <div id='teamChatTab' className = "teamChatTab">
+        <div className ="chatArea">
+          <div className ="chatHeader"></div>
+          <TeamMessages/>
+          <br/>
+          <div className="chatControls ">
+            <textarea value={this.state.message} onChange={(e) => setState({'message' : e.target.value})} placeholder="Write Message"/>
+            <i id="sendChatIcon" className="fas fa-paper-plane sendChatIcon" onClick={() => this.submitTeamMessage()}></i>
+          </div>
+        </div>
+      </div>
+    )
+  }
 }
 class ListOfPendingMembers extends React.Component {
   accept = (member) => {
     teamsRef.doc(teamId).update({
-      teamMembers: firebase.firestore.FieldValue.arrayUnion(firebase.auth().currentUser.uid),
-      pendingMembers: firebase.firestore.FieldValue.arrayRemove(firebase.auth().currentUser.uid)
-    }).then(this.render())
+      teamMembers: firebase.firestore.FieldValue.arrayUnion(member),
+      pendingMembers: firebase.firestore.FieldValue.arrayRemove(member)
+    })
     //removes the uid of the user accepted from the pending members field in the database
     //then adds the uid of the user accepted to the team members field in the database
   }
   reject = (member) => {
     teamsRef.doc(teamId).update({
-      pendingMembers: firebase.firestore.FieldValue.arrayRemove(firebase.auth().currentUser.uid)
-    }).then(this.render())
+      pendingMembers: firebase.firestore.FieldValue.arrayRemove(member)
+    })
     //removes the uid of the user rejected from the pending members field in the database 
   }
   render() {
+    return (
     <div>
       {team.pendingMembers.map(member => 
       <div>
@@ -410,12 +253,13 @@ class ListOfPendingMembers extends React.Component {
           </div>
         </div>
         <div>
-          <button onClick = {this.accept(member)} className = "pendingMemberAcceptButton">Accept</button>
-          <button onClick = {this.reject(member)} className = "PendingMemberRejectButtton">Recject</button>
+          <button onClick = {() => this.accept(member)} className = "pendingMemberAcceptButton">Accept</button>
+          <button onClick = {() => this.reject(member)} className = "PendingMemberRejectButtton">Recject</button>
         </div>
       </div>
       )}
     </div>
+    )
   }
 }
 /*
@@ -505,23 +349,125 @@ class TeamTournamentsList extends React.Component{
 }
 
 class TeamTournamentTab extends React.Component {
+    updateTeamTournaments = () => {
+      //sets up an event listener for the tournaments a team is in 
+      db.collection("tournaments")
+      .where("players", "array-contains", teamId)
+      .onSnapshot((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            if(!tournaments.includes(doc.data())) {
+              this.setState({
+                'tournaments':{...doc.data()}
+              })
+            }
+          })
+      })
+    }
+    
+    constructor(props) {
+      super(props)
+      this.updateTeamTournaments()
+    }
     render() {
       return(
-        <div className = "teamTournamentsList">
-          <div className = "teamTournamentsHeader">
-            Tournaments in Progress:
+          <div className = "teamTournamentsList">
+            <div className = "teamTournamentsHeader">
+              Tournaments in Progress:
+            </div>
+            <TeamTournamentsList tournaments = {currentTournaments}/>
+            <div className = "teamTournamentsHeader">
+              Upcoming Tournaments:
+            </div>
+            <TeamTournamentsList tournaments = {upcomingTournaments}/>
+            <div className = "teamTournamentsHeader">
+              Completed tournaments:
+            </div>
+            <TeamTournamentsList tournaments = {completeTournaments}/>
           </div>
-          <TeamTournamentsList tournaments = {team.tournaments.current}/>
-          <div className = "teamTournamentsHeader">
-            Upcoming Tournaments:
-          </div>
-          <TeamTournamentsList tournaments = {team.tournaments.upcoming}/>
-          <div className = "teamTournamentsHeader">
-            Completed tournaments:
-          </div>
-          <TeamTournamentsList tournaments = {team.tournaments.complete}/>
-        </div>
       )
+      }
+}
+class TeamOverviewTab extends React.Component {
+  teamListener = () => {
+    db.collection('teams').doc(teamId).onSnapshot((doc) => {
+      if(doc.data().teamMembers.includes(firebase.auth().currentUser.uid)) {
+        this.setState({'buttonText' : 'Leave Team'})
+        this.setState({'buttonOnClick' : () => {
+          teamsRef.doc(teamId).update({
+            teamMembers: firebase.firestore.FieldValue.arrayRemove(firebase.auth().currentUser.uid)
+          })
+        }})
+      } else if (doc.data().pendingMembers.includes(firebase.auth().currentUser.uid)) {
+        this.setState({'buttonText' : 'requested'})
+        this.setState({'buttonOnClick' : () => {}})
+      } else {
+        this.setState({'buttonText' : 'Join Team'})
+        if(doc.data().privacy == "private"){
+          this.setState({'buttonOnClick' : () => {
+            teamsRef.doc(teamId).update({
+              teamPendingMembers: firebase.firestore.FieldValue.arrayUnion(firebase.auth().currentUser.uid)
+            });
+          }})
+        } else {
+          this.setState({'buttonOnClick' : () => {
+            teamsRef.doc(teamId).update({
+              teamMembers: firebase.firestore.FieldValue.arrayUnion(firebase.auth().currentUser.uid)
+            });
+          }})
+        }
+      }
+      this.setState({'teamDescription' : doc.data().description});
+      this.setState({'teamName' : doc.data().teamName});
+    })
+  }
+  constructor(props) {
+    super(props)
+    this.state = {}
+    this.teamListener();
+  }
+  render() {
+    return (
+      <div>
+        <h2>{this.state.teamName}</h2>
+        <h6>{this.state.teamDescription}</h6>
+        <button onClick = {this.state.buttonOnClick}>{this.state.buttonText}</button>
+      </div>
+    )
+  }
+}
+
+
+
+class TeamInfoPage extends React.Component {
+    
+  constructor(props) {
+    super(props)
+    db.collection('teams').doc(teamId).get().then((doc) => {
+      if(doc.data().teamAdmins.includes(firebase.auth().currentUser.uid)) {
+        this.state = {
+          'pendingTabStyle' : 'block'
+        }
+      } else {
+        this.state = {
+          'pendingTabStle' : 'none'
+        }
+      }
+    })
+    this.state = {
+      'tab' : <TeamOverviewTab/>
     }
-    //not done yet but im going to pass the tournament lists thru props 
+  }
+  render() {
+    return(
+      <div>
+        <ul className="quickNavbar">
+          <li id="teamOverviewNavbar" className="quickNavbarItem quickNavbarItemSelected"><a className="quickNavbarItemLink" onClick= {() => this.setState({'tab': <TeamOverviewTab/>})}><p className="quickNavbarItemText">Overview</p></a></li>
+          <li id="teamChatNavbar" className="quickNavbarItem"><a className="quickNavbarItemLink" onClick= {() => this.setState({'tab': <TeamMessageTab/>})}><p className="quickNavbarItemText">Chat</p></a></li>
+          <li id="teamTournamentsNavbar" className="quickNavbarItem"><a className="quickNavbarItemLink" onClick= {() => this.setState({'tab': <TeamTournamentTab/>})}><p className="quickNavbarItemText">Tournaments</p></a></li>
+          <li id="teamPendingNavbar" className="quickNavbarItem" style = {{display: this.state.pendingTabStyle}}><a className="quickNavbarItemLink" onClick= {() => this.setState({'tab': <ListOfPendingMembers/>})}><p className="quickNavbarItemText">Pending Requests</p></a></li>
+        </ul>
+        <div>{this.state.tab}</div>
+      </div>
+    )
+  }
 }
