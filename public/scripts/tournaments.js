@@ -1,3 +1,7 @@
+let snapShot = {};
+var TournamentCardArray = [];
+let checkForScroll = true;
+
 function personalizeElements() {
   $("#gameList").append('<li class="filterListItem gameFilterListItem"><label class="filterOption"><input class="filterInput" type="radio"><p class="filterText">All</p></input></label></li>');
   $("#dateList").append('<li class="filterListItem dateFilterListItem"><label class="filterOption"><input class="filterInput" type="radio"><p class="filterText">All</p></input></label></li>');
@@ -20,6 +24,10 @@ var dateOptions = ["Today", "This Week", "This Month"];
 var currentDate = new Date();
 var filteredDate = currentDate;
 var query = tournamentsCollection.where("date", ">=", new Date());
+
+class TournamentListing extends React.Component {
+  render() { return this.props.listing }
+}
 
 class TournamentCard extends React.Component {
   handleClick() {
@@ -118,13 +126,14 @@ async function filterData() {
   });
 }
 
-async function renderTournamentCards() {
-  var TournamentCardArray = [];
+async function renderTournamentCards(lastSnapShot = null) {
   var tournamentNumber = 1;
-  query.get().then(async function(querySnapshot) {
+  if(lastSnapShot !== null) query = query.startAfter(lastSnapShot)
+  query.limit(4).get().then(async function(querySnapshot) {
     if (querySnapshot.size == 0) { console.log("No tournaments match the given criteria"); /* We need to add some code that makes it more clear that nothing meets the criteria */ }
 
-    await Promise.all(querySnapshot.docs.map(async (doc) => {
+    await Promise.all(querySnapshot.docs.map(async (doc, index) => {
+      if(querySnapshot.docs.length == index + 1) snapShot = doc
       var wallpaper = "/media/game_wallpapers/" + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "-" + "cardWallpaper.";
       var title = doc.data().name;
 
@@ -176,9 +185,10 @@ async function renderTournamentCards() {
       tournamentNumber++;
     })).then(() => {
       ReactDOM.render(
-        TournamentCardArray,
+        (<TournamentListing listing={TournamentCardArray} />),
         document.getElementById("row")
       );
+      checkForScroll = true;
     });
   });
 }
@@ -190,3 +200,15 @@ function searchGameFilter(searchbar) {
       else { $(this).hide(); }
   });
 }
+
+$(window).on("scroll", async (event) => {
+  if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+    if(checkForScroll) {
+      console.log("At the end of the page")
+      await renderTournamentCards(snapShot)
+      checkForScroll = false
+    } else {
+      console.log("At the end of the page not sending")
+    }
+  }
+})
