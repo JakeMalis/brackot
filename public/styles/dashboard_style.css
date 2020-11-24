@@ -665,6 +665,50 @@ text-align: center;
   display: inline-block;
 }
 
+#noTournaments{
+  display: none;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  max-width: 820px;
+}
+
+#noTeams{
+  display: none;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  max-width: 820px;
+}
+
+#noTournamentsMessage{
+  color: #888888 !important;
+  margin-top: 80px;
+  margin-bottom: 30px;
+  text-align: center;
+  width: 100%;
+}
+
+#noTeamsMessage{
+  color: #888888 !important;
+  margin-top: 80px;
+  margin-bottom: 30px;
+  text-align: center;
+  width: 100%;
+}
+
+#noTournamentsButton{
+  margin-bottom: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#noTeamsButton{
+  margin-bottom: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .tournamentSearchbar{
   display: inline-block;
   float: right;

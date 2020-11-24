@@ -40,12 +40,12 @@ async function renderTeamCards() {
   query.get().then(async function(querySnapshot) {
     const collectionLength = querySnapshot.size;
 
-    if (collectionLength == 0) {
+    if (collectionLength == 0) { // if there are no team cards to be shown
       ReactDOM.render(
         TeamCardArray,
         document.getElementById("teamsRow")
       );
-      console.log("No teams match criteria given.");
+      document.getElementById('noTeams').style.display = 'block'; // display the block #noTournaments which is a message
     }
 
     querySnapshot.forEach(async (doc) => {
