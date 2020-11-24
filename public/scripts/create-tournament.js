@@ -14,7 +14,7 @@ function personalizeElements() {
   document.getElementById("date").setAttribute("min", today);
 
   games.forEach((game) => {
-    gameFileName = (game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","").replace("'","");
+    gameFileName = (game.toLowerCase()).replaceAll(/ /g, "").replaceAll("-","").replaceAll(".","").replaceAll("'","");
     $("#createTournamentGameCarousel").append('<label id="create' + gameFileName + 'TournamentLabel" onclick="animateGameCarousel(this.id)" class="createTournamentGamesLabel"><input name="newTournamentGame" class="createTournamentGamesRadio" type="radio" value="' + game + '""></input><picture><source srcset="../media/game_images/' + gameFileName + '.webp" type="image/webp"><img class="createTournamentGamesImage" src="../media/game_images/' + gameFileName + '.jpg"></picture></label>');
   });
 
@@ -50,7 +50,7 @@ function animateParticipantType(selected){
 }
 
 function searchGameCreateTournament(searchbar) {
-    var value = $(searchbar).val().toLowerCase();
+    var value = $(searchbar).val().toLowerCase().replaceAll(" ","").replaceAll("'",""); // value stores the current string in the searchbar, in lowercase and with no spaces
     $("#createTournamentGameCarousel > label").each(function() {
       if ($(this).attr("id").toLowerCase().replace('label', '').replace('createtournament', '').search(value) > -1) { $(this).show(); }
       else { $(this).hide(); }
