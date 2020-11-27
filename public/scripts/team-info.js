@@ -21,6 +21,10 @@ function personalizeElements() {
     <TeamInfoPage/>,
     document.getElementById('teamInfoCard')
   )
+  ReactDOM.render(
+    <TeamInfoQuickCard/>,
+    document.getElementById('teamInfoQuickContent')
+  )
   
   
   
@@ -436,10 +440,59 @@ class TeamOverviewTab extends React.Component {
   }
 }
 
+class TeamInfoQuickCard extends React.Component {
+  constructor(props) {
+    super(props) 
+    teamsRef.doc(teamId).get().then((doc) => {
+      try {
+        this.state = {
+          'members' : doc.data().teamMembers.length,
+          'privacy' : doc.data().privacy
+        } 
+      } catch(err) {
+        this.state = {
+          'members' : 'none',
+          'privacy' : 'public'
+        }
+        console.log(err)
+      }
+      
+    })
+  }
+  render() {
+    return( 
+      <div>
+        <div class="teamSocials" id="teamInfoSocials">
+          <a class="teamSocial facebookIcon noDisplay" id="teamInfoFacebook"><i class="fab fa-facebook-square" aria-hidden="true"></i></a>
+          <a class="teamSocial twitterIcon noDisplay" id="teamInfoTwitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+          <a class="teamSocial instagramIcon noDisplay" id="teamInfoInstagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+          <a class="teamSocial youtubeIcon noDisplay" id="teamInfoYoutube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+          <a class="teamSocial redditIcon noDisplay" id="teamInfoReddit"><i class="fab fa-reddit-alien" aria-hidden="true"></i></a>
+          <a class="teamSocial twitchIcon noDisplay" id="teamInfoTwitch"><i class="fab fa-twitch" aria-hidden="true"></i></a>
+          <a class="teamSocial discordIcon noDisplay" id="teamInfoDiscord"><i class="fab fa-discord" aria-hidden="true"></i></a>
+        </div>
+        <div class="teamInfoDetails">
+          <div class="iconAndNum teamInfoIconAndNum">
+            <i class="fas fa-user teamInfoIcon"></i>
+            <h2 id="teamInfoMembers" class="teamInfoStat"></h2>
+          </div>
+          <p class="statDescription">{`Members ${this.state.members}`}</p>
+        </div>
+        <div class="teamInfoDetails">
+          <div class="iconAndNum teamInfoIconAndNum">
+            <i id="teamInfoPublicIcon" class="fas fa-users teamInfoIcon noDisplay"></i>
+            <i id="teamInfoPrivateIcon" class="fas fa-lock teamInfoIcon noDisplay"></i>
+            <h2 id="teamInfoPrivacy" class="teamInfoStat"></h2>
+          </div>
+          <p class="statDescription">Privacy</p>
+                  
+        </div>
+      </div>
+    )
+  }
+}
 
-
-class TeamInfoPage extends React.Component {
-    
+class TeamInfoMainCard extends React.Component {
   constructor(props) {
     super(props)
     db.collection('teams').doc(teamId).get().then((doc) => {
@@ -461,13 +514,43 @@ class TeamInfoPage extends React.Component {
     return(
       <div>
         <ul className="quickNavbar">
-          <li id="teamOverviewNavbar" className="quickNavbarItem quickNavbarItemSelected"><a className="quickNavbarItemLink" onClick= {() => this.setState({'tab': <TeamOverviewTab/>})}><p className="quickNavbarItemText">Overview</p></a></li>
-          <li id="teamChatNavbar" className="quickNavbarItem"><a className="quickNavbarItemLink" onClick= {() => this.setState({'tab': <TeamMessageTab/>})}><p className="quickNavbarItemText">Chat</p></a></li>
-          <li id="teamTournamentsNavbar" className="quickNavbarItem"><a className="quickNavbarItemLink" onClick= {() => this.setState({'tab': <TeamTournamentTab/>})}><p className="quickNavbarItemText">Tournaments</p></a></li>
-          <li id="teamPendingNavbar" className="quickNavbarItem" style = {{display: this.state.pendingTabStyle}}><a className="quickNavbarItemLink" onClick= {() => this.setState({'tab': <ListOfPendingMembers/>})}><p className="quickNavbarItemText">Pending Requests</p></a></li>
+          <li id="teamOverviewNavbar" className="quickNavbarItem quickNavbarItemSelected">
+            <a className="quickNavbarItemLink" onClick= {() => this.setState({'tab': <TeamOverviewTab/>})}>
+              <p className="quickNavbarItemText">Overview</p>
+            </a>
+          </li>
+          <li id="teamChatNavbar" className="quickNavbarItem">
+            <a className="quickNavbarItemLink" onClick= {() => this.setState({'tab': <TeamMessageTab/>})}>
+              <p className="quickNavbarItemText">Chat</p>
+            </a>
+          </li>
+          <li id="teamTournamentsNavbar" className="quickNavbarItem">
+            <a className="quickNavbarItemLink" onClick= {() => this.setState({'tab': <TeamTournamentTab/>})}>
+              <p className="quickNavbarItemText">Tournaments</p>
+            </a>
+          </li>
+          <li id="teamPendingNavbar" className="quickNavbarItem" style =  {{display: this.state.pendingTabStyle}}>
+            <a className="quickNavbarItemLink" onClick= {() => this.setState({'tab': <ListOfPendingMembers/>})}>
+              <p className="quickNavbarItemText">Pending Requests</p>
+            </a>
+          </li>
         </ul>
         <div>{this.state.tab}</div>
       </div>
     )
   }
 }
+class TeamInfoPage extends React.Component { 
+  constructor(props) {
+    super(props)
+  }
+  render() {
+    return(
+      <div>
+        <TeamInfoQuickCard/>
+        <TeamInfoMainCard/>
+      </div>
+      
+    )
+  }
+} 

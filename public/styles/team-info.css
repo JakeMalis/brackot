@@ -55,16 +55,7 @@
   margin-right: 5px;
 }
 
-.teamChatTab {
-  display: none;
-}
-
-.teamPendingTab {
-  display: none;
-}
-
 .teamTournamentsTab {
-  display: none;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;

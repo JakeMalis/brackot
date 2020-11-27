@@ -42,15 +42,14 @@ $cardBackGroundColor : #2b2c3c;
 }
 .teamChatTab {
     @extend %teamInfoTab;
-    display: none;
+    
 }
 .teamPendingTab {
     @extend %teamInfoTab;
-    display: none;
 }
 .teamTournamentsTab {
     @extend %teamInfoTab;
-    display: none;
+    
     flex-direction: row;
     .teamTournamentsList {
         .teamTournamentsHeader {
