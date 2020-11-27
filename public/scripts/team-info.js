@@ -158,8 +158,9 @@ class TeamMessages extends React.Component {
     db.collection('teams').doc(teamId).collection('chat')
     .orderBy('createdAt', 'asc')
     .onSnapshot((querySnapshot) => {
+      this.setState({'messages': []})
         querySnapshot.forEach(doc => {
-          if(!this.state.messages.includes(doc.data()))
+        
             this.setState({messages : [...this.state.messages, doc.data()] })
         });     
     })
@@ -180,7 +181,7 @@ class TeamMessages extends React.Component {
 }
 
 class TeamMessageTab extends React.Component {
-  updateTeamMessage = () => {
+  updateTeamMessage = (msgObj) => {
     db.collection('teams')
         .doc(teamId)
         .collection('chat')
@@ -195,13 +196,14 @@ class TeamMessageTab extends React.Component {
         )
   }
 
-  submitTeamMessage = () => {
+  submitTeamMessage = (message) => {
+    console.log(message)
     const msgObj = {
         sentUID: firebase.auth().currentUser.uid,
         message
     }
     if(message !== ""){
-        updateTeamMessage(msgObj).then(this.setState({'message' : ''}))
+        this.updateTeamMessage(msgObj).then(document.getElementById('teamChatText').value = '')
     }
   }
   constructor(props) {
@@ -218,8 +220,8 @@ class TeamMessageTab extends React.Component {
           <TeamMessages/>
           <br/>
           <div className="chatControls ">
-            <textarea value={this.state.message} onChange={(e) => setState({'message' : e.target.value})} placeholder="Write Message"/>
-            <i id="sendChatIcon" className="fas fa-paper-plane sendChatIcon" onClick={() => this.submitTeamMessage()}></i>
+            <textarea id = 'teamChatText' placeholder="Write Message"/>
+            <i id="sendChatIcon" className="fas fa-paper-plane sendChatIcon" onClick={() => this.submitTeamMessage(document.getElementById("teamChatText").value)}></i>
           </div>
         </div>
       </div>
@@ -422,7 +424,7 @@ class TeamOverviewTab extends React.Component {
         }
       }
       this.setState({'teamDescription' : doc.data().description});
-      this.setState({'teamName' : doc.data().teamName});
+      this.setState({'teamName' : doc.data().name});
     })
   }
   constructor(props) {
