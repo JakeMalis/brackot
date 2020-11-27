@@ -19,11 +19,7 @@ function personalizeElements() {
   teamId = url.searchParams.get("teamId");
   ReactDOM.render(
     <TeamInfoPage/>,
-    document.getElementById('teamInfoCard')
-  )
-  ReactDOM.render(
-    <TeamInfoQuickCard/>,
-    document.getElementById('teamInfoQuickContent')
+    document.getElementById('teamInfoMainPage')
   )
   
   
@@ -67,7 +63,7 @@ function personalizeElements() {
       $('#teamInfoGamesRow').removeClass("noDisplay");
       doc.data().games.forEach((game) => {
         gameFileName = (game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","").replace("'","");
-        $("#teamInfoGameCarousel").append('<label id="teamInfo' + gameFileName + 'Label" class="teamInfoGamesLabel"><picture><source srcset="../media/game_images/' + gameFileName + '.webp" type="image/webp"><img class="teamInfoGamesImage" src="../media/game_images/' + gameFileName + '.jpg"></picture></label>');
+        $("#teamInfoGameCarousel").append('<label id="teamInfo' + gameFileName + 'Label" className="teamInfoGamesLabel"><picture><source srcset="../media/game_images/' + gameFileName + '.webp" type="image/webp"><img className="teamInfoGamesImage" src="../media/game_images/' + gameFileName + '.jpg"></picture></label>');
       });
     }
 
@@ -304,6 +300,9 @@ class TeamTournamentsList extends React.Component{
     //this sends you to the tournament that you click on 
     //doesnt work yet
   }
+  constructor(props) {
+    super(props)
+  }
   render() {
     return(
       <div className = "tournamentRows">
@@ -353,40 +352,42 @@ class TeamTournamentsList extends React.Component{
 }
 
 class TeamTournamentTab extends React.Component {
-    updateTeamTournaments = () => {
-      //sets up an event listener for the tournaments a team is in 
+    componentDidMount() {
       db.collection("tournaments")
       .where("players", "array-contains", teamId)
       .onSnapshot((querySnapshot) => {
           querySnapshot.forEach((doc) => {
-            if(!tournaments.includes(doc.data())) {
-              this.setState({
-                'tournaments':{...doc.data()}
-              })
+            if(!this.state.tournaments.includes(doc.data())) {
+              this.state.tournaments.push(doc.data())
             }
           })
+          this.setState({'isDataFetched': true})
       })
     }
     
     constructor(props) {
       super(props)
-      this.updateTeamTournaments()
+      this.state = {
+        'tournaments': [],
+        'isDataFetched' :false
+      }
     }
     render() {
+      if(!this.state.isDataFetched) return null;
       return(
           <div className = "teamTournamentsList">
             <div className = "teamTournamentsHeader">
               Tournaments in Progress:
             </div>
-            <TeamTournamentsList tournaments = {currentTournaments}/>
+            <TeamTournamentsList tournaments = {this.state.tournaments}/>
             <div className = "teamTournamentsHeader">
               Upcoming Tournaments:
             </div>
-            <TeamTournamentsList tournaments = {upcomingTournaments}/>
+            <TeamTournamentsList tournaments = {this.state.tournaments}/>
             <div className = "teamTournamentsHeader">
               Completed tournaments:
             </div>
-            <TeamTournamentsList tournaments = {completeTournaments}/>
+            <TeamTournamentsList tournaments = {this.state.tournaments}/>
           </div>
       )
       }
@@ -443,72 +444,100 @@ class TeamOverviewTab extends React.Component {
 class TeamInfoQuickCard extends React.Component {
   constructor(props) {
     super(props) 
-    teamsRef.doc(teamId).get().then((doc) => {
-      try {
-        this.state = {
-          'members' : doc.data().teamMembers.length,
-          'privacy' : doc.data().privacy
-        } 
-      } catch(err) {
-        this.state = {
-          'members' : 'none',
-          'privacy' : 'public'
-        }
-        console.log(err)
+    this.state = {}
+    this.getTeamMembers();
+    
+  }
+  getTeamMembers = () => {
+    teamsRef.doc(teamId).onSnapshot((doc) => {
+      console.log(teamId)
+      this.state = {
+        'members' : doc.data().teamMembers,
+        'privacy' : doc.data().privacy
+        
       }
       
     })
   }
   render() {
     return( 
+      <div id="teamInfoQuickCard" className="teamInfoQuickCard">
+        <div className="wideCardBackground tournamentInfoCardBackground">
+          <div className="singleColumn">
+            <img id="teamInfoProfilePic" className="teamInfoProfilePic" />
+              <div id = "teamNameQuickCard" class = "teamNameQuickCard"></div>
+              <div className="teamInfoQuickContent" id='teamInfoQuickContent'>
+                <TeamInfoQuickContent teamMembers = {this.state.teamMembers}/>
+              </div>
+            </div>
+        </div>
+      </div>
+    )
+  }
+}
+class TeamInfoQuickContent extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      'teamMembers': db.collection('team').doc(teamId).get().then(doc =>{
+        return(doc.data.teamMembers)
+      })
+    }
+    console.log(this.state.teamMembers)
+  }
+  render() {
+    return (
       <div>
-        <div class="teamSocials" id="teamInfoSocials">
-          <a class="teamSocial facebookIcon noDisplay" id="teamInfoFacebook"><i class="fab fa-facebook-square" aria-hidden="true"></i></a>
-          <a class="teamSocial twitterIcon noDisplay" id="teamInfoTwitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-          <a class="teamSocial instagramIcon noDisplay" id="teamInfoInstagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-          <a class="teamSocial youtubeIcon noDisplay" id="teamInfoYoutube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
-          <a class="teamSocial redditIcon noDisplay" id="teamInfoReddit"><i class="fab fa-reddit-alien" aria-hidden="true"></i></a>
-          <a class="teamSocial twitchIcon noDisplay" id="teamInfoTwitch"><i class="fab fa-twitch" aria-hidden="true"></i></a>
-          <a class="teamSocial discordIcon noDisplay" id="teamInfoDiscord"><i class="fab fa-discord" aria-hidden="true"></i></a>
+        <div className="teamSocials" id="teamInfoSocials">
+          <a className="teamSocial facebookIcon noDisplay" id="teamInfoFacebook"><i className="fab fa-facebook-square" aria-hidden="true"></i></a>
+          <a className="teamSocial twitterIcon noDisplay" id="teamInfoTwitter"><i className="fab fa-twitter" aria-hidden="true"></i></a>
+          <a className="teamSocial instagramIcon noDisplay" id="teamInfoInstagram"><i className="fab fa-instagram" aria-hidden="true"></i></a>
+          <a className="teamSocial youtubeIcon noDisplay" id="teamInfoYoutube"><i className="fab fa-youtube" aria-hidden="true"></i></a>
+          <a className="teamSocial redditIcon noDisplay" id="teamInfoReddit"><i className="fab fa-reddit-alien" aria-hidden="true"></i></a>
+          <a className="teamSocial twitchIcon noDisplay" id="teamInfoTwitch"><i className="fab fa-twitch" aria-hidden="true"></i></a>
+          <a className="teamSocial discordIcon noDisplay" id="teamInfoDiscord"><i className="fab fa-discord" aria-hidden="true"></i></a>
         </div>
-        <div class="teamInfoDetails">
-          <div class="iconAndNum teamInfoIconAndNum">
-            <i class="fas fa-user teamInfoIcon"></i>
-            <h2 id="teamInfoMembers" class="teamInfoStat"></h2>
+        <div className="teamInfoDetails">
+          <div className="iconAndNum teamInfoIconAndNum">
+            <i className="fas fa-user teamInfoIcon"></i>
+            <h2 id="teamInfoMembers" className="teamInfoStat"></h2>
           </div>
-          <p class="statDescription">{`Members ${this.state.members}`}</p>
+          <p className="statDescription">{`Members ${this.state.teamMembers.length}`}</p>
         </div>
-        <div class="teamInfoDetails">
-          <div class="iconAndNum teamInfoIconAndNum">
-            <i id="teamInfoPublicIcon" class="fas fa-users teamInfoIcon noDisplay"></i>
-            <i id="teamInfoPrivateIcon" class="fas fa-lock teamInfoIcon noDisplay"></i>
-            <h2 id="teamInfoPrivacy" class="teamInfoStat"></h2>
+        <div className="teamInfoDetails">
+          <div className="iconAndNum teamInfoIconAndNum">
+            <i id="teamInfoPublicIcon" className="fas fa-users teamInfoIcon noDisplay"></i>
+            <i id="teamInfoPrivateIcon" className="fas fa-lock teamInfoIcon noDisplay"></i>
+            <h2 id="teamInfoPrivacy" className="teamInfoStat"></h2>
           </div>
-          <p class="statDescription">Privacy</p>
+          <p className="statDescription">Privacy</p>
                   
         </div>
       </div>
     )
   }
 }
-
 class TeamInfoMainCard extends React.Component {
   constructor(props) {
     super(props)
-    db.collection('teams').doc(teamId).get().then((doc) => {
-      if(doc.data().teamAdmins.includes(firebase.auth().currentUser.uid)) {
-        this.state = {
-          'pendingTabStyle' : 'block'
-        }
-      } else {
-        this.state = {
-          'pendingTabStle' : 'none'
-        }
-      }
-    })
+    this.getTeamStatus()
     this.state = {
       'tab' : <TeamOverviewTab/>
     }
+  }
+  getTeamStatus() {
+    db.collection('teams').doc(teamId).onSnapshot((doc) => {
+      if(doc.data().teamAdmins.includes(firebase.auth().currentUser.uid)) {
+        this.state = {
+          'teamAdmin' : true
+        }
+      } else {
+        this.state = {
+          'teamAdmin' : false
+        }
+        console.log(this.state.teamAdmin)
+      }
+    })
   }
   render() {
     return(
@@ -529,7 +558,7 @@ class TeamInfoMainCard extends React.Component {
               <p className="quickNavbarItemText">Tournaments</p>
             </a>
           </li>
-          <li id="teamPendingNavbar" className="quickNavbarItem" style =  {{display: this.state.pendingTabStyle}}>
+          <li id="teamPendingNavbar" className="quickNavbarItem" style =  {{display: this.state.teamAdmin ? "block" : "none"}}>
             <a className="quickNavbarItemLink" onClick= {() => this.setState({'tab': <ListOfPendingMembers/>})}>
               <p className="quickNavbarItemText">Pending Requests</p>
             </a>
@@ -546,7 +575,7 @@ class TeamInfoPage extends React.Component {
   }
   render() {
     return(
-      <div>
+      <div className = 'teamInfoPageContainer'>
         <TeamInfoQuickCard/>
         <TeamInfoMainCard/>
       </div>
