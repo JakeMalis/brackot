@@ -70,53 +70,10 @@ function personalizeElements() {
 
     */
     
-    }
-    //document.getElementById("tournamentInfoWallpaper").className = "headerImage tournamentInfoWallpaper " + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "InfoWallpaper";
-const updateMembers = () => {
-    //sets up an event listener
-    
-    db.collection('teams').doc(teamId).onSnapshot(() => {
-        team.members = []
-        //clears the team members list
-        teamsRef.doc(teamId).get().then((doc) => {
-          if(doc.exists) {
-            team.members = doc.data().teamMembers;
-            //document.getElementById('teamInfoName').innerHTML = doc.data().name;
-          }
-        }
-        )
-        console.log(team.members)
-        //replaces the team members list with the team members list from the database
-        //re-renders the TeamMembersTab every time there is an update to the team member list
-    })
 }
 
-const initTeamChat = () => {
-  //calls the event listener function and passes the current UID
-  getRealtimeTeamConversations(firebase.auth().currentUser.uid);
-  
-}
+
 //updateMessage is the function that actually sends the message to firebase
-const getPendingTeamMembers = () => {
-  team.pendingMembers = [] 
-  db.collection('teams').doc(teamId)
-  //sets up an event listener for the team doc 
-  .onSnapshot((doc) => {
-    team.pendingMembers = doc.data().pendingMembers
-  })
-}
-
-
-
-const renderTeamChat = () => {
-  //keep these seperate for dynamic rendering
-  ReactDOM.render(
-      <TeamMessage/>,
-      document.getElementById("teamMessageSections")
-      
-  );
-  //displays the Message component
-}
 async function getProfilePic(player) {
   //takes in the player uid and uses that to get the profile pic from a URL
   await firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + player + "/profile").getDownloadURL().then(function (url) {
@@ -133,17 +90,6 @@ async function getProfilePic(player) {
 * component your team card
 *
 ****************************************************/
-/*
-class PlayerPopUp extends React.Component {
-  render() {
-    return (
-      <div>
-        
-      </div>
-    )
-  }
-}
-*/
 class TeamMessages extends React.Component {
   constructor(props) {
     super(props)
@@ -154,7 +100,7 @@ class TeamMessages extends React.Component {
   }
   getRealtimeTeamConversations = () => {
     //this function sets the event listener 
-  
+    
     db.collection('teams').doc(teamId).collection('chat')
     .orderBy('createdAt', 'asc')
     .onSnapshot((querySnapshot) => {
@@ -181,6 +127,7 @@ class TeamMessages extends React.Component {
 }
 
 class TeamMessageTab extends React.Component {
+  //the tab of the main team card that has all of the team chat components in them
   updateTeamMessage = (msgObj) => {
     db.collection('teams')
         .doc(teamId)
@@ -197,18 +144,20 @@ class TeamMessageTab extends React.Component {
   }
 
   submitTeamMessage = (message) => {
-    console.log(message)
     const msgObj = {
         sentUID: firebase.auth().currentUser.uid,
         message
+        //an object with all the data about a message
     }
     if(message !== ""){
         this.updateTeamMessage(msgObj).then(document.getElementById('teamChatText').value = '')
+        //calls updateTeamMessage with the message object then resets the teamChat text box to empty
     }
   }
   constructor(props) {
     super(props)
     this.state = {
+      //sets default state of the message to blank
       'message' : ''
     }
   }
@@ -375,6 +324,7 @@ class TeamTournamentTab extends React.Component {
       }
     }
     render() {
+      //waits for the component did mount function to run before returning the actual component class
       if(!this.state.isDataFetched) return null;
       return(
           <div className = "teamTournamentsList">
@@ -395,7 +345,9 @@ class TeamTournamentTab extends React.Component {
       }
 }
 class TeamOverviewTab extends React.Component {
+  //the main overview of the team
   teamListener = () => {
+    //creates an event listener for data on the team
     db.collection('teams').doc(teamId).onSnapshot((doc) => {
       if(doc.data().teamMembers.includes(firebase.auth().currentUser.uid)) {
         this.setState({'buttonText' : 'Leave Team'})
@@ -444,32 +396,16 @@ class TeamOverviewTab extends React.Component {
 }
 
 class TeamInfoQuickCard extends React.Component {
-  constructor(props) {
-    super(props) 
-    this.state = {}
-    this.getTeamMembers();
-    
-  }
-  getTeamMembers = () => {
-    teamsRef.doc(teamId).onSnapshot((doc) => {
-      console.log(teamId)
-      this.state = {
-        'members' : doc.data().teamMembers,
-        'privacy' : doc.data().privacy
-        
-      }
-      
-    })
-  }
   render() {
+    
     return( 
       <div id="teamInfoQuickCard" className="teamInfoQuickCard">
         <div className="wideCardBackground tournamentInfoCardBackground">
           <div className="singleColumn">
             <img id="teamInfoProfilePic" className="teamInfoProfilePic" />
-              <div id = "teamNameQuickCard" class = "teamNameQuickCard"></div>
+              <div id = "teamNameQuickCard" className = "teamNameQuickCard"></div>
               <div className="teamInfoQuickContent" id='teamInfoQuickContent'>
-                <TeamInfoQuickContent teamMembers = {this.state.teamMembers}/>
+                <TeamInfoQuickContent/>
               </div>
             </div>
         </div>
@@ -479,15 +415,26 @@ class TeamInfoQuickCard extends React.Component {
 }
 class TeamInfoQuickContent extends React.Component {
   constructor(props) {
-    super(props)
+    super(props) 
     this.state = {
-      'teamMembers': db.collection('team').doc(teamId).get().then(doc =>{
-        return(doc.data.teamMembers)
-      })
+      'members': [],
+      'privacy' : [],
+      'isDataFetched': true
     }
-    console.log(this.state.teamMembers)
+    
+  }
+  //gets the list of team members
+  componentDidMount() {
+    teamsRef.doc(teamId).onSnapshot((doc) => {
+      this.setState({
+        'members' : doc.data().teamMembers,
+        'privacy' : doc.data().privacy,
+        'isDataFetched': true
+      })
+    })
   }
   render() {
+    if(!this.state.isDataFetched){return null;}
     return (
       <div>
         <div className="teamSocials" id="teamInfoSocials">
@@ -504,7 +451,7 @@ class TeamInfoQuickContent extends React.Component {
             <i className="fas fa-user teamInfoIcon"></i>
             <h2 id="teamInfoMembers" className="teamInfoStat"></h2>
           </div>
-          <p className="statDescription">{`Members ${this.state.teamMembers.length}`}</p>
+          <p className="statDescription">{`Members: ${this.state.members.length}`}</p>
         </div>
         <div className="teamInfoDetails">
           <div className="iconAndNum teamInfoIconAndNum">
@@ -512,7 +459,7 @@ class TeamInfoQuickContent extends React.Component {
             <i id="teamInfoPrivateIcon" className="fas fa-lock teamInfoIcon noDisplay"></i>
             <h2 id="teamInfoPrivacy" className="teamInfoStat"></h2>
           </div>
-          <p className="statDescription">Privacy</p>
+          <p className="statDescription">Privacy:  <i className={this.state.privacy === 'public' ? 'fas fa-lock-open' : 'fas fa-lock'}></i></p>
                   
         </div>
       </div>
@@ -543,7 +490,7 @@ class TeamInfoMainCard extends React.Component {
   }
   render() {
     return(
-      <div>
+      <div className = 'teamInfoMainCard'>
         <ul className="quickNavbar">
           <li id="teamOverviewNavbar" className="quickNavbarItem quickNavbarItemSelected">
             <a className="quickNavbarItemLink" onClick= {() => this.setState({'tab': <TeamOverviewTab/>})}>
@@ -566,7 +513,7 @@ class TeamInfoMainCard extends React.Component {
             </a>
           </li>
         </ul>
-        <div>{this.state.tab}</div>
+        <div className = 'teamInfoPageContainer'>{this.state.tab}</div>
       </div>
     )
   }
@@ -581,7 +528,6 @@ class TeamInfoPage extends React.Component {
         <TeamInfoQuickCard/>
         <TeamInfoMainCard/>
       </div>
-      
     )
   }
 } 

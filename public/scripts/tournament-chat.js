@@ -10,7 +10,6 @@ const userConstants = {
 }
 const user = {
     'tournamentConversations': [],
-    'teamConversations': []
 }
 //object that contains all of the messages to be rendered across all chat files
 

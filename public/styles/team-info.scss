@@ -1,11 +1,14 @@
 $cardBackGroundColor : #2b2c3c;
-
+.teamInfoMainCard {
+    width: 100%;
+}
 .teamInfoPageContainer{
     width: 90%;
     margin-left: auto;
     margin-right: auto;
     display: flex;
     flex-direction: row;
+    background-color: $cardBackGroundColor;
 }
 %teamInfoTab {
     background-color: $cardBackGroundColor;

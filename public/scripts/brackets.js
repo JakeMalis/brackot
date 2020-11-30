@@ -87,9 +87,6 @@ class Connector extends React.Component {
     );
   }
 }
-
-
-
 /* ====================================================WORK IN PROGRESS COMPONENT BELOW====================================
 ***************************************************************************************************************************
 ***************************************************************************************************************************
@@ -130,7 +127,7 @@ EXAMPLES
 participant upperHalf  -  the first person in the index of a match, filling the "upper" spot in the match
 participant lowerHalf  -  the second person in the index of a match, filling the "lower" spot in the match
 participant upperHalf noParticipant  -  the upper half of a match doesn't have its player yet from the last match
-                                         therefore, it has the noParticipant class to leave an empty spot in upperHalf
+therefore, it has the noParticipant class to leave an empty spot in upperHalf
 */
 
 function renderMatchCards() {
