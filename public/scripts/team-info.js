@@ -513,7 +513,7 @@ class TeamInfoMainCard extends React.Component {
             </a>
           </li>
         </ul>
-        <div className = 'teamInfoPageContainer'>{this.state.tab}</div>
+        <div className = 'teamInfoPageContainer teamInfoMainInfo'>{this.state.tab}</div>
       </div>
     )
   }

@@ -8,6 +8,8 @@ $cardBackGroundColor : #2b2c3c;
     margin-right: auto;
     display: flex;
     flex-direction: row;
+}
+.teamInfoMainInfo {
     background-color: $cardBackGroundColor;
 }
 %teamInfoTab {
