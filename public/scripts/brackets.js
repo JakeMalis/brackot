@@ -81,6 +81,119 @@ class Connector extends React.Component {
   }
 }
 
+const render_fn = (container, data, score, state, ...rest) => {
+  switch (state) {
+    case 'empty-bye':
+      container.append(`BYE`);
+      return;
+    case 'empty-tbd':
+      container.append(`TBD`);
+      return;
+    case 'entry-no-score':
+    case 'entry-default-win':
+    case 'entry-complete':
+      const [teamName, teamAvatar] = data.split('^^^');
+      container
+        .append(
+          `<img src=${teamAvatar ? teamAvatar : 'https://firebasestorage.googleapis.com/v0/b/brackot/o/BrackotLogo2.jpg?alt=media&token=7bdf6862-64ec-4db7-9666-3e2865d2cdbe'} width="24px" height="24px" /> `
+        )
+        .append(teamName);
+      return;
+  }
+};
+
+/*================================================NEW BRACKET COMPONENT=================================================*/
+class BracketComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      teamNames: [],
+      teamScores: [],
+      bracketType: 'single',
+      userIds: [],
+    }
+  }
+
+  async componentDidMount() {
+    const users = [];
+    const ids = [];
+    const brackets = [];
+    var participantNumber = 1;
+    await firebase.firestore().collection("tournaments").doc(tournamentId).get().then(async (doc) => {
+      var players = doc.data().players;
+      await firebase.firestore().collection("tournaments").doc(tournamentId).get().then(async (doc) => {
+        const bracket = Object.keys(doc.data().bracket).map(round => {
+          return doc.data().bracket[round];
+        });
+        brackets.push(bracket);
+      });
+      await Promise.all(players.map(async (entry) => {
+        return await firebase.firestore().collection("users").doc(entry).get().then(async (userDoc) => {
+          const gsReference = firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + entry + "/profile");
+          let url = '';
+          try {
+            url = await gsReference.getDownloadURL()
+          } catch (err) {
+            url = '';
+          }
+          users.push(userDoc.data().name + '^^^' + url);
+          ids.push(entry);
+          participantNumber ++;
+        });
+      }))
+    });
+
+    let matchResults = [];
+    let i = 2;
+    let index = 0;
+    while (participantNumber / i >= 1) {
+      matchResults.push(new Array(participantNumber / i).fill([null, null]));
+      index ++ ;
+      i *= 2;
+    }
+
+    for (i = 0 ; i < brackets.length ; i ++) {
+      matchResults[0][i] = [brackets[i][0].matchup1.playerOneScore, brackets[i][0].matchup1.playerTwoScore];
+    }
+
+    const userData = [];
+    for (let i = 0 ; i < users.length ; i += 2 ) {
+      userData.push([users[i], users[i + 1] || null]);
+    }
+
+    this.setState({teamNames: userData, userIds: ids, teamScores: matchResults});
+    
+    
+  }
+
+  componentDidUpdate() {
+    if (this.state.teamNames.length > 0) {
+      ($('div#bracket-render')).bracket({
+        init: {
+          teams: this.state.teamNames,
+          results : [
+            this.state.teamScores
+          ]
+        },
+        teamWidth: 180,
+        scoreWidth: 40,
+        roundMargin: 40,
+				matchMargin: 60,
+        decorator: {
+					render: render_fn,
+					edit: () => {}
+				}
+      });
+    }
+  }
+
+  render() {
+    return (
+      <div id="bracket-render" style={{width: '100%'}}></div>
+    )
+  }
+}
+
 /* ====================================================WORK IN PROGRESS COMPONENT BELOW====================================
 ***************************************************************************************************************************
 ***************************************************************************************************************************
@@ -101,106 +214,110 @@ class LeaderboardCard extends React.Component {
 
 //Local functions used to render the bracket and other client-side functions
 function renderMatchCards() {
-  firebase.firestore().collection("tournaments").doc(tournamentId).get().then(async (doc) => {
-    const bracket = Object.keys(doc.data().bracket).map(round => {
-      return doc.data().bracket[round];
-    });
+  ReactDOM.render(
+    <BracketComponent />,
+    document.getElementById("bracket-renderer")
+  );
+  // firebase.firestore().collection("tournaments").doc(tournamentId).get().then(async (doc) => {
+  //   const bracket = Object.keys(doc.data().bracket).map(round => {
+  //     return doc.data().bracket[round];
+  //   });
 
-    var rounds = bracket.map(function(rounds) {
-      return Object.keys(rounds).sort().map(function(round) {
-        return rounds[round];
-      });
-    });
+  //   var rounds = bracket.map(function(rounds) {
+  //     return Object.keys(rounds).sort().map(function(round) {
+  //       return rounds[round];
+  //     });
+  //   });
 
-    rounds.forEach(async (round, roundNumber) => {
-      var MatchColumnCards = [];
-      var ConnectorColumnConnectors = [];
-      var matchNumber = 0;
-      var connectorNumber = 0;
+  //   rounds.forEach(async (round, roundNumber) => {
+  //     var MatchColumnCards = [];
+  //     var ConnectorColumnConnectors = [];
+  //     var matchNumber = 0;
+  //     var connectorNumber = 0;
 
-      await Promise.all(round.map(async (matchup) => {
-        var upperParticipant, lowerParticipant;
-        var participants = [];
+  //     await Promise.all(round.map(async (matchup) => {
+  //       var upperParticipant, lowerParticipant;
+  //       var participants = [];
 
-        if (!((matchup.playerOne === null) && (matchup.playerTwo === null))) {
+  //       if (!((matchup.playerOne === null) && (matchup.playerTwo === null))) {
 
-          var playerOneName = await firebase.firestore().runTransaction(async (transaction) => {
-            return await transaction.get(firebase.firestore().collection("users").doc(matchup.playerOne)).then(creatorDoc => {
-              return creatorDoc.data().name;
-            })
-          });
-          var playerTwoName = await firebase.firestore().runTransaction(async (transaction) => {
-            return await transaction.get(firebase.firestore().collection("users").doc(matchup.playerTwo)).then(creatorDoc => {
-              return creatorDoc.data().name;
-            })
-          });
+  //         var playerOneName = await firebase.firestore().runTransaction(async (transaction) => {
+  //           return await transaction.get(firebase.firestore().collection("users").doc(matchup.playerOne)).then(creatorDoc => {
+  //             return creatorDoc.data().name;
+  //           })
+  //         });
+  //         var playerTwoName = await firebase.firestore().runTransaction(async (transaction) => {
+  //           return await transaction.get(firebase.firestore().collection("users").doc(matchup.playerTwo)).then(creatorDoc => {
+  //             return creatorDoc.data().name;
+  //           })
+  //         });
 
-          var playerOneProfilePicture = await firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + matchup.playerOne + "/profile").getDownloadURL().then(function (url) {
-            return String(url);
-          }).catch((error) => {
-            return "../media/BrackotLogo2.jpg";
-          });
+  //         var playerOneProfilePicture = await firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + matchup.playerOne + "/profile").getDownloadURL().then(function (url) {
+  //           return String(url);
+  //         }).catch((error) => {
+  //           return "../media/BrackotLogo2.jpg";
+  //         });
 
-          var playerTwoProfilePicture = await firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + matchup.playerTwo + "/profile").getDownloadURL().then(function (url) {
-            return String(url);
-          }).catch((error) => {
-            return "../media/BrackotLogo2.jpg";
-          });
+  //         var playerTwoProfilePicture = await firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + matchup.playerTwo + "/profile").getDownloadURL().then(function (url) {
+  //           return String(url);
+  //         }).catch((error) => {
+  //           return "../media/BrackotLogo2.jpg";
+  //         });
 
-          //Player Scores?
+  //         //Player Scores?
 
 
-          if ((matchup.playerOne === null) && (matchup.playerTwo === null) && (roundNumber !=1)) {
-            MatchColumnCards.push(<EmptyMatchCard roundNumber={roundNumber} matchNumber={matchNumber} key={matchNumber}/>);
-            if((matchNumber % 2 != 0) && (roundNumber != getByesAndRounds()[1])){ ConnectorColumnConnectors.push(<Connector roundNumber={roundNumber} connectorNumber={connectorNumber} visibility={"visible"} key={connectorNumber}/>); }
-          }
-          else if ((matchup.playerOne === null) && (matchup.playerTwo === null)){
-            MatchColumnCards.push(<EmptyMatchCard roundNumber={roundNumber} matchNumber={matchNumber} key={matchNumber}/>);
-            if(matchNumber % 2 != 0){ ConnectorColumnConnectors.push(<UpperConnector roundNumber={roundNumber} connectorNumber={connectorNumber} visibility={"hidden"} key={connectorNumber}/>); }
-            else{ ConnectorColumnConnectors.push(<LowerConnector roundNumber={roundNumber} connectorNumber={connectorNumber} visibility={"hidden"} key={connectorNumber}/>); }
-          }
-          else {
-            upperParticipant = {
-              uid: matchup.playerOne,
-              picture: playerOneProfilePicture,
-              name: playerOneName,
-              score: 3
-            };
-            participants.push(upperParticipant);
-            lowerParticipant = {
-              uid: matchup.playerTwo,
-              picture: playerTwoProfilePicture,
-              name: playerTwoName,
-              score: 2
-            };
-            participants.push(lowerParticipant);
-            MatchColumnCards.push(<MatchCard roundNumber={roundNumber} matchNumber={matchNumber} participants={participants} key={matchNumber}/>);
-            if((matchNumber % 2 != 0) && (roundNumber == 1)){
-              ConnectorColumnConnectors.push(<UpperConnector roundNumber={roundNumber} connectorNumber={connectorNumber} visibility={"visible"} key={connectorNumber}/>);
-            }
-            else if(round == 1){
-              ConnectorColumnConnectors.push(<LowerConnector roundNumber={roundNumber} connectorNumber={connectorNumber} visibility={"visible"} key={connectorNumber}/>);
-            }
-            else if((matchNumber % 2 != 0) && (roundNumber != getByesAndRounds()[1])){
-              ConnectorColumnConnectors.push(<Connector roundNumber={roundNumber} connectorNumber={connectorNumber} visibility={"visible"} key={connectorNumber}/>);
-            }
-          }
-          matchNumber++;
-          connectorNumber++;
-        }
-      })).then(() => {
-        roundNumber++;
-        ReactDOM.render(
-          MatchColumnCards,
-          document.getElementById("matchColumn" + roundNumber)
-        );
-        ReactDOM.render(
-          ConnectorColumnConnectors,
-          document.getElementById("connectorColumn" + roundNumber)
-        );
-      });
-    });
-  });
+  //         if ((matchup.playerOne === null) && (matchup.playerTwo === null) && (roundNumber !=1)) {
+  //           MatchColumnCards.push(<EmptyMatchCard roundNumber={roundNumber} matchNumber={matchNumber} key={matchNumber}/>);
+  //           if((matchNumber % 2 != 0) && (roundNumber != getByesAndRounds()[1])){ ConnectorColumnConnectors.push(<Connector roundNumber={roundNumber} connectorNumber={connectorNumber} visibility={"visible"} key={connectorNumber}/>); }
+  //         }
+  //         else if ((matchup.playerOne === null) && (matchup.playerTwo === null)){
+  //           MatchColumnCards.push(<EmptyMatchCard roundNumber={roundNumber} matchNumber={matchNumber} key={matchNumber}/>);
+  //           if(matchNumber % 2 != 0){ ConnectorColumnConnectors.push(<UpperConnector roundNumber={roundNumber} connectorNumber={connectorNumber} visibility={"hidden"} key={connectorNumber}/>); }
+  //           else{ ConnectorColumnConnectors.push(<LowerConnector roundNumber={roundNumber} connectorNumber={connectorNumber} visibility={"hidden"} key={connectorNumber}/>); }
+  //         }
+  //         else {
+  //           upperParticipant = {
+  //             uid: matchup.playerOne,
+  //             picture: playerOneProfilePicture,
+  //             name: playerOneName,
+  //             score: 3
+  //           };
+  //           participants.push(upperParticipant);
+  //           lowerParticipant = {
+  //             uid: matchup.playerTwo,
+  //             picture: playerTwoProfilePicture,
+  //             name: playerTwoName,
+  //             score: 2
+  //           };
+  //           participants.push(lowerParticipant);
+  //           MatchColumnCards.push(<MatchCard roundNumber={roundNumber} matchNumber={matchNumber} participants={participants} key={matchNumber}/>);
+  //           if((matchNumber % 2 != 0) && (roundNumber == 1)){
+  //             ConnectorColumnConnectors.push(<UpperConnector roundNumber={roundNumber} connectorNumber={connectorNumber} visibility={"visible"} key={connectorNumber}/>);
+  //           }
+  //           else if(round == 1){
+  //             ConnectorColumnConnectors.push(<LowerConnector roundNumber={roundNumber} connectorNumber={connectorNumber} visibility={"visible"} key={connectorNumber}/>);
+  //           }
+  //           else if((matchNumber % 2 != 0) && (roundNumber != getByesAndRounds()[1])){
+  //             ConnectorColumnConnectors.push(<Connector roundNumber={roundNumber} connectorNumber={connectorNumber} visibility={"visible"} key={connectorNumber}/>);
+  //           }
+  //         }
+  //         matchNumber++;
+  //         connectorNumber++;
+  //       }
+  //     })).then(() => {
+  //       roundNumber++;
+  //       ReactDOM.render(
+  //         MatchColumnCards,
+  //         document.getElementById("matchColumn" + roundNumber)
+  //       );
+  //       ReactDOM.render(
+  //         ConnectorColumnConnectors,
+  //         document.getElementById("connectorColumn" + roundNumber)
+  //       );
+  //     });
+  //   });
+  // });
 }
 
 function openMatchModal(match) {
