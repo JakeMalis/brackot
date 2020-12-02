@@ -1,16 +1,5 @@
 var teamId;
 const db = firebase.firestore();
-const team = {
-    'members' : [],
-    'pendingMembers' : [],
-    'tournaments': {
-      'upcoming' : [],
-      'current' : [],
-      'complete' : []
-    },
-    'conversations' : [],
-    'socials' : []
-};
 const teamsRef = db.collection("teams");
 
 function personalizeElements() {
@@ -178,6 +167,7 @@ class TeamMessageTab extends React.Component {
   }
 }
 class ListOfPendingMembers extends React.Component {
+  //a tab with a list of pending members that a tema admin can reject or accept 
   accept = (member) => {
     teamsRef.doc(teamId).update({
       teamMembers: firebase.firestore.FieldValue.arrayUnion(member),
@@ -288,6 +278,7 @@ class TeamTournamentsList extends React.Component{
                 <h6 className="tournamentCardHostName">
                   {String(db.collection("users").doc(doc.creator).get().then((doc) => {
                     if(doc.exists) {
+                      //gets the name of the tournaments creator
                       return String(doc.data().name)
                     }
                   }))}
@@ -350,6 +341,7 @@ class TeamOverviewTab extends React.Component {
     //creates an event listener for data on the team
     db.collection('teams').doc(teamId).onSnapshot((doc) => {
       if(doc.data().teamMembers.includes(firebase.auth().currentUser.uid)) {
+        //if the user is in the team if provides a button which lets the user leave the team they are in 
         this.setState({'buttonText' : 'Leave Team'})
         this.setState({'buttonOnClick' : () => {
           teamsRef.doc(teamId).update({
@@ -359,29 +351,36 @@ class TeamOverviewTab extends React.Component {
       } else if (doc.data().pendingMembers.includes(firebase.auth().currentUser.uid)) {
         this.setState({'buttonText' : 'requested'})
         this.setState({'buttonOnClick' : () => {}})
+        //if the user has already requested to be in the team the button will do nothing and the text will read requested. 
+        //different stylings for different button messages will come later
       } else {
         this.setState({'buttonText' : 'Join Team'})
         if(doc.data().privacy == "private"){
           this.setState({'buttonOnClick' : () => {
             teamsRef.doc(teamId).update({
               teamPendingMembers: firebase.firestore.FieldValue.arrayUnion(firebase.auth().currentUser.uid)
+              //adds the current user to the list of pending team members if the team is private and the user wishes to join the team
             });
           }})
         } else {
           this.setState({'buttonOnClick' : () => {
             teamsRef.doc(teamId).update({
               teamMembers: firebase.firestore.FieldValue.arrayUnion(firebase.auth().currentUser.uid)
+              //if the team is public it allows the user to automatically join the team 
             });
           }})
         }
       }
       this.setState({'teamDescription' : doc.data().description});
+      //gets the team description data and adds it to the state of the compoent so it automatically updates when firebase does
       this.setState({'teamName' : doc.data().name});
+      //gets the team name data and adds it to the state of the compoent so it automatically updates when firebase does
     })
   }
   constructor(props) {
     super(props)
     this.state = {}
+    //fast enough function it doesnt need to be safe guarded with a component did mount
     this.teamListener();
   }
   render() {
@@ -397,7 +396,8 @@ class TeamOverviewTab extends React.Component {
 
 class TeamInfoQuickCard extends React.Component {
   render() {
-    
+    //container with stylings for the team Info quick card
+    // no actual content other than tbhe profile pic
     return( 
       <div id="teamInfoQuickCard" className="teamInfoQuickCard">
         <div className="wideCardBackground tournamentInfoCardBackground">
@@ -416,14 +416,17 @@ class TeamInfoQuickCard extends React.Component {
 class TeamInfoQuickContent extends React.Component {
   constructor(props) {
     super(props) 
+    //sets the empty state and initializes isDataFetched to false so that the component doesnt load until all the other necesary data is brouought
     this.state = {
       'members': [],
       'privacy' : [],
-      'isDataFetched': true
+      'isDataFetched': false
     }
     
   }
   //gets the list of team members
+  //makes sure that the component has all of the data before it renders in
+  // this stops the component from rendering blank or an error resulting from an undeclared variable being called
   componentDidMount() {
     teamsRef.doc(teamId).onSnapshot((doc) => {
       this.setState({
@@ -470,7 +473,9 @@ class TeamInfoMainCard extends React.Component {
   constructor(props) {
     super(props)
     this.getTeamStatus()
+    // this function runs quick enough that there doesnt need to be a failsafe like some of the other components with firebase data
     this.state = {
+      //changes tab by setting the state equal to a jsx element
       'tab' : <TeamOverviewTab/>
     }
   }
@@ -478,6 +483,8 @@ class TeamInfoMainCard extends React.Component {
     db.collection('teams').doc(teamId).onSnapshot((doc) => {
       if(doc.data().teamAdmins.includes(firebase.auth().currentUser.uid)) {
         this.state = {
+          //checks to see if the current user is a team admin
+          //if the user is a team admin the pending members page loads
           'teamAdmin' : true
         }
       } else {
@@ -524,6 +531,7 @@ class TeamInfoPage extends React.Component {
   }
   render() {
     return(
+      //a flexbox containing the team Info card and Team info Quick Card
       <div className = 'teamInfoPageContainer'>
         <TeamInfoQuickCard/>
         <TeamInfoMainCard/>
@@ -531,3 +539,18 @@ class TeamInfoPage extends React.Component {
     )
   }
 } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
