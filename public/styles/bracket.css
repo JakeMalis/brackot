@@ -708,3 +708,6 @@ div.jQBracket .team div.label {
   height: auto !important;
 }
 
+div.jQBracket .tools {
+  display: none;
+}
