@@ -310,7 +310,9 @@ class TeamTournamentTab extends React.Component {
     constructor(props) {
       super(props)
       this.state = {
-        'tournaments': [],
+        'upcomingTournaments': [],
+        'currentTournaments':[],
+        'completedTournamentss':[],
         'isDataFetched' :false
       }
     }
