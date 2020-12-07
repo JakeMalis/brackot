@@ -76,7 +76,7 @@ async function getProfilePic(player) {
 * This area is where i create a bunch of react
 * components. These are then placed into other react
 * components and all render into the high level
-* component your team card
+* component your team info page
 *
 ****************************************************/
 class TeamMessages extends React.Component {
