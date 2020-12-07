@@ -711,3 +711,11 @@ div.jQBracket .team div.label {
 div.jQBracket .tools {
   display: none;
 }
+
+#bracket-render {
+  overflow: auto;
+}
+
+.loserBracket .round:last-of-type .connector {
+  display: none !important;
+}

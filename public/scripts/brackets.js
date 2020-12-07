@@ -1,9 +1,14 @@
 let clickedRound = 0;
 let clickedTable = 0;
 let usersCollectionData = [];
+let doubleBracket = false;
+let finalBracket = false;
+let winnerBracket = true;
+let tournamentUsers = [];
 
 const tournamentCollection = firebase.firestore().collection("tournaments");
 const userCollection = firebase.firestore().collection("users");
+const auth = firebase.auth();
 
 const render_fn = (container, data, _, state) => {
   switch (state) {
@@ -28,14 +33,21 @@ const render_fn = (container, data, _, state) => {
 
 const getUserData = (userId) => {
   let userName;
+  let id;
   return userCollection.doc(userId).get().then((userDoc) => {
     userName = userDoc.data().name;
+    id = userDoc.id;
     return Promise.resolve(firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + userId + "/profile")).then((ref) => {
       return ref.getDownloadURL();
     }).catch(err => {
       return '';
     });
   }).then((url) => {
+    tournamentUsers.push({
+      id,
+      userName,
+      url,
+    });
     return `${userName}^^^${url}`;
   })
 }
@@ -51,11 +63,35 @@ const initBracket = (type, participantNumber) => {
       index ++ ;
       i *= 2;
     }
-  } else if (type === 'Double Elimination') {
-    
-  }
+    matchResults[matchResults.length - 1].push([null, null, `${index}^^^2`])
 
-  return matchResults;
+    return matchResults;
+  } else if (type === 'Double Elimination') {
+    const winnerBrackets = [], loserBrackets = [];
+    index = 0;
+    while (participantNumber / i >= 1) {
+      winnerBrackets.push(new Array(participantNumber / i).fill('').map((_, idx) => [null, null, `${index + 1}^^^${idx+1}^^^winner`]));
+      index ++;
+      i *= 2;
+    }
+
+    const winnerNumber = winnerBrackets[0].length;
+    i = 2;
+    index = 0;
+    while (winnerNumber / i >= 1) {
+      loserBrackets.push(new Array(winnerNumber / i).fill('').map((_, idx) => [null, null, `${index + 1}^^^${idx+1}^^^loser`]));
+      loserBrackets.push(new Array(winnerNumber / i).fill('').map((_, idx) => [null, null, `${index + 2}^^^${idx+1}^^^loser`]));
+      index += 2;
+      i *= 2;
+    }
+
+    const finalBrackets = [
+      [[null, null, '1^^^1^^^final'], [null, null, '1^^^2^^^final']],
+      [[null, null, '2^^^1^^^final']],
+    ]
+
+    return [winnerBrackets, loserBrackets, finalBrackets];
+  }
 }
 
 /*================================================NEW BRACKET COMPONENT=================================================*/
@@ -65,7 +101,7 @@ class BracketComponent extends React.Component {
     this.state = {
       teamNames: [],
       teamScores: [],
-      bracketType: 'single',
+      bracketType: 'Single Elimination',
     }
   }
 
@@ -78,60 +114,123 @@ class BracketComponent extends React.Component {
     const users = await Promise.all(shuffledParticipants.map(participant => getUserData(participant)));
     usersCollectionData = users;
     const participantNumber = shuffledParticipants.length + 1;
-    const renderBrackets = initBracket(bracketType, participantNumber);
+    const desiredParticpants = Math.pow(2, Math.round(Math.log(participantNumber) / Math.log(2)));
+    const renderBrackets = initBracket(bracketType, desiredParticpants);
 
     if (bracketType === 'Single Elimination') {
-      bracket.forEach(single => {
+      (bracket || []).forEach(single => {
         // Winner Bracket Only
         renderBrackets[single.round-1][single.table-1] = [single.teamOneScore, single.teamTwoScore, `${single.round}^^^${single.table}`];
       })
     } else if (bracketType === 'Double Elimination') {
+      (bracket || []).forEach(single => {
+        // Winner Bracket Only
+        if (single.isFinal)
+          renderBrackets[2][single.round-1][single.table-1] = [single.teamOneScore, single.teamTwoScore, `${single.round}^^^${single.table}^^^final`];
+        else if (single.isWinner)
+          renderBrackets[0][single.round-1][single.table-1] = [single.teamOneScore, single.teamTwoScore, `${single.round}^^^${single.table}^^^winner`];
+        else
+          renderBrackets[1][single.round-1][single.table-1] = [single.teamOneScore, single.teamTwoScore, `${single.round}^^^${single.table}^^^loser`];
+      })
     }
 
     const userData = [];
     for (let i = 0 ; i < users.length ; i += 2 ) {
       userData.push([users[i], users[i + 1] || null]);
     }
+    userData.push(...new Array(desiredParticpants / 2 - userData.length).fill('').map((_) => [null, null]));
 
-    this.setState({teamNames: userData, teamScores: renderBrackets});
+    this.setState({teamNames: userData, teamScores: renderBrackets, bracketType});
 
     tournamentCollection.doc(tournamentId).onSnapshot((snapshot) => {
-      const { bracket } = snapshot.data();
-      const renderBrackets = initBracket(bracketType, participantNumber);
+      const { bracket, reports, creator } = snapshot.data();
+      const renderBrackets = initBracket(bracketType, desiredParticpants);
 
       if (bracketType === 'Single Elimination') {
-        bracket.forEach(single => {
+        (bracket || []).forEach(single => {
           // Winner Bracket Only
           renderBrackets[single.round-1][single.table-1] = [single.teamOneScore, single.teamTwoScore, `${single.round}^^^${single.table}`];
         })
       } else if (bracketType === 'Double Elimination') {
+        (bracket || []).forEach(single => {
+          // Winner Bracket Only
+          if (single.isFinal)
+            renderBrackets[2][single.round-1][single.table-1] = [single.teamOneScore, single.teamTwoScore, `${single.round}^^^${single.table}^^^final`];
+          else if (single.isWinner)
+            renderBrackets[0][single.round-1][single.table-1] = [single.teamOneScore, single.teamTwoScore, `${single.round}^^^${single.table}^^^winner`];
+          else
+            renderBrackets[1][single.round-1][single.table-1] = [single.teamOneScore, single.teamTwoScore, `${single.round}^^^${single.table}^^^loser`];
+        })
       }
 
       this.setState({teamNames: userData, teamScores: renderBrackets});
+
+      if (creator === auth.currentUser.uid && reports && reports.length) {
+        let grouped = (reports || []).reduce((r, a) => {
+          const key = `Round ${a.round}, Table ${a.table}`;
+          r[key] = [...r[key] || [], a];
+          return r;
+        }, {});
+        const disputedMatches = [];
+        Object.keys(grouped).map(roundKey => {
+          const testMatches = grouped[roundKey];
+          const resultTeamOne = testMatches[0].teamOneScore;
+          const resultTeamTwo = testMatches[0].teamTwoScore;
+          const isIdentical = testMatches.every(match => {
+            return match.teamOneScore === resultTeamOne && match.teamTwoScore === resultTeamTwo
+          });
+          if (!isIdentical) disputedMatches.push(roundKey);
+        })
+        if (disputedMatches.length > 0) {
+          document.getElementById("alertBox").style.display = "block";
+          document.getElementById("alertBox").classList.add("errorAlert");
+          document.getElementById("alertTextBold").innerHTML = "Error: ";
+          document.getElementById("alertText").innerHTML = 'Disputed Match Records Reported For ' + disputedMatches.join(',');
+        }
+      } else {
+        document.getElementById("alertBox").style.display = "none";
+      }
     });
   }
 
   componentDidUpdate() {
     if (this.state.teamNames.length > 0) {
+      let results = [];
+      let options = {};
+      if (this.state.bracketType === 'Single Elimination') {
+        results = [this.state.teamScores];
+        options = {
+          skipConsolationRound: true,
+        };
+      } else if (this.state.bracketType === 'Double Elimination') {
+        results = this.state.teamScores;
+        options = {
+          skipSecondaryFinal: true,
+          skipConsolationRound: true,
+        };
+      }
       ($('div#bracket-render')).bracket({
         init: {
           teams: this.state.teamNames,
-          results : [
-            this.state.teamScores
-          ]
+          results
         },
         teamWidth: 180,
         scoreWidth: 40,
         roundMargin: 40,
         matchMargin: 40,
-        skipConsolationRound: true,
+        ...options,        
         decorator: {
 					render: render_fn,
 					edit: () => {}
         },
         onMatchClick: (data) => {
-          const [round, table] = data.split('^^^');
-          openMatchModal(round, table, this.state.teamScores)
+          if (data === undefined) return;
+          const [round, table, double] = data.split('^^^');
+          const bracketType = this.state.bracketType;
+          if (!double)
+            openMatchModal(bracketType, round, table, this.state.teamScores)
+          else
+            openMatchModal(bracketType, round, table, this.state.teamScores, double);
         },
       });
     }
@@ -152,43 +251,69 @@ const renderMatchCards = () => {
   );
 }
 
-const openMatchModal = async (round, table, bracket) => {
-  const [teamOneScore, teamTwoScore] = bracket[round-1][table-1];
+const openMatchModal = async (bracketType, round, table, bracket, double) => {
+  if (bracketType === 'Single Elimination') {
+    const [teamOneScore, teamTwoScore] = bracket[round-1][table-1];
 
-  let tableIndex, upperUser, lowerUser;
+    let tableIndex, upperUser, lowerUser;
 
-  if (+round === 1) {
-    tableIndex = +table * 2;
-    if (usersCollectionData.length < tableIndex) return;
-    upperUser = usersCollectionData[tableIndex - 2].split('^^^');
-    lowerUser = usersCollectionData[tableIndex - 1].split('^^^');
+    if (+round === 1) {
+      tableIndex = +table * 2;
+      if (usersCollectionData.length < tableIndex) return;
+      upperUser = usersCollectionData[tableIndex - 2].split('^^^');
+      lowerUser = usersCollectionData[tableIndex - 1].split('^^^');
+    } else {
+      const compTable = +table*2-2;
+      const prevUpper = bracket[round-2][compTable];
+      const prevLower = bracket[round-2][compTable+1];
+      const isBYE = +round === 2 && 2 * (compTable + 2) > usersCollectionData.length;
+      // if (!isBYE && (prevUpper[0] === null || prevUpper[1] === null || prevLower[0] === null || prevLower[1] === null)) return;
+      const startTable = findParentTable(+round-1, +table*2-1, bracket);
+      const startIndex = bracket[0][startTable - 1][0] >= bracket[0][startTable - 1][1] ? startTable * 2 - 2 : startTable * 2 - 1;
+
+      const endTable = findParentTable(+round-1, +table*2, bracket);
+      const endIndex = bracket[0][endTable - 1][0] >= bracket[0][endTable - 1][1] ? endTable * 2 - 2 : endTable * 2 - 1;
+      upperUser = usersCollectionData[startIndex].split('^^^');
+      lowerUser = usersCollectionData[endIndex].split('^^^');
+    }
+
+    const modal = document.getElementById("matchModal");
+    modal.style.display = "block";
+
+    document.getElementById("upperParticipantScoreModal").innerHTML = teamOneScore;
+    document.getElementById("lowerParticipantScoreModal").innerHTML = teamTwoScore;
+    
+    document.getElementById("upperParticipantNameModal").innerHTML = upperUser[0];
+    document.getElementById("lowerParticipantNameModal").innerHTML = lowerUser[0];
+    document.getElementById("upperParticipantPicModal").src = upperUser[1] || 'media/BrackotLogo2.jpg';
+    document.getElementById("lowerParticipantPicModal").src = lowerUser[1] || 'media/BrackotLogo2.jpg';
+    clickedRound = round;
+    clickedTable = table;
   } else {
-    const compTable = +table*2-2;
-    const prevUpper = bracket[round-2][compTable];
-    const prevLower = bracket[round-2][compTable+1];
-    const isBYE = +round === 2 && 2 * (compTable + 2) > usersCollectionData.length;
-    if (!isBYE && (prevUpper[0] === null || prevUpper[1] === null || prevLower[0] === null || prevLower[1] === null)) return;
-    const startTable = findParentTable(+round-1, +table*2-1, bracket);
-    const startIndex = bracket[0][startTable - 1][0] >= bracket[0][startTable - 1][1] ? startTable * 2 - 2 : startTable * 2 - 1;
+    let teamOneScore, teamTwoScore;
+    if (double === 'final')
+      [teamOneScore, teamTwoScore] = bracket[2][round-1][table-1];
+    else if (double === 'winner')
+      [teamOneScore, teamTwoScore] = bracket[0][round-1][table-1];
+    else
+      [teamOneScore, teamTwoScore] = bracket[1][round-1][table-1];
 
-    const endTable = findParentTable(+round-1, +table*2, bracket);
-    const endIndex = bracket[0][endTable - 1][0] >= bracket[0][endTable - 1][1] ? endTable * 2 - 2 : endTable * 2 - 1;
-    upperUser = usersCollectionData[startIndex].split('^^^');
-    lowerUser = usersCollectionData[endIndex].split('^^^');
+    const modal = document.getElementById("matchModal");
+    modal.style.display = "block";
+
+    document.getElementById("upperParticipantScoreModal").innerHTML = teamOneScore;
+    document.getElementById("lowerParticipantScoreModal").innerHTML = teamTwoScore;
+    
+    document.getElementById("upperParticipantNameModal").innerHTML = 'First';
+    document.getElementById("lowerParticipantNameModal").innerHTML = 'Second';
+    document.getElementById("upperParticipantPicModal").src = 'media/BrackotLogo2.jpg';
+    document.getElementById("lowerParticipantPicModal").src = 'media/BrackotLogo2.jpg';
+    doubleBracket = true;
+    winnerBracket = double === 'winner';
+    finalBracket = double === 'final';
+    clickedRound = round;
+    clickedTable = table;
   }
-
-  const modal = document.getElementById("matchModal");
-  modal.style.display = "block";
-
-  document.getElementById("upperParticipantScoreModal").innerHTML = teamOneScore;
-  document.getElementById("lowerParticipantScoreModal").innerHTML = teamTwoScore;
-  
-  document.getElementById("upperParticipantNameModal").innerHTML = upperUser[0];
-  document.getElementById("lowerParticipantNameModal").innerHTML = lowerUser[0];
-  document.getElementById("upperParticipantPicModal").src = upperUser[1] || 'media/BrackotLogo2.jpg';
-  document.getElementById("lowerParticipantPicModal").src = lowerUser[1] || 'media/BrackotLogo2.jpg';
-  clickedRound = round;
-  clickedTable = table;
 }
 
 const findParentTable = (round, table, bracket) => {
@@ -217,7 +342,7 @@ const editMatchScores = () => {
 }
 
 //Functions done locally reagrding updating data that need to be moved to a cloud function
-function startTournament() {
+const startTournament = () => {
   tournamentCollection.doc(tournamentId).get().then((tournamentDataDoc) => {
     const { players } = tournamentDataDoc.data();
     const playerCount = players.length;
@@ -230,15 +355,22 @@ function startTournament() {
       shuffledParticipants[j] = temp;
     }
 
-    tournamentCollection.doc(tournamentId).set({
+    tournamentCollection.doc(tournamentId).update({
       tournamentStarted: true,
       shuffledParticipants: shuffledParticipants,
+    }).then(() => {
+      document.getElementById("bracketNavbar").style.display = "inline-block";
+      document.getElementById("tournamentSignUpButton").className = 'tournamentCardButton tournamentCardButtonInProgress';
+      document.getElementById("tournamentSignUpButton").innerHTML = "Tournament In Progress";
+      document.getElementById("tournamentSignUpButton").disabled = true;
+    }).catch(err => {
+      const errMessage = err.code === 'permission-denied' ? "You don't have any access to start this tournament" : err.toString();
+      document.getElementById("alertBox").style.display = "block";
+      document.getElementById("alertBox").classList.add("errorAlert");
+      document.getElementById("alertTextBold").innerHTML = "Error: ";
+      document.getElementById("alertText").innerHTML = 'Failed to start the tournament: ' + errMessage;
     });
   });
-  document.getElementById("bracketNavbar").style.display = "inline-block";
-  document.getElementById("tournamentSignUpButton").className = 'tournamentCardButton tournamentCardButtonInProgress';
-  document.getElementById("tournamentSignUpButton").innerHTML = "Tournament In Progress";
-  document.getElementById("tournamentSignUpButton").disabled = true;
 }
 
 /* *** SAVE MATCH SCORES functions ***
@@ -248,24 +380,70 @@ function startTournament() {
 const saveMatchScores = async () => {
   const tournamentDataDoc = await tournamentCollection.doc(tournamentId).get();
   const tournamentData = tournamentDataDoc.data();
-  const { bracket } = tournamentData;
-  const newBracketData = {
-    round: +clickedRound,
-    table: +clickedTable,
-    teamOneScore: +document.getElementById('upperParticipantScoreInput').value,
-    teamTwoScore: +document.getElementById('lowerParticipantScoreInput').value
+  const { bracket, creator, reports } = tournamentData;
+  const myUserId = auth.currentUser.uid;
+  let newBracketData;
+  if (!doubleBracket) {
+    newBracketData = {
+      round: +clickedRound,
+      table: +clickedTable,
+      teamOneScore: +document.getElementById('upperParticipantScoreInput').value,
+      teamTwoScore: +document.getElementById('lowerParticipantScoreInput').value
+    }
+  } else if (!finalBracket) {
+    newBracketData = {
+      round: +clickedRound,
+      table: +clickedTable,
+      teamOneScore: +document.getElementById('upperParticipantScoreInput').value,
+      teamTwoScore: +document.getElementById('lowerParticipantScoreInput').value,
+      isWinner: winnerBracket
+    }
+  } else {
+    newBracketData = {
+      round: +clickedRound,
+      table: +clickedTable,
+      teamOneScore: +document.getElementById('upperParticipantScoreInput').value,
+      teamTwoScore: +document.getElementById('lowerParticipantScoreInput').value,
+      isFinal: true
+    }
   }
   let newBracket = [];
-  const findIndex = bracket.findIndex(single => single.round === +clickedRound && single.table === +clickedTable);
+  let findIndex;
+  if (!doubleBracket)
+    findIndex = (bracket || []).findIndex(single => single.round === +clickedRound && single.table === +clickedTable);
+  else
+    findIndex = (bracket || []).findIndex(single => single.round === +clickedRound && single.table === +clickedTable && single.isWinner === winnerBracket && single.isFinal === finalBracket);
   if (findIndex === -1) {
-    newBracket = [...bracket, newBracketData];
+    newBracket = [...(bracket || []), newBracketData];
   } else {
     newBracket = [...bracket];
     newBracket[findIndex] = newBracketData;
   }
-  return tournamentCollection.doc(tournamentId).set({
-    ...tournamentData,
-    bracket: newBracket
+
+  return Promise.resolve(true).then(() => {
+    if (myUserId === creator || findIndex === -1) {
+      const newReports = (reports || []).filter(report => !(report.round === +clickedRound && report.table === +clickedTable));
+      return tournamentCollection.doc(tournamentId).set({
+        ...tournamentData,
+        bracket: newBracket,
+        reports: newReports,
+      })
+    }
+
+    let newReports = [];
+    const reportfindIndex = (reports || []).findIndex(single => single.round === +clickedRound && single.table === +clickedTable);
+    if (reportfindIndex === -1) {
+      newReports = [...(reports || []), newBracketData];
+    } else {
+      newReports = [...reports];
+      if (reports[findIndex].teamOneScore !== newBracketData.teamOneScore || reports[findIndex].teamTwoScore !== newBracketData.teamTwoScore) {
+        newReports.push(newBracketData);
+      }
+    }
+    return tournamentCollection.doc(tournamentId).set({
+      ...tournamentData,
+      reports: newReports,
+    });
   }).then(() => {
     document.getElementById("editScoresButton").style.display = "block";
     document.getElementById("submitResultsButton").style.display = "none";
@@ -278,7 +456,6 @@ const saveMatchScores = async () => {
     document.getElementById('upperParticipantScoreInput').value = 0;
     document.getElementById('upperParticipantScoreInput').value = 0;
   });
-
 }
 
 var currentMobileRound = 1;
