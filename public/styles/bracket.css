@@ -54,11 +54,11 @@ p{
   color: #eeeeee;
 }
 
-.bracket{
+/* .bracket{
   overflow-x: auto;
   min-height: 1px;
   padding-top: 50px;
-}
+} */
 
 .teamName{
   margin: 0px;
@@ -305,7 +305,7 @@ p{
   border-bottom-right-radius: 4px;
 }
 
-.match{
+/* .match{
   margin-left: auto;
   margin-right: auto;
   height: calc(2 * var(--participantHeight) + var(--dividerHeight));
@@ -314,7 +314,7 @@ p{
 
   transition-duration: 0.15s;
   background-color: var(--background);
-}
+} */
 
 .visible{
   visibility: visible !important;
@@ -324,12 +324,12 @@ p{
   visibility: hidden !important;
 }
 
-.connector{
+/* .connector{
   position: relative;
   padding-top: var(--participantHeight);
   padding-bottom: var(--participantHeight);
   width: 100%;
-}
+} */
 
 .emptyMatch{
   box-shadow: none;
@@ -680,11 +680,42 @@ p{
   #bracketRoundContainer{
     display: none;
   }
-  .bracket{
+  /* .bracket{
     padding-top: 0px;
-  }
+  } */
   .matchColumn{
     width: var(--participantWidth);
     display: inline-block !important;
   }
+}
+
+.bracket {
+  margin-bottom: 42px;
+}
+
+.team {
+  background-color: rgba(255,255,255,0.07) !important;
+  color: #ccc !important;
+  font-size: 16px !important;
+  font-family: 'proxima-nova', sans-serif !important;
+}
+
+.team:hover {
+  color: #fff !important;
+}
+
+div.jQBracket .team div.label {
+  height: auto !important;
+}
+
+div.jQBracket .tools {
+  display: none;
+}
+
+#bracket-render {
+  overflow: auto;
+}
+
+.loserBracket .round:last-of-type .connector {
+  display: none !important;
 }
