@@ -21,6 +21,32 @@ var currentDate = new Date();
 var filteredDate = currentDate;
 var query = tournamentsCollection.where("date", ">=", new Date());
 
+class TournamentCardSkeleton extends React.Component {
+  render() {
+    return (
+      <div className="tournamentCard">
+        <div className="tournamentCardBackground">
+          <div className="tournamentCardContent">
+            <div className="tournamentCardSkeletonWallpaper loading"></div>
+            <div className="tournamentCardText">
+                <h6 className="tournamentCardTitle">Loading...</h6>
+                <ul className="tournamentCardDetails">
+                  <li className="tournamentDetailsList"><i className="fa fa-gamepad tournamentCardIcon" aria-hidden="true"></i><div className="tournamentCardDetail">Loading...</div></li>
+                  <li className="tournamentDetailsList"><i className="fa fa-calendar tournamentCardIcon" aria-hidden="true"></i><div className="tournamentCardDetail">Loading...</div></li>
+                  <li className="tournamentDetailsList"><i className="fa fa-user tournamentCardIcon" aria-hidden="true"></i><div className="tournamentCardDetail">Loading...</div></li>
+                </ul>
+            </div>
+            <div className="tournamentCardHostBar">
+              <div className="tournamentCardSkeletonHostPic"></div>
+              <h6 className="tournamentCardHostName">Loading...</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
+
 class TournamentCard extends React.Component {
   handleClick() {
     window.location = "tournament-info?tournamentId=" + this.props.tournamentID;
@@ -120,62 +146,61 @@ async function filterData() {
 
 async function renderTournamentCards() {
   var TournamentCardArray = [];
-  var tournamentNumber = 1;
+
+  ReactDOM.render(
+    new Array(4).fill('').map((_, index) => <TournamentCardSkeleton key={index} />),
+    document.getElementById("row")
+  );
+
   query.get().then(async function(querySnapshot) {
     if (querySnapshot.size == 0) { // If there are no tournaments available to be rendered...
       document.getElementById('noTournaments').style.display = 'block'; // display the block #noTournaments which is a message
     }
     await Promise.all(querySnapshot.docs.map(async (doc) => {
-      var wallpaper = "/media/game_wallpapers/" + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "-" + "cardWallpaper.";
-      var title = doc.data().name;
+      const docData = doc.data();
+      const { game, name, players, date } = docData;
+      const wallpaper = "/media/game_wallpapers/" + (game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "-" + "cardWallpaper.";
+      const title = name;
 
-      var creatorName = await firebase.firestore().runTransaction(async (transaction) => {
-        return await transaction.get(firebase.firestore().collection("users").doc(doc.data().creator)).then(creatorDoc => {
-          return creatorDoc.data().name;
-        })
+      const creatorName = await firebase.firestore().collection("users").doc(docData.creator).get().then(creatorDoc => {
+        return creatorDoc.name;
       });
 
-      var participants = (doc.data().players.length) + " Participants";
+      const participants = (players.length) + " Participants";
 
-      let game;
-      if (doc.data().game == "Counter-Strike Global Offensive") {
-        game = "Counter-Strike: Global Offensive";
-      }
-      else {
-        game = doc.data().game;
+      let transformedGame = game;
+      if (game == "Counter-Strike Global Offensive") {
+        transformedGame = "Counter-Strike: Global Offensive";
       }
 
-      var tournamentHostPic = await firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + doc.data().creator + "/profile").getDownloadURL().then(function (url) {
+      const tournamentHostPic = await firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + docData.creator + "/profile").getDownloadURL().then((url) => {
         return String(url);
       }).catch((error) => {
         return "media/BrackotLogo2.jpg";
       });
 
-      var date = new Date(doc.data().date.toDate());
+      const transformedDate = new Date(date.toDate());
       var hour, meridiem;
 
-
-      if ((date.getHours() == 0)){
+      if ((transformedDate.getHours() == 0)){
         hour = 12;
         meridiem = "A.M."
       }
-      else if ((date.getHours() - 12) < 0) {
-        hour = date.getHours();
+      else if ((transformedDate.getHours() - 12) < 0) {
+        hour = transformedDate.getHours();
         meridiem = "A.M."
       }
-      else if ((date.getHours() - 12) == 0) {
-        hour = date.getHours();
+      else if ((transformedDate.getHours() - 12) == 0) {
+        hour = transformedDate.getHours();
         meridiem = "P.M."
       }
       else {
-        hour = date.getHours() - 12;
+        hour = transformedDate.getHours() - 12;
         meridiem = "P.M."
       }
-      var tournamentDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' @ ' + hour + ':' + String(date.getMinutes()).padStart(2, "0") + ' ' + meridiem;
+      const tournamentDate = (transformedDate.getMonth() + 1) + '/' + transformedDate.getDate() + '/' + transformedDate.getFullYear() + ' @ ' + hour + ':' + String(transformedDate.getMinutes()).padStart(2, "0") + ' ' + meridiem;
 
       TournamentCardArray.push(<TournamentCard wallpaper={wallpaper} title={title} game={game} date={tournamentDate} participants={participants} tournamentHostPic={tournamentHostPic} tournamentID={doc.id} creatorName={creatorName} key={doc.id} />);
-
-      tournamentNumber++;
     })).then(() => {
       ReactDOM.render(
         TournamentCardArray,
