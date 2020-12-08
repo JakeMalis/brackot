@@ -81,7 +81,7 @@ function personalizeElements() {
 
     document.getElementById("tournamentInfoWallpaper").className = "headerImage tournamentInfoWallpaper " + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "InfoWallpaper";
 
-    if (doc.data().tournamentStarted == false) {
+    if (doc.data().tournamentStatus == 'notStarted') {
       if (doc.data().creator === firebase.auth().currentUser.uid) {
         document.getElementById("tournamentSignUpButton").innerHTML = "Start Tournament";
         document.getElementById("tournamentSignUpButton").onclick = function() { startTournament(); };
@@ -96,7 +96,7 @@ function personalizeElements() {
         document.getElementById("tournamentSignUpButton").onclick = function() { unenroll(); };
       }
     }
-    else if (doc.data().tournamentStarted == true) {
+    else if (doc.data().tournamentStatus == 'inProgress') {
       document.getElementById("tournamentSignUpButton").className = 'tournamentCardButton tournamentCardButtonInProgress';
       document.getElementById("tournamentSignUpButton").innerHTML = "Tournament In Progress";
       document.getElementById("tournamentSignUpButton").disabled = true;

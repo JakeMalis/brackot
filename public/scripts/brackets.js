@@ -356,7 +356,7 @@ const startTournament = () => {
     }
 
     tournamentCollection.doc(tournamentId).update({
-      tournamentStarted: true,
+      tournamentStatus: 'inProgress',
       shuffledParticipants: shuffledParticipants,
     }).then(() => {
       document.getElementById("bracketNavbar").style.display = "inline-block";
