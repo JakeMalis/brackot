@@ -23,8 +23,8 @@ async function loadHeader() {
   getCustomClaimRole();
 
   firebase.auth().currentUser.getIdTokenResult().then((idTokenResult) => {
-     if (idTokenResult.claims.stripeRole == "unlimited") {
-       document.getElementById("unlimitedIcon").style.visibility = "visible";
+    if (idTokenResult.claims.stripeRole == "unlimited") {
+        document.getElementById("unlimitedIcon").style.visibility = "visible";
      }
   });
 }

@@ -137,11 +137,12 @@ async function renderTournamentCards() {
 
       var participants = (doc.data().players.length) + " Participants";
 
+      let game;
       if (doc.data().game == "Counter-Strike Global Offensive") {
-        var game = "Counter-Strike: Global Offensive";
+        game = "Counter-Strike: Global Offensive";
       }
       else {
-        var game = doc.data().game;
+        game = doc.data().game;
       }
 
       var tournamentHostPic = await firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + doc.data().creator + "/profile").getDownloadURL().then(function (url) {

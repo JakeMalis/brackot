@@ -2,15 +2,17 @@
   --gradient: linear-gradient(120deg,#23F2AC,#23D0F2);
   --aquamarine: #23F2AC;
   --turquoise: #23D0F2;
+  --white: #eeeeee;
   --topbarColor: #161722;
-  --background: #202131;
-  --cardColor: #2b2c3c;
-  --tournamentCardColor: #3a3b4a;
-  --tournamentCardColorHover: #454656;
-  --sidebarWidth: 0px;
+  --background: #101017;
+  --cardColor: #171921;
+  --tournamentCardColor: #242529;
+  --tournamentCardColorHover: #303137;
+  --darkFont: #727276;
 
   --filterLabelWidth: 125px;
 }
+
 body{
   overflow-x: hidden;
   margin: 0px;
@@ -22,7 +24,7 @@ body{
 h1{
   font-family: 'proxima-nova', sans-serif !important;
   font-weight: 700;
-  color: #eeeeee;
+  color: var(--white);
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -66,13 +68,13 @@ h6{
 
 p{
   font-family: 'proxima-nova', sans-serif !important;
-  color: #eeeeee;
+  color: var(--white);
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
 }
 
 input{
-  color: #eeeeee;
+  color: var(--white);
 }
 
 ::placeholder{
@@ -80,7 +82,7 @@ input{
 }
 
 select{
-  color: #eeeeee;
+  color: var(--white);
 }
 
 select option{
@@ -93,7 +95,7 @@ select option{
 }
 
 .main-page{
-  padding-top: 95px;
+  padding-top: 70px;
   width: 100%;
   margin-left: 0px;
 }
@@ -162,6 +164,14 @@ select option{
 
 .leagueoflegendsInfoWallpaper{
   background-image: url('../media/game_wallpapers/League of Legends-gameplay.jpg');
+}
+
+.tournamentInfoFadeOverlay{
+  z-index: -99;
+  width: 100%;
+  height: 400px;
+  position: absolute;
+  background-image: linear-gradient(180deg, rgba(0,0,0,0.1), var(--background) 80%);
 }
 
 .prizingIcons{
@@ -318,7 +328,7 @@ font-size: 2em;
 .fa {
 position: relative;
 display: table-cell;
-width: var(--sidebarWidth);
+width: 0px;
 height: 26px;
 text-align: center;
 vertical-align: middle;
@@ -335,7 +345,7 @@ margin-top: 13px;
 }
 
 #firstGreetingMessage{
-  color: #eeeeee;
+  color: var(--white);
   display: normal;
   font-size: 40px;
   font-weight: 600;
@@ -346,7 +356,7 @@ margin-top: 13px;
 }
 
 #greetingMessage{
-  color: #eeeeee;
+  color: var(--white);
   display: none;
   font-size: 50px;
   text-align: center;
@@ -359,7 +369,7 @@ margin-top: 13px;
   margin-right: auto;
   padding-top: 20px;
   padding-bottom: 40px;
-  color: #eeeeee;
+  color: var(--white);
   font-size: 37px;
   text-align: center;
 }
@@ -418,7 +428,7 @@ margin-top: 13px;
 }
 
 .boostsPrice{
-  color: #eeeeee;
+  color: var(--white);
 text-align: center;
 }
 
@@ -472,7 +482,7 @@ text-align: center;
   padding-right: 16px;
   float: right;
   position: relative;
-  color: #eeeeee;
+  color: var(--white);
   text-align: center;
   width: auto;
 }
@@ -522,22 +532,25 @@ text-align: center;
   padding-right: 12px;
   height: 60px;
   display: inline-block;
-  float: left;
+  position: absolute;
+  top: 110px;
+  right: 100px;
+  float: right;
   width: 100%;
 }
 
 .filterLabel{
   margin-right: 1px;
-  border-top: 7px solid var(--tournamentCardColor);
-  border-bottom: 11px solid var(--tournamentCardColor);
-  border-right: 15px solid var(--tournamentCardColor);
-  border-left: 15px solid var(--tournamentCardColor);
-  background-color: var(--tournamentCardColor);
+  border-top: 7px solid var(--cardColor);
+  border-bottom: 11px solid var(--cardColor);
+  border-right: 15px solid var(--cardColor);
+  border-left: 15px solid var(--cardColor);
+  background-color: var(--cardColor);
   border-radius: 2px;
   width: var(--filterLabelWidth) !important;
   height: 60px;
   display: inline-block;
-  float: left;
+  float: right;
   width: auto;
   cursor: pointer;
   overflow:hidden;
@@ -545,20 +558,20 @@ text-align: center;
 }
 
 .filterLabel:hover{
-  border-color: var(--tournamentCardColorHover);
-  background-color: var(--tournamentCardColorHover);
+  border-color: var(--tournamentCardColor);
+  background-color: var(--tournamentCardColor);
 }
 
 .filterButtonLabelActive{
-  border-color: var(--tournamentCardColorHover);
-  background-color: var(--tournamentCardColorHover);
+  border-color: var(--tournamentCardColor);
+  background-color: var(--tournamentCardColor);
 }
 
 .filterIcon{
   width: 40px !important;
   margin-top: 6px !important;
   display: inline-block;
-  color: #eeeeee;
+  color: var(--white);
 }
 
 .filterLabelText{
@@ -593,7 +606,7 @@ text-align: center;
 }
 
 .filterOption:hover .filterText{
-  color: #eeeeee;
+  color: var(--white);
 }
 
 .filterInput{
@@ -622,29 +635,30 @@ text-align: center;
   width: 220px;
   background-color: var(--cardColor);
   border: 1px solid: var(--tournamentCardColor);
-  color: #eeeeee;
+  color: var(--white);
 }
 
 .filterPopup{
+  float: right;
   z-index: 10000;
   margin: 10px;
   position: relative;
-  background-color: var(--tournamentCardColorHover);
+  background-color: var(--tournamentCardColor);
   margin-top: 61px;
-  margin-left: 0px;
+  margin-right: calc(-2 * var(--filterLabelWidth));
   min-width: var(--filterLabelWidth);
   max-width: calc(2 * var(--filterLabelWidth));
   height: auto;
   /*max-height: 170px;*/
   /*overflow: auto;*/
   display: none;
-  color: #eeeeee;
+  color: var(--white);
   border-radius: 2px;
 }
 
 #datePopup{
   max-width: var(--filterLabelWidth);
-  margin-left: calc(1px + var(--filterLabelWidth));
+  margin-right: calc(-2 * var(--filterLabelWidth));
 }
 
 .show{
@@ -749,7 +763,7 @@ text-align: center;
   border-radius: 4px;
   border: 0px;
   box-shadow: 0px 0px 13px 0px rgba(0,0,0,0.2);
-  background-color: var(--tournamentCardColor);
+  background-color: var(--cardColor);
 }
 
 .tournamentCardBackground:hover{
@@ -804,7 +818,6 @@ text-align: center;
 .tournamentDetailsList{
   overflow: hidden;
   width: auto;
-  color: #aaaaaa;
   list-style: none;
   display: block;
   min-height: 23px;
@@ -816,14 +829,14 @@ text-align: center;
   width: 30px !important;
   padding-right: 10px;
   font-size: 14px !important;
-  color: #aaaaaa !important;
+  color: var(--darkFont) !important;
   display: inline-block;
 }
 
 .tournamentCardDetail{
   text-overflow: ellipsis;
   font-size: 14px;
-  color: #aaaaaa !important;
+  color: var(--darkFont) !important;
   display: inline-block;
   font-family: 'proxima-nova', sans-serif;
 }
@@ -833,7 +846,7 @@ text-align: center;
   bottom: 0px;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
-  border-top: 2px solid rgba(100,100,100,0.2);
+  border-top: 2px solid rgba(100,100,100,0.1);
   height: 44px;
   width: 100%;
 }
@@ -865,7 +878,7 @@ text-align: center;
   width: calc(100% - 57px);
   max-width: 100%;
   margin: 0px;
-  color: #aaaaaa !important;
+  color: var(--darkFont) !important;
 }
 
 .teamCardButton{
@@ -887,19 +900,19 @@ text-align: center;
 
 .teamCardButton:hover{
   background: #505060;
-  color: #eeeeee;
+  color: var(--white);
 }
 
 .tournamentCardButton{
+  margin-left: 42px;
+  margin-bottom: 40px;
+  padding-left: 15px;
+  padding-right: 15px;
   font-family: 'proxima-nova', sans-serif;
   height: 50px;
   border: 0px;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  color: #eeeeee;
-  width: 100%;
+  border-radius: 4px;
+  color: var(--white);
   font-size: 15px;
   font-weight: bold;
   letter-spacing: 1px;
@@ -1176,10 +1189,7 @@ text-align: center;
   margin-right: auto;
   height: auto;
   width: 90%;
-  border-radius: 4px;
-  border: 1px solid rgba(0,0,0,0.05);
-  box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.15);
-  background-color: var(--cardColor);
+  background-color: transparent;
 }
 
 .wideCardContent{
@@ -1191,7 +1201,6 @@ text-align: center;
 
 .tournamentInfoCardBackground{
   border: 0px !important;
-  box-shadow: 0px -2px 8px 0px rgba(0,0,0,0.25) !important;
 }
 
 #overviewTab{
@@ -1309,7 +1318,7 @@ text-align: center;
   font-family: 'proxima-nova', sans-serif;
   letter-spacing: 1.7px;
   font-weight: 800px;
-  color: #eeeeee;
+  color: var(--white);
   border: 0px;
   border-radius: 8px;
   cursor: pointer;
@@ -1416,7 +1425,7 @@ text-align: center;
   border-radius: 8px;
   background-color: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.09);
-  color: #eeeeee;
+  color: var(--white);
 }
 
 .createTournamentTextInput::placeholder{
@@ -1578,7 +1587,7 @@ text-align: center;
 .createTournamentLabelChecked{
   background-color: var(--tournamentCardColorHover);
   border: 2px solid var(--aquamarine);
-  color: #eeeeee;
+  color: var(--white);
 }
 
 .createTournamentInput{
@@ -1657,7 +1666,7 @@ text-align: center;
 }
 
 .createTeamIcon:hover{
-  color: #eeeeee;
+  color: var(--white);
 }
 
 .facebookIcon{ color: #1778f2 !important; }
@@ -1679,10 +1688,106 @@ text-align: center;
 */
 
 
+/*===========================================CHAT CLASSES============================================================= */
+.messageBlurb{
+  width: auto !important;
+  color: white;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 15px;
+}
+
+.bubble{
+  width: auto;
+  max-width: 90%;
+  position: relative;
+  box-shadow: 0px 0px 2px 0px (0,0,0,0.2);
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+.userBubble{
+  margin-left: auto;
+  background-image: linear-gradient(10deg,#13C6C2,#13E29C);
+}
+
+.chatControls{
+  position: relative;
+}
+
+.chatInput{
+  width: 100%;
+  margin-top: 6px;
+  margin-bottom: 30px;
+  height: 40px;
+  padding: 11px;
+  padding-left: 16px;
+  padding-right: 16px;
+  font-size: 15px;
+  font-family: 'proxima-nova', sans-serif;
+  border-radius: 8px;
+  background-color: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.09);
+  color: #eeeeee;
+}
+
+.chatInput::placeholder{
+  color: #888888 !important;
+}
+
+.sendChatIcon{
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  font-size: 15px;
+  cursor: pointer;
+  color: #eeeeee;
+  transition-duration: 0.1s;
+}
+
+.sendChatIcon:hover{
+  color: #aaaaaa;
+}
+
+/* The below is the component of the messsage bubble that makes a bubble have the pointer to the side */
+.userBubble:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 10px solid #13E09A;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    top: 0;
+    right: -8px;
+}
+
+.foreignBubble{
+  margin-right: auto;
+  background-image: linear-gradient(0deg,var(--tournamentCardColorHover),var(--tournamentCardColorHover));
+}
+
+/* The below is the component of the messsage bubble that makes a bubble have the pointer to the side */
+.foreignBubble:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 10px solid var(--tournamentCardColorHover);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    top: 0;
+    left: -8px;
+}
+
+/*--aquamarine: #23F2AC;
+--turquoise: #23D0F2;*/
 
 /* TOURNAMENT INFO PAGE CODE */
 .tournamentInfoPageContainer{
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 #bracketNavbar{
@@ -1690,7 +1795,7 @@ text-align: center;
 }
 
 #tournamentTitle{
-  color: #eeeeee;
+  color: var(--white);
   margin-bottom: 0px;
   padding-top: 30px;
   padding-left: 42px;
@@ -1699,7 +1804,6 @@ text-align: center;
 }
 
 .quickDetailHeader{
-  background-color: rgba(255,255,255,0.07);
   margin-top: -20px;
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
@@ -1710,11 +1814,12 @@ text-align: center;
   padding-right: 35px;
   padding-top: 10px;
   padding-bottom: 15px;
+  margin-bottom: 5px;
   flex-wrap: wrap;
 }
 
 .quickDetail{
-  color: #aaaaaa;
+  color: var(--white);
   list-style: none;
   display: inline-block;
   margin-left: 10px;
@@ -1731,7 +1836,7 @@ text-align: center;
 }
 
 .quickDetailText{
-  color: #aaaaaa;
+  color: var(--white);
   font-size: 15px;
   display: inline-block;
   letter-spacing: 0.8px;
@@ -1899,7 +2004,7 @@ text-align: center;
   padding-left: 15px;
   padding-right: 15px;
   font-size: 16px;
-  color: #eeeeee;
+  color: var(--white);
 }
 /*
 .infoParticipant{
@@ -2014,6 +2119,62 @@ text-align: center;
   letter-spacing: 0.8px;
 }
 
+
+
+
+
+
+
+/*====================================================LEGAL PAGES (TERMS AND PRIVACY)=====================================================================*/
+.h1Legal{
+  font-family: 'proxima-nova', sans-serif !important;
+  color: #eeeeee !important;
+  font-size: 40px !important;
+}
+.h2Legal{
+  font-family: 'proxima-nova', sans-serif !important;
+  color: #aaaaaa !important;
+  font-size: 26px !important;
+  font-weight: 800 !important;
+  text-transform: uppercase;
+}
+.h3Legal{
+  font-family: 'proxima-nova', sans-serif !important;
+  color: #aaaaaa !important;
+  font-size: 18px !important;
+  text-decoration: underline;
+}
+.pLegal{
+  font-family: 'proxima-nova', sans-serif !important;
+  color: #aaaaaa !important;
+  font-size: 18px;
+}
+
+.ulLegal{
+  font-family: 'proxima-nova', sans-serif !important;
+  color: #aaaaaa !important;
+  font-size: 18px;
+}
+
+.legalListItem{
+  font-family: 'proxima-nova', sans-serif !important;
+  color: #aaaaaa !important;
+  font-size: 18px;
+}
+
+.legalContainer{
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 50px;
+  padding-top: 100px;
+  width: 85%;
+  max-width: 1100px;
+}
+
+
+
+
+
 /* THE BELOW SECTION IS MEANT FOR MOBILE DEVICES ONLY */
 @media only screen and (min-width: 480px){
   #firstGreetingMessage{
@@ -2048,7 +2209,7 @@ text-align: center;
 
   .main-page{
     width: 100vw;
-    padding-top: 120px;
+    padding-top: 70px;
   }
 
   .userInfobar{
@@ -2112,10 +2273,6 @@ text-align: center;
     margin-bottom: 42px;
     margin-left: 56px;
     margin-right: 56px;
-  }
-
-  .tournamentInfoPageContainer{
-    margin-top: 60px;
   }
 }
 

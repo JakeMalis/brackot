@@ -2,10 +2,15 @@
   --gradient: linear-gradient(120deg,#23F2AC,#23D0F2);
   --aquamarine: #23F2AC;
   --turquoise: #23D0F2;
-  --background: #202131;
-  --cardColor: #2b2c3c;
-  --tournamentCardColor: #3a3b4a;
-  --tournamentCardColorHover: #454656;
+  --white: #eeeeee;
+  --topbarColor: #161722;
+  --background: #101017;
+  --cardColor: #171921;
+  --tournamentCardColor: #242529;
+  --tournamentCardColorHover: #303137;
+  --darkFont: #727276;
+
+  --filterLabelWidth: 125px;
 }
 
 body{

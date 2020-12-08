@@ -2,10 +2,15 @@
   --gradient: linear-gradient(120deg,#23F2AC,#23D0F2);
   --aquamarine: #23F2AC;
   --turquoise: #23D0F2;
-  --background: #202131;
-  --cardColor: #2b2c3c;
-  --tournamentCardColor: #3a3b4a;
-  --tournamentCardColorHover: #454656;
+  --white: #eeeeee;
+  --topbarColor: #161722;
+  --background: #101017;
+  --cardColor: #171921;
+  --tournamentCardColor: #242529;
+  --tournamentCardColorHover: #303137;
+  --darkFont: #727276;
+
+  --filterLabelWidth: 125px;
 }
 body{
   overflow-x: hidden;
@@ -188,7 +193,7 @@ select option{
 }
 
 .fadeOverlay{
-  background-image: linear-gradient(180deg, rgba(0,0,0,0), rgba(32, 33, 49, 1) 95%);
+  background-image: linear-gradient(180deg, rgba(0,0,0,0), var(--background) 95%);
 }
 
 .contentBox{
@@ -218,7 +223,7 @@ select option{
   padding: 0px;
   padding-bottom: 50px;
   font-weight: 400;
-  color: #aaaaaa !important;
+  color: var(--darkFont) !important;
 }
 
 .thirdLandingSubheader{
@@ -229,6 +234,7 @@ select option{
   margin-left: auto;
   margin-right: auto;
   max-width: 570px;
+  color: #aaaaaa !important;
 }
 
 #browseGamesHeader{
@@ -372,11 +378,11 @@ select option{
 
 @media only screen and (min-width: 480px){
   .thirdLandingTopOverlay{
-    background-image: linear-gradient(90deg, rgba(35, 242, 172, 0.1), rgba(32, 33, 49, 1) 42%);
+    background-image: linear-gradient(90deg, rgba(35, 242, 172, 0.1), var(--background) 42%);
   }
 
   .thirdLandingBottomOverlay{
-      background-image: linear-gradient(270deg, rgba(35, 242, 172, 0.1), rgba(32, 33, 49, 1) 42%);
+      background-image: linear-gradient(270deg, rgba(35, 242, 172, 0.1), var(--background) 42%);
   }
 
   .carouselArrow{
