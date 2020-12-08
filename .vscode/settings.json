@@ -1,0 +1,6 @@
+{
+    "terminal.integrated.fontFamily": "Fira Code",
+    "editor.fontSize" : 12,
+    "editor.fontFamily": "Fira Code",
+    "editor.fontLigatures": true
+}

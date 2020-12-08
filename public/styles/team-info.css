@@ -1,0 +1,90 @@
+.teamInfoMainCard {
+  width: 100%;
+}
+
+.teamInfoPageContainer {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.teamInfoMainInfo {
+  background-color: #2b2c3c;
+}
+
+.teamOverviewTab, .teamChatTab, .teamPendingTab, .teamTournamentsTab {
+  background-color: #2b2c3c;
+}
+
+.teamNameQuickCard {
+  color: white;
+  text-align: center;
+  font-size: large;
+}
+
+.teamOverviewTab {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.teamOverviewTab .teamName {
+  text-align: center;
+  color: white;
+  font-size: larger;
+  width: 100%;
+}
+
+.teamOverviewTab .teamDescription {
+  text-align: center;
+  color: lightgray;
+  font-size: large;
+  width: 100%;
+}
+
+.teamOverviewTab .leaveTeamButton {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.teamOverviewTab .joinTeamButton {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.teamTournamentsTab {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.teamTournamentsTab .teamTournamentsList .teamTournamentsHeader {
+  color: white;
+  text-align: center;
+  font-size: large;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.teamTournamentsTab .teamTournamentsList .teamTournamentRow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+/*# sourceMappingURL=team-info.css.map */

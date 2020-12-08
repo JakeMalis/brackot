@@ -4,8 +4,10 @@ function personalizeElements() {
   var url = new URL(window.location.href);
   tournamentId = url.searchParams.get("tournamentId");
 
+  
+  initChat();
+  renderChat();
   renderParticipants();
-
 
   firebase.firestore().collection("tournaments").doc(tournamentId).get().then(function(doc) {
     document.getElementById("tournamentTitle").innerHTML = doc.data().name;
@@ -97,7 +99,7 @@ function personalizeElements() {
       }
     }
     else if (doc.data().tournamentStarted == true) {
-      document.getElementById("tournamentSignUpButton").className = 'tournamentCardButton tournamentCardButtonInProgress';
+      document.getElementById("tournamentSignUpButton").className = "tournamentCardButton tournamentCardButtonInProgress";
       document.getElementById("tournamentSignUpButton").innerHTML = "Tournament In Progress";
       document.getElementById("tournamentSignUpButton").disabled = true;
 
@@ -175,31 +177,53 @@ function sendConfirmationEmail(tournamentId) {
 
 function setTab(tab) {
   if(tab === "overview") {
+    
     document.getElementById("overviewTab").style.display = "block";
     document.getElementById("participantsTab").style.display = "none";
     document.getElementById("bracketTab").style.display = "none";
+    document.getElementById("chatTab").style.display = "none";
 
     document.getElementById("overviewNavbar").className = "quickNavbarItem quickNavbarItemSelected";
     document.getElementById("participantsNavbar").className = "quickNavbarItem";
     document.getElementById("bracketNavbar").className = "quickNavbarItem";
+    document.getElementById("chatNavbar").className = "quickNavbarItem";
   }
   else if(tab === "participants") {
+    
     document.getElementById("overviewTab").style.display = "none";
     document.getElementById("participantsTab").style.display = "block";
     document.getElementById("bracketTab").style.display = "none";
+    document.getElementById("chatTab").style.display = "none";
 
     document.getElementById("overviewNavbar").className = "quickNavbarItem";
     document.getElementById("participantsNavbar").className = "quickNavbarItem quickNavbarItemSelected";
     document.getElementById("bracketNavbar").className = "quickNavbarItem";
+    document.getElementById("chatNavbar").className = "quickNavbarItem";
   }
   else if(tab === "bracket") {
+    
     document.getElementById("overviewTab").style.display = "none";
     document.getElementById("participantsTab").style.display = "none";
     document.getElementById("bracketTab").style.display = "block";
+    document.getElementById("chatTab").style.display = "none";
 
     document.getElementById("overviewNavbar").className = "quickNavbarItem";
     document.getElementById("participantsNavbar").className = "quickNavbarItem";
     document.getElementById("bracketNavbar").className = "quickNavbarItem quickNavbarItemSelected";
+    document.getElementById("chatNavbar").className = "quickNavbarItem";
+  }
+  else if(tab === "chat") {
+    
+    document.getElementById("overviewTab").style.display = "none";
+    document.getElementById("participantsTab").style.display = "none";
+    document.getElementById("bracketTab").style.display = "none";
+    document.getElementById("chatTab").style.display = "block";
+
+    document.getElementById("overviewNavbar").className = "quickNavbarItem";
+    document.getElementById("participantsNavbar").className = "quickNavbarItem";
+    document.getElementById("bracketNavbar").className = "quickNavbarItem";
+    document.getElementById("chatNavbar").className = "quickNavbarItem quickNavbarItemSelected";
+    
   }
 }
 
