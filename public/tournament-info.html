@@ -32,6 +32,11 @@
   <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-storage.js"></script>
   <script src="scripts/firebaseConfig.js"></script>
 
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script type="text/javascript" src="./lib/jquery.bracket.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="./lib/jquery.bracket.min.css" />
+
   <script type="text/babel" src="scripts/brackets.js"></script>
   <script type="text/babel" src="scripts/participantCards.js"></script>
   <script type='text/babel' src='scripts/tournament-chat.js'></script>
@@ -47,7 +52,9 @@
   <div id="topbar">
     <script> $( "#topbar" ).load( "ajax/topbar.html" ); </script>
   </div>
-  <div id="tournamentInfoWallpaper" class="tournamentInfoWallpaper"></div>
+  <div id="tournamentInfoWallpaper" class="tournamentInfoWallpaper">
+    <div class="tournamentInfoFadeOverlay"/>
+  </div>
 
   <div class="main-page">
       <div class="tournamentInfoPageContainer">
@@ -62,6 +69,7 @@
                 <li id="prizingQuickListItem" class="quickDetail"><i class="fa fa-trophy quickDetailIcon" aria-hidden="true"></i><p id="prizingQuick" class="quickDetailText"></p></li>
                 <li id="entryFeeQuickListItem" class="quickDetail"><i class="fa fa-ticket-alt quickDetailIcon" aria-hidden="true"></i><p id="entryFeeQuick" class="quickDetailText"></p></li>
               </ul>
+              <button class="tournamentCardButton tournamentCardButtonGeneric" id="tournamentSignUpButton"></button>
               <ul class="quickNavbar">
                 <li id="overviewNavbar" class="quickNavbarItem quickNavbarItemSelected"><a class="quickNavbarItemLink" onclick="setTab('overview')"><p class="quickNavbarItemText">Overview</p></a></li>
                 <li id="participantsNavbar" class="quickNavbarItem"><a class="quickNavbarItemLink" onclick="setTab('participants')"><p class="quickNavbarItemText">Participants</p></a></li>
@@ -104,6 +112,7 @@
                   <p id="bracketRoundMobileText">Round 1</p>
                   <button id="nextBracketRound" class="bracketRoundButton" onclick="changeRoundMobile('next')"><i class="fa fa-caret-right bracketRoundButtonIcon" aria-hidden="true"></i></button>
                 </div>
+                <div id="bracket-renderer"></div>
                 <div id="bracket" class="bracket">
                   <div class="matchColumn" id="matchColumn1">
                   </div>
@@ -181,12 +190,8 @@
                     <i id="sendChatIcon" class="fas fa-paper-plane sendChatIcon" onClick="submitTournamentMessage()"></i>
                   </div>
                 </div>
-
               </div>
-
             </div>
-
-            <button class="tournamentCardButton tournamentCardButtonGeneric" id="tournamentSignUpButton"></button>
           </div>
         </div>
 

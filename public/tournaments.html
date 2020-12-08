@@ -37,6 +37,7 @@
   <script src="scripts/header.js"></script>
   <script src="scripts/topbar.js"></script>
 
+  <!-- Is this still necessary?  Why is this here? -->
   <div class="modal fade" id="chooseTeamModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -87,14 +88,20 @@
               <div class="filterAndSearchbar">
                 <!--
                 <input id="tournamentSearchbar" class="tournamentSearchbar" type="text" placeholder="Find tournaments..."></input>-->
-                <label id="gameFilterButton" class="filterLabel" onclick="toggleGamePopup()">
-                  <p class="filterLabelText">Game</p>
-                  <p id="gameLabelField" class="filterLabelField">All</p>
-                </label>
                 <label id="dateFilterButton" class="filterLabel" onclick="toggleDatePopup()">
                   <p class="filterLabelText">Date</p>
                   <p id="dateLabelField" class="filterLabelField">All</p>
                 </label>
+                <label id="gameFilterButton" class="filterLabel" onclick="toggleGamePopup()">
+                  <p class="filterLabelText">Game</p>
+                  <p id="gameLabelField" class="filterLabelField">All</p>
+                </label>
+
+
+                <div id="datePopup" class="filterPopup">
+                  <div id="dateList" class="filterRow">
+                  </div>
+                </div>
 
                 <div id="gamePopup" class="filterPopup widePopup">
                   <div id="gameFilterColumn" class="filterRow">
@@ -104,13 +111,12 @@
                   </div>
                 </div>
 
-                <div id="datePopup" class="filterPopup">
-                  <div id="dateList" class="filterRow">
-                  </div>
-                </div>
-
               </div>
-              <div class="row" id="row" style="margin-top: 80px;margin-left: 0px !important; margin-right: 0px !important;">
+              <div class="row" id="row" style="margin-top: 10px;margin-left: 0px !important; margin-right: 0px !important;">
+              </div>
+              <div id="noTournaments">
+                <h4 id="noTournamentsMessage">We couldn't find any tournaments that match the given criteria. Try widening your search, or click the button below to create your own.</h4>
+                <button id="noTournamentsButton" class="grayButton" onclick="location.href='create-tournament.html';">Host Tournament</button>
               </div>
             </div>
           </div>

@@ -39,7 +39,7 @@ exports.createUserDocument = functions.region('us-east1').auth.user().onCreate(a
       newsletter: true,
       thirdparty: true
     }
-  });
+  }, { merge: true });
 });
 
 exports.sendWelcomeEmail = functions.region('us-east1').firestore.document('users/{userId}').onCreate(async (snap, context) => {

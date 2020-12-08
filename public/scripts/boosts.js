@@ -12,7 +12,7 @@ function personalizeElements() {
 
 async function startCheckout(product) {
   const docRef = await firebase.firestore()
-  .collection('customers')
+  .collection('users')
   .doc(firebase.auth().currentUser.uid)
   .collection('checkout_sessions')
   .add({

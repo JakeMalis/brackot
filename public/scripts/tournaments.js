@@ -122,8 +122,9 @@ async function renderTournamentCards() {
   var TournamentCardArray = [];
   var tournamentNumber = 1;
   query.get().then(async function(querySnapshot) {
-    if (querySnapshot.size == 0) { console.log("No tournaments match the given criteria"); /* We need to add some code that makes it more clear that nothing meets the criteria */ }
-
+    if (querySnapshot.size == 0) { // If there are no tournaments available to be rendered...
+      document.getElementById('noTournaments').style.display = 'block'; // display the block #noTournaments which is a message
+    }
     await Promise.all(querySnapshot.docs.map(async (doc) => {
       var wallpaper = "/media/game_wallpapers/" + (doc.data().game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","") + "-" + "cardWallpaper.";
       var title = doc.data().name;
