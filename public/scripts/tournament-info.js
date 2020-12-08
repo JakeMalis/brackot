@@ -106,6 +106,14 @@ function personalizeElements() {
       document.getElementById("bracketNavbar").style.display = "inline-block";
       renderMatchCards();
     }
+    else if (doc.data().tournamentStatus == 'completed') {
+      document.getElementById("tournamentSignUpButton").className = 'tournamentCardButton tournamentCardButtonInProgress';
+      document.getElementById("tournamentSignUpButton").innerHTML = "Tournament Completed";
+      document.getElementById("tournamentSignUpButton").disabled = true;
+
+      document.getElementById("bracketNavbar").style.display = "inline-block";
+      renderMatchCards();
+    }
 
     shuffledParticipants = doc.data().players;
     numParticipants = doc.data().players.length;

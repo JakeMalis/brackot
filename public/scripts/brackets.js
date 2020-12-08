@@ -380,7 +380,7 @@ const startTournament = () => {
 const saveMatchScores = async () => {
   const tournamentDataDoc = await tournamentCollection.doc(tournamentId).get();
   const tournamentData = tournamentDataDoc.data();
-  const { bracket, creator, reports } = tournamentData;
+  const { bracket, creator, reports, tournamentStatus, shuffledParticipants } = tournamentData;
   const myUserId = auth.currentUser.uid;
   let newBracketData;
   if (!doubleBracket) {
@@ -420,7 +420,16 @@ const saveMatchScores = async () => {
     newBracket[findIndex] = newBracketData;
   }
 
+  const participantNumber = shuffledParticipants.length + 1;
+  const desiredParticpants = Math.pow(2, Math.round(Math.log(participantNumber) / Math.log(2)));
+
   return Promise.resolve(true).then(() => {
+    let updatedStatus = tournamentStatus;
+    if (finalBracket) {
+      updatedStatus === 'completed';
+    } else if (Math.log(desiredParticpants) / Math.log(2) === +clickedRound) {
+      updatedStatus === 'completed';
+    }
     if (myUserId === creator || findIndex === -1) {
       const newReports = (reports || []).filter(report => !(report.round === +clickedRound && report.table === +clickedTable));
       return tournamentCollection.doc(tournamentId).set({
@@ -443,6 +452,7 @@ const saveMatchScores = async () => {
     return tournamentCollection.doc(tournamentId).set({
       ...tournamentData,
       reports: newReports,
+      tournamentStatus: updatedStatus,
     });
   }).then(() => {
     document.getElementById("editScoresButton").style.display = "block";
