@@ -97,7 +97,7 @@ function addTournament() { try{
           2: secondEarnings,
           3: thirdEarnings
       },
-      tournamentStarted: false,
+      tournamentStatus: 'notStarted',
       unlimited: document.getElementById("unlimited").checked,
       type: document.querySelector('input[name="newTournamentParticipantType"]:checked').value,
       entryFee: entryFee,
