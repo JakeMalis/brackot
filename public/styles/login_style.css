@@ -2,9 +2,15 @@
   --gradient: linear-gradient(120deg,#23F2AC,#23D0F2);
   --aquamarine: #23F2AC;
   --turquoise: #23D0F2;
-  --background: #202131;
-  --cardColor: #2b2c3c;
-  --tournamentCardColor: #3a3b4a;
+  --white: #eeeeee;
+  --topbarColor: #161722;
+  --background: #101017;
+  --cardColor: #171921;
+  --tournamentCardColor: #242532;
+  --tournamentCardColorHover: #303140;
+  --darkFont: #727276;
+
+  --filterLabelWidth: 125px;
 }
 
 * {
@@ -36,7 +42,7 @@ body {
 }
 
 .splashOverlay{
-  background: rgba(32,33,49,0.9);
+  background: rgba(10,10,20,0.8);
   margin: 0px;
   padding: 0px;
   width: 100vw;

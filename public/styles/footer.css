@@ -1,8 +1,23 @@
+:root{
+  --gradient: linear-gradient(120deg,#23F2AC,#23D0F2);
+  --aquamarine: #23F2AC;
+  --turquoise: #23D0F2;
+  --white: #eeeeee;
+  --topbarColor: #161722;
+  --background: #101017;
+  --cardColor: #171921;
+  --tournamentCardColor: #242529;
+  --tournamentCardColorHover: #303137;
+  --darkFont: #727276;
+
+  --filterLabelWidth: 125px;
+}
+
 .footer{
   border-top: 1px solid rgba(100,100,100,0.2);
   width: 100%;
   height: auto;
-  background: #202131;
+  background: #101017;
 }
 
 .footerContainer{
@@ -36,7 +51,7 @@
 .footerListHeader{
   padding-top: 10px;
   padding-bottom: 5px;
-  color: #dddddd;
+  color: #eeeeee;
   font-size: 18px;
   font-family: 'proxima-nova', sans-serif;
   font-weight: 700;
