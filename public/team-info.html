@@ -13,7 +13,7 @@
   <link rel="stylesheet" type="text/css" href="styles/footer.css">
   <link rel="stylesheet" type="text/css" href="styles/font-awesome/css/all.css">
   <link rel="stylesheet" href="https://use.typekit.net/fyp1otf.css">
-
+  <link rel="stylesheet" type="text/css" href="styles/team-info.css">
   <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
@@ -30,8 +30,7 @@
   <script src="scripts/firebaseConfig.js"></script>
 
   <script src="scripts/games.js"></script>
-  <script src="scripts/team-info.js"></script>
-
+  <script type= "text/babel" src="scripts/team-info.js"></script>
   <script src="scripts/header.js"></script>
   <script src="scripts/topbar.js"></script>
 </head>
@@ -44,69 +43,9 @@
   </div>
   <div id="tournamentInfoWallpaper" class="tournamentInfoWallpaper"></div>
 
-  <div class="main-page">
-      <div class="teamInfoPageContainer">
+  <div class="main-page" id = "teamInfoMainPage">
 
-        <div id="teamInfoQuickCard" class="teamInfoQuickCard">
-          <div class="wideCardBackground tournamentInfoCardBackground">
-            <div class="singleColumn">
-              <img id="teamInfoProfilePic" class="teamInfoProfilePic" />
-              <div class="teamInfoQuickContent">
-                <div class="teamSocials" id="teamInfoSocials">
-                  <a class="teamSocial facebookIcon noDisplay" id="teamInfoFacebook"><i class="fab fa-facebook-square" aria-hidden="true"></i></a>
-                  <a class="teamSocial twitterIcon noDisplay" id="teamInfoTwitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-                  <a class="teamSocial instagramIcon noDisplay" id="teamInfoInstagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                  <a class="teamSocial youtubeIcon noDisplay" id="teamInfoYoutube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
-                  <a class="teamSocial redditIcon noDisplay" id="teamInfoReddit"><i class="fab fa-reddit-alien" aria-hidden="true"></i></a>
-                  <a class="teamSocial twitchIcon noDisplay" id="teamInfoTwitch"><i class="fab fa-twitch" aria-hidden="true"></i></a>
-                  <a class="teamSocial discordIcon noDisplay" id="teamInfoDiscord"><i class="fab fa-discord" aria-hidden="true"></i></a>
-                </div>
-                <div class="teamInfoDetails">
-                  <div class="iconAndNum teamInfoIconAndNum">
-                    <i class="fas fa-user teamInfoIcon"></i>
-                    <h2 id="teamInfoMembers" class="teamInfoStat"></h2>
-                  </div>
-                  <p class="statDescription">Members</p>
-                </div>
-                <div class="teamInfoDetails">
-                  <div class="iconAndNum teamInfoIconAndNum">
-                    <i id="teamInfoPublicIcon" class="fas fa-users teamInfoIcon noDisplay"></i>
-                    <i id="teamInfoPrivateIcon" class="fas fa-lock teamInfoIcon noDisplay"></i>
-                    <h2 id="teamInfoPrivacy" class="teamInfoStat"></h2>
-                  </div>
-                  <p class="statDescription">Privacy</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div id="teamInfoCard" class="teamInfoCard">
-          <div class="wideCardBackground tournamentInfoCardBackground">
-            <div id="teamInfoCardContent" class="wideCardContent">
-              <h6 class="teamInfoSubheader">Team</h6>
-              <h2 class="teamInfoName" id="teamInfoName"></h2>
-              <div class="tournamentInfoRow">
-                <h6 class="teamInfoSubheader">Description</h6><p id="teamInfoDescription" class="tournamentInfoDetail font15"></p>
-              </div>
-              <div id="teamInfoGamesRow" class="tournamentInfoRow noDisplay">
-                <h6 class="teamInfoSubheader">Games</h6><p id="teamInfoGames" class="tournamentInfoDetail font15"></p>
-                <div id="teamInfoGameCarousel" class="teamInfoGameCarousel"></div>
-              </div>
-              <!--
-              <div class="tournamentInfoRow">
-                <h6 class="tournamentInfoSubheader">Requirements</h6><p id="teamInfoRequirements" class="tournamentInfoDetail font15"></p>
-              </div>
-              <div class="tournamentInfoRow noBottomPadding">
-              </div>-->
-            </div>
-            <button class="tournamentCardButton tournamentCardButtonGeneric" id="teamSignUpButton"></button>
-          </div>
-        </div>
-
-
-
-      </div>
+  </div>
 
 
 
