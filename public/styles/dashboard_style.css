@@ -314,6 +314,7 @@ select option{
 }
 
 .myTournamentsHeader{
+  padding-left: 10px;
   padding-bottom: 0px;
 }
 
@@ -491,6 +492,11 @@ text-align: center;
   color: rgba(255,255,255,0.7);
 }
 
+#row{
+  display: block;
+  margin-top: 60px;
+}
+
 .row{
   display: flex;
   flex-wrap: wrap;
@@ -528,15 +534,11 @@ text-align: center;
 }
 
 .filterAndSearchbar{
-  padding-left: 12px;
+  padding-left: 0px;
   padding-right: 12px;
   height: 60px;
   display: inline-block;
-  position: absolute;
-  top: 110px;
-  right: 100px;
-  float: right;
-  width: 100%;
+  float: left;
 }
 
 .filterLabel{
@@ -2199,6 +2201,19 @@ text-align: center;
 
 /* THE BELOW SECTION IS MEANT FOR MOBILE DEVICES ONLY */
 @media only screen and (min-width: 480px){
+  .filterAndSearchbar{
+    padding-left: 12px;
+    position: absolute;
+    top: 110px;
+    right: 100px;
+    float: right;
+  }
+
+  #row{
+    display: inline-block;
+    margin-top: 0px;
+  }
+
   #firstGreetingMessage{
     font-size: 50px;
   }
