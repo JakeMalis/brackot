@@ -10,50 +10,6 @@ const tournamentCollection = firebase.firestore().collection("tournaments");
 const userCollection = firebase.firestore().collection("users");
 const auth = firebase.auth();
 
-document.addEventListener('DOMContentLoaded', function() {
-  const ele = document.getElementById('bracket-renderer');
-  ele.style.cursor = 'grab';
-
-  let pos = { top: 0, left: 0, x: 0, y: 0 };
-
-  const mouseDownHandler = function(e) {
-      ele.style.cursor = 'grabbing';
-      ele.style.userSelect = 'none';
-
-      pos = {
-          left: ele.scrollLeft,
-          top: ele.scrollTop,
-          // Get the current mouse position
-          x: e.clientX,
-          y: e.clientY,
-      };
-
-      document.addEventListener('mousemove', mouseMoveHandler);
-      document.addEventListener('mouseup', mouseUpHandler);
-  };
-
-  const mouseMoveHandler = function(e) {
-      // How far the mouse has been moved
-      const dx = e.clientX - pos.x;
-      const dy = e.clientY - pos.y;
-
-      // Scroll the element
-      ele.scrollTop = pos.top - dy;
-      ele.scrollLeft = pos.left - dx;
-  };
-
-  const mouseUpHandler = function() {
-      ele.style.cursor = 'grab';
-      ele.style.removeProperty('user-select');
-
-      document.removeEventListener('mousemove', mouseMoveHandler);
-      document.removeEventListener('mouseup', mouseUpHandler);
-  };
-
-  // Attach the handler
-  ele.addEventListener('mousedown', mouseDownHandler);
-});
-
 const render_fn = (container, data, _, state) => {
   switch (state) {
     case 'empty-bye':
@@ -207,7 +163,7 @@ class BracketComponent extends React.Component {
         })
       }
 
-      this.setState({teamNames: userData, teamScores: renderBrackets});
+      this.setState({teamNames: userData, teamScores: renderBrackets, bracketType});
 
       if (creator === auth.currentUser.uid && reports && reports.length) {
         let grouped = (reports || []).reduce((r, a) => {
@@ -237,17 +193,21 @@ class BracketComponent extends React.Component {
     });
   }
 
-  componentDidUpdate() {
-    if (this.state.teamNames.length > 0) {
+  UNSAFE_componentWillUpdate(_, state) {
+    this.renderTournamentBracket(state);
+  }
+
+  renderTournamentBracket(state) {
+    if (state.teamNames.length > 0) {
       let results = [];
       let options = {};
-      if (this.state.bracketType === 'Single Elimination') {
-        results = [this.state.teamScores];
+      if (state.bracketType === 'Single Elimination') {
+        results = [state.teamScores];
         options = {
           skipConsolationRound: true,
         };
-      } else if (this.state.bracketType === 'Double Elimination') {
-        results = this.state.teamScores;
+      } else if (state.bracketType === 'Double Elimination') {
+        results = state.teamScores;
         options = {
           skipSecondaryFinal: true,
           skipConsolationRound: true,
@@ -255,7 +215,7 @@ class BracketComponent extends React.Component {
       }
       ($('div#bracket-render')).bracket({
         init: {
-          teams: this.state.teamNames,
+          teams: state.teamNames,
           results
         },
         teamWidth: 180,
@@ -270,11 +230,11 @@ class BracketComponent extends React.Component {
         onMatchClick: (data) => {
           if (data === undefined) return;
           const [round, table, double] = data.split('^^^');
-          const bracketType = this.state.bracketType;
+          const bracketType = state.bracketType;
           if (!double)
-            openMatchModal(bracketType, round, table, this.state.teamScores)
+            openMatchModal(bracketType, round, table, state.teamScores)
           else
-            openMatchModal(bracketType, round, table, this.state.teamScores, double);
+            openMatchModal(bracketType, round, table, state.teamScores, double);
         },
       });
     }
