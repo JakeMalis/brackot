@@ -152,13 +152,13 @@ class TeamMessageTab extends React.Component {
   }
   render(){
     return(
-      <div id='teamChatTab' className = "teamChatTab">
-        <div className ="chatArea">
+      <div id='teamChatTab' className = "teamChatTab" style={{width: '100%'}}>
+        <div className ="chatArea" style={{padding: '30px 30px 0'}}>
           <div className ="chatHeader"></div>
           <TeamMessages/>
           <br/>
           <div className="chatControls ">
-            <textarea id = 'teamChatText' placeholder="Write Message"/>
+            <input id = 'teamChatText' placeholder="Write Message" className="chatInput" />
             <i id="sendChatIcon" className="fas fa-paper-plane sendChatIcon" onClick={() => this.submitTeamMessage(document.getElementById("teamChatText").value)}></i>
           </div>
         </div>
@@ -234,6 +234,66 @@ class TeamMembersTab extends React.component {
 }
 */
 
+class TeamTournamentCard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      creatorPic: '../media/BrackotLogo2.jpg',
+    }
+    this.getCreatorPic();
+  }
+  getCreatorPic() {
+    const player = this.props.tournamentData.creator;
+    firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + player + "/profile").getDownloadURL().then((url) => {
+      this.setState({creatorPic: String(url)});
+    }).catch(() => {
+      this.setState({creatorPic: "../media/BrackotLogo2.jpg"});
+    })
+  }
+  
+  render() {
+    const { tournamentData } = this.props;
+    const { creatorPic } = this.state;
+    console.log(`../media/game_wallpapers/${tournamentData.game}-cardWallpaper.jpg`);
+    return (
+      <div className="tournamentCard">
+        {/*how the tournament card is structured comes from tournaments.js*/}
+        <div className="tournamentCardBackground">
+          <div className="tournamentCardContent">
+            <picture className="tournamentWallpaper">
+              <source srcSet={`/media/game_wallpapers/${tournamentData.game.toLowerCase().replace(/ /g, '')}-cardWallpaper.webp`} type="image/webp"></source>
+              <img className="tournamentWallpaper" src={`/media/game_wallpapers/${tournamentData.game.toLowerCase().replace(/ /g, '')}-cardWallpaper.jpg`}/>
+            </picture>
+            <div className="tournamentCardText">
+              <h6 className="tournamentCardTitle">{String(tournamentData.name)}</h6>
+              <ul className="tournamentCardDetails">
+                <li className="tournamentDetailsList">
+                  <i className="fa fa-gamepad tournamentCardIcon" aria-hidden="true"></i>
+                  <div className="tournamentCardDetail">{String(tournamentData.game)}</div>
+                </li>
+                <li className="tournamentDetailsList">
+                  <i className="fa fa-calendar tournamentCardIcon" aria-hidden="true"></i>
+                  <div className="tournamentCardDetail">{String(tournamentData.date)}</div>
+                </li>
+                <li className="tournamentDetailsList">
+                  <i className="fa fa-user tournamentCardIcon" aria-hidden="true"></i>
+                  <div className="tournamentCardDetail">{String(tournamentData.players.length)}</div>
+                </li>
+              </ul>
+            </div>
+            <div className="tournamentCardHostBar">
+              <img className="tournamentCardHostPic" src={String(creatorPic)}></img>
+              <h6 className="tournamentCardHostName">
+                {String(tournamentData.creatorName)}
+              </h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
+
 class TeamTournamentsList extends React.Component{
   
   handleClick = (doc) => { 
@@ -247,99 +307,66 @@ class TeamTournamentsList extends React.Component{
   render() {
     return(
       <div className = "tournamentRows">
-        {this.props.tournaments.map((doc) => (
-      <div className="tournamentCard">
-        {/*how the tournament card is structured comes from tournaments.js*/}
-        <div className="tournamentCardBackground">
-          <div className="tournamentCardContent">
-              <picture className="tournamentWallpaper">
-                <source srcSet={'../media/game_wallpapers/' + `${doc.game}` + '-cardWallpaper.webp'} type="image/webp"></source>
-                <img className="tournamentWallpaper" src={'../media/game_wallpapers/' + `${doc.game}` + '-cardWallpaper.jpg'}/>
-              </picture>
-              <div className="tournamentCardText">
-                <h6 className="tournamentCardTitle">{String(doc.name)}</h6>
-                <ul className="tournamentCardDetails">
-                  <li className="tournamentDetailsList">
-                    <i className="fa fa-gamepad tournamentCardIcon" aria-hidden="true"></i>
-                    <div className="tournamentCardDetail">{String(doc.game)}</div>
-                  </li>
-                  <li className="tournamentDetailsList">
-                    <i className="fa fa-calendar tournamentCardIcon" aria-hidden="true"></i>
-                    <div className="tournamentCardDetail">{String(doc.date)}</div>
-                  </li>
-                  <li className="tournamentDetailsList">
-                    <i className="fa fa-user tournamentCardIcon" aria-hidden="true"></i>
-                    <div className="tournamentCardDetail">{String(doc.players.length)}</div>
-                  </li>
-                </ul>
-              </div>
-              <div className="tournamentCardHostBar">
-                <img className="tournamentCardHostPic" src={String(getProfilePic(doc.creator))}></img>
-                <h6 className="tournamentCardHostName">
-                  {String(db.collection("users").doc(doc.creator).get().then((doc) => {
-                    if(doc.exists) {
-                      //gets the name of the tournaments creator
-                      return String(doc.data().name)
-                    }
-                  }))}
-                </h6>
-              </div>
-            </div>
-          </div>
-      </div>
-      ))}
+        {this.props.tournaments.map((doc, id) => (
+          <TeamTournamentCard tournamentData={doc} key={id} />
+        ))}
     </div>    
   )    
   }
 }
 
 class TeamTournamentTab extends React.Component {
-    componentDidMount() {
-      db.collection("tournaments")
-      .where("players", "array-contains", teamId)
-      .onSnapshot((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            if(!this.state.tournaments.includes(doc.data())) {
-              this.state.tournaments.push(doc.data())
-            }
-          })
-          this.setState({'isDataFetched': true})
-      })
+  componentDidMount() {
+    db.collection("tournaments")
+    .where("players", "array-contains", teamId)
+    .onSnapshot((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          if(!this.state.tournaments.includes(doc.data())) {
+            this.state.tournaments.push(doc.data())
+          }
+        })
+        this.setState({'isDataFetched': true})
+    })
+  }
+  
+  constructor(props) {
+    super(props)
+    this.state = {
+      'tournaments': [],
+      'isDataFetched' :false
     }
-    
-    constructor(props) {
-      super(props)
-      this.state = {
-        'tournaments': [],
-        'isDataFetched' :false
-      }
-    }
-    render() {
-      //waits for the component did mount function to run before returning the actual component class
-      if(!this.state.isDataFetched) return null;
-      return(
-          <div className = "teamTournamentsList">
-            <div className = "teamTournamentsHeader">
-              Tournaments in Progress:
-            </div>
-            <TeamTournamentsList tournaments = {this.state.tournaments}/>
-            <div className = "teamTournamentsHeader">
-              Upcoming Tournaments:
-            </div>
-            <TeamTournamentsList tournaments = {this.state.tournaments}/>
-            <div className = "teamTournamentsHeader">
-              Completed tournaments:
-            </div>
-            <TeamTournamentsList tournaments = {this.state.tournaments}/>
-          </div>
-      )
-      }
+  }
+  render() {
+    //waits for the component did mount function to run before returning the actual component class
+    if(!this.state.isDataFetched) return null;
+    return(
+      <div className = "teamTournamentsList" style={{width: '100%'}}>
+        <div className = "teamTournamentsHeader">
+          Tournaments in Progress:
+        </div>
+        <TeamTournamentsList tournaments = {this.state.tournaments}/>
+        <div className = "teamTournamentsHeader">
+          Upcoming Tournaments:
+        </div>
+        <TeamTournamentsList tournaments = {this.state.tournaments}/>
+        <div className = "teamTournamentsHeader">
+          Completed tournaments:
+        </div>
+        <TeamTournamentsList tournaments = {this.state.tournaments}/>
+      </div>
+    )
+  }
 }
 class TeamOverviewTab extends React.Component {
   //the main overview of the team
-  teamListener = () => {
+  teamListener() {
     //creates an event listener for data on the team
     db.collection('teams').doc(teamId).onSnapshot((doc) => {
+      const { description, name, games } = doc.data();
+      this.setState({'teamDescription' : description});
+      this.setState({'teamName' : name});
+      this.setState({'games' : games});
+
       if(doc.data().teamMembers.includes(firebase.auth().currentUser.uid)) {
         //if the user is in the team if provides a button which lets the user leave the team they are in 
         this.setState({'buttonText' : 'Leave Team'})
@@ -371,39 +398,77 @@ class TeamOverviewTab extends React.Component {
           }})
         }
       }
-      this.setState({'teamDescription' : doc.data().description});
-      //gets the team description data and adds it to the state of the compoent so it automatically updates when firebase does
-      this.setState({'teamName' : doc.data().name});
-      //gets the team name data and adds it to the state of the compoent so it automatically updates when firebase does
     })
+  }
+  getGameFileName(gameName) {
+    const gameFileName = (gameName.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","").replace("'","");
+    return gameFileName;
   }
   constructor(props) {
     super(props)
-    this.state = {}
-    //fast enough function it doesnt need to be safe guarded with a component did mount
+    this.state = {
+      teamName: '',
+      teamDescription: '',
+      buttonOnClick: () => {},
+      buttonText: 'Join Team',
+    }
     this.teamListener();
   }
   render() {
+    const { teamName, teamDescription, games, buttonOnClick, buttonText } = this.state;
     return (
-      <div>
-        <h2>{this.state.teamName}</h2>
-        <h6>{this.state.teamDescription}</h6>
-        <button onClick = {this.state.buttonOnClick}>{this.state.buttonText}</button>
+      <div className="wideCardBackground tournamentInfoCardBackground">
+        <div id="teamInfoCardContent" className="wideCardContent">
+          <h6 className="teamInfoSubheader">Team</h6>
+          <h2 className="teamInfoName" id="teamInfoName">{teamName}</h2>
+          <div className="tournamentInfoRow">
+            <h6 className="teamInfoSubheader">Description</h6>
+            <p id="teamInfoDescription" className="tournamentInfoDetail font15">{teamDescription}</p>
+          </div>
+          {games && games.map((gameType, index) => (
+            <div id="teamInfoGamesRow" className="tournamentInfoRow" key={index}>
+              <h6 className="teamInfoSubheader">Games</h6><p id="teamInfoGames" className="tournamentInfoDetail font15"></p>
+              <div id="teamInfoGameCarousel" className="teamInfoGameCarousel">
+                <label id="teamInfominecraftLabel" className="teamInfoGamesLabel">
+                  <picture>
+                    <source srcSet={`../media/game_images/${this.getGameFileName(gameType)}.webp`} type="image/webp" />
+                    <img className="teamInfoGamesImage" src={`../media/game_images/${this.getGameFileName(gameType)}.jpg`} />
+                  </picture>
+                </label>
+              </div>
+            </div>
+          ))}
+        </div>
+        <button className="tournamentCardButton tournamentCardButtonGeneric" id="teamSignUpButton" onClick={this.state.buttonOnClick}>{buttonText}</button>
       </div>
     )
   }
 }
 
 class TeamInfoQuickCard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {teamProfilePic: ''}
+  }
+
+  componentDidMount() {
+    firebase.storage().refFromURL("gs://brackot-teams-storage/" + teamId + "/profile").getDownloadURL().then(function (url) {
+      this.setState({teamProfilePic: url});
+    }).catch(() => {
+      this.setState({teamProfilePic: "../media/BrackotLogo2.jpg"});
+    });
+  }
+
   render() {
     //container with stylings for the team Info quick card
     // no actual content other than tbhe profile pic
+    const { teamProfilePic } = this.state;
     return( 
       <div id="teamInfoQuickCard" className="teamInfoQuickCard">
         <div className="wideCardBackground tournamentInfoCardBackground">
           <div className="singleColumn">
-            <img id="teamInfoProfilePic" className="teamInfoProfilePic" />
-              <div id = "teamNameQuickCard" className = "teamNameQuickCard"></div>
+            {teamProfilePic && <img id="teamInfoProfilePic" className="teamInfoProfilePic" src={teamProfilePic}/>}
+            <div id = "teamNameQuickCard" className = "teamNameQuickCard"></div>
               <div className="teamInfoQuickContent" id='teamInfoQuickContent'>
                 <TeamInfoQuickContent/>
               </div>
@@ -420,7 +485,8 @@ class TeamInfoQuickContent extends React.Component {
     this.state = {
       'members': [],
       'privacy' : [],
-      'isDataFetched': false
+      'isDataFetched': false,
+      'social': {}
     }
     
   }
@@ -429,25 +495,28 @@ class TeamInfoQuickContent extends React.Component {
   // this stops the component from rendering blank or an error resulting from an undeclared variable being called
   componentDidMount() {
     teamsRef.doc(teamId).onSnapshot((doc) => {
+      const docData = doc.data();
       this.setState({
-        'members' : doc.data().teamMembers,
-        'privacy' : doc.data().privacy,
-        'isDataFetched': true
+        'members' : docData.teamMembers,
+        'privacy' : docData.privacy,
+        'isDataFetched': true,
+        'social' : docData.social
       })
     })
   }
   render() {
+    const { social } = this.state;
     if(!this.state.isDataFetched){return null;}
     return (
       <div>
         <div className="teamSocials" id="teamInfoSocials">
-          <a className="teamSocial facebookIcon noDisplay" id="teamInfoFacebook"><i className="fab fa-facebook-square" aria-hidden="true"></i></a>
-          <a className="teamSocial twitterIcon noDisplay" id="teamInfoTwitter"><i className="fab fa-twitter" aria-hidden="true"></i></a>
-          <a className="teamSocial instagramIcon noDisplay" id="teamInfoInstagram"><i className="fab fa-instagram" aria-hidden="true"></i></a>
-          <a className="teamSocial youtubeIcon noDisplay" id="teamInfoYoutube"><i className="fab fa-youtube" aria-hidden="true"></i></a>
-          <a className="teamSocial redditIcon noDisplay" id="teamInfoReddit"><i className="fab fa-reddit-alien" aria-hidden="true"></i></a>
-          <a className="teamSocial twitchIcon noDisplay" id="teamInfoTwitch"><i className="fab fa-twitch" aria-hidden="true"></i></a>
-          <a className="teamSocial discordIcon noDisplay" id="teamInfoDiscord"><i className="fab fa-discord" aria-hidden="true"></i></a>
+          {social.facebook && <a className="teamSocial facebookIcon noDisplay" id="teamInfoFacebook"><i className="fab fa-facebook-square" aria-hidden="true"></i></a>}
+          {social.twitter && <a className="teamSocial twitterIcon noDisplay" id="teamInfoTwitter"><i className="fab fa-twitter" aria-hidden="true"></i></a>}
+          {social.instagram && <a className="teamSocial instagramIcon noDisplay" id="teamInfoInstagram"><i className="fab fa-instagram" aria-hidden="true"></i></a>}
+          {social.youtube && <a className="teamSocial youtubeIcon noDisplay" id="teamInfoYoutube"><i className="fab fa-youtube" aria-hidden="true"></i></a>}
+          {social.reddit && <a className="teamSocial redditIcon noDisplay" id="teamInfoReddit"><i className="fab fa-reddit-alien" aria-hidden="true"></i></a>}
+          {social.twitch && <a className="teamSocial twitchIcon noDisplay" id="teamInfoTwitch"><i className="fab fa-twitch" aria-hidden="true"></i></a>}
+          {social.discord && <a className="teamSocial discordIcon noDisplay" id="teamInfoDiscord"><i className="fab fa-discord" aria-hidden="true"></i></a>}
         </div>
         <div className="teamInfoDetails">
           <div className="iconAndNum teamInfoIconAndNum">
@@ -476,7 +545,8 @@ class TeamInfoMainCard extends React.Component {
     // this function runs quick enough that there doesnt need to be a failsafe like some of the other components with firebase data
     this.state = {
       //changes tab by setting the state equal to a jsx element
-      'tab' : <TeamOverviewTab/>
+      'tab' : <TeamOverviewTab/>,
+      'tabName': 'overview'
     }
   }
   getTeamStatus() {
@@ -496,26 +566,27 @@ class TeamInfoMainCard extends React.Component {
     })
   }
   render() {
+    const { tabName } = this.state;
     return(
       <div className = 'teamInfoMainCard'>
         <ul className="quickNavbar">
-          <li id="teamOverviewNavbar" className="quickNavbarItem quickNavbarItemSelected">
-            <a className="quickNavbarItemLink" onClick= {() => this.setState({'tab': <TeamOverviewTab/>})}>
+          <li id="teamOverviewNavbar" className={`quickNavbarItem ${tabName === 'overview' ? 'quickNavbarItemSelected' : ''}`}>
+            <a className="quickNavbarItemLink" onClick= {() => this.setState({'tab': <TeamOverviewTab/>, tabName: 'overview'})}>
               <p className="quickNavbarItemText">Overview</p>
             </a>
           </li>
-          <li id="teamChatNavbar" className="quickNavbarItem">
-            <a className="quickNavbarItemLink" onClick= {() => this.setState({'tab': <TeamMessageTab/>})}>
+          <li id="teamChatNavbar" className={`quickNavbarItem ${tabName === 'message' ? 'quickNavbarItemSelected' : ''}`}>
+            <a className="quickNavbarItemLink" onClick= {() => this.setState({'tab': <TeamMessageTab/>, tabName: 'message'})}>
               <p className="quickNavbarItemText">Chat</p>
             </a>
           </li>
-          <li id="teamTournamentsNavbar" className="quickNavbarItem">
-            <a className="quickNavbarItemLink" onClick= {() => this.setState({'tab': <TeamTournamentTab/>})}>
+          <li id="teamTournamentsNavbar" className={`quickNavbarItem ${tabName === 'tournament' ? 'quickNavbarItemSelected' : ''}`}>
+            <a className="quickNavbarItemLink" onClick= {() => this.setState({'tab': <TeamTournamentTab/>, tabName: 'tournament'})}>
               <p className="quickNavbarItemText">Tournaments</p>
             </a>
           </li>
-          <li id="teamPendingNavbar" className="quickNavbarItem" style =  {{display: this.state.teamAdmin ? "block" : "none"}}>
-            <a className="quickNavbarItemLink" onClick= {() => this.setState({'tab': <ListOfPendingMembers/>})}>
+          <li id="teamPendingNavbar" className={`quickNavbarItem ${tabName === 'pending' ? 'quickNavbarItemSelected' : ''}`} style =  {{display: this.state.teamAdmin ? "block" : "none"}}>
+            <a className="quickNavbarItemLink" onClick= {() => this.setState({'tab': <ListOfPendingMembers/>, tabName: 'pending'})}>
               <p className="quickNavbarItemText">Pending Requests</p>
             </a>
           </li>
