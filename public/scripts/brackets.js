@@ -163,7 +163,7 @@ class BracketComponent extends React.Component {
         })
       }
 
-      this.setState({teamNames: userData, teamScores: renderBrackets});
+      this.setState({teamNames: userData, teamScores: renderBrackets, bracketType});
 
       if (creator === auth.currentUser.uid && reports && reports.length) {
         let grouped = (reports || []).reduce((r, a) => {
@@ -193,17 +193,21 @@ class BracketComponent extends React.Component {
     });
   }
 
-  componentDidUpdate() {
-    if (this.state.teamNames.length > 0) {
+  UNSAFE_componentWillUpdate(_, state) {
+    this.renderTournamentBracket(state);
+  }
+
+  renderTournamentBracket(state) {
+    if (state.teamNames.length > 0) {
       let results = [];
       let options = {};
-      if (this.state.bracketType === 'Single Elimination') {
-        results = [this.state.teamScores];
+      if (state.bracketType === 'Single Elimination') {
+        results = [state.teamScores];
         options = {
           skipConsolationRound: true,
         };
-      } else if (this.state.bracketType === 'Double Elimination') {
-        results = this.state.teamScores;
+      } else if (state.bracketType === 'Double Elimination') {
+        results = state.teamScores;
         options = {
           skipSecondaryFinal: true,
           skipConsolationRound: true,
@@ -211,7 +215,7 @@ class BracketComponent extends React.Component {
       }
       ($('div#bracket-render')).bracket({
         init: {
-          teams: this.state.teamNames,
+          teams: state.teamNames,
           results
         },
         teamWidth: 180,
@@ -226,11 +230,11 @@ class BracketComponent extends React.Component {
         onMatchClick: (data) => {
           if (data === undefined) return;
           const [round, table, double] = data.split('^^^');
-          const bracketType = this.state.bracketType;
+          const bracketType = state.bracketType;
           if (!double)
-            openMatchModal(bracketType, round, table, this.state.teamScores)
+            openMatchModal(bracketType, round, table, state.teamScores)
           else
-            openMatchModal(bracketType, round, table, this.state.teamScores, double);
+            openMatchModal(bracketType, round, table, state.teamScores, double);
         },
       });
     }
