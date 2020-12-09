@@ -87,9 +87,16 @@ exports.storeUserProfilePictures = functions.region('us-east1').pubsub.schedule(
     for (const user of listUsersResult.users) {
       const ret = await new Promise(async (resolve, reject) => {
         try {
-          await admin.firestore().collection('users').doc(user.toJSON()["uid"]).update({
-            avatarUrl: user.toJSON()["photoURL"]
-          });
+          if (user.toJSON()["photoURL"] === "media/BrackotLogo2.jpg") {
+            await admin.firestore().collection('users').doc(user.toJSON()["uid"]).update({
+              avatarUrl: null
+            });
+          }
+          else {
+            await admin.firestore().collection('users').doc(user.toJSON()["uid"]).update({
+              avatarUrl: user.toJSON()["photoURL"]
+            });
+          }
           resolve(true);
         }
         catch(e) {
