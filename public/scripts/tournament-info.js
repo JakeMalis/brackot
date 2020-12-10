@@ -104,7 +104,6 @@ function personalizeElements() {
       document.getElementById("tournamentSignUpButton").disabled = true;
 
       document.getElementById("bracketNavbar").style.display = "inline-block";
-      renderMatchCards();
     }
     else if (doc.data().tournamentStatus == 'completed') {
       document.getElementById("tournamentSignUpButton").className = 'tournamentCardButton tournamentCardButtonInProgress';
@@ -112,9 +111,6 @@ function personalizeElements() {
       document.getElementById("tournamentSignUpButton").disabled = true;
 
       document.getElementById("bracketNavbar").style.display = "inline-block";
-      renderMatchCards();
-
-      initDragAndDrop();
     }
 
     shuffledParticipants = doc.data().players;
@@ -221,6 +217,8 @@ function setTab(tab) {
     document.getElementById("participantsNavbar").className = "quickNavbarItem";
     document.getElementById("bracketNavbar").className = "quickNavbarItem quickNavbarItemSelected";
     document.getElementById("chatNavbar").className = "quickNavbarItem";
+
+    renderMatchCards();
   }
   else if(tab === "chat") {
     
