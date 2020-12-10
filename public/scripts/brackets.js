@@ -670,4 +670,6 @@ window.addEventListener("resize", () => {
   console.log(document.getElementById("bracket-render").style)
   if (window.innerWidth <= 468)
     document.getElementById("bracket-render").style.overflow = "auto";
+  else
+    document.getElementById("bracket-render").style.overflow = "hidden";
 });
