@@ -125,6 +125,7 @@ class BracketComponent extends React.Component {
       teamNames: [],
       teamScores: [],
       bracketType: "Single Elimination",
+      availbleForBracket: false,
     };
   }
 
@@ -133,7 +134,12 @@ class BracketComponent extends React.Component {
     document.getElementById("lowerParticipantScoreInput").value = 0;
 
     const tournamentDoc = await tournamentCollection.doc(tournamentId).get();
-    const { shuffledParticipants, bracket, bracketType } = tournamentDoc.data();
+    const {
+      shuffledParticipants,
+      bracket,
+      bracketType,
+      tournamentStatus,
+    } = tournamentDoc.data();
     const users = await Promise.all(
       shuffledParticipants.map((participant) => getUserData(participant))
     );
@@ -191,6 +197,8 @@ class BracketComponent extends React.Component {
     this.setState({
       teamNames: userData,
       teamScores: renderBrackets,
+      availbleForBracket:
+        tournamentStatus === "inProgress" || tournamentStatus === "completed",
       bracketType,
     });
 
@@ -271,13 +279,12 @@ class BracketComponent extends React.Component {
 
   UNSAFE_componentWillUpdate(_, state) {
     this.renderTournamentBracket(state);
-    setTimeout(() => {
-      this.renderTournamentBracket(state);
-    }, 500);
   }
 
   renderTournamentBracket(state) {
+    if (!state.availbleForBracket) return;
     if (state.teamNames.length > 0) {
+      if (window.innerWidth >= 1024) initDragAndDrop();
       let results = [];
       let options = {};
       if (state.bracketType === "Single Elimination") {
@@ -658,3 +665,11 @@ function changeRoundMobile(action) {
       }
     });
 }
+
+window.addEventListener("resize", () => {
+  console.log(document.getElementById("bracket-render").style)
+  if (window.innerWidth <= 468)
+    document.getElementById("bracket-render").style.overflow = "auto";
+  else
+    document.getElementById("bracket-render").style.overflow = "hidden";
+});
