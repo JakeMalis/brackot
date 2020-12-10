@@ -1,73 +1,72 @@
-$cardBackGroundColor : #2b2c3c;
+$cardBackGroundColor: #2b2c3c;
 .teamInfoMainCard {
-    width: 100%;
+  width: 100%;
 }
-.teamInfoPageContainer{
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    flex-direction: row;
+.teamInfoPageContainer {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: row;
 }
 .teamInfoMainInfo {
-    background-color: $cardBackGroundColor;
+  background-color: $cardBackGroundColor;
 }
 %teamInfoTab {
-    background-color: $cardBackGroundColor;
+  background-color: $cardBackGroundColor;
 }
 .teamNameQuickCard {
-    color: white;
-    text-align: center;
-    font-size: large;
+  color: white;
+  text-align: center;
+  font-size: large;
 }
 .teamOverviewTab {
-    @extend %teamInfoTab;
-    display: flex;
-    flex-direction: column;
-    .teamName { 
-        text-align: center;
-        color: white;
-        font-size: larger;
-        width: 100%;
-    }
-    .teamDescription {
-        text-align: center;
-        color: lightgray;
-        font-size: large;
-        width: 100%
-    }
-    .leaveTeamButton {
-        margin-left: 5px;
-        margin-right: 5px;
-    }
-    .joinTeamButton {
-        margin-left: 5px;
-        margin-right: 5px;
-    }
+  @extend %teamInfoTab;
+  display: flex;
+  flex-direction: column;
+  .teamName {
+    text-align: center;
+    color: white;
+    font-size: larger;
+    width: 100%;
+  }
+  .teamDescription {
+    text-align: center;
+    color: lightgray;
+    font-size: large;
+    width: 100%;
+  }
+  .leaveTeamButton {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .joinTeamButton {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
 }
 .teamChatTab {
-    @extend %teamInfoTab;
-    
+  @extend %teamInfoTab;
 }
 .teamPendingTab {
-    @extend %teamInfoTab;
+  @extend %teamInfoTab;
 }
 .teamTournamentsTab {
-    @extend %teamInfoTab;
-    
-    flex-direction: row;
-    .teamTournamentsList {
-        .teamTournamentsHeader {
-            color: white;
-            text-align: center;
-            font-size: large;
-            padding-top: 5px;
-            padding-bottom: 5px;
-        }
-        .teamTournamentRow {
-            display: flex;
-            flex-direction: row;
-        }
+  @extend %teamInfoTab;
+
+  flex-direction: row;
+  .teamTournamentsList {
+    .teamTournamentsHeader {
+      color: white;
+      text-align: center;
+      font-size: large;
+      padding-top: 5px;
+      padding-bottom: 5px;
     }
+    .teamTournamentRow {
+      display: flex;
+      flex-direction: row;
+    }
+  }
 }
 

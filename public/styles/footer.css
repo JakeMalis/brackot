@@ -92,14 +92,15 @@
   margin-bottom: 40px;
 }
 
-@media only screen and (min-width: 480px){
+@media (min-width: 480px){
   .footerContainer{
     padding-left: 10%;
     padding-right: 10%;
+    height: auto;
   }
 
   .footerColumn{
-    height: 100%;
+    height: auto;
     width: 25%;
     padding-bottom: 40px;
   }
