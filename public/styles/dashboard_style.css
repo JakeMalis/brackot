@@ -493,7 +493,7 @@ text-align: center;
 }
 
 #row{
-  display: block;
+  display: flex;
   margin-top: 60px;
 }
 
@@ -2212,7 +2212,6 @@ text-align: center;
   }
 
   #row{
-    display: inline-block;
     margin-top: 0px;
   }
 
@@ -2493,5 +2492,11 @@ text-align: center;
 @keyframes loading {
   100% {
     transform: translateX(100%);
+  }
+}
+
+@media (max-width: 480px){
+  #row {
+    display: block !important;
   }
 }
