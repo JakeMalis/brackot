@@ -1,11 +1,12 @@
 <html lang="en">
 <script src="https://unpkg.com/redux@latest/dist/redux.min.js"></script>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Tournaments | Brackot</title>
-  <link rel="icon" type="image/png" href="media/favicon.png"/>
+  <link rel="icon" type="image/png" href="media/favicon.png" />
   <script>var exports = {};</script>
 
   <link rel="stylesheet" type="text/css" href="styles/dashboard_style.css">
@@ -21,8 +22,11 @@
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
   <script src="https://unpkg.com/redux@4.0.5/dist/redux.js"></script>
 
   <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
@@ -45,139 +49,180 @@
   <script src="scripts/header.js"></script>
   <script src="scripts/topbar.js"></script>
 </head>
+
 <body>
   <div id="alert">
-    <script> $( "#alert" ).load( "ajax/alert.html" ); </script>
+    <script> $("#alert").load("ajax/alert.html"); </script>
   </div>
   <div id="topbar">
-    <script> $( "#topbar" ).load( "ajax/topbar.html" ); </script>
+    <script> $("#topbar").load("ajax/topbar.html"); </script>
   </div>
   <div id="tournamentInfoWallpaper" class="tournamentInfoWallpaper">
     <div class="tournamentInfoFadeOverlay"></div>
   </div>
 
   <div class="main-page">
-      <div class="tournamentInfoPageContainer">
-        <div class="wideCard tournamentInfoCard">
-          <div class="wideCardBackground tournamentInfoCardBackground">
-            <div class="quickDetailHeader" onload="setTab('overview')">
-              <h2 id="tournamentTitle"></h2>
-              <ul class="tournamentQuickDetails">
-                <li class="quickDetail"><i class="fa fa-user quickDetailIcon" aria-hidden="true"></i><p id="participantsQuick" class="quickDetailText"></p></li>
-                <li class="quickDetail"><i class="fa fa-gamepad quickDetailIcon" aria-hidden="true"></i><p id="gameQuick" class="quickDetailText"></p></li>
-                <li class="quickDetail"><i class="fa fa-calendar quickDetailIcon" aria-hidden="true"></i><p id="dateAndTimeQuick" class="quickDetailText"></p></li>
-                <li id="prizingQuickListItem" class="quickDetail"><i class="fa fa-trophy quickDetailIcon" aria-hidden="true"></i><p id="prizingQuick" class="quickDetailText"></p></li>
-                <li id="entryFeeQuickListItem" class="quickDetail"><i class="fa fa-ticket-alt quickDetailIcon" aria-hidden="true"></i><p id="entryFeeQuick" class="quickDetailText"></p></li>
-              </ul>
-              <button class="tournamentCardButton tournamentCardButtonGeneric" id="tournamentSignUpButton"></button>
-              <ul class="quickNavbar">
-                <li id="overviewNavbar" class="quickNavbarItem quickNavbarItemSelected"><a class="quickNavbarItemLink" onclick="setTab('overview')"><p class="quickNavbarItemText">Overview</p></a></li>
-                <li id="participantsNavbar" class="quickNavbarItem"><a class="quickNavbarItemLink" onclick="setTab('participants')"><p class="quickNavbarItemText">Participants</p></a></li>
-                <li id="chatNavbar" class="quickNavbarItem"><a class="quickNavbarItemLink" onclick="setTab('chat')"><p class="quickNavbarItemText">Chat</p></a></li>
-                <li id="bracketNavbar" class="quickNavbarItem"><a class="quickNavbarItemLink" onclick="setTab('bracket')"><p class="quickNavbarItemText">Bracket</p></a></li>
+    <div class="tournamentInfoPageContainer">
+      <div class="wideCard tournamentInfoCard">
+        <div class="wideCardBackground tournamentInfoCardBackground">
+          <div class="quickDetailHeader" onload="setTab('overview')">
+            <h2 id="tournamentTitle">Loading...</h2>
+            <ul class="tournamentQuickDetails">
+              <li class="quickDetail"><i class="fa fa-user quickDetailIcon" aria-hidden="true"></i>
+                <p id="participantsQuick" class="quickDetailText">Loading...</p>
+              </li>
+              <li class="quickDetail"><i class="fa fa-gamepad quickDetailIcon" aria-hidden="true"></i>
+                <p id="gameQuick" class="quickDetailText">Loading...</p>
+              </li>
+              <li class="quickDetail"><i class="fa fa-calendar quickDetailIcon" aria-hidden="true"></i>
+                <p id="dateAndTimeQuick" class="quickDetailText">Loading...</p>
+              </li>
+              <li id="prizingQuickListItem" class="quickDetail"><i class="fa fa-trophy quickDetailIcon"
+                  aria-hidden="true"></i>
+                <p id="prizingQuick" class="quickDetailText">Loading...</p>
+              </li>
+              <li id="entryFeeQuickListItem" class="quickDetail"><i class="fa fa-ticket-alt quickDetailIcon"
+                  aria-hidden="true"></i>
+                <p id="entryFeeQuick" class="quickDetailText">Loading...</p>
+              </li>
+            </ul>
+            <button class="tournamentCardButton tournamentCardButtonGeneric"
+              id="tournamentSignUpButton">Loading...</button>
+            <ul class="quickNavbar">
+              <li id="overviewNavbar" class="quickNavbarItem quickNavbarItemSelected"><a class="quickNavbarItemLink"
+                  onclick="setTab('overview')">
+                  <p class="quickNavbarItemText">Overview</p>
+                </a></li>
+              <li id="participantsNavbar" class="quickNavbarItem"><a class="quickNavbarItemLink"
+                  onclick="setTab('participants')">
+                  <p class="quickNavbarItemText">Participants</p>
+                </a></li>
+              <li id="chatNavbar" class="quickNavbarItem"><a class="quickNavbarItemLink" onclick="setTab('chat')">
+                  <p class="quickNavbarItemText">Chat</p>
+                </a></li>
+              <li id="bracketNavbar" class="quickNavbarItem"><a class="quickNavbarItemLink" onclick="setTab('bracket')">
+                  <p class="quickNavbarItemText">Bracket</p>
+                </a></li>
 
-              </ul>
+            </ul>
+          </div>
+          <div id="tournamentInfoCardContent" class="wideCardContent">
+
+
+            <div id="overviewTab" class="infoTab">
+              <div class="tournamentInfoRow">
+                <h6 class="tournamentInfoSubheader">Description</h6>
+                <p id="tournamentInfoDescription" class="tournamentInfoDetail font15"></p>
+              </div>
+              <div class="tournamentInfoRow noBottomPadding">
+                <div class="tournamentInfoColumn">
+                  <h6 id="tournamentInfoSubheaderPrizes" class="tournamentInfoSubheader">Prizes</h6>
+                  <ul id="prizingList" class="prizingList">
+                    <li class="prizingListItem" id="firstPlace"><i
+                        class="fa fa-trophy tournamentInfoPrizingIcon goldColor" aria-hidden="true"></i>
+                      <p id="tournamentInfoFirstPrizing" class="tournamentInfoDetail font18">Loading...</p>
+                    </li>
+                    <li class="prizingListItem" id="secondPlace"><i
+                        class="fa fa-trophy tournamentInfoPrizingIcon silverColor" aria-hidden="true"></i>
+                      <p id="tournamentInfoSecondPrizing" class="tournamentInfoDetail font18">Loading...</p>
+                    </li>
+                    <li class="prizingListItem" id="thirdPlace"><i
+                        class="fa fa-trophy tournamentInfoPrizingIcon bronzeColor" aria-hidden="true"></i>
+                      <p id="tournamentInfoThirdPrizing" class="tournamentInfoDetail font18">Loading...</p>
+                    </li>
+                  </ul>
+                </div>
+                <div class="tournamentInfoColumn">
+                  <!--<h6 class="tournamentInfoSubheader">Format</h6><p id="tournamentInfoFormat" class="tournamentInfoDetail font30">5v5</p>-->
+                </div>
+                <div class="clearFloat"></div>
+              </div>
             </div>
-            <div id="tournamentInfoCardContent" class="wideCardContent">
 
 
-              <div id="overviewTab" class="infoTab">
-                <div class="tournamentInfoRow">
-                  <h6 class="tournamentInfoSubheader">Description</h6><p id="tournamentInfoDescription" class="tournamentInfoDetail font15"></p>
-                </div>
-                <div class="tournamentInfoRow noBottomPadding">
-                  <div class="tournamentInfoColumn">
-                    <h6 id="tournamentInfoSubheaderPrizes" class="tournamentInfoSubheader">Prizes</h6>
-                    <ul id="prizingList" class="prizingList">
-                      <li class="prizingListItem" id="firstPlace"><i class="fa fa-trophy tournamentInfoPrizingIcon goldColor" aria-hidden="true"></i><p id="tournamentInfoFirstPrizing" class="tournamentInfoDetail font18"></p></li>
-                      <li class="prizingListItem" id="secondPlace"><i class="fa fa-trophy tournamentInfoPrizingIcon silverColor" aria-hidden="true"></i><p id="tournamentInfoSecondPrizing" class="tournamentInfoDetail font18"></p></li>
-                      <li class="prizingListItem" id="thirdPlace"><i class="fa fa-trophy tournamentInfoPrizingIcon bronzeColor" aria-hidden="true"></i><p id="tournamentInfoThirdPrizing" class="tournamentInfoDetail font18"></p></li>
-                    </ul>
-                  </div>
-                  <div class="tournamentInfoColumn">
-                    <!--<h6 class="tournamentInfoSubheader">Format</h6><p id="tournamentInfoFormat" class="tournamentInfoDetail font30">5v5</p>-->
-                  </div>
-                  <div class="clearFloat"></div>
-                </div>
+            <div id="participantsTab" class="infoTab">
+            </div>
+
+
+            <div id="bracketTab" class="infoTab">
+              <div id="bracketRoundContainer">
+                <button id="prevBracketRound" class="bracketRoundButton" onclick="changeRoundMobile('previous')"><i
+                    class="fa fa-caret-left bracketRoundButtonIcon" aria-hidden="true"></i></button>
+                <p id="bracketRoundMobileText">Round 1</p>
+                <button id="nextBracketRound" class="bracketRoundButton" onclick="changeRoundMobile('next')"><i
+                    class="fa fa-caret-right bracketRoundButtonIcon" aria-hidden="true"></i></button>
               </div>
+              <div id="bracket-renderer"></div>
+              <div id="bracket" class="bracket">
 
-
-              <div id="participantsTab" class="infoTab">
-              </div>
-
-
-              <div id="bracketTab" class="infoTab">
-                <div id="bracketRoundContainer">
-                  <button id="prevBracketRound" class="bracketRoundButton" onclick="changeRoundMobile('previous')"><i class="fa fa-caret-left bracketRoundButtonIcon" aria-hidden="true"></i></button>
-                  <p id="bracketRoundMobileText">Round 1</p>
-                  <button id="nextBracketRound" class="bracketRoundButton" onclick="changeRoundMobile('next')"><i class="fa fa-caret-right bracketRoundButtonIcon" aria-hidden="true"></i></button>
-                </div>
-                <div id="bracket-renderer"></div>
-                <div id="bracket" class="bracket">
-
-                  <div id="matchModal" class="matchModal">
-                    <div class="matchModal-content">
-                      <span id="closeModal" class="close" onclick="closeMatchModal()">&times;</span>
-                      <div class="modalTop">
-                        <div id="upperParticipantModal" class="participantInfobox topBox">
-                          <img id="upperParticipantPicModal" class="infoboxPic" src="media/BrackotLogo2.jpg">
-                          <h1 id="upperParticipantNameModal" class="infoboxName"></h1>
-                          <input type="number" id="upperParticipantScoreInput" class="scoreInputModal"></input>
-                          <h2 id="upperParticipantScoreModal" class="infoboxScore">-</h2>
-                          <h2 id="upperParticipantWinnerModal" class="infoboxWinner">Winner</h2>
-                        </div>
-                        <div id="lowerParticipantModal" class="participantInfobox bottomBox">
-                          <img id="lowerParticipantPicModal" class="infoboxPic" src="media/BrackotLogo2.jpg">
-                          <h1 id="lowerParticipantNameModal" class="infoboxName"></h1>
-                          <input type="number" id="lowerParticipantScoreInput" class="scoreInputModal"></input>
-                          <h2 id="lowerParticipantScoreModal" class="infoboxScore">-</h2>
-                          <h2 id="lowerParticipantWinnerModal" class="infoboxWinner">Winner</h2>
-                        </div>
+                <div id="matchModal" class="matchModal">
+                  <div class="matchModal-content">
+                    <span id="closeModal" class="close" onclick="closeMatchModal()">&times;</span>
+                    <div class="modalTop">
+                      <div id="upperParticipantModal" class="participantInfobox topBox">
+                        <img id="upperParticipantPicModal" class="infoboxPic" src="media/BrackotLogo2.jpg">
+                        <h1 id="upperParticipantNameModal" class="infoboxName"></h1>
+                        <input type="number" id="upperParticipantScoreInput" class="scoreInputModal"></input>
+                        <h2 id="upperParticipantScoreModal" class="infoboxScore">-</h2>
+                        <h2 id="upperParticipantWinnerModal" class="infoboxWinner">Winner</h2>
                       </div>
-                      <div class="modalBottom">
-                        <button onclick="editMatchScores()" id="editScoresButton" class="grayButton submitResultsButton">Edit Scores</button>
-                        <button onclick="saveMatchScores()" id="submitResultsButton" class="gradientButton submitResultsButton">Submit Results</button>
+                      <div id="lowerParticipantModal" class="participantInfobox bottomBox">
+                        <img id="lowerParticipantPicModal" class="infoboxPic" src="media/BrackotLogo2.jpg">
+                        <h1 id="lowerParticipantNameModal" class="infoboxName"></h1>
+                        <input type="number" id="lowerParticipantScoreInput" class="scoreInputModal"></input>
+                        <h2 id="lowerParticipantScoreModal" class="infoboxScore">-</h2>
+                        <h2 id="lowerParticipantWinnerModal" class="infoboxWinner">Winner</h2>
                       </div>
+                    </div>
+                    <div class="modalBottom">
+                      <button onclick="editMatchScores()" id="editScoresButton"
+                        class="grayButton submitResultsButton">Edit Scores</button>
+                      <button onclick="saveMatchScores()" id="submitResultsButton"
+                        class="gradientButton submitResultsButton">Submit Results</button>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
 
-              <div id="chatTab" class="infoTab">
-                <div class="chatArea">
-                  <div class="chatHeader"></div>
-                  <div class="messageSections" id = 'messageSections'></div>
-                  <br>
-                  <div class="chatControls">
-                    <input id= 'textHolder' placeholder="Write Message" class = 'chatInput'></input>
-                    <i id="sendChatIcon" class="fas fa-paper-plane sendChatIcon" onClick="submitTournamentMessage()"></i>
-                  </div>
+            <div id="chatTab" class="infoTab">
+              <div class="chatArea">
+                <div class="chatHeader"></div>
+                <div class="messageSections" id='messageSections'></div>
+                <br>
+                <div class="chatControls">
+                  <input id='textHolder' placeholder="Write Message" class='chatInput'></input>
+                  <i id="sendChatIcon" class="fas fa-paper-plane sendChatIcon" onClick="submitTournamentMessage()"></i>
                 </div>
               </div>
             </div>
-
           </div>
+
         </div>
-
-
-
-        <div id="entryFeeModal" class="matchModal">
-          <div class="matchModal-content">
-            <span id="closeEntryFeeModal" class="close" onclick="closeEntryFeeModal()">&times;</span>
-            <div class="modalTop">
-            </div>
-            <div class="modalBottom">
-              <button onclick="editMatchScores()" id="editScoresButton" class="grayButton submitResultsButton">Edit Scores</button>
-              <button onclick="saveMatchScores()" id="submitResultsButton" class="gradientButton submitResultsButton">Submit Results</button>
-            </div>
-          </div>
-        </div>
-
-
       </div>
+
+
+
+      <div id="entryFeeModal" class="matchModal">
+        <div class="matchModal-content">
+          <span id="closeEntryFeeModal" class="close" onclick="closeEntryFeeModal()">&times;</span>
+          <div class="modalTop">
+          </div>
+          <div class="modalBottom">
+            <button onclick="editMatchScores()" id="editScoresButton" class="grayButton submitResultsButton">Edit
+              Scores</button>
+            <button onclick="saveMatchScores()" id="submitResultsButton"
+              class="gradientButton submitResultsButton">Submit Results</button>
+          </div>
+        </div>
+      </div>
+
+
     </div>
-    <div id="footer">
-      <script> $( "#footer" ).load( "ajax/footer.html" ); </script>
-    </div>
+  </div>
+  <div id="footer">
+    <script> $("#footer").load("ajax/footer.html"); </script>
+  </div>
 </body>
+
 </html>

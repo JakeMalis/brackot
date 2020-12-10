@@ -2499,4 +2499,7 @@ text-align: center;
   #row {
     display: block !important;
   }
+  .teamInfoPageContainer {
+    flex-direction: column !important;
+  }
 }

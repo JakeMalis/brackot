@@ -1,7 +1,51 @@
+
+class TournamentCardSkeleton extends React.Component {
+  render() {
+    return (
+      <div className="tournamentCard">
+        <div className="tournamentCardBackground">
+          <div className="tournamentCardContent">
+            <div className="tournamentCardSkeletonWallpaper loading"></div>
+            <div className="tournamentCardText">
+              <h6 className="tournamentCardTitle">Loading...</h6>
+              <ul className="tournamentCardDetails">
+                <li className="tournamentDetailsList">
+                  <i
+                    className="fa fa-gamepad tournamentCardIcon"
+                    aria-hidden="true"
+                  ></i>
+                  <div className="tournamentCardDetail">Loading...</div>
+                </li>
+                <li className="tournamentDetailsList">
+                  <i
+                    className="fa fa-calendar tournamentCardIcon"
+                    aria-hidden="true"
+                  ></i>
+                  <div className="tournamentCardDetail">Loading...</div>
+                </li>
+                <li className="tournamentDetailsList">
+                  <i
+                    className="fa fa-user tournamentCardIcon"
+                    aria-hidden="true"
+                  ></i>
+                  <div className="tournamentCardDetail">Loading...</div>
+                </li>
+              </ul>
+            </div>
+            <div className="tournamentCardHostBar">
+              <div className="tournamentCardSkeletonHostPic"></div>
+              <h6 className="tournamentCardHostName">Loading...</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
 function loadRegisteredTournaments() {
   var TournamentCardArray = [];
   var HostedTournamentCardArray = [];
-
   class TournamentCard extends React.Component {
     render() {
       return (
@@ -167,6 +211,14 @@ function loadRegisteredTournaments() {
 
 
 function personalizeElements() {
+  ReactDOM.render(
+    new Array(4).fill('').map((_, index) => <TournamentCardSkeleton key={index} />),
+    document.getElementById("myTournamentsRow")
+  );
+  ReactDOM.render(
+    new Array(4).fill('').map((_, index) => <TournamentCardSkeleton key={index} />),
+    document.getElementById("myHostedTournamentsRow")
+  );
   firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).get().then(function(doc) {
     document.getElementById("firstGreetingMessage").innerHTML = "Welcome back, " + firebase.auth().currentUser.displayName + "!";
     document.getElementById("notifications").innerHTML = doc.data().stats.notifications;

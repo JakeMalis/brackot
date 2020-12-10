@@ -87,7 +87,6 @@ function getRealtimeConversations() {
         querySnapshot.forEach(doc => {
             user.tournamentConversations.push(doc.data())
             //adds each firebase documment in chat collection to conversations object
-            console.log('eh')
             
         });
         
@@ -104,9 +103,9 @@ class Message extends React.Component {
                     /*
                         maps through the conversations object putting each message in a div
                     */
-                        user.tournamentConversations.map(con =>
+                        user.tournamentConversations.map((con, index) =>
                             <div className = {con.sentUID == firebase.auth().currentUser.uid
-                            ? 'bubble userBubble' : 'bubble foreignBubble'}>
+                            ? 'bubble userBubble' : 'bubble foreignBubble'} key={index}>
                     {//if the sentUID of the message is the same as the UID of the user who is currently logged in it
                     //puts the message on the right if not it puts it on the left
                     }

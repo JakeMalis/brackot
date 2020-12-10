@@ -399,13 +399,15 @@ class TeamTournamentTab extends React.Component {
     //waits for the component did mount function to run before returning the actual component class
     if (!this.state.isDataFetched) return null;
     return (
-      <div className="teamTournamentsList" style={{ width: "100%" }}>
-        <div className="teamTournamentsHeader">Tournaments in Progress:</div>
-        <TeamTournamentsList tournaments={this.state.tournaments} />
-        <div className="teamTournamentsHeader">Upcoming Tournaments:</div>
-        <TeamTournamentsList tournaments={this.state.tournaments} />
-        <div className="teamTournamentsHeader">Completed tournaments:</div>
-        <TeamTournamentsList tournaments={this.state.tournaments} />
+      <div className="teamTournamentsTab">
+        <div className="teamTournamentsList" style={{ width: "100%" }}>
+          <div className="teamTournamentsHeader">Tournaments in Progress:</div>
+          <TeamTournamentsList tournaments={this.state.tournaments} />
+          <div className="teamTournamentsHeader">Upcoming Tournaments:</div>
+          <TeamTournamentsList tournaments={this.state.tournaments} />
+          <div className="teamTournamentsHeader">Completed tournaments:</div>
+          <TeamTournamentsList tournaments={this.state.tournaments} />
+        </div>
       </div>
     );
   }
