@@ -705,7 +705,7 @@ p{
 }
 
 div.jQBracket .team div.label {
-  height: auto !important;
+  height: 32px !important;
 }
 
 div.jQBracket .tools {
@@ -713,7 +713,7 @@ div.jQBracket .tools {
 }
 
 #bracket-render {
-  overflow: auto;
+  overflow: hidden;
 }
 
 .loserBracket .round:last-of-type .connector {

@@ -6,7 +6,6 @@ admin.initializeApp();
 import { v4 as uuidv4 } from 'uuid';
 
 exports.registration = require('./registration');
-exports.brackets = require('./brackets');
 
 exports.makeUserAdmin = functions.region('us-east1').https.onCall(async (data, context) => {
   if(!context.auth) throw new Error("User is not logged in");
@@ -73,6 +72,32 @@ exports.fixUserDocuments = functions.region('us-east1').pubsub.schedule('*/10 * 
                 resolve(false);
               }
           });
+        }
+        catch(e) {
+          console.log('Error: ', e);
+          resolve(false);
+        }
+      });
+    }
+  });
+});
+
+exports.storeUserProfilePictures = functions.region('us-east1').pubsub.schedule('*/5 * * * *').onRun(async (context) => {
+  await admin.auth().listUsers(500).then(async (listUsersResult) => {
+    for (const user of listUsersResult.users) {
+      const ret = await new Promise(async (resolve, reject) => {
+        try {
+          if (user.toJSON()["photoURL"] === "media/BrackotLogo2.jpg") {
+            await admin.firestore().collection('users').doc(user.toJSON()["uid"]).update({
+              avatarUrl: null
+            });
+          }
+          else {
+            await admin.firestore().collection('users').doc(user.toJSON()["uid"]).update({
+              avatarUrl: user.toJSON()["photoURL"]
+            });
+          }
+          resolve(true);
         }
         catch(e) {
           console.log('Error: ', e);
