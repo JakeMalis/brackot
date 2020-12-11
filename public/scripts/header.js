@@ -4,8 +4,8 @@ window.onload = function() {
       var page = path.split("/").pop();
 
       if (user && (page === "")) { loadHeader(); }
-      else if (user && !(page === "")) { personalizeElements(); loadHeader(); }
-      else if (!(user) && (page === "tournaments")) { personalizeElements(); }
+      else if (user && !(page === "")) { setTimeout(() => {personalizeElements()}, 0); loadHeader(); }
+      else if (!(user) && (page === "tournaments")) { setTimeout(() => {personalizeElements()}, 0); }
       else if (!(user) && (!(page === "") && !(page === "tournaments") && !(page === "privacy-policy") && !(page === "terms-of-service"))) { window.location = "login.html"; }
   });
 }
