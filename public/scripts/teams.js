@@ -127,16 +127,12 @@ async function renderTeamCards() {
         var privacyIcon = "fa-lock";
       }
 
-      var teamProfilePic = await firebase
-        .storage()
-        .refFromURL("gs://brackot-teams-storage/" + doc.id + "/profile")
-        .getDownloadURL()
-        .then(function (url) {
-          return String(url);
-        })
-        .catch((error) => {
-          return "../media/BrackotLogo2.jpg";
-        });
+      if (doc.data().teamAvatar == null) {
+        var teamProfilePic = "../media/BrackotLogo.png"
+      }
+      else {
+        var teamProfilePic = doc.data().teamAvatar;
+      }
 
       //"/media/game_wallpapers/amongus-cardWallpaper."
       TeamCardArray.push(
