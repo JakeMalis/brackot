@@ -79,7 +79,6 @@ function addTournament() { try{
 
   firebase.firestore().collection("tournaments").add({
       creator: firebase.auth().currentUser.uid,
-      creatorName: firebase.auth().currentUser.displayName,
       date: new Date(date + " " + time),
       description: document.getElementById('tournamentDescription').value,
       game: document.querySelector('input[name="newTournamentGame"]:checked').value,
@@ -110,9 +109,9 @@ function addTournament() { try{
       document.getElementById("alertTextBold").innerHTML = "Update: ";
       document.getElementById("alertText").innerHTML = "Your tournament has been added!";
   }).then(() => {
-        
+
   })
-  
+
   .catch(function(error) {
       console.error("Error writing document: ", error);
   });
