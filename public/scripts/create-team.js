@@ -103,9 +103,14 @@ function addTeam() {
         document.getElementById("alertTextBold").innerHTML = "Update: ";
         document.getElementById("alertText").innerHTML = "Your team has been created!";
 
-        firebase.app().storage("gs://brackot-teams-storage").ref(docRef.id).child("profile").put(profilePicture).then((snapshot) => {
-          console.log('pfp uploaded');
-          //Do stuff to set current page's images to the profile without having to refresh.
+        firebase.app().storage("gs://brackot-teams-storage").ref(docRef.id).child("profile").put(profilePicture).then(async (snapshot) => {
+          var teamAvatar = await firebase.storage().refFromURL("gs://brackot-teams-storage/" + snapshot.metadata.fullPath).getDownloadURL().then(function (url) {
+            return String(url);
+          });
+
+          firebase.firestore().collection("teams").doc(docRef.id).update({
+            teamAvatar: teamAvatar
+          });
         });
         /*
         if (the team creator didn't upload a picture) {
