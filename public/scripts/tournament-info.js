@@ -256,6 +256,8 @@ function initDragAndDrop() {
   const ele = document.getElementById('bracket-render');
   ele.style.cursor = 'grab';
 
+  if (window.innerWidth <= 468) ele.style.overflow = 'auto';
+
   let pos = { top: 0, left: 0, x: 0, y: 0 };
 
   const mouseDownHandler = function(e) {

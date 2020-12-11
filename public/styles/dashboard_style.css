@@ -2502,4 +2502,10 @@ text-align: center;
   .teamInfoPageContainer {
     flex-direction: column !important;
   }
+  .quickNavbar{
+    padding-left: 0;
+  }
+  #bracket-renderer {
+    padding-top: 51px;
+  }
 }

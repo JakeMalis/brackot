@@ -97,7 +97,7 @@
 <footer>
   <script>
   games.forEach((game) => {
-    gameFileName = (game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","");
+    gameFileName = (game.toLowerCase()).replace(/ /g, "").replace("-","").replace(".","").replace("'", "");
     $("#browseGamesCarousel").append('<label onclick="location.href= &quot; tournaments &quot; ;" class="browseGamesLabel"><picture><source srcset="../media/game_images/' + gameFileName + '.webp" type="image/webp"><img id="browseGamesLeagueImage" class="browseGamesImage" src="../media/game_images/' + gameFileName + '.jpg"></picture></label>');
   });
   </script>

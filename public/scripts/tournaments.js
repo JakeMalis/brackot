@@ -250,7 +250,7 @@ async function renderTournamentCards() {
     await Promise.all(
       querySnapshot.docs.map(async (doc) => {
         const docData = doc.data();
-        const { game, name, players, date } = docData;
+        const { game, name, players, date, creator } = docData;
         const wallpaper =
           "/media/game_wallpapers/" +
           game
@@ -265,10 +265,10 @@ async function renderTournamentCards() {
         const creatorName = await firebase
           .firestore()
           .collection("users")
-          .doc(docData.creator)
+          .doc(creator)
           .get()
           .then((creatorDoc) => {
-            return creatorDoc.name;
+            return creatorDoc.data().name;
           });
 
         const participants = players.length + " Participants";

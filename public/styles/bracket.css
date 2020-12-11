@@ -719,3 +719,9 @@ div.jQBracket .tools {
 .loserBracket .round:last-of-type .connector {
   display: none !important;
 }
+
+@media (max-width: 480px) {
+  #bracket-render {
+    overflow: auto;
+  }
+}
