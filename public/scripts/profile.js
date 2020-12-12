@@ -134,12 +134,14 @@ function uploadAvatar(avatar) {
   var avatarReference = storageReference.child("profile");
   var image = avatar.target.files[0];
 
-
   avatarReference.put(image).then(function(snapshot) {
     console.log('Uploaded profile image!');
     snapshot.ref.getDownloadURL().then(function(url){
         firebase.auth().currentUser.updateProfile({
             photoURL: url
+        });
+        firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
+            avatarUrl: url
         });
         document.getElementById("profileProfilePic").src = url;
         document.getElementById("avatar").src = url;
