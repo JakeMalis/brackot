@@ -5,6 +5,8 @@ const teamsRef = db.collection("teams");
 function personalizeElements() {
   var url = new URL(window.location.href);
   teamId = url.searchParams.get("teamId");
+  document.getElementById("tournamentInfoWallpaper").className =
+    "headerImage tournamentInfoWallpaper minecraftInfoWallpaper";
   ReactDOM.render(
     <TeamInfoPage />,
     document.getElementById("teamInfoMainPage")
@@ -83,6 +85,7 @@ class TeamMessages extends React.Component {
     super(props);
     this.state = {
       messages: [],
+      userNames: {},
     };
     this.getRealtimeTeamConversations();
   }
@@ -97,21 +100,85 @@ class TeamMessages extends React.Component {
         this.setState({ messages: [] });
         querySnapshot.forEach((doc) => {
           this.setState({ messages: [...this.state.messages, doc.data()] });
+          if (!this.state.userNames[doc.data().sentUID])
+            return db
+              .collection("users")
+              .doc(doc.data().sentUID)
+              .get()
+              .then((userDoc) => {
+                const { name, avatarUrl } = userDoc.data();
+                this.setState((state) => {
+                  return {
+                    userNames: {
+                      ...state.userNames,
+                      [doc.data().sentUID]: {
+                        name,
+                        avatarUrl,
+                      },
+                    },
+                  };
+                });
+              });
         });
       });
   };
+  convertStampToDate(timestamp) {
+    const messageDate = new Date(timestamp * 1000);
+    const today = new Date();
+    const date =
+      today.getFullYear() === messageDate.getFullYear() &&
+      today.getMonth() === messageDate.getMonth() &&
+      today.getDate() === messageDate.getDate()
+        ? "Today"
+        : `${months[messageDate.getMonth()]} ${messageDate.getDate()}`;
+    const hour =
+      messageDate.getHours() === 12
+        ? 12
+        : messageDate.getHours() > 12
+        ? messageDate.getHours() - 12
+        : messageDate.getHours();
+    const time = `${hour < 10 ? `0${hour}` : hour}:${
+      messageDate.getMinutes() < 10
+        ? `0${messageDate.getMinutes()}`
+        : messageDate.getMinutes()
+    } ${messageDate.getHours() >= 12 ? "PM" : "AM"}`;
+
+    return `${date} ${time}`;
+  }
   render() {
+    const { userNames } = this.state;
     return (
       <div>
-        {this.state.messages.map((con) => (
+        {this.state.messages.map((con, index) => (
           <div
             className={
               con.sentUID == firebase.auth().currentUser.uid
                 ? "bubble userBubble"
                 : "bubble foreignBubble"
             }
+            key={index}
           >
-            <p className="messageBlurb">{con.message}</p>
+            <div className="messageBlurb">
+              <span>{con.message}</span>
+              {userNames[con.sentUID] && (
+                <div className="messageBlurb-detail">
+                  <small>
+                    {userNames[con.sentUID].name}
+                    <br />
+                    {this.convertStampToDate(con.createdAt.seconds)}
+                  </small>
+                  <img
+                    className="messageAvatar"
+                    src={
+                      userNames[con.sentUID].avatarUrl
+                        ? userNames[con.sentUID].avatarUrl
+                        : "media/BrackotLogo2.jpg"
+                    }
+                    alt="avatar"
+                  />
+                </div>
+              )}
+            </div>
           </div>
         ))}
       </div>
@@ -158,8 +225,11 @@ class TeamMessageTab extends React.Component {
   }
   render() {
     return (
-      <div id="teamChatTab" className="teamChatTab" style={{ width: "100%" }}>
-        <div className="chatArea" style={{ padding: "30px 30px 0" }}>
+      <div
+        id="teamChatTab"
+        className="wideCardBackground tournamentInfoCardBackground"
+      >
+        <div className="chatArea">
           <div className="chatHeader"></div>
           <TeamMessages />
           <br />
@@ -201,12 +271,13 @@ class ListOfPendingMembers extends React.Component {
     //removes the uid of the user rejected from the pending members field in the database
   };
   render() {
+    const { team } = this.props;
     return (
       <div>
-        {team.pendingMembers.map((member) => (
+        {(team.pendingMembers || []).map((member) => (
           <div>
             <div>
-              <img id={`profilePic${member}`} src={getProfilePic(member)}></img>
+              <img src={getProfilePic(member)}></img>
               <div>{db.collection("users").doc(member).name}</div>
             </div>
             <div>
@@ -399,15 +470,13 @@ class TeamTournamentTab extends React.Component {
     //waits for the component did mount function to run before returning the actual component class
     if (!this.state.isDataFetched) return null;
     return (
-      <div className="teamTournamentsTab">
-        <div className="teamTournamentsList" style={{ width: "100%" }}>
-          <div className="teamTournamentsHeader">Tournaments in Progress:</div>
-          <TeamTournamentsList tournaments={this.state.tournaments} />
-          <div className="teamTournamentsHeader">Upcoming Tournaments:</div>
-          <TeamTournamentsList tournaments={this.state.tournaments} />
-          <div className="teamTournamentsHeader">Completed tournaments:</div>
-          <TeamTournamentsList tournaments={this.state.tournaments} />
-        </div>
+      <div className="teamTournamentsList wideCardBackground tournamentInfoCardBackground">
+        <div className="teamTournamentsHeader">Tournaments in Progress:</div>
+        <TeamTournamentsList tournaments={this.state.tournaments} />
+        <div className="teamTournamentsHeader">Upcoming Tournaments:</div>
+        <TeamTournamentsList tournaments={this.state.tournaments} />
+        <div className="teamTournamentsHeader">Completed tournaments:</div>
+        <TeamTournamentsList tournaments={this.state.tournaments} />
       </div>
     );
   }
@@ -423,52 +492,6 @@ class TeamOverviewTab extends React.Component {
         this.setState({ teamDescription: description });
         this.setState({ teamName: name });
         this.setState({ games: games });
-
-        if (doc.data().teamMembers.includes(firebase.auth().currentUser.uid)) {
-          //if the user is in the team if provides a button which lets the user leave the team they are in
-          this.setState({ buttonText: "Leave Team" });
-          this.setState({
-            buttonOnClick: () => {
-              teamsRef.doc(teamId).update({
-                teamMembers: firebase.firestore.FieldValue.arrayRemove(
-                  firebase.auth().currentUser.uid
-                ),
-              });
-            },
-          });
-        } else if (
-          doc.data().pendingMembers.includes(firebase.auth().currentUser.uid)
-        ) {
-          this.setState({ buttonText: "requested" });
-          this.setState({ buttonOnClick: () => {} });
-          //if the user has already requested to be in the team the button will do nothing and the text will read requested.
-          //different stylings for different button messages will come later
-        } else {
-          this.setState({ buttonText: "Join Team" });
-          if (doc.data().privacy == "private") {
-            this.setState({
-              buttonOnClick: () => {
-                teamsRef.doc(teamId).update({
-                  teamPendingMembers: firebase.firestore.FieldValue.arrayUnion(
-                    firebase.auth().currentUser.uid
-                  ),
-                  //adds the current user to the list of pending team members if the team is private and the user wishes to join the team
-                });
-              },
-            });
-          } else {
-            this.setState({
-              buttonOnClick: () => {
-                teamsRef.doc(teamId).update({
-                  teamMembers: firebase.firestore.FieldValue.arrayUnion(
-                    firebase.auth().currentUser.uid
-                  ),
-                  //if the team is public it allows the user to automatically join the team
-                });
-              },
-            });
-          }
-        }
       });
   }
   getGameFileName(gameName) {
@@ -500,11 +523,7 @@ class TeamOverviewTab extends React.Component {
     } = this.state;
     return (
       <div className="wideCardBackground tournamentInfoCardBackground">
-        <div id="teamInfoCardContent" className="wideCardContent">
-          <h6 className="teamInfoSubheader">Team</h6>
-          <h2 className="teamInfoName" id="teamInfoName">
-            {teamName}
-          </h2>
+        <div id="teamInfoCardContent">
           <div className="tournamentInfoRow">
             <h6 className="teamInfoSubheader">Description</h6>
             <p id="teamInfoDescription" className="tournamentInfoDetail font15">
@@ -547,13 +566,13 @@ class TeamOverviewTab extends React.Component {
               </div>
             ))}
         </div>
-        <button
+        {/* <button
           className="tournamentCardButton tournamentCardButtonGeneric"
           id="teamSignUpButton"
           onClick={this.state.buttonOnClick}
         >
           {buttonText}
-        </button>
+        </button> */}
       </div>
     );
   }
@@ -584,7 +603,7 @@ class TeamInfoQuickCard extends React.Component {
     const { teamProfilePic } = this.state;
     return (
       <div id="teamInfoQuickCard" className="teamInfoQuickCard">
-        <div className="wideCardBackground tournamentInfoCardBackground">
+        <div className="tournamentInfoCardBackground">
           <div className="singleColumn">
             {teamProfilePic && (
               <img
@@ -730,30 +749,93 @@ class TeamInfoMainCard extends React.Component {
       //changes tab by setting the state equal to a jsx element
       tab: <TeamOverviewTab />,
       tabName: "overview",
+      teamName: "Loading ...",
+      buttonText: "Loading ...",
+      buttonOnClick: () => {},
+      team: {},
     };
   }
   getTeamStatus() {
     db.collection("teams")
       .doc(teamId)
       .onSnapshot((doc) => {
+        this.setState({
+          teamName: doc.data().name,
+          team: doc.data(),
+        });
         if (doc.data().teamAdmins.includes(firebase.auth().currentUser.uid)) {
-          this.state = {
-            //checks to see if the current user is a team admin
-            //if the user is a team admin the pending members page loads
+          this.setState({
             teamAdmin: true,
-          };
+          });
         } else {
-          this.state = {
+          this.setState({
             teamAdmin: false,
-          };
-          console.log(this.state.teamAdmin);
+          });
+        }
+
+        if (doc.data().teamMembers.includes(firebase.auth().currentUser.uid)) {
+          //if the user is in the team if provides a button which lets the user leave the team they are in
+          this.setState({ buttonText: "Leave Team" });
+          this.setState({
+            buttonOnClick: () => {
+              teamsRef.doc(teamId).update({
+                teamMembers: firebase.firestore.FieldValue.arrayRemove(
+                  firebase.auth().currentUser.uid
+                ),
+              });
+            },
+          });
+        } else if (
+          doc.data().pendingMembers &&
+          doc.data().pendingMembers.includes(firebase.auth().currentUser.uid)
+        ) {
+          this.setState({ buttonText: "requested" });
+          this.setState({ buttonOnClick: () => {} });
+          //if the user has already requested to be in the team the button will do nothing and the text will read requested.
+          //different stylings for different button messages will come later
+        } else {
+          this.setState({ buttonText: "Join Team" });
+          if (doc.data().privacy == "private") {
+            this.setState({
+              buttonOnClick: () => {
+                teamsRef.doc(teamId).update({
+                  teamPendingMembers: firebase.firestore.FieldValue.arrayUnion(
+                    firebase.auth().currentUser.uid
+                  ),
+                  //adds the current user to the list of pending team members if the team is private and the user wishes to join the team
+                });
+              },
+            });
+          } else {
+            this.setState({
+              buttonOnClick: () => {
+                teamsRef.doc(teamId).update({
+                  teamMembers: firebase.firestore.FieldValue.arrayUnion(
+                    firebase.auth().currentUser.uid
+                  ),
+                  //if the team is public it allows the user to automatically join the team
+                });
+              },
+            });
+          }
         }
       });
   }
   render() {
-    const { tabName } = this.state;
+    const { tabName, teamName, buttonText, buttonOnClick, team } = this.state;
     return (
       <div className="teamInfoMainCard">
+        <h2 className="teamInfoName" id="teamInfoName">
+          {teamName}
+        </h2>
+        <button
+          className="tournamentCardButton tournamentCardButtonGeneric"
+          id="tournamentSignUpButton"
+          onClick={buttonOnClick}
+        >
+          {buttonText}
+        </button>
+
         <ul className="quickNavbar">
           <li
             id="teamOverviewNavbar"
@@ -808,13 +890,13 @@ class TeamInfoMainCard extends React.Component {
             className={`quickNavbarItem ${
               tabName === "pending" ? "quickNavbarItemSelected" : ""
             }`}
-            style={{ display: this.state.teamAdmin ? "block" : "none" }}
+            style={{ display: this.state.teamAdmin ? "inline-block" : "none" }}
           >
             <a
               className="quickNavbarItemLink"
               onClick={() =>
                 this.setState({
-                  tab: <ListOfPendingMembers />,
+                  tab: <ListOfPendingMembers team={team} />,
                   tabName: "pending",
                 })
               }
@@ -823,9 +905,7 @@ class TeamInfoMainCard extends React.Component {
             </a>
           </li>
         </ul>
-        <div className="teamInfoPageContainer teamInfoMainInfo">
-          {this.state.tab}
-        </div>
+        <div>{this.state.tab}</div>
       </div>
     );
   }

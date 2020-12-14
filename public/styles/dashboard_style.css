@@ -1174,6 +1174,15 @@ text-align: center;
   margin-bottom: 25px;
   font-size: 34px;
   width: 100%;
+  margin-left: 42px;
+}
+
+.teamTournamentsHeader {
+  color: white;
+  text-align: center;
+  font-size: large;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .teamInfoQuickCard{
@@ -1244,7 +1253,6 @@ text-align: center;
 
 #teamInfoCardContent{
   margin-top: 0px;
-  padding-top: 42px;
 }
 
 #tournamentInfoCardContent{
