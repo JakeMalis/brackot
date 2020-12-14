@@ -1721,6 +1721,35 @@ text-align: center;
   padding-top: 8px;
   padding-bottom: 8px;
   font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.messageBlurb span {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+
+.messageBlurb small {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+  text-align: right;
+}
+
+.messageBlurb .messageBlurb-detail{
+  display: flex;
+  align-items: center;
+}
+
+.messageAvatar {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+  border-radius: 100%;
 }
 
 .bubble{
@@ -2507,5 +2536,16 @@ text-align: center;
   }
   #bracket-renderer {
     padding-top: 51px;
+  }
+  .messageBlurb{
+    flex-direction: column;
+  }
+  .messageBlurb .messageBlurb-detail {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+  .messageBlurb small {
+    margin-left: 8px;
+    text-align: left;
   }
 }
