@@ -1,3 +1,7 @@
+function handleKeyDown(evt) {
+  console.log(evt)
+}
+
 function handleSignIn() {
   if (document.getElementById("rememberMe").checked) {
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(function() { authenticateUser(); });
