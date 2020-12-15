@@ -107,7 +107,7 @@ function loadRegisteredTournaments() {
 
   firebase.firestore().collection("tournaments").where("players", "array-contains", firebase.auth().currentUser.uid).get().then(function(querySnapshot) {
     var renderTournamentNumber = 1;
-    querySnapshot.forEach(function(doc) {
+    querySnapshot.forEach(async function(doc) {
 
         $('#playerTournamentContent' + renderTournamentNumber).click(function(){
           window.location = "tournament-info?tournamentId=" + doc.id;
@@ -137,7 +137,16 @@ function loadRegisteredTournaments() {
           meridiem = "P.M."
         }
 
-        document.getElementById("playerTournamentHostName" + renderTournamentNumber).innerHTML = doc.data().creatorName;
+        const creatorName = await firebase
+          .firestore()
+          .collection("users")
+          .doc(doc.data().creator)
+          .get()
+          .then((creatorDoc) => {
+            return creatorDoc.data().name;
+          });
+
+        document.getElementById("playerTournamentHostName" + renderTournamentNumber).innerHTML = creatorName;
 
         var tournamentCreator = doc.data().creator;
         var gsReference = firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + tournamentCreator + "/profile");
@@ -158,7 +167,7 @@ function loadRegisteredTournaments() {
 
   firebase.firestore().collection("tournaments").where("creator", "==", firebase.auth().currentUser.uid).get().then(function(querySnapshot) {
     var renderHostedTournamentNumber = 1;
-    querySnapshot.forEach(function(doc) {
+    querySnapshot.forEach(async function(doc) {
 
         $('#hostTournamentContent' + renderHostedTournamentNumber).click(function(){
           window.location = "tournament-info?tournamentId=" + doc.id;
@@ -188,7 +197,16 @@ function loadRegisteredTournaments() {
           meridiem = "P.M."
         }
 
-        document.getElementById("hostTournamentHostName" + renderHostedTournamentNumber).innerHTML = doc.data().creatorName;
+        const creatorName = await firebase
+          .firestore()
+          .collection("users")
+          .doc(doc.data().creator)
+          .get()
+          .then((creatorDoc) => {
+            return creatorDoc.data().name;
+          });
+
+        document.getElementById("hostTournamentHostName" + renderHostedTournamentNumber).innerHTML = creatorName;
 
         var tournamentCreator = doc.data().creator;
         var gsReference = firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + tournamentCreator + "/profile");
