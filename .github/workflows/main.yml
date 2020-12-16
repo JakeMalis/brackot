@@ -14,4 +14,4 @@ jobs:
         with:
           args: hosting:channel:deploy testing
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          FIREBASE_TOKEN: "1//05GK37eiEfUsUCgYIARAAGAUSNwF-L9Irbuwe8qn1kzgBqdDkfUK-pmuivRnkbbqF-3ZHOujkX0uiyC0yFdk4ZjmqjyGoVXYpvQY"
