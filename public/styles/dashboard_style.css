@@ -2589,13 +2589,46 @@ select option {
     margin-left: 8px;
     text-align: left;
   }
+
+  input[type="date"],
+  input[type="time"] {
+    -webkit-appearance: none;
+  }
+
+  select {
+    -webkit-appearance: none;
+  }
 }
 
-input[type="date"],
-input[type="time"] {
-  -webkit-appearance: none;
+.nice-select {
+  width: 100% !important;
+  margin-top: 6px !important;
+  margin-bottom: 30px !important;
+  height: 50px !important;
+  padding: 11px !important;
+  font-size: 18px !important;
+  font-family: "proxima-nova", sans-serif !important;
+  border-radius: 8px !important;
+  background-color: #232329 !important;
+  border: 1px solid rgba(255, 255, 255, 0.09) !important;
+  color: var(--white) !important;
+  line-height: 1.5 !important;
 }
 
-select {
-  -webkit-appearance: none;
+.nice-select .list {
+  width: 100% !important;
+  background-color: #232329 !important;
+  border: 1px solid rgba(255, 255, 255, 0.09) !important;
+  color: var(--white) !important;
+  font-size: 18px !important;
+  font-family: "proxima-nova", sans-serif !important;
+  border-radius: 8px !important;
+}
+
+.nice-select .list:hover {
+  background-color: #333339 !important;
+}
+
+.nice-select .option.focus, .nice-select .option.selected.focus, .nice-select .option:hover {
+  background-color: #333339 !important;
 }
