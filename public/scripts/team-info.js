@@ -530,22 +530,17 @@ class TeamOverviewTab extends React.Component {
               {teamDescription}
             </p>
           </div>
-          {games &&
-            games.map((gameType, index) => (
-              <div
-                id="teamInfoGamesRow"
-                className="tournamentInfoRow"
-                key={index}
-              >
-                <h6 className="teamInfoSubheader">Games</h6>
-                <p
-                  id="teamInfoGames"
-                  className="tournamentInfoDetail font15"
-                ></p>
-                <div id="teamInfoGameCarousel" className="teamInfoGameCarousel">
+
+          <div id="teamInfoGamesRow" className="tournamentInfoRow">
+            <h6 className="teamInfoSubheader">Games</h6>
+            <p id="teamInfoGames" className="tournamentInfoDetail font15"></p>
+            <div id="teamInfoGameCarousel" className="teamInfoGameCarousel">
+              {games &&
+                games.map((gameType, index) => (
                   <label
                     id="teamInfominecraftLabel"
                     className="teamInfoGamesLabel"
+                    key={index}
                   >
                     <picture>
                       <source
@@ -562,9 +557,9 @@ class TeamOverviewTab extends React.Component {
                       />
                     </picture>
                   </label>
-                </div>
-              </div>
-            ))}
+                ))}
+            </div>
+          </div>
         </div>
         {/* <button
           className="tournamentCardButton tournamentCardButtonGeneric"
