@@ -1,53 +1,44 @@
 class ParticipantCard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      avatar: '',
+      name: 'Loading...',
+      loading: true,
+    }
+  }
+  componentDidMount() {
+    const { participantId } = this.props;
+    firebase.firestore().collection("users").doc(participantId).get().then(userDoc => {
+      const { avatarUrl, name } = userDoc.data();
+      this.setState({
+        avatar: avatarUrl ? avatarUrl : 'media/BrackotLogo2.jpg',
+        loading: false,
+        name,
+      })
+    })
+  }
   render() {
+    const { avatar, name, loading } = this.state;
     return(
-      <div className={"participantCard"} id={"participantCard" + this.props.participantInfoNumber}>
-        <img className={"participantCardPic"} id={"participantCardPic" + this.props.participantInfoNumber}></img>
-        <p className={"participantCardName"} id={"participantCardName" + this.props.participantInfoNumber}></p>
+      <div className="participantCard">
+        {loading ? <div className="participantCardPic">:</div> : <img className="participantCardPic" src={avatar} />}
+        <p className="participantCardName">{name}</p>
       </div>
     );
   }
 }
 
-function renderParticipants(){
-  var ParticipantCards = [];
-  firebase.firestore().collection("tournaments").doc(tournamentId).get().then(async function(doc) {
-      var participantInfoNumber = 1;
-
-      doc.data().players.forEach(function(participant) {
-        ParticipantCards.push(<ParticipantCard participantInfoNumber={participantInfoNumber} key={participantInfoNumber}/>);
-        participantInfoNumber++;
+const renderParticipants = () => {
+  const ParticipantCards = [];
+  firebase.firestore().collection("tournaments").doc(tournamentId).get().then((doc) => {
+      doc.data().players.forEach((participant, index) => {
+        ParticipantCards.push(<ParticipantCard key={index+1} participantId={participant}/>);
       });
-    }).then(function() {
+    }).then(() => {
       ReactDOM.render(
         ParticipantCards,
         document.getElementById("participantsTab")
       );
-    }).then(function() {
-    loadParticipantData();
-  });
-}
-
-function loadParticipantData(){
-  firebase.firestore().collection("tournaments").doc(tournamentId).get().then(function(doc) {
-      var participantNumber = 1;
-      var players = doc.data().players;
-      players.forEach(function(entry) {
-        participantInfoLoadingFunction(entry, participantNumber);
-        participantNumber++;
-      });
     });
-}
-
-async function participantInfoLoadingFunction(entry, participantNumber) {
-  firebase.firestore().collection("users").doc(entry).get().then(function(userDoc) {
-    document.getElementById("participantCardName" + participantNumber).innerHTML = userDoc.data().name;
-
-    var gsReference = firebase.storage().refFromURL("gs://brackot-app.appspot.com/" + entry + "/profile");
-    gsReference.getDownloadURL().then(function (url) {
-      document.getElementById("participantCardPic" + participantNumber).src = url;
-    }).catch((error) => {
-      document.getElementById("participantCardPic" + participantNumber).src = "media/BrackotLogo2.jpg";
-    });
-  });
 }
