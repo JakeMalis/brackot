@@ -1753,8 +1753,7 @@ select option {
 
 .messageBlurb span {
   flex: 1;
-  display: flex;
-  align-items: center;
+  display: block;
   font-size: 18px;
 }
 
@@ -1769,6 +1768,7 @@ select option {
 .messageBlurb .messageBlurb-detail {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .messageAvatar {
