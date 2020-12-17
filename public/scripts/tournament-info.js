@@ -4,7 +4,7 @@ function personalizeElements() {
   var url = new URL(window.location.href);
   tournamentId = url.searchParams.get("tournamentId");
 
-  
+
   initChat();
   renderChat();
   renderParticipants();
@@ -68,15 +68,15 @@ function personalizeElements() {
     }
     else if ((date.getHours() - 12) < 0) {
       hour = date.getHours();
-      meridiem = "A.M."
+      meridiem = "A.M. ET"
     }
     else if ((date.getHours() - 12) == 0) {
       hour = date.getHours();
-      meridiem = "P.M."
+      meridiem = "P.M. ET"
     }
     else {
       hour = date.getHours() - 12;
-      meridiem = "P.M."
+      meridiem = "P.M. ET"
     }
 
     document.getElementById("dateAndTimeQuick").innerHTML = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' @ ' + hour + ':' + String(date.getMinutes()).padStart(2, "0") + ' ' + meridiem;
@@ -150,11 +150,11 @@ function sendConfirmationEmail(tournamentId) {
 
     if ((date.getHours() - 12) <= 0) {
       hour = date.getHours();
-      meridiem = "A.M."
+      meridiem = "A.M. ET"
     }
     else {
       hour = date.getHours() - 12;
-      meridiem = "P.M."
+      meridiem = "P.M. ET"
     }
 
     date = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' @ ' + hour + ':' + String(date.getMinutes()).padStart(2, "0") + ' ' + meridiem;
@@ -183,7 +183,7 @@ function sendConfirmationEmail(tournamentId) {
 
 function setTab(tab) {
   if(tab === "overview") {
-    
+
     document.getElementById("overviewTab").style.display = "block";
     document.getElementById("participantsTab").style.display = "none";
     document.getElementById("bracketTab").style.display = "none";
@@ -195,7 +195,7 @@ function setTab(tab) {
     document.getElementById("chatNavbar").className = "quickNavbarItem";
   }
   else if(tab === "participants") {
-    
+
     document.getElementById("overviewTab").style.display = "none";
     document.getElementById("participantsTab").style.display = "block";
     document.getElementById("bracketTab").style.display = "none";
@@ -207,7 +207,7 @@ function setTab(tab) {
     document.getElementById("chatNavbar").className = "quickNavbarItem";
   }
   else if(tab === "bracket") {
-    
+
     document.getElementById("overviewTab").style.display = "none";
     document.getElementById("participantsTab").style.display = "none";
     document.getElementById("bracketTab").style.display = "block";
@@ -221,7 +221,7 @@ function setTab(tab) {
     renderMatchCards();
   }
   else if(tab === "chat") {
-    
+
     document.getElementById("overviewTab").style.display = "none";
     document.getElementById("participantsTab").style.display = "none";
     document.getElementById("bracketTab").style.display = "none";
@@ -231,7 +231,7 @@ function setTab(tab) {
     document.getElementById("participantsNavbar").className = "quickNavbarItem";
     document.getElementById("bracketNavbar").className = "quickNavbarItem";
     document.getElementById("chatNavbar").className = "quickNavbarItem quickNavbarItemSelected";
-    
+
   }
 }
 

@@ -296,16 +296,16 @@ async function renderTournamentCards() {
 
         if (transformedDate.getHours() == 0) {
           hour = 12;
-          meridiem = "A.M.";
+          meridiem = "A.M. ET";
         } else if (transformedDate.getHours() - 12 < 0) {
           hour = transformedDate.getHours();
-          meridiem = "A.M.";
+          meridiem = "A.M. ET";
         } else if (transformedDate.getHours() - 12 == 0) {
           hour = transformedDate.getHours();
-          meridiem = "P.M.";
+          meridiem = "P.M. ET";
         } else {
           hour = transformedDate.getHours() - 12;
-          meridiem = "P.M.";
+          meridiem = "P.M. ET";
         }
         const tournamentDate =
           transformedDate.getMonth() +
