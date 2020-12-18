@@ -6,20 +6,16 @@
   width: 90%;
   margin-left: auto;
   margin-right: auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
 }
 
 .teamInfoMainInfo {
   background-color: #2b2c3c;
 }
 
-.teamOverviewTab, .teamChatTab, .teamPendingTab, .teamTournamentsTab {
+.teamOverviewTab,
+.teamChatTab,
+.teamPendingTab,
+.teamTournamentsTab {
   background-color: #2b2c3c;
 }
 
@@ -35,8 +31,8 @@
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
 .teamOverviewTab .teamName {
@@ -66,8 +62,8 @@
 .teamTournamentsTab {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 
 .teamTournamentsTab .teamTournamentsList .teamTournamentsHeader {
@@ -84,7 +80,41 @@
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 /*# sourceMappingURL=team-info.css.map */
+
+.team-header {
+  display: flex;
+}
+
+.team-header .team-header__avatar {
+  display: block;
+  margin-right: 32px;
+}
+
+.team-header .team-header__content {
+  display: block;
+}
+
+.team-header .team-header__content .team-header__content--title {
+  margin-bottom: 25px;
+  font-size: 34px;
+  color: white;
+}
+
+.team-header .team-header__content .team-header__content--detail {
+  font-size: 16px;
+  color: #888;
+}
+
+.team-header .team-header__content .teamButton {
+  margin-left: 0;
+  margin-bottom: 0;
+}
+
+.team-header__avatar--skeleton {
+  height: 155px;
+  width: 232px;
+}
