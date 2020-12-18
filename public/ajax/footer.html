@@ -27,4 +27,34 @@
       </div>
     </div>
   </div>
+  <script src="scripts/authentication.js"></script>
+
+  <div class="auth-modal-wrapper" id="auth-modal">
+    <div class="auth-modal">
+      <div class="auth-modal-content">
+        <form class="loginForms blockerLoginModal" action="">
+          <h1 class="blockerLoginText">Log in and <span class="gradientText">game on</span></h1>
+          <input class="loginInput" placeholder="Email Address..." id="email" autocomplete="on">
+          <br>
+          <input class="loginInput bottomLoginInput" placeholder="Password..." id="password" type="password"
+            autocomplete="on">
+          <label>
+            <input id="rememberMe" class="rememberMeInput" type="checkbox">
+            <p class="rememberMeText">Remember Me</p></input>
+          </label>
+          <div id="forgot-password-block">
+            <a href="forgot-password.html">
+              <p class='forgotPasswordText'>Forgot your password?</p>
+            </a>
+          </div>
+
+          <div style="text-align: center;">
+            <button type="button" class="loginButton primaryBtn" onclick="handleSignIn();">Login</button>
+            <button type="button" class="loginButton secondaryBtn" onclick="location.href='register.html';">Sign
+              Up</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
