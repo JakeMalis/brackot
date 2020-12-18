@@ -14,8 +14,7 @@ firebase.auth().onAuthStateChanged(function (user) {
   }
 
   if (user && page === "") {
-    window.location = "dashboard";
-    // loadHeader();
+    loadHeader();
   } else if (user && !(page === "")) {
     personalizeElements();
     loadHeader();
