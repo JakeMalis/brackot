@@ -1,41 +1,38 @@
 var path = window.location.pathname;
 var page = path.split("/").pop();
-var tempUser = firebase.auth().currentUser;
-console.log(page, tempUser);
-if (
-  !tempUser &&
-  !(page === "") &&
-  !(page === "tournaments") &&
-  !(page === "privacy-policy") &&
-  !(page === "terms-of-service")
-) {
-  setTimeout(() => {
-    const blockerModal = document.getElementById("auth-modal");
-    console.log(blockerModal);
-    blockerModal.style.display = "block";
-  });
-}
+
 firebase.auth().onAuthStateChanged(function (user) {
   var path = window.location.pathname;
   var page = path.split("/").pop();
 
+  if (user) {
+    setTimeout(() => {
+      const blockerModal = document.getElementById("auth-modal");
+      if (blockerModal.style.display === "block")
+        blockerModal.style.display = "none";
+    }, 500);
+  }
+
   if (user && page === "") {
-    loadHeader();
+    window.location = "dashboard";
+    // loadHeader();
   } else if (user && !(page === "")) {
     personalizeElements();
     loadHeader();
   } else if (!user && page === "tournaments") {
     personalizeElements();
-  } else if (
+  }
+  if (
     !user &&
     !(page === "") &&
     !(page === "tournaments") &&
     !(page === "privacy-policy") &&
     !(page === "terms-of-service")
   ) {
-    const blockerModal = document.getElementById("auth-modal");
-    blockerModal.style.display = "block";
-    // window.location = "login.html";
+    setTimeout(() => {
+      const blockerModal = document.getElementById("auth-modal");
+      blockerModal.style.display = "block";
+    }, 500);
   }
 });
 
