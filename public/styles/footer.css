@@ -150,3 +150,9 @@
   text-align: center;
   margin-bottom: 40px;
 }
+
+.gradientText{
+  background: -webkit-linear-gradient(300deg,var(--aquamarine),var(--turquoise));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
