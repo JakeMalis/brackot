@@ -576,7 +576,16 @@ class TeamOverviewTab extends React.Component {
 class TeamInfoQuickCard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { teamProfilePic: "" };
+    this.state = {
+      teamProfilePic: "",
+      teamName: "",
+      members: [],
+      privacy: [],
+      isDataFetched: false,
+      social: {},
+      buttonText: "Loading ...",
+      buttonOnClick: () => {},
+    };
   }
 
   componentDidMount() {
@@ -590,26 +599,106 @@ class TeamInfoQuickCard extends React.Component {
       .catch(() => {
         this.setState({ teamProfilePic: "../media/BrackotLogo2.jpg" });
       });
+
+    teamsRef.doc(teamId).onSnapshot((doc) => {
+      const docData = doc.data();
+      this.setState({
+        teamName: docData.name,
+        members: docData.teamMembers,
+        privacy: docData.privacy,
+        isDataFetched: true,
+        social: docData.social,
+      });
+
+      if (doc.data().teamMembers.includes(firebase.auth().currentUser.uid)) {
+        //if the user is in the team if provides a button which lets the user leave the team they are in
+        this.setState({ buttonText: "Leave Team" });
+        this.setState({
+          buttonOnClick: () => {
+            teamsRef.doc(teamId).update({
+              teamMembers: firebase.firestore.FieldValue.arrayRemove(
+                firebase.auth().currentUser.uid
+              ),
+            });
+          },
+        });
+      } else if (
+        doc.data().pendingMembers &&
+        doc.data().pendingMembers.includes(firebase.auth().currentUser.uid)
+      ) {
+        this.setState({ buttonText: "requested" });
+        this.setState({ buttonOnClick: () => {} });
+        //if the user has already requested to be in the team the button will do nothing and the text will read requested.
+        //different stylings for different button messages will come later
+      } else {
+        this.setState({ buttonText: "Join Team" });
+        if (doc.data().privacy == "private") {
+          this.setState({
+            buttonOnClick: () => {
+              teamsRef.doc(teamId).update({
+                teamPendingMembers: firebase.firestore.FieldValue.arrayUnion(
+                  firebase.auth().currentUser.uid
+                ),
+                //adds the current user to the list of pending team members if the team is private and the user wishes to join the team
+              });
+            },
+          });
+        } else {
+          this.setState({
+            buttonOnClick: () => {
+              console.log("click");
+              teamsRef.doc(teamId).update({
+                teamMembers: firebase.firestore.FieldValue.arrayUnion(
+                  firebase.auth().currentUser.uid
+                ),
+                //if the team is public it allows the user to automatically join the team
+              });
+            },
+          });
+        }
+      }
+    });
   }
 
   render() {
     //container with stylings for the team Info quick card
     // no actual content other than tbhe profile pic
-    const { teamProfilePic } = this.state;
+    const {
+      teamProfilePic,
+      teamName,
+      members,
+      privacy,
+      buttonOnClick,
+      buttonText,
+    } = this.state;
     return (
       <div id="teamInfoQuickCard" className="teamInfoQuickCard">
         <div className="tournamentInfoCardBackground">
-          <div className="singleColumn">
-            {teamProfilePic && (
-              <img
-                id="teamInfoProfilePic"
-                className="teamInfoProfilePic"
-                src={teamProfilePic}
-              />
-            )}
-            <div id="teamNameQuickCard" className="teamNameQuickCard"></div>
-            <div className="teamInfoQuickContent" id="teamInfoQuickContent">
-              <TeamInfoQuickContent />
+          <div className="team-header">
+            <div className="team-header__avatar">
+              {teamProfilePic ? (
+                <img
+                  id="teamInfoProfilePic"
+                  className="teamInfoProfilePic"
+                  src={teamProfilePic}
+                />
+              ) : (
+                <div className="team-header__avatar--skeleton loading"></div>
+              )}
+            </div>
+            <div className="team-header__content">
+              <h2 className="team-header__content--title">{teamName}</h2>
+              <p className="team-header__content--detail">
+                Members: {members.length}&nbsp;&nbsp;&nbsp;&nbsp;Privacy{" "}
+                {privacy}
+              </p>
+              <button
+                className="tournamentCardButton tournamentCardButtonGeneric teamButton"
+                id="tournamentSignUpButton"
+                onClick={buttonOnClick}
+              >
+                {buttonText}
+              </button>
             </div>
           </div>
         </div>
@@ -745,8 +834,6 @@ class TeamInfoMainCard extends React.Component {
       tab: <TeamOverviewTab />,
       tabName: "overview",
       teamName: "Loading ...",
-      buttonText: "Loading ...",
-      buttonOnClick: () => {},
       team: {},
     };
   }
@@ -767,70 +854,12 @@ class TeamInfoMainCard extends React.Component {
             teamAdmin: false,
           });
         }
-
-        if (doc.data().teamMembers.includes(firebase.auth().currentUser.uid)) {
-          //if the user is in the team if provides a button which lets the user leave the team they are in
-          this.setState({ buttonText: "Leave Team" });
-          this.setState({
-            buttonOnClick: () => {
-              teamsRef.doc(teamId).update({
-                teamMembers: firebase.firestore.FieldValue.arrayRemove(
-                  firebase.auth().currentUser.uid
-                ),
-              });
-            },
-          });
-        } else if (
-          doc.data().pendingMembers &&
-          doc.data().pendingMembers.includes(firebase.auth().currentUser.uid)
-        ) {
-          this.setState({ buttonText: "requested" });
-          this.setState({ buttonOnClick: () => {} });
-          //if the user has already requested to be in the team the button will do nothing and the text will read requested.
-          //different stylings for different button messages will come later
-        } else {
-          this.setState({ buttonText: "Join Team" });
-          if (doc.data().privacy == "private") {
-            this.setState({
-              buttonOnClick: () => {
-                teamsRef.doc(teamId).update({
-                  teamPendingMembers: firebase.firestore.FieldValue.arrayUnion(
-                    firebase.auth().currentUser.uid
-                  ),
-                  //adds the current user to the list of pending team members if the team is private and the user wishes to join the team
-                });
-              },
-            });
-          } else {
-            this.setState({
-              buttonOnClick: () => {
-                teamsRef.doc(teamId).update({
-                  teamMembers: firebase.firestore.FieldValue.arrayUnion(
-                    firebase.auth().currentUser.uid
-                  ),
-                  //if the team is public it allows the user to automatically join the team
-                });
-              },
-            });
-          }
-        }
       });
   }
   render() {
     const { tabName, teamName, buttonText, buttonOnClick, team } = this.state;
     return (
       <div className="teamInfoMainCard">
-        <h2 className="teamInfoName" id="teamInfoName">
-          {teamName}
-        </h2>
-        <button
-          className="tournamentCardButton tournamentCardButtonGeneric"
-          id="tournamentSignUpButton"
-          onClick={buttonOnClick}
-        >
-          {buttonText}
-        </button>
-
         <ul className="quickNavbar">
           <li
             id="teamOverviewNavbar"
